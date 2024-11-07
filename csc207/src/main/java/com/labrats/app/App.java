@@ -2,8 +2,8 @@ package com.labrats.app;
 
 import java.util.Date;
 
-import com.labrats.app.entity.Transaction;
-import com.labrats.app.entity.TransactionHistory;
+import entity.Transaction;
+import entity.TransactionHistory;
 
 public class App {
     public static void main(String[] args) {
