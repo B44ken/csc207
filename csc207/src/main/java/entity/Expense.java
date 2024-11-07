@@ -1,4 +1,4 @@
-package com.labrats.app.entity;
+package entity;
 
 import java.sql.Date;
 
