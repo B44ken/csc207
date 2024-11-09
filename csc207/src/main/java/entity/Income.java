@@ -2,8 +2,11 @@ package entity;
 
 import java.util.Date;
 
+/**
+ * Entity Income.
+ */
 public class Income extends Transaction {
-    public Income(int amount, String category, Date date) {
-        super(amount, category, date);
+    public Income(String name, int amount, String category, Date date) {
+        super(name, amount, category, date);
     }
 }
