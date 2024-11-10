@@ -7,14 +7,21 @@ import entity.TransactionHistory;
 import javax.swing.JFrame;
 import view.AppBuilder;
 
+/**
+ * App class.
+ */
 public class App {
+    /**
+     * Main method for this project.
+     * @param args argument.
+     */
     public static void main(String[] args) {
-        var budget = new TransactionHistory();
+        final var budget = new TransactionHistory();
 
-        var salary = new Transaction(3000, "Job", new Date(2024, 10, 10));
+        final var salary = new Transaction("", 3000, "Job", new Date(2024, 10, 10));
         budget.add(salary);
 
-        var nextMonthSalary = new Transaction(3000, "Job", new Date(2024, 11, 10));
+        final var nextMonthSalary = new Transaction("", 3000, "Job", new Date(2024, 11, 10));
         budget.add(nextMonthSalary);
 
         System.out.println("Net budget " + Integer.toString(budget.getAmountBetween(new Date(2024, 10, 1), new Date(2024, 10, 31))));
