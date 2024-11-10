@@ -12,21 +12,22 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import interface_adapter.login.IncomeController;
-import interface_adapter.login.IncomeState;
-import interface_adapter.login.IncomeViewModel;
+import interface_adapter.add_income.AddIncomeController;
+import interface_adapter.add_income.AddIncomeState;
+import interface_adapter.add_income.AddIncomeViewModel;
 //change above to what its actually called if its different
 
-public class IncomeView extends JPanel implements ActionListener {
+public class IncomeView extends JPanel implements ActionListener, PropertyChangeListener {
 
-    private final IncomeController incomeController;
+    private final AddIncomeController addIncomeController;
+    private final AddIncomeViewModel addIncomeViewModel;
     // change above to what controller is actually called later
 
-    public IncomeView(IncomeViewModel incomeViewModel, IncomeController controller) {
+    public IncomeView(AddIncomeViewModel incomeViewModel, AddIncomeController controller) {
 
-        this.incomeController = controller;
-        this.incomeViewModel = incomeViewModel;
-        this.incomeViewModel.addPropertyChangeListener(this);
+        this.addIncomeController = controller;
+        this.addIncomeViewModel = incomeViewModel;
+        addIncomeViewModel.addPropertyChangeListener(this);
 
         final JLabel title = new JLabel("Add Income");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -68,12 +69,14 @@ public class IncomeView extends JPanel implements ActionListener {
         confirmButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String name = nameTextField.getText();
-                String amount = amountTextField.getText();
+                Double amount = Double.valueOf(amountTextField.getText());
                 String category = categoryTextField.getText();
                 Integer day = Integer.valueOf(dayTextField.getText());
                 Integer month = Integer.valueOf(monthTextField.getText());
                 Integer year = Integer.valueOf(yearTextField.getText());
                 // input into text file here
+                // after everything funnelled into txt file go back to home
+                addIncomeController.switchToHomeView();
             }
         });
 
@@ -92,4 +95,14 @@ public class IncomeView extends JPanel implements ActionListener {
         frame.pack();
         frame.setVisible(true);
     };
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JOptionPane.showMessageDialog(this, "Action Performed not implemented yet.");
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        JOptionPane.showMessageDialog(this, "Property Change not implemented yet.");
+    }
 }
