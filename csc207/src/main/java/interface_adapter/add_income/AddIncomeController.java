@@ -5,6 +5,7 @@ package interface_adapter.add_income;
 // create input data object containing that info
 // call method to start a use case, pass the input data into the use case
 
+import use_case.add_income.AddIncomeInputBoundary;
 import use_case.add_income.AddIncomeInputData;
 
 import java.util.Date;
@@ -13,8 +14,10 @@ import java.util.Date;
  * Controller for Add Income use case.
  */
 public class AddIncomeController {
-    private final AddIncomeInputData addIncomeUseCaseInteractor;
-    public AddIncomeController(AddIncomeInputData addIncomeUseCaseInteractor) {
+
+    private final AddIncomeInputBoundary addIncomeUseCaseInteractor;
+
+    public AddIncomeController(AddIncomeInputBoundary addIncomeUseCaseInteractor) {
         this.addIncomeUseCaseInteractor = addIncomeUseCaseInteractor;
     }
 
@@ -27,6 +30,7 @@ public class AddIncomeController {
      *
      */
     public void execute(String name, double amount, String category, Date date) {
-        final AddIncomeInputData addIncomeInputData
+        final AddIncomeInputData addIncomeInputData = new AddIncomeInputData(name, amount, date);
+        addIncomeUseCaseInteractor.execute(addIncomeInputData);
     }
 }
