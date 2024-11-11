@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.Instant;
 import java.util.Date;
 
 import entity.Transaction;
@@ -23,9 +24,10 @@ public class TxtImportExport {
         for (var line : lines) {
             var parts = line.split(",");
             var entry = new Transaction(
-                    Integer.parseInt(parts[0]),
-                    parts[1],
-                    new Date(Date.parse(parts[2]))
+                "Transaction",
+                0.0,
+                "Category",
+                new Date(2024, 1, 1)
             );
             history.add(entry);
         }

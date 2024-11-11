@@ -11,7 +11,7 @@ public class Transaction {
     private String category;
     private Date date;
 
-    public Transaction(String name, int amount, String category, Date date) {
+    public Transaction(String name, double amount, String category, Date date) {
         this.name = name;
         this.amount = amount;
         this.category = category;
