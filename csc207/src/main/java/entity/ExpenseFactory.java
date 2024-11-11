@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.Date;
+
 /**
  * Factory for creating Expense.
  */
@@ -10,11 +12,13 @@ public class ExpenseFactory implements TransactionFactory {
      *
      * @param name   of transaction.
      * @param amount of transaction.
-     * @param type   of transaction.
+     * @param category   of transaction.
+     * @param date of trasnaction
      * @return the transaction.
      */
     @Override
-    public Expense create(String name, double amount, String type) {
-        return new Expense();
+    public Expense create(String name, double amount, String category, Date date) {
+        return new Expense(name, amount, category, date);
     }
+
 }

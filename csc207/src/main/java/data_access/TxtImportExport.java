@@ -23,8 +23,9 @@ public class TxtImportExport {
         for (var line : lines) {
             var parts = line.split(",");
             var entry = new Transaction(
-                    Integer.parseInt(parts[0]),
                     parts[1],
+                    Integer.parseInt(parts[0]),
+                    "category",
                     new Date(Date.parse(parts[2]))
             );
             history.add(entry);
