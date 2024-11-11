@@ -1,6 +1,6 @@
 package view;
 
-import view.ViewModel;
+import interface_adapter.ViewModel;
 
 /**
  * The ViewModel for the Home View.
