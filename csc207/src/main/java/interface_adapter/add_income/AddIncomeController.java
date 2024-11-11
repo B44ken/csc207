@@ -33,4 +33,7 @@ public class AddIncomeController {
         final AddIncomeInputData addIncomeInputData = new AddIncomeInputData(name, amount, date);
         addIncomeUseCaseInteractor.execute(addIncomeInputData);
     }
+
+    public void switchToHomeView() {
+    }
 }

@@ -36,4 +36,12 @@ public class AddIncomeInteractor implements AddIncomeInputBoundary {
         final AddIncomeOutputData addIncomeOutputData = new AddIncomeOutputData(income.getName(), false);
         userPresenter.prepareSuccessView(addIncomeOutputData);
     }
+
+    /**
+     *
+     */
+    @Override
+    public void switchToHomeView() {
+        userPresenter.switchToHomeVIew();
+    }
 }

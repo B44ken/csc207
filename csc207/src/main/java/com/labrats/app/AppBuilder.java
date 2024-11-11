@@ -1,4 +1,6 @@
-package view;
+package com.labrats.app;
+
+import view.*;
 
 import java.awt.CardLayout;
 

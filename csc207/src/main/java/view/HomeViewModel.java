@@ -1,7 +1,5 @@
 package view;
 
-import view.ViewModel;
-
 /**
  * The ViewModel for the Home View.
  */

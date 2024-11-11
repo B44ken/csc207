@@ -15,7 +15,7 @@ import javax.swing.event.DocumentListener;
 import interface_adapter.add_income.AddIncomeController;
 import interface_adapter.add_income.AddIncomeState;
 import interface_adapter.add_income.AddIncomeViewModel;
-//change above to what its actually called if its different
+// change above to what its actually called if its different
 
 public class IncomeView extends JPanel implements ActionListener, PropertyChangeListener {
 
