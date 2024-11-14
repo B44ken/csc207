@@ -33,7 +33,7 @@ public class IncomeView extends JPanel implements ActionListener, PropertyChange
 
         JPanel namePanel = new JPanel();
         JTextField nameTextField = new JTextField(15);
-        namePanel.add(new JLabel("First Name:"));
+        namePanel.add(new JLabel("Name:"));
         namePanel.add(nameTextField);
 
         JPanel amountPanel = new JPanel();
@@ -65,6 +65,10 @@ public class IncomeView extends JPanel implements ActionListener, PropertyChange
         JButton confirmButton = new JButton("Confirm");
         confirmPanel.add(confirmButton);
 
+        JPanel cancelPanel = new JPanel();
+        JButton cancelButton = new JButton("Cancel");
+        cancelPanel.add(cancelButton);
+
         confirmButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String name = nameTextField.getText();
@@ -73,6 +77,7 @@ public class IncomeView extends JPanel implements ActionListener, PropertyChange
                 Integer day = Integer.valueOf(dayTextField.getText());
                 Integer month = Integer.valueOf(monthTextField.getText());
                 Integer year = Integer.valueOf(yearTextField.getText());
+                Date date = new Date(year, month, day);
                 // input into text file here
                 // after everything funnelled into txt file go back to home
                 // addIncomeController.switchToHomeView();
