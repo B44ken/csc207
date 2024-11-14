@@ -1,12 +1,12 @@
 package entity;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * Entity expense.
  */
 public class Expense extends Transaction {
-    public Expense(int amount, String category, Date date) {
+    public Expense(String name, double amount, String category, Date date) {
         super("", -amount, category, date);
     }
 }
