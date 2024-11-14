@@ -14,6 +14,7 @@ import interface_adapter.add_income.AddIncomeController;
 import interface_adapter.add_income.AddIncomeViewModel;
 import use_case.add_income.AddIncomeInputBoundary;
 import use_case.add_income.AddIncomeInputData;
+import view.AddIncomeView;
 
 public class AppBuilder {
     public final JPanel cardPanel = new JPanel();
@@ -25,7 +26,7 @@ public class AppBuilder {
     private HomeView homeView;
     private HomeViewModel homeViewModel;
 
-    private IncomeView incomeView;
+    private AddIncomeView incomeView;
     // private IncomeViewModel incomeViewModel;
 
     public AppBuilder() {
@@ -59,7 +60,7 @@ public class AppBuilder {
 
     public AppBuilder addIncomeView() {
         AddIncomeInputData inputData = new AddIncomeInputData(null, 0, null);
-        incomeView = new IncomeView(
+        incomeView = new AddIncomeView(
             new AddIncomeViewModel(),
             new AddIncomeController(inputData)
         );
