@@ -1,5 +1,7 @@
 package view;
 
+import interface_adapter.ViewManagerModel;
+
 import java.awt.CardLayout;
 
 import javax.swing.JPanel;
