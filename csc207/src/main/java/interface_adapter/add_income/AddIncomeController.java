@@ -23,17 +23,16 @@ public class AddIncomeController {
 
     /**
      * Executes the Change password use case.
+     * Creates an InputData Object for use case AddIncomeInteractor to carry out interaction.
      * @param name to be added
      * @param amount
      * @param category
      * @param date
      *
      */
-    public void execute(String name, double amount, String category, Date date) {
-        final AddIncomeInputData addIncomeInputData = new AddIncomeInputData(name, amount, date);
+    public void execute(String name, double amount, String category, String date) {
+        final AddIncomeInputData addIncomeInputData = new AddIncomeInputData(name, amount, category, date);
         addIncomeUseCaseInteractor.execute(addIncomeInputData);
     }
 
-    public void switchToHomeView() {
-    }
 }

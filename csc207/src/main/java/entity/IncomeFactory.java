@@ -17,7 +17,8 @@ public class IncomeFactory implements TransactionFactory{
      * @return the transaction.
      */
     @Override
-    public Transaction create(String name, double amount, String category, Date date) {
-        return new Income(name, amount, category, date);
+    public Transaction create(String name, double amount, String category, String date) {
+        Date newdate = new Date(date);
+        return new Income(name, amount, category, newdate);
     }
 }

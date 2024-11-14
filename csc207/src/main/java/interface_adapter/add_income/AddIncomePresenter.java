@@ -41,8 +41,9 @@ public class AddIncomePresenter implements AddIncomeOutputBoundary {
      * Switches to the Home View.
      */
     @Override
-    public void switchToHomeView() {
+    public void switchToHomeVIew() {
         viewManagerModel.setState(addIncomeViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
     }
+
 }

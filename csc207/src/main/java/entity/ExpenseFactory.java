@@ -17,8 +17,10 @@ public class ExpenseFactory implements TransactionFactory {
      * @return the transaction.
      */
     @Override
-    public Expense create(String name, double amount, String category, Date date) {
-        return new Expense(name, amount, category, date);
+    public Expense create(String name, double amount, String category, String date) {
+        Date newdate = new Date(date);
+        double negativeAmount = -amount;
+        return new Expense(name, negativeAmount, category, newdate);
     }
 
 }

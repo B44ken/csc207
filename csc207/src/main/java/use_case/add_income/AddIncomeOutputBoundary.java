@@ -19,5 +19,5 @@ public interface AddIncomeOutputBoundary {
     /**
      * Switches to the Home View.
      */
-    void switchToHomeView();
+    void switchToHomeVIew();
 }
