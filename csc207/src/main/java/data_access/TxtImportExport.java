@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Date;
 
 import entity.Transaction;
@@ -27,7 +28,7 @@ public class TxtImportExport {
                 "Transaction",
                 0.0,
                 "Category",
-                new Date(2024, 1, 1)
+                makeDate(2024, 1, 1)
             );
             history.add(entry);
         }
@@ -37,12 +38,12 @@ public class TxtImportExport {
 
     public static void exportData(TransactionHistory history, String path) {
         var sb = new StringBuilder();
-        for (var t : history.history) {
-            sb.append(t.amount);
+        for (var t : history.getHistory()) {
+            sb.append(t.getAmount());
             sb.append(",");
-            sb.append(t.category);
+            sb.append(t.getCategory());
             sb.append(",");
-            sb.append(t.date);
+            sb.append(t.getDate().toString());
             sb.append("\n");
         }
         var data = sb.toString();
@@ -53,5 +54,10 @@ public class TxtImportExport {
         } catch (Exception err) {
             throw new RuntimeException("File not found");
         }
+    }
+
+    // cursed
+    static Date makeDate(int year, int month, int day) {
+        return Date.from(Instant.ofEpochMilli(LocalDate.of(year, month, day).toEpochDay()));
     }
 }
