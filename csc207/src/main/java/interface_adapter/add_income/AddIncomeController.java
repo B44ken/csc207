@@ -5,7 +5,6 @@ package interface_adapter.add_income;
 // create input data object containing that info
 // call method to start a use case, pass the input data into the use case
 
-import use_case.add_income.AddIncomeInputBoundary;
 import use_case.add_income.AddIncomeInputData;
 
 import java.util.Date;
@@ -14,25 +13,20 @@ import java.util.Date;
  * Controller for Add Income use case.
  */
 public class AddIncomeController {
-
-    private final AddIncomeInputBoundary addIncomeUseCaseInteractor;
-
-    public AddIncomeController(AddIncomeInputBoundary addIncomeUseCaseInteractor) {
+    private final AddIncomeInputData addIncomeUseCaseInteractor;
+    public AddIncomeController(AddIncomeInputData addIncomeUseCaseInteractor) {
         this.addIncomeUseCaseInteractor = addIncomeUseCaseInteractor;
     }
 
     /**
      * Executes the Change password use case.
-     * Creates an InputData Object for use case AddIncomeInteractor to carry out interaction.
      * @param name to be added
      * @param amount
      * @param category
      * @param date
      *
      */
-    public void execute(String name, double amount, String category, String date) {
-        final AddIncomeInputData addIncomeInputData = new AddIncomeInputData(name, amount, category, date);
-        addIncomeUseCaseInteractor.execute(addIncomeInputData);
+    public void execute(String name, double amount, String category, Date date) {
+        final AddIncomeInputData addIncomeInputData;
     }
-
 }

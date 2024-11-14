@@ -3,9 +3,15 @@ package view;
 import javax.swing.JOptionPane;
 
 public class HomeController {
+    private final ViewManager viewManager;
+
+    public HomeController(ViewManager viewManager) {
+        this.viewManager = viewManager;
+    }
 
     public void switchToAddIncome(){
-        JOptionPane.showMessageDialog(null, "Button not implemented yet.");
+        // this.cardLayout.show(cardPanel, "Add Income");
+        viewManager.selectView("Add Income");
     }
 
     public void switchToAddExpense(){
