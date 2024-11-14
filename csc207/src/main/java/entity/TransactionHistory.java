@@ -41,6 +41,20 @@ public class TransactionHistory {
         return sum;
     }
 
+    public ArrayList<Transaction> getHistory() {
+        return history;
+    }
+
+    public TransactionHistory getBetween(Date start, Date stop) {
+        var result = new TransactionHistory();
+        for (var t : history) {
+            if (t.getDate().after(start) && t.getDate().before(stop)) {
+                result.add(t);
+            }
+        }
+        return result;
+    }
+
     /**
      * Adds a transaction into history.
      * @param transaction the transaction to be added.
