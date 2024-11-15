@@ -8,7 +8,9 @@ import use_case.add_budget.AddBudgetInputData;
  * Controller for Add Budget use case.
  */
 public class AddBudgetController {
+
     private final AddBudgetInputBoundary addBudgetUseCaseInteractor;
+
     public AddBudgetController(AddBudgetInputBoundary addBudgetUseCaseInteractor) {
         this.addBudgetUseCaseInteractor = addBudgetUseCaseInteractor;
     }
