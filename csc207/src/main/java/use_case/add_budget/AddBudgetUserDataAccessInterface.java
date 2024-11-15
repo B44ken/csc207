@@ -9,8 +9,15 @@ import entity.Budget;
  */
 public interface AddBudgetUserDataAccessInterface {
     /**
+     * Checks if a Budget with the given categoryName exists.
+     * @param categoryName the categoryName to look for
+     * @return true if a budget with the given categoryName exists; false otherwise
+     */
+    boolean existsByName(String categoryName);
+
+    /**
      * Adds Budget into Budget History.
-     * @param budget the income to be added.
+     * @param budget the budget to be added.
      */
     void addBudget(Budget budget);
 }
