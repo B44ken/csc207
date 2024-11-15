@@ -27,14 +27,21 @@ public class AddBudgetInteractor implements AddBudgetInputBoundary {
      */
     @Override
     public void execute(AddBudgetInputData addBudgetInputData) {
-        final Budget budget = new Budget(null,null);
-        budget.setAmount(addBudgetInputData.getAmount());
-        budget.setCategoryName(addBudgetInputData.getCategoryName());
-        budgetHistory.add(budget);
+        if (userDataAccessObject.existsByName(addBudgetInputData.getCategoryName())){
+            userPresenter.prepareFailView("Budget for this category already exists. Select 'Edit Budget' to modify amount.");
+        }
+        else {
+            final Budget budget = new Budget(null, null);
+            budget.setAmount(addBudgetInputData.getAmount());
+            budget.setCategoryName(addBudgetInputData.getCategoryName());
+            budgetHistory.add(budget);
+            // userDataAccessObject.save(budget);
+            // do we want a save for this? do we need one?
+            userDataAccessObject.addBudget(budget);
 
-        userDataAccessObject.addBudget(budget);
-        final AddBudgetOutputData addBudgetOutputData = new AddBudgetOutputData(budget.getCategoryName(), false);
-        userPresenter.prepareSuccessView(addBudgetOutputData);
+            final AddBudgetOutputData addBudgetOutputData = new AddBudgetOutputData(budget.getCategoryName(), false);
+            userPresenter.prepareSuccessView(addBudgetOutputData);
+        }
     }
 
     @Override
