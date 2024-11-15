@@ -1,3 +1,5 @@
+package view;
+
 import java.util.Date;
 
 import java.awt.Component;
@@ -16,8 +18,8 @@ import interface_adapter.add_budget.AddBudgetViewModel;
 
 
 public class AddBudgetView extends JPanel implements ActionListener, PropertyChangeListener {
-
-    private final AddBudgetController addBudgetController;
+    private final String viewName = "add budget";
+    private AddBudgetController addBudgetController;
     private final AddBudgetViewModel addBudgetViewModel;
     // change above to what controller is actually called later
     // need to move the input fields out here unfortunately!!!!!!!!!!!
@@ -80,4 +82,8 @@ public class AddBudgetView extends JPanel implements ActionListener, PropertyCha
     public void propertyChange(PropertyChangeEvent evt) {
         JOptionPane.showMessageDialog(this, "Property Change not implemented yet.");
     }
+
+    public String getViewName() {return viewName;}
+
+    public void setAddBudgetState(AddBudgetController controller) {this.addBudgetController = controller;}
 }
