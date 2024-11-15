@@ -31,7 +31,7 @@ public class Budget {
 
     @Override
     public String toString() {
-        return "Budget Type: " + this.categoryName + ", Amount: " + this.amount;
+        return "Budget Type: " + this.categoryName + ", Amount: $" + this.amount;
     }
 
 }
