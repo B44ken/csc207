@@ -7,6 +7,7 @@ import use_case.add_budget.AddBudgetOutputData;
 public class AddBudgetPresenter implements AddBudgetOutputBoundary {
 
     private final AddBudgetViewModel addBudgetViewModel;
+    // need to add budgetviewmodel
     private final ViewManagerModel viewManagerModel;
 
     public AddBudgetPresenter(ViewManagerModel viewManagerModel, AddBudgetViewModel addBudgetViewModel) {
@@ -21,8 +22,14 @@ public class AddBudgetPresenter implements AddBudgetOutputBoundary {
      */
     @Override
     public void prepareSuccessView(AddBudgetOutputData outputData) {
-        // is below supposed to say "add budget" or just "budget"??????
-        addBudgetViewModel.firePropertyChanged("add budget");
+        // need to implement budgetview for this to work, based on signup presenter code:
+        // final BudgetState budgetState = budgetViewModel.getState();
+        // budgetState.addBudget(response.getBudget());
+        // this.budgetViewModel.setState(budgetState);
+        // budgetViewModel.firePropertyChanged();
+
+        // viewManagerModel.setState(budgetViewModel.getViewName());
+        // viewManagerModel.firePropertyChanged();
     }
 
     /**
@@ -37,8 +44,8 @@ public class AddBudgetPresenter implements AddBudgetOutputBoundary {
 
     @Override
     public void switchToBudgetView(){
-        viewManagerModel.setState(AddBudgetViewModel.getViewName());
-        // need to make ViewModel.getViewName() static for above line to work apparently? idk man
-        viewManagerModel.firePropertyChanged();
+        // need to implement budget view for this to work
+        // viewManagerModel.setState(budgetViewModel.getViewName());
+        // viewManagerModel.firePropertyChanged();
     }
 }
