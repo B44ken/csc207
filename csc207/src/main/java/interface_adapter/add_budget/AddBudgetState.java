@@ -6,11 +6,11 @@ package interface_adapter.add_budget;
 public class AddBudgetState {
     private String name = "";
 
-    private String addFail;
+    private String addError;
 
     public AddBudgetState(AddBudgetState copy) {
         this.name = copy.name;
-        this.addFail = copy.addFail;
+        this.addError = copy.addError;
     }
 
     public AddBudgetState() {
@@ -24,7 +24,7 @@ public class AddBudgetState {
         this.name = name;
     }
 
-    public void setAddFail(String addFail) {
-        this.addFail = addFail;
+    public void setAddError(String addError) {
+        this.addError = addError;
     }
 }
