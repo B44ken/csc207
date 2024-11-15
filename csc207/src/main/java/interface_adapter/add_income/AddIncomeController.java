@@ -19,7 +19,7 @@ public class AddIncomeController {
     }
 
     /**
-     * Executes the Change password use case.
+     * Executes the Add Income use case.
      * @param name to be added
      * @param amount
      * @param category

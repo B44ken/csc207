@@ -1,5 +1,6 @@
 package com.labrats.app;
 
+import data_access.InMemoryUserDataAccessObject;
 import view.*;
 
 import java.awt.CardLayout;
@@ -23,11 +24,20 @@ public class AppBuilder {
     private final ViewManagerModel viewManagerModel = new ViewManagerModel();
     private final ViewManager viewManager = new ViewManager(cardPanel, cardLayout, viewManagerModel);
 
+    private final InMemoryUserDataAccessObject userDataAccessObject = new InMemoryUserDataAccessObject();
+
     private HomeView homeView;
     private HomeViewModel homeViewModel;
 
     private AddIncomeView incomeView;
     // private IncomeViewModel incomeViewModel;
+    // private AddExpenseView addExpenseView;
+    // private AddExpenseViewModel addExpenseViewModel;
+    // private SetGoalView setGoalView;
+    // private SetGoalViewModel setGoalViewModel;
+    // private AddBudgetView;
+    // private AddBudgetViewModel;
+
 
     public AppBuilder() {
         cardPanel.setLayout(cardLayout);
@@ -36,7 +46,6 @@ public class AppBuilder {
 
     /**
      * Adds the Home View to the Application.
-     * 
      * @return this builder
      */
     public AppBuilder addHomeView() {
@@ -47,19 +56,10 @@ public class AppBuilder {
         return this;
     }
 
-    /**
-     * Add the Home Use Case to the application
-     * 
-     * @return
-     */
-    public AppBuilder addHomeUseCase() {
-        final HomeController controller = new HomeController(viewManager);
-        homeView.setHomeController(controller);
-        return this;
-    }
 
     public AppBuilder addIncomeView() {
         AddIncomeInputData inputData = new AddIncomeInputData(null, 0, null);
+//        should call to API in above line
         incomeView = new AddIncomeView(
             new AddIncomeViewModel(),
             new AddIncomeController(inputData)

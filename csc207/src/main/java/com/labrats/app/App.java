@@ -1,7 +1,5 @@
 package com.labrats.app;
 
-import view.AppBuilder;
-
 /**
  * App class.
  */
