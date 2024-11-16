@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.time.LocalDate;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -78,6 +79,7 @@ public class IncomeView extends JPanel implements ActionListener, PropertyChange
                 Integer day = Integer.valueOf(dayTextField.getText());
                 Integer month = Integer.valueOf(monthTextField.getText());
                 Integer year = Integer.valueOf(yearTextField.getText());
+                LocalDate date = LocalDate.of(year, month, day);
                 // input into text file here
                 // after everything funnelled into txt file go back to home
                 // addIncomeController.switchToHomeView();

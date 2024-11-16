@@ -1,5 +1,6 @@
 package entity;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -31,14 +32,52 @@ public class TransactionHistory {
      * @param stop the end date (inclusive)
      * @return net amount.
      */
-    public int getAmountBetween(Date start, Date stop) {
+    public int getAmountBetween(LocalDate start, LocalDate stop) {
         int sum = 0;
         for (var t : history) {
-            if (t.getDate().after(start) && t.getDate().before(stop)) {
+            if(!t.getDate().isBefore(start) && !t.getDate().isAfter(stop)) {
                 sum += t.getAmount();
             }
         }
         return sum;
+    }
+
+    public int getExpensesBetween(LocalDate start, LocalDate stop) {
+        int sum = 0;
+        for (var t : history) {
+            if(!t.getDate().isBefore(start) && !t.getDate().isAfter(stop)) {
+                if(t instanceof Expense) {
+                    sum += t.getAmount();
+                }
+            }
+        }
+        return sum;
+    }
+
+    public int getIncomeBetween(LocalDate start, LocalDate stop) {
+        int sum = 0;
+        for (var t : history) {
+            if(!t.getDate().isBefore(start) && !t.getDate().isAfter(stop)) {
+                if(t instanceof Income) {
+                    sum += t.getAmount();
+                }
+            }
+        }
+        return sum;
+    }
+
+    public ArrayList<Transaction> getHistory() {
+        return history;
+    }
+
+    public TransactionHistory getBetween(LocalDate start, LocalDate stop) {
+        var result = new TransactionHistory();
+        for (var t : history) {
+            if(!t.getDate().isBefore(start) && !t.getDate().isAfter(stop)) {
+                result.add(t);
+            }
+        }
+        return result;
     }
 
     /**

@@ -1,6 +1,6 @@
 package use_case.add_income;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * The input data for Add Income use case.
@@ -10,9 +10,9 @@ public class AddIncomeInputData {
 
     private final String name;
     private final double amount;
-    private final Date date;
+    private final LocalDate date;
 
-    public AddIncomeInputData(String name, double amount, Date date) {
+    public AddIncomeInputData(String name, double amount, LocalDate date) {
         this.name = name;
         this.amount = amount;
         this.date = date;
@@ -26,7 +26,7 @@ public class AddIncomeInputData {
         return amount;
     }
 
-    Date getDate() {
+    LocalDate getDate() {
         return date;
     }
 }

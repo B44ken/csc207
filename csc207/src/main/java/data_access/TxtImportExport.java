@@ -4,8 +4,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.Date;
 
+import entity.Expense;
+import entity.Income;
 import entity.Transaction;
 import entity.TransactionHistory;
 
@@ -22,10 +25,11 @@ public class TxtImportExport {
         var lines = fileContent.split("\n");
         for (var line : lines) {
             var parts = line.split(",");
-            var entry = new Transaction(
-                    Integer.parseInt(parts[0]),
-                    parts[1],
-                    new Date(Date.parse(parts[2]))
+            var entry = new Income(
+                parts[1],
+                Double.parseDouble(parts[0]),
+                "category",
+                LocalDate.parse(parts[2])
             );
             history.add(entry);
         }
@@ -35,12 +39,12 @@ public class TxtImportExport {
 
     public static void exportData(TransactionHistory history, String path) {
         var sb = new StringBuilder();
-        for (var t : history.history) {
-            sb.append(t.amount);
+        for (var t : history.getHistory()) {
+            sb.append(t.getAmount());
             sb.append(",");
-            sb.append(t.category);
+            sb.append(t.getCategory());
             sb.append(",");
-            sb.append(t.date);
+            sb.append(t.getDate());
             sb.append("\n");
         }
         var data = sb.toString();
@@ -51,5 +55,10 @@ public class TxtImportExport {
         } catch (Exception err) {
             throw new RuntimeException("File not found");
         }
+    }
+
+    // cursed
+    static LocalDate makeDate(int year, int month, int day) {
+        return LocalDate.of(year, month, day);
     }
 }
