@@ -1,5 +1,6 @@
 package entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -9,9 +10,9 @@ public class Transaction {
     private String name;
     private double amount;
     private String category;
-    private Date date;
+    private LocalDate date;
 
-    public Transaction(String name, double amount, String category, Date date) {
+    public Transaction(String name, double amount, String category, LocalDate date) {
         this.name = name;
         this.amount = amount;
         this.category = category;
@@ -42,11 +43,11 @@ public class Transaction {
         this.category = category;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

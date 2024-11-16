@@ -8,6 +8,8 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Date;
 
+import entity.Expense;
+import entity.Income;
 import entity.Transaction;
 import entity.TransactionHistory;
 
@@ -24,11 +26,11 @@ public class TxtImportExport {
         var lines = fileContent.split("\n");
         for (var line : lines) {
             var parts = line.split(",");
-            var entry = new Transaction(
-                "Transaction",
-                0.0,
-                "Category",
-                makeDate(2024, 1, 1)
+            var entry = new Income(
+                parts[1],
+                Double.parseDouble(parts[0]),
+                "category",
+                LocalDate.parse(parts[2])
             );
             history.add(entry);
         }
@@ -57,7 +59,7 @@ public class TxtImportExport {
     }
 
     // cursed
-    static Date makeDate(int year, int month, int day) {
-        return Date.from(Instant.ofEpochMilli(LocalDate.of(year, month, day).toEpochDay()));
+    static LocalDate makeDate(int year, int month, int day) {
+        return LocalDate.of(year, month, day);
     }
 }
