@@ -5,8 +5,19 @@ package interface_adapter.add_expense;
  */
 public class AddExpenseState {
 
+    private String name = "";
+    private String nameError;
+
+    public String getExpenseError() {
+        return nameError;
+    }
+
+    public void setExpenseError(String nameError) {
+        this.nameError = nameError;
+    }
+
     @Override
     public String toString() {
-        return "To be implemented";
+        return "To be implemented/ in progress";
     }
 }
