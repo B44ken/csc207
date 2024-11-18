@@ -1,5 +1,7 @@
 package com.labrats.app;
 
+import javax.swing.*;
+
 /**
  * App class.
  */
@@ -9,13 +11,21 @@ public class App {
      * @param args argument.
      */
     public static void main(String[] args) {
-        var ab = new AppBuilder();
-        ab
-        .addHomeView()
-        .addHomeUseCase()
-        .addIncomeView()
-        .addIncomeUseCase()
-        .build()
-        .setVisible(true);
+        final AppBuilder appBuilder = new AppBuilder();
+        final JFrame application = appBuilder
+                .addAddIncomeView()
+                .addAddExpenseView()
+                .addExpenseView()
+                .addIncomeView()
+                .addHomeView()
+                .addGoalView()
+                .addBudgetView()
+                .addChangePasswordUseCase()
+                .addLogoutUseCase()
+                .build();
+
+        application.pack();
+        application.setVisible(true);
     }
+
 }
