@@ -6,13 +6,15 @@ package interface_adapter.add_income;
 import interface_adapter.ViewManagerModel;
 import use_case.add_income.AddIncomeOutputBoundary;
 import use_case.add_income.AddIncomeOutputData;
+import view.AddIncomeView;
 
 public class AddIncomePresenter implements AddIncomeOutputBoundary {
-
+    private final AddIncomeViewModel addIncomeviewModel;
     private final AddIncomeViewModel addIncomeViewModel;
     private final ViewManagerModel viewManagerModel;
 
-    public AddIncomePresenter(AddIncomeViewModel addIncomeViewModel, ViewManagerModel viewManagerModel) {
+    public AddIncomePresenter(AddIncomeViewModel addIncomeviewModel, AddIncomeViewModel addIncomeViewModel, ViewManagerModel viewManagerModel) {
+        this.addIncomeviewModel = addIncomeviewModel;
         this.addIncomeViewModel = addIncomeViewModel;
         this.viewManagerModel = viewManagerModel;
     }
@@ -24,8 +26,15 @@ public class AddIncomePresenter implements AddIncomeOutputBoundary {
      */
     @Override
     public void prepareSuccessView(AddIncomeOutputData outputData) {
-        // i'm kinda confused on what's happening here
-        addIncomeViewModel.firePropertyChanged("income");
+        // On success, switch to the logged in view.
+
+        final AddIncomeState addIncomeState = addIncomeViewModel.getState();
+        addIncomeState.setUsername(response.getUsername());
+        this.addIncomeViewModel.setState(addIncomeState);
+        this.addIncomeViewModel.firePropertyChanged();
+
+        this.viewManagerModel.setState(addIncomeViewModel.getViewName());
+        this.viewManagerModel.firePropertyChanged();
     }
 
     /**
