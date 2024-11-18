@@ -1,8 +1,10 @@
 package com.labrats.app;
 
 import data_access.InMemoryUserDataAccessObject;
+import interface_adapter.add_budget.AddBudgetViewModel;
 import interface_adapter.add_expense.AddExpenseController;
 import interface_adapter.add_income.AddIncomePresenter;
+import interface_adapter.income_history.IncomeHistoryViewModel;
 import use_case.add_goal.AddGoalInputData;
 import use_case.add_income.AddIncomeInteractor;
 import use_case.add_income.AddIncomeOutputBoundary;
@@ -11,7 +13,6 @@ import view.*;
 import java.awt.CardLayout;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
@@ -33,6 +34,10 @@ public class AppBuilder {
     private HomeView homeView;
     private HomeViewModel homeViewModel;
 
+    private IncomeHistoryView incomeHistoryView;
+    private IncomeHistoryViewModel incomeHistoryViewModel;
+    private ExpenseHistoryViewModel expenseHistoryViewModel;
+    private ExpenseHitoryView expenseHistoryView;
     private AddIncomeView addIncomeView;
     private AddIncomeViewModel addIncomeViewModel;
     private AddExpenseView addExpenseView;
@@ -62,32 +67,32 @@ public class AppBuilder {
     }
 
     /**
-     * Adds Add Income View to the Application.
+     * Adds Income View to the Application.
      * @return this builder
      */
-    public AppBuilder addIncomeView() {
-        AddIncomeInputData inputData = new AddIncomeInputData(null, 0, null);
+    public AppBuilder addIncomeHistoryView() {
 //        should call to API in above line
-        addIncomeViewModel = new AddIncomeViewModel();
-        addIncomeView = new AddIncomeView(addIncomeViewModel, addIncomeController);
-        cardPanel.add(addIncomeView, addIncomeView.getViewName());
-//        addIncomeView.setVisible(true);
-//        viewManager.addView(addIncomeView.getViewName(), addIncomeView);
+        incomeHistoryViewModel = new IncomeHistoryViewModel();
+        incomeHistoryView = new IncomeHistoryView(incomeHistoryViewModel, incomeHistoryController);
+        cardPanel.add(incomeHistoryView, incomeHistoryView.getViewName());
+//        addIncomeHistoryView.setVisible(true);
+//        viewManager.addView(addIncomeHistoryView.getViewName(), addIncomeHistoryView);
         return this;
     }
 
     /**
-     * Adds Add Expense View to the Application.
+     * Adds Expense History View to the Application.
      * @return this builder
      */
-    public AppBuilder addExpenseView() {
-        AddIncomeInputData inputData = new AddIncomeInputData(null, 0, null);
-//        should call to API in above line
-        addIncomeViewModel = new AddIncomeViewModel();
-        addIncomeView = new AddIncomeView(addIncomeViewModel, addIncomeController);
+    public AppBuilder addExpenseHistoryView() {
+        expenseHistoryViewModel = new ExpenseHistoryViewModel();
+        // shouldn't need a controller for ExpHistoryView:
+        // there is no input data.. but there is actionperformed and property change!
+        expenseHistoryView = new ExpenseHistoryView(expenseHistoryViewModel, expenseHistoryController);
         cardPanel.add(addIncomeView, addIncomeView.getViewName());
         return this;
     }
+
 
     /**
      * Adds Add Budget View to the Application.
@@ -100,9 +105,44 @@ public class AppBuilder {
         return this;
     }
 
+    /**
+     * Adds Add Income View to the Application.
+     * @return this builder
+     */
+    public AppBuilder addGoalView() {
+        addGoalViewModel = new AddGoalViewModel();
+        addGoalView = new AddGoalView(addGoalViewModel);
+        cardPanel.add(addGoalView, addGoalView.getViewName());
+        return this;
+    }
 
     /**
-     * Adds Set Goal View to the Application.
+     * Adds Add Income View to the Application.
+     * @return this builder
+     */
+    public AppBuilder addAddIncomeView() {
+        addAddIncomeViewModel = new AddIncomeViewModel();
+        addAddIncomeView = new AddIncomeView(addIncomeViewModel, addIncomeController);
+        cardPanel.add(addIncomeView, addIncomeView.getViewName());
+        return this;
+    }
+
+    /**
+     * Adds Add Expense View to the Application.
+     * @return this builder
+     */
+    public AppBuilder addAddExpenseView() {
+        AddIncomeInputData inputData = new AddIncomeInputData(null, 0, null);
+//        should call to API in above line
+        addIncomeViewModel = new AddIncomeViewModel();
+        addIncomeView = new AddIncomeView(addIncomeViewModel, addIncomeController);
+        cardPanel.add(addIncomeView, addIncomeView.getViewName());
+        return this;
+    }
+
+
+    /**
+     * Adds Add Goal View to the Application.
      * @return this builder
      */
     public AppBuilder addAddGoalView() {
@@ -146,7 +186,7 @@ public class AppBuilder {
     }
 
     /**
-     * Creates the JFrame for the application and initially sets up the SignupView
+     * Creates the JFrame for the application and initially sets up the HomeView
      * to be displayed.
      * 
      * @return the application
@@ -162,10 +202,6 @@ public class AppBuilder {
         viewManagerModel.firePropertyChanged();
 
         return application;
-    }
-
-    public void setVisible(boolean visible) {
-        viewManager.setVisible(visible);
     }
 
 }

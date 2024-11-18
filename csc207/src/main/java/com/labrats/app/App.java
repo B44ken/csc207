@@ -15,8 +15,8 @@ public class App {
         final JFrame application = appBuilder
                 .addAddIncomeView()
                 .addAddExpenseView()
-                .addExpenseView()
-                .addIncomeView()
+                .addExpenseHistoryView()
+                .addIncomeHistoryView()
                 .addHomeView()
                 .addGoalView()
                 .addBudgetView()
