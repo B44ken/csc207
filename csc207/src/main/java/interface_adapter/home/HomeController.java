@@ -1,4 +1,4 @@
-package view;
+package interface_adapter.home;
 
 import javax.swing.JOptionPane;
 

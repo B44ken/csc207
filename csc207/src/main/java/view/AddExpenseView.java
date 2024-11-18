@@ -12,6 +12,8 @@ import java.beans.PropertyChangeListener;
 
 import javax.swing.*;
 //change above to what its actually called if its different
+import interface_adapter.add_expense.AddExpenseController;
+import interface_adapter.add_expense.AddExpenseViewModel;
 
 public class AddExpenseView extends JPanel implements ActionListener, PropertyChangeListener {
 
@@ -106,5 +108,5 @@ public class AddExpenseView extends JPanel implements ActionListener, PropertyCh
     public void propertyChange(PropertyChangeEvent evt) {
         JOptionPane.showMessageDialog(this, "Property Change not implemented yet.");
     }
-    }
+
 }
