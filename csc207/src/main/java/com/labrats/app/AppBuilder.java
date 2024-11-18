@@ -1,5 +1,7 @@
 package com.labrats.app;
 
+import interface_adapter.add_goal.AddGoalController;
+import use_case.add_goal.AddGoalInputData;
 import view.*;
 
 import java.awt.CardLayout;
@@ -28,6 +30,9 @@ public class AppBuilder {
 
     private AddIncomeView incomeView;
     // private IncomeViewModel incomeViewModel;
+
+    private GoalView goalView;
+    private GoalViewModel goalViewModel;
 
     public AppBuilder() {
         cardPanel.setLayout(cardLayout);
@@ -79,6 +84,18 @@ public class AppBuilder {
         };
         // inputBoundary.addIncome(null, 0, null);
         return this;
+    }
+
+    public AppBuilder addGoalView() {
+        AddGoalInputData inputData = new AddGoalInputData();
+        goalView = new goalView(
+                new GoalViewModel(), new AddGoalController(inputData)
+        );
+        cardPanel.add(goalView, goalView.getViewName());
+        goalView.setVisible(true);
+        viewManager.addView(goalView.getViewName(), goalView);
+        return this;
+
     }
 
     /**
