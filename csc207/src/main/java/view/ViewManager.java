@@ -32,11 +32,6 @@ public class ViewManager implements PropertyChangeListener {
         views.setVisible(visible);
     }
 
-    public void addView(String viewName, JPanel view) {
-        viewMap.put(viewName, view);
-        views.add(view, viewName);
-    }
-
     public void selectView(String viewName) {
         viewMap.get(currentView).setVisible(false);
         viewMap.get(viewName).setVisible(true);
