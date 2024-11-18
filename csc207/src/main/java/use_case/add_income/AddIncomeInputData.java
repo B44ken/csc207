@@ -10,12 +10,14 @@ public class AddIncomeInputData {
 
     private final String name;
     private final double amount;
+    private final String category;
     private final Date date;
 
-    public AddIncomeInputData(String name, double amount, Date date) {
+    public AddIncomeInputData(String name, double amount, String category, String date) {
         this.name = name;
         this.amount = amount;
-        this.date = date;
+        this.category = category;
+        this.date = new Date(date);
     }
 
     String getName() {
@@ -28,5 +30,8 @@ public class AddIncomeInputData {
 
     Date getDate() {
         return date;
+    }
+    String getCategory() {
+        return category;
     }
 }

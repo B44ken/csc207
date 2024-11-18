@@ -1,29 +1,29 @@
 package view;
 
-import java.util.Date;
-
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Date;
 
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 import interface_adapter.add_income.AddIncomeController;
-import interface_adapter.add_income.AddIncomeState;
 import interface_adapter.add_income.AddIncomeViewModel;
 //change above to what its actually called if its different
 
-public class IncomeView extends JPanel implements ActionListener, PropertyChangeListener {
+public class AddIncomeView extends JPanel implements ActionListener, PropertyChangeListener {
+    private String viewName = "Add Income";
 
     private final AddIncomeController addIncomeController;
     private final AddIncomeViewModel addIncomeViewModel;
+
+    private final JFrame outerFrame;
     // change above to what controller is actually called later
 
-    public IncomeView(AddIncomeViewModel incomeViewModel, AddIncomeController controller) {
+    public AddIncomeView(AddIncomeViewModel incomeViewModel, AddIncomeController controller) {
+        super();
 
         this.addIncomeController = controller;
         this.addIncomeViewModel = incomeViewModel;
@@ -81,7 +81,7 @@ public class IncomeView extends JPanel implements ActionListener, PropertyChange
                 Date date = new Date(year, month, day);
                 // input into text file here
                 // after everything funnelled into txt file go back to home
-                addIncomeController.switchToHomeView();
+                // addIncomeController.switchToHomeView();
             }
         });
 
@@ -93,12 +93,13 @@ public class IncomeView extends JPanel implements ActionListener, PropertyChange
         mainPanel.add(dayPanel);
         mainPanel.add(monthPanel);
         mainPanel.add(yearPanel);
+        mainPanel.add(confirmPanel);
 
-        JFrame frame = new JFrame("Add Income");
-        frame.setContentPane(mainPanel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+        outerFrame = new JFrame("Add Income");
+        outerFrame.setContentPane(mainPanel);
+        outerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        outerFrame.pack();
+        // frame.setVisible(true);
     };
 
     @Override
@@ -109,5 +110,13 @@ public class IncomeView extends JPanel implements ActionListener, PropertyChange
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         JOptionPane.showMessageDialog(this, "Property Change not implemented yet.");
+    }
+
+    public void setVisible(boolean visible) {
+        outerFrame.setVisible(visible);
+    }
+
+    public String getViewName() {
+        return viewName;
     }
 }

@@ -1,9 +1,6 @@
 package com.labrats.app;
 
-import java.util.Date;
-
-import entity.Transaction;
-import entity.TransactionHistory;
+import view.AppBuilder;
 
 /**
  * App class.
@@ -14,14 +11,13 @@ public class App {
      * @param args argument.
      */
     public static void main(String[] args) {
-        final var budget = new TransactionHistory();
-
-        final var salary = new Transaction("", 3000, "Job", new Date(2024, 10, 10));
-        budget.add(salary);
-
-        final var nextMonthSalary = new Transaction("", 3000, "Job", new Date(2024, 11, 10));
-        budget.add(nextMonthSalary);
-
-        System.out.println("Net budget " + Integer.toString(budget.getAmountBetween(new Date(2024, 10, 1), new Date(2024, 10, 31))));
+        var ab = new AppBuilder();
+        ab
+        .addHomeView()
+        .addHomeUseCase()
+        .addIncomeView()
+        .addIncomeUseCase()
+        .build()
+        .setVisible(true);
     }
 }

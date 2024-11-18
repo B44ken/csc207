@@ -3,7 +3,7 @@ package interface_adapter;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-// alerts View about updates through a callback
+// alerts View about updates through a callback, then View will change accordingly
 
 /**
  * The ViewModel for Finance App implementation
@@ -62,6 +62,4 @@ public class ViewModel<T> {
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         this.support.addPropertyChangeListener(listener);
     }
-
-
 }

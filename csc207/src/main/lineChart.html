@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"><</script>
+</head>
+<body>
+  <canvas id="chart" width="400" height="400"><</canvas>
+  <script>
+    chartIt();
+    async function chartIt() {
+      await getData();
+      const ctx = document.getElementById('chart').getContext('2d')
+      const myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: data.xvalues,
+          datasets: [
+            {
+              label: 'Monthly Finance',
+              data: data.yvalues,
+              fill: false,
+              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+              borderColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 1
+            }
+          ]
+        }
+      });
+    }
+    async function getData() {
+      const xvalues = []
+      const yvalues = [];
+
+      const response = await fetch('TxtImportExport');
+      const data = await response.text();
+
+      const table = data.split('\n').slice(1);
+      table.forEach(row => {
+        const columns = row.split(',');
+        const month = columns[0];
+        yvalues.push(month);
+        const value = columns[1];
+        yvalues.push(parseFlaoat(value));
+        console.log(month, value);
+      });
+      return {xvalues, yvalues}
+    }
+
+
+
+    </script>
+
+</body>
+</html>
