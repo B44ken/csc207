@@ -27,6 +27,6 @@ public class AddIncomeController {
      *
      */
     public void execute(String name, double amount, String category, Date date) {
-        final AddIncomeInputData addIncomeInputData
+        final AddIncomeInputData addIncomeInputData;
     }
 }

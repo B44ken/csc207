@@ -11,4 +11,6 @@ public interface AddIncomeInputBoundary {
      */
     void execute(AddIncomeInputData addIncomeInputData);
 
+    void switchToHomeView();
+
 }
