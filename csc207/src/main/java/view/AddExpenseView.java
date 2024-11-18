@@ -1,5 +1,7 @@
 package view;
 
+import interface_adapter.add_expense.AddExpenseController;
+
 import java.util.Date;
 
 import java.awt.Component;
@@ -9,23 +11,17 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-
-import interface_adapter.add_income.AddIncomeController;
-import interface_adapter.add_income.AddIncomeState;
-import interface_adapter.add_income.AddIncomeViewModel;
 //change above to what its actually called if its different
 import interface_adapter.add_expense.AddExpenseController;
 import interface_adapter.add_expense.AddExpenseViewModel;
 
-public class ExpenseView extends JPanel implements ActionListener, PropertyChangeListener {
+public class AddExpenseView extends JPanel implements ActionListener, PropertyChangeListener {
 
     private final AddExpenseController addExpenseController;
     private final AddExpenseViewModel addExpenseViewModel;
     // change above to what controller is actually called
 
-    public ExpenseView(AddExpenseViewModel expenseViewModel, AddExpenseController controller) {
+    public AddExpenseView(AddExpenseViewModel expenseViewModel, AddExpenseController controller) {
 
         this.addExpenseController = controller;
         this.addExpenseViewModel = expenseViewModel;
