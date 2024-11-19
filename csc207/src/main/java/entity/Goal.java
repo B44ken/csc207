@@ -9,12 +9,12 @@ import java.util.Date;
 public class Goal {
     private String target;
     private double amount;
-    private Date date;
+    private Date targetDate;
 
     public Goal(String name, double amount, Date date) {
         this.target = target;
         this.amount = amount;
-        this.date = date;
+        this.targetDate = targetDate;
     }
 
     public String getTarget() {
@@ -33,9 +33,9 @@ public class Goal {
         this.amount = amount;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getTargetDate() {
+        return targetDate;
     }
 
-    public void setDate(Date date) {this.date = date;}
+    public void setTargetDate(Date targetDate) {this.targetDate = targetDate;}
 }
