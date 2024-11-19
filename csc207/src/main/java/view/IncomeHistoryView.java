@@ -30,7 +30,7 @@ import interface_adapter.add_income.AddIncomeViewModel;
 public class IncomeHistoryView extends JPanel implements ActionListener, PropertyChangeListener {
     private final String viewName = "income history";
     private final IncomeHistoryViewModel viewModel;
-    private final IncomeHistoryOutputBoundary incomeHistoryOutputBoundary;
+//    private final IncomeHistoryOutputBoundary incomeHistoryOutputBoundary;
 
     private final JButton Home;
     private final JButton Expense;
@@ -58,8 +58,7 @@ public class IncomeHistoryView extends JPanel implements ActionListener, Propert
                 //how do i choose which presenter/output boundary to use "switch to home view?"
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-
-                        incomeHistoryViewModel.setState("HomeView");
+                        incomeHistoryViewModel.setState();
                         }
                     }
         );
@@ -100,7 +99,6 @@ public class IncomeHistoryView extends JPanel implements ActionListener, Propert
 
         @Override
         public void propertyChange(PropertyChangeEvent evt) {
-            final IncomeHistory state = (IncomeHistory) evt.getNewValue();
         }
 
     public String getViewName() {
