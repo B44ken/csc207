@@ -1,36 +1,38 @@
 package interface_adapter.home;
 
+import java.awt.CardLayout;
+
 import javax.swing.JOptionPane;
+
+import view.ViewManager;
 
 public class HomeController {
 
-    private final HomeInputBoundary homeUseCaseInteractor;
+    private ViewManager viewManager;
+    private CardLayout cardLayout;
 
-    private final ViewManager viewManager;
-
-    public HomeController(HomeInputBoundary homeUseCaseInteractor, ViewManager viewManager) {
-        this.homeUseCaseInteractor = homeUseCaseInteractor;
-        this.viewManager = viewManager;
+    public HomeController() {
+        // this.viewManager = viewManager;
     }
 
-    public void switchToAddIncome(){
-        // this.cardLayout.show(cardPanel, "Add Income");
-        viewManager.selectView("Add Income");
+    public void switchToAddIncome() {
+        this.cardLayout.show(cardPanel, "Add Income");
+        // this.viewManager.selectView("Add Income");
     }
 
-    public void switchToAddExpense(){
-        homeUseCaseInteractor.switchToAddExpense();
-    }
+    // public void switchToAddExpense() {
+    //     JOptionPane.showMessageDialog(null, "Button not implemented yet.");
+    // }
 
-    public void switchToIncomeView(){
-        JOptionPane.showMessageDialog(null, "Button not implemented yet.");
-    }
+    // public void switchToIncomeView() {
+    //     JOptionPane.showMessageDialog(null, "Button not implemented yet.");
+    // }
 
-    public void switchToExpenseView(){
-        JOptionPane.showMessageDialog(null, "Button not implemented yet.");
-    }
+    // public void switchToExpenseView() {
+    //     JOptionPane.showMessageDialog(null, "Button not implemented yet.");
+    // }
 
-    public void switchToGoalView(){
-        JOptionPane.showMessageDialog(null, "Button not implemented yet.");
-    }
+    // public void switchToGoalView() {
+    //     JOptionPane.showMessageDialog(null, "Button not implemented yet.");
+    // }
 }
