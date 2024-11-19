@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.swing.*;
 
@@ -78,7 +78,7 @@ public class AddIncomeView extends JPanel implements ActionListener, PropertyCha
                 Integer day = Integer.valueOf(dayTextField.getText());
                 Integer month = Integer.valueOf(monthTextField.getText());
                 Integer year = Integer.valueOf(yearTextField.getText());
-                Date date = new Date(year, month, day);
+                LocalDate date = LocalDate.of(year, month, day);
                 // input into text file here
                 // after everything funnelled into txt file go back to home
                 // addIncomeController.switchToHomeView();
