@@ -16,18 +16,28 @@ import data_access.TxtImportExport;
          * @param args argument.
      */
     public static void main(String[] args) {
-        testApp();
-        // var ab = new AppBuilder();
-        // ab
-        // .addHomeView()
-        // .addHomeUseCase()
-        // .addIncomeView()
-        // .addIncomeUseCase()
-        // .build()
-        // .setVisible(true);
+        // runWholeApp();
+        runChartDemo();
     }
 
-    public static void testApp() {
+    public static void runWholeApp() {
+        final AppBuilder appBuilder = new AppBuilder();
+        final JFrame application = appBuilder
+                .addAddIncomeView()
+                .addAddExpenseView()
+                .addExpenseHistoryView()
+                .addIncomeHistoryView()
+                .addHomeView()
+                .addGoalView()
+                // .addBudgetView()
+                // .addChangePasswordUseCase()
+                // .addLogoutUseCase()
+                .build();
+        application.pack();
+        application.setVisible(true);
+    }
+
+    public static void runChartDemo() {
         var test = TxtImportExport.importData("testdata.csv");
 
         var cif = new data_access.ChartImageFactory(test);

@@ -34,7 +34,6 @@ public class TxtImportExport {
             );
             history.add(entry);
         }
-
         return history;
     }
 

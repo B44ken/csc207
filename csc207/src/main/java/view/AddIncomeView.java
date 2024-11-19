@@ -13,7 +13,7 @@ import interface_adapter.add_income.AddIncomeController;
 import interface_adapter.add_income.AddIncomeViewModel;
 //change above to what its actually called if its different
 
-public class IncomeView extends JPanel implements ActionListener, PropertyChangeListener {
+public class AddIncomeView extends JPanel implements ActionListener, PropertyChangeListener {
     private String viewName = "Add Income";
 
     private final AddIncomeController addIncomeController;
@@ -22,7 +22,7 @@ public class IncomeView extends JPanel implements ActionListener, PropertyChange
     private final JFrame outerFrame;
     // change above to what controller is actually called later
 
-    public IncomeView(AddIncomeViewModel incomeViewModel, AddIncomeController controller) {
+    public AddIncomeView(AddIncomeViewModel incomeViewModel, AddIncomeController controller) {
         super();
 
         this.addIncomeController = controller;

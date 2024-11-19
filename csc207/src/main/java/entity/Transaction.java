@@ -18,6 +18,7 @@ public class Transaction {
         this.date = date;
     }
 
+
     public String getName() {
         return name;
     }

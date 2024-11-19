@@ -1,4 +1,4 @@
-package view;
+package interface_adapter.home;
 
 import interface_adapter.ViewModel;
 
