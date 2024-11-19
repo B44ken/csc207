@@ -4,7 +4,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import view.ExpenseView;
-import view.HomeController;
 import view.HomeView;
 import view.ViewSwitcher;
 import view.IncomeHistoryView;

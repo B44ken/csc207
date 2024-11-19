@@ -18,6 +18,8 @@ import interface_adapter.add_income.AddIncomeController;
 import interface_adapter.add_income.AddIncomeState;
 import interface_adapter.add_income.AddIncomeViewModel;
 //change above to what its actually called if its different
+import interface_adapter.add_expense.AddExpenseController;
+import interface_adapter.add_expense.AddExpenseViewModel;
 
 public class ExpenseView extends JPanel {
 
