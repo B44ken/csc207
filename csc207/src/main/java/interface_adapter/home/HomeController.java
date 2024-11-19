@@ -3,9 +3,13 @@ package interface_adapter.home;
 import javax.swing.JOptionPane;
 
 public class HomeController {
+
+    private final HomeInputBoundary homeUseCaseInteractor;
+
     private final ViewManager viewManager;
 
-    public HomeController(ViewManager viewManager) {
+    public HomeController(HomeInputBoundary homeUseCaseInteractor, ViewManager viewManager) {
+        this.homeUseCaseInteractor = homeUseCaseInteractor;
         this.viewManager = viewManager;
     }
 
@@ -15,7 +19,7 @@ public class HomeController {
     }
 
     public void switchToAddExpense(){
-        JOptionPane.showMessageDialog(null, "Button not implemented yet.");
+        homeUseCaseInteractor.switchToAddExpense();
     }
 
     public void switchToIncomeView(){
