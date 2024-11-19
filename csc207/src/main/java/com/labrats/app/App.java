@@ -5,20 +5,15 @@ import java.time.LocalDate;
 
 import javax.swing.JFrame;
 
-import data_access.ChartAPI;
 import data_access.TxtImportExport;
-import entity.Expense;
-import entity.Income;
-import entity.TransactionHistory;
-import view.AppBuilder;
 
 /**
  * App class.
- */
-public class App {
-    /**
-     * Main method for this project.
-     * @param args argument.
+    */
+    public class App {
+        /**
+         * Main method for this project.
+         * @param args argument.
      */
     public static void main(String[] args) {
         testApp();
