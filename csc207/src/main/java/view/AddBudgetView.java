@@ -1,5 +1,6 @@
 package view;
 
+import java.io.*;
 import java.util.Date;
 
 import java.awt.Component;
@@ -52,11 +53,13 @@ public class AddBudgetView extends JPanel implements ActionListener, PropertyCha
         cancelPanel.add(cancelButton);
 
         confirmButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 String categoryName = categoryNameTextField.getText();
-                Double amount = Double.valueOf(amountTextField.getText());
-                // input into budget text file here
-                // after everything funnelled into txt file go back to budget view:
+                String amount = amountTextField.getText();
+                addBudgetController.createUserData(categoryName, amount);
+                // i believe this inputs into budget text file here ^
+                // switch back to budget view?:
                 // addBudgetController.switchToBudgetView();
             }
         });
@@ -86,4 +89,23 @@ public class AddBudgetView extends JPanel implements ActionListener, PropertyCha
     public String getViewName() {return viewName;}
 
     public void setAddBudgetState(AddBudgetController controller) {this.addBudgetController = controller;}
+
+    private static boolean isEntryUnique(String fileName, String input) {
+        File file = new File(fileName);
+        if (!file.exists()) {
+            return true;
+        }
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.contains(input)) {
+                    return false;
+                }
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
 }
