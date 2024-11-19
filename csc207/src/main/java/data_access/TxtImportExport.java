@@ -14,7 +14,7 @@ import entity.Transaction;
 import entity.TransactionHistory;
 
 public class TxtImportExport {
-    public static TransactionHistory importData(String path) {
+    public static UserData importData(String path) {
         var history = new TransactionHistory();
         String fileContent;
         try {
@@ -38,7 +38,7 @@ public class TxtImportExport {
         return history;
     }
 
-    public static void exportData(TransactionHistory history, String path) {
+    public static void exportData(UserData history, String path) {
         var sb = new StringBuilder();
         for (var t : history.getHistory()) {
             sb.append(t.getAmount());

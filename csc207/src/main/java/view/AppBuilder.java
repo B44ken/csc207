@@ -50,7 +50,11 @@ public class AppBuilder {
      * @return
      */
     public AppBuilder addHomeUseCase() {
+<<<<<<< Updated upstream
         final HomeController controller = new HomeController(viewManager);
+=======
+        final HomeController controller = new HomeController(viewManager)
+>>>>>>> Stashed changes
         homeView.setHomeController(controller);
         return this;
     }

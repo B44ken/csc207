@@ -27,7 +27,7 @@ public class IncomeView extends JPanel implements ActionListener, PropertyChange
 
         this.addIncomeController = controller;
         this.addIncomeViewModel = incomeViewModel;
-        addIncomeViewModel.addPropertyChangeListener(this);
+        // addIncomeViewModel.addPropertyChangeListener(this);
 
         final JLabel title = new JLabel("Add Income");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
