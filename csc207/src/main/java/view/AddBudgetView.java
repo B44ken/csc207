@@ -57,19 +57,9 @@ public class AddBudgetView extends JPanel implements ActionListener, PropertyCha
             public void actionPerformed(ActionEvent e) {
                 String categoryName = categoryNameTextField.getText();
                 String amount = amountTextField.getText();
-
-                String combinedText = categoryName + ',' + amount;
-                if (isEntryUnique("budget_history.txt", categoryName)) {
-                    try {
-                        BufferedWriter writer = new BufferedWriter(new FileWriter("budget_history.txt", true));
-                        writer.write(combinedText);
-                        writer.newLine();
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                }
+                addBudgetController.createUserData(categoryName, amount);
                 // i believe this inputs into budget text file here ^
-                // switch back to budget view:
+                // switch back to budget view?:
                 // addBudgetController.switchToBudgetView();
             }
         });
