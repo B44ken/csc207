@@ -17,6 +17,20 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import interface_adapter.ViewManagerModel;
+import interface_adapter.home.HomeController;
+import interface_adapter.home.HomePresenter;
+import interface_adapter.home.HomeViewModel;
+import interface_adapter.add_expense.AddExpenseController;
+import interface_adapter.add_expense.AddExpensePresenter;
+import interface_adapter.add_expense.AddExpenseViewModel;
+import use_case.home.HomeInteractor;
+import use_case.home.HomeInputBoundary;
+import use_case.home.HomeOutputBoundary;
+import use_case.add_expense.AddExpenseInteractor;
+import use_case.add_expense.AddExpenseOutputBoundary;
+import view.ViewManager;
+import view.HomeView;
+import view.AddExpenseView;
 import interface_adapter.add_income.AddIncomeViewModel;
 import use_case.add_income.AddIncomeInputBoundary;
 import use_case.add_income.AddIncomeInputData;
@@ -132,11 +146,9 @@ public class AppBuilder {
      * @return this builder
      */
     public AppBuilder addAddExpenseView() {
-        AddIncomeInputData inputData = new AddIncomeInputData(null, 0, null);
-//        should call to API in above line
-        addIncomeViewModel = new AddIncomeViewModel();
-        addIncomeView = new AddIncomeView(addIncomeViewModel, addIncomeController);
-        cardPanel.add(addIncomeView, addIncomeView.getViewName());
+        addExpenseViewModel = new AddExpenseViewModel();
+        addExpenseView = new AddExpenseView(addExpenseViewModel);
+        cardPanel.add(addExpenseView, addExpenseView.getViewName());
         return this;
     }
 
@@ -176,11 +188,10 @@ public class AppBuilder {
      */
     public AppBuilder addAddExpenseUseCase() {
         final AddExpenseOutputBoundary addExpenseOutputBoundary = new AddExpensePresenter(viewManagerModel,
-                addExpenseViewModel, addExpenseViewModel);
-        final AddExpenseInputBoundary userAddExpenseInteractor = new AddExpenseInteractor(
-                userDataAccessObject, addExpenseOutputBoundary, expenseFactory);
+                addExpenseViewModel, homeViewModel);
+        final AddExpenseInputBoundary addExpenseUseCaseInteractor = new AddExpenseInteractor(addExpenseOutputBoundary);
 
-        final AddExpenseController controller = new AddExpenseController(userAddExpenseInteractor);
+        final AddExpenseController controller = new AddExpenseController(addExpenseUseCaseInteractor);
         addExpenseView.setAddExpenseController(controller);
         return this;
     }
