@@ -1,7 +1,5 @@
 package view;
 
-import interface_adapter.add_expense.AddExpenseController;
-
 import java.util.Date;
 
 import java.awt.Component;
@@ -16,14 +14,15 @@ import interface_adapter.add_expense.AddExpenseController;
 import interface_adapter.add_expense.AddExpenseViewModel;
 
 public class AddExpenseView extends JPanel implements ActionListener, PropertyChangeListener {
+    private final String viewName = "Add Expense";
 
-    private final AddExpenseController addExpenseController;
+    private AddExpenseController controller;
     private final AddExpenseViewModel addExpenseViewModel;
     // change above to what controller is actually called
 
-    public AddExpenseView(AddExpenseViewModel expenseViewModel, AddExpenseController controller) {
+    public AddExpenseView(AddExpenseViewModel expenseViewModel) {
 
-        this.addExpenseController = controller;
+        //this.addExpenseController = controller;
         this.addExpenseViewModel = expenseViewModel;
         addExpenseViewModel.addPropertyChangeListener(this);
 
@@ -79,7 +78,7 @@ public class AddExpenseView extends JPanel implements ActionListener, PropertyCh
                 Date date = new Date(year, month, day);
                 // input into text file here
                 // after everything funnelled into txt file go back to home
-                addExpenseController.switchToHomeView();
+                controller.switchToHomeView();
             }
         });
 
@@ -109,4 +108,11 @@ public class AddExpenseView extends JPanel implements ActionListener, PropertyCh
         JOptionPane.showMessageDialog(this, "Property Change not implemented yet.");
     }
 
+    public String getViewName() {
+        return viewName;
+    }
+
+    public void setAddExpenseController(AddExpenseController controller) {
+        this.controller = controller;
+    }
 }
