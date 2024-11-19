@@ -1,12 +1,13 @@
 package entity;
 
+
 import java.util.Date;
 
 /**
  * Factory for creating goals.
  */
 
-public interface GoalFactory {
+public class GoalFactory {
     /**
      * Creates a new goal.
      * @param target of goal.
@@ -14,5 +15,8 @@ public interface GoalFactory {
      * @param date of goal.
      * @return the goal.
      */
-    Transaction create(String target, double amount, Date date);
+    public Goal create(String target, double amount, Date date) {
+        Date newdate = date;
+        return new Goal(target, amount, newdate);
+    }
 }

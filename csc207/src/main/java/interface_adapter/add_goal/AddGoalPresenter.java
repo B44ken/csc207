@@ -1,8 +1,8 @@
 package interface_adapter.add_goal;
 
 import interface_adapter.ViewManagerModel;
-import use_case.add_income.AddIncomeOutputBoundary;
-import use_case.add_income.AddIncomeOutputData;
+import use_case.add_income.AddGoalOutputBoundary;
+import use_case.add_income.AddGoalOutputData;
 
 public class AddGoalPresenter implements AddGoalOutputBoundary {
 
