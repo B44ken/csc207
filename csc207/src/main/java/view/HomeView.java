@@ -1,7 +1,9 @@
 package view;
 
+import interface_adapter.home.HomeController;
+import interface_adapter.home.HomeViewModel;
+
 import java.awt.Component;
-import java.awt.Desktop.Action;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

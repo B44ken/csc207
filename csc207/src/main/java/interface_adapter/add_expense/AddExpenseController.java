@@ -1,4 +1,36 @@
 package interface_adapter.add_expense;
 
+import use_case.add_expense.AddExpenseInputBoundary;
+import use_case.add_expense.AddExpenseInputData;
+
+/**
+ * The controller for the Add Expense Use Case.
+ */
 public class AddExpenseController {
+
+    private final AddExpenseInputBoundary addExpenseUseCaseInteractor;
+
+    public AddExpenseController(AddExpenseInputBoundary addExpenseUseCaseInteractor) {
+        this.addExpenseUseCaseInteractor = addExpenseUseCaseInteractor;
+    }
+
+    /**
+     * Executes the Add Expense Use Case.
+     * @param name the name of the expense
+     * @param amount the amount of the expense
+     * @param category the category of the expense
+     * @param date the date of the expense
+     */
+    public void execute(String name, float amount, String category, String date){
+        final AddExpenseInputData addExpenseInputData = new AddExpenseInputData(amount, name, category, date);
+
+        addExpenseUseCaseInteractor.execute(addExpenseInputData);
+    }
+
+    /**
+     * Executes the "switch to HomeView" Use Case.
+     */
+    public void switchToHomeView() {
+        addExpenseUseCaseInteractor.switchToHomeView();
+    }
 }

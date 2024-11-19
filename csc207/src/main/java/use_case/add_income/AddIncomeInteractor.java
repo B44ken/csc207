@@ -1,5 +1,8 @@
 package use_case.add_income;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 import entity.Income;
 import entity.TransactionHistory;
 
