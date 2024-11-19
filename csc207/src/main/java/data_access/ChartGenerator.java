@@ -1,5 +1,5 @@
 class ChartDataRepository {
-    constructor() {
+    void constructor() {
         this.quickChartUrl = 'https://quickchart.io/chart';
     }
 

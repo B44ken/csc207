@@ -2,31 +2,19 @@ package com.labrats.app;
 
 import javax.swing.*;
 
-/**
- * App class.
- */
-public class App {
-
+public class AppAddIncome {
     /**
-     * Main method for this project.
+     * AddIncome Individual view
      * @param args argument.
      */
     public static void main(String[] args) {
         final AppBuilder appBuilder = new AppBuilder();
         final JFrame application = appBuilder
                 .addAddIncomeView()
-                .addAddExpenseView()
-                .addExpenseHistoryView()
-                .addIncomeHistoryView()
-                .addHomeView()
-                .addGoalView()
-                .addAddBudgetView()
-                .addChangePasswordUseCase()
-                .addLogoutUseCase()
+                .addAddIncomeUseCase()
                 .build();
-
         application.pack();
         application.setVisible(true);
     }
-
 }
+

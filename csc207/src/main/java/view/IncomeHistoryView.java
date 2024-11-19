@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeListener;
 
-public class IncomeHistoryView {
+
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -26,90 +26,85 @@ import interface_adapter.add_income.AddIncomeController;
 import interface_adapter.add_income.AddIncomeViewModel;
 //change above to what its actually called if its different
 
-    public class IncomeHistory extends JPanel implements ActionListener, PropertyChangeListener {
-        private final String viewName = "income history";
-        private final IncomeHistoryViewModel viewModel;
 
-        private final JButton Home;
-        private final JButton Expense;
-        private final JButton Goals;
-        private IncomeHistory loginController;
+public class IncomeHistoryView extends JPanel implements ActionListener, PropertyChangeListener {
+    private final String viewName = "income history";
+    private final IncomeHistoryViewModel viewModel;
+    private final IncomeHistoryOutputBoundary incomeHistoryOutputBoundary;
 
-        public LoginView(IncomeHistory incomeHistoryViewModel) {
+    private final JButton Home;
+    private final JButton Expense;
+    private final JButton Goals;
 
-            this.viewModel = IncomeHistoryViewModel;
-            this.viewModel.addPropertyChangeListener(this);
+    public IncomeHistoryView(IncomeHistoryViewModel incomeHistoryViewModel) {
+        this.viewModel = incomeHistoryViewModel;
+        this.viewModel.addPropertyChangeListener(this);
 
-            final JLabel title = new JLabel("Income History");
-            title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        final JLabel title = new JLabel("Income History");
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-            final LabelTextPanel incomeHistory = new LabelTextPanel(new JLabel("Income"));
+        final JPanel buttons = new JPanel();
+        Home = new JButton("Home");
+        buttons.add(Home);
+        Expense = new JButton("Expense");
+        buttons.add(Expense);
+        Goals = new JButton("Goals");
+        buttons.add(Goals);
 
-            final JPanel buttons = new JPanel();
-            Home = new JButton("Home");
-            buttons.add(Home);
-            Expense = new JButton("Expense");
-            buttons.add(Expense);
+        // txt file/goals in here
+        // Add Chart API here!!
 
-            // Add Chart API here!!
+        Home.addActionListener(
+                //how do i choose which presenter/output boundary to use "switch to home view?"
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
 
-            Home.addActionListener(
-                    new ActionListener() {
-                        public void actionPerformed(ActionEvent evt) {
-                            if (evt.getSource().equals(Home)) {
-                                final IncomeHistoryState currentState = incomeHistoryViewModel.getState();
-
-                                HomeController.execute(
-                                );
-                            }
+                        incomeHistoryViewModel.setState("HomeView");
                         }
                     }
-            );
+        );
 
-            Home.addActionListener(
-                    new ActionListener() {
-                        public void actionPerformed(ActionEvent evt) {
-                            if (evt.getSource().equals(Home)) {
-                                final IncomeHistoryState currentState = incomeHistoryViewModel.getState();
-
-                                HomeController.execute(
-                                );
-                            }
-                        }
+        Expense.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        incomeHistoryOutputBoundary.switchToExpenseHistoryView();
                     }
-            );
+                }
+        );
+
+        Goal.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        IncomeHistoryController.switchToGoalView();
+                    }
+                }
+        );
 
 
-            this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 
-            this.add(title);
-            this.add();
-            this.add(usernameErrorField);
-            this.add(passwordInfo);
-            this.add(buttons);
+        this.add(title);
+//        this.add(); txt file/chart api here
+        this.add(buttons);
+    }
+
+
+    /**
+     * React to a button click that results in evt.
+     * @param evt the ActionEvent to react to
+     */
+    public void actionPerformed(ActionEvent evt) {
+        System.out.println("Click " + evt.getActionCommand());
+    }
+
+        @Override
+        public void propertyChange(PropertyChangeEvent evt) {
+            final IncomeHistory state = (IncomeHistory) evt.getNewValue();
         }
 
+    public String getViewName() {
+        return viewName;
+    }
 
-        /**
-         * React to a button click that results in evt.
-         * @param evt the ActionEvent to react to
-         */
-        public void actionPerformed(ActionEvent evt) {
-            System.out.println("Click " + evt.getActionCommand());
-        }
-
-//        @Override
-//        public void propertyChange(PropertyChangeEvent evt) {
-//            final IncomeHistory state = (IncomeHistory) evt.getNewValue();
-//            usernameErrorField.setText(state.getLoginError());
-//        }
-
-        public String getViewName() {
-            return viewName;
-        }
-
-        public void setLoginController(LoginController loginController) {
-            this.loginController = loginController;
-        }
-}}
+}

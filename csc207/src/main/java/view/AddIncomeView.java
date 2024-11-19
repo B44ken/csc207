@@ -97,7 +97,7 @@ public class AddIncomeView extends JPanel implements ActionListener, PropertyCha
 
         outerFrame = new JFrame("Add Income");
         outerFrame.setContentPane(mainPanel);
-        outerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        outerFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         outerFrame.pack();
         // frame.setVisible(true);
     };

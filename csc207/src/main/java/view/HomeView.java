@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import interface_adapter.home.HomeViewModel;
+
 /**
  * The view for the home view case.
  */

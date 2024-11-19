@@ -75,8 +75,6 @@ public class AppBuilder {
         incomeHistoryViewModel = new IncomeHistoryViewModel();
         incomeHistoryView = new IncomeHistoryView(incomeHistoryViewModel, incomeHistoryController);
         cardPanel.add(incomeHistoryView, incomeHistoryView.getViewName());
-//        addIncomeHistoryView.setVisible(true);
-//        viewManager.addView(addIncomeHistoryView.getViewName(), addIncomeHistoryView);
         return this;
     }
 
@@ -146,14 +144,11 @@ public class AppBuilder {
      * @return this builder
      */
     public AppBuilder addAddGoalView() {
-        AddGoalInputData inputData = new AddGoalInputData(null, 0, null);
-//        should call to API in above line
         addGoalViewModel = new AddGoalViewModel();
         addGoalView = new AddGoalView(addGoalViewModel, addGoalController);
         cardPanel.add(addGoalView, addGoalView.getViewName());
         return this;
     }
-
 
     /**
      * Adds Add Income Use Case to the application
