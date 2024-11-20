@@ -9,31 +9,33 @@ import data_access.TxtImportExport;
 
 /**
  * App class.
-    */
-    public class App {
-        /**
-         * Main method for this project.
-         * @param args argument.
+ */
+public class App {
+    /**
+     * Main method for this project.
+     * 
+     * @param args argument.
      */
     public static void main(String[] args) {
-        // runWholeApp();
-        runChartDemo();
+        runWholeApp();
+        // runChartDemo();
     }
 
     public static void runWholeApp() {
         final AppBuilder appBuilder = new AppBuilder();
         final JFrame application = appBuilder
-                .addAddIncomeView()
-                .addAddExpenseView()
-                .addExpenseHistoryView()
-                .addIncomeHistoryView()
                 .addHomeView()
-                .addGoalView()
+                .addHomeUseCase()
+                // .addIncomeHistoryView()
+                .addExpenseView()
+                .build();
+                // .addAddIncomeView()
+                // .addAddExpenseView()
+                // .addExpenseHistoryView()
+                // .addGoalView()
                 // .addBudgetView()
                 // .addChangePasswordUseCase()
                 // .addLogoutUseCase()
-                .build();
-
         application.pack();
         application.setVisible(true);
     }
