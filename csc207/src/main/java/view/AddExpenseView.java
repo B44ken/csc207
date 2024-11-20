@@ -1,35 +1,28 @@
 package view;
 
-import java.util.Date;
-
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 import com.labrats.app.ViewNames;
-
-import interface_adapter.add_income.AddIncomeController;
-import interface_adapter.add_income.AddIncomeState;
-import interface_adapter.add_income.AddIncomeViewModel;
-//change above to what its actually called if its different
 import interface_adapter.add_expense.AddExpenseController;
-import interface_adapter.add_expense.AddExpenseViewModel;
 
-public class ExpenseView extends JPanel {
+//change above to what its actually called if its different
 
-    // private final AddExpenseController addExpenseController;
+
+public class AddExpenseView extends JPanel {
+
+    private AddExpenseController addExpenseController;
     // private final AddExpenseViewModel addExpenseViewModel;
     // change above to what controller is actually called
 
     public ViewSwitcher viewSwitcher;
 
-    public ExpenseView() {
+    public AddExpenseView() {
         this.viewSwitcher = viewSwitcher;
 
         final JLabel title = new JLabel("Add Expense");
@@ -75,6 +68,21 @@ public class ExpenseView extends JPanel {
 
         confirmButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                String name = nameTextField.getText();
+                Double amount = Double.valueOf(amountTextField.getText());
+                String category = categoryTextField.getText();
+
+                try{
+                    FileWriter writer = new FileWriter("test.txt");
+                    writer.write("Name: " + name + "\nAmount: " + amount + "\nCategory: " + category);
+                    writer.write(System.lineSeparator());
+                    writer.flush();
+                    writer.close();
+                }
+                catch(IOException ex)
+                {
+                    System.out.println("Error!" + name + amount + category);
+                }
                 // String name = nameTextField.getText();
                 // Double amount = Double.valueOf(amountTextField.getText());
                 // String category = categoryTextField.getText();
@@ -88,6 +96,16 @@ public class ExpenseView extends JPanel {
                 viewSwitcher.switchTo(ViewNames.home);
             }
         });
+
+        cancelButton.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                    JOptionPane.showMessageDialog(cancelButton, "Adding an expense cancelled. Going back to Home.");
+                    addExpenseController.switchToHomeView();
+            }
+        }
+        );
+
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
@@ -111,5 +129,15 @@ public class ExpenseView extends JPanel {
 
     public void addViewSwitcher(ViewSwitcher viewSwitcher) {
         this.viewSwitcher = viewSwitcher;
+    }
+    /*
+    public String getViewName() {
+        return viewName;
+    }
+
+     */
+
+    public void setAddExpenseController(AddExpenseController controller) {
+        this.addExpenseController = controller;
     }
 }

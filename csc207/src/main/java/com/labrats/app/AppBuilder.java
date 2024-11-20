@@ -3,13 +3,12 @@ package com.labrats.app;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import view.ExpenseView;
+import view.AddExpenseView;
 import view.HomeView;
 import view.ViewSwitcher;
 import view.IncomeHistoryView;
 
 import java.awt.CardLayout;
-import java.security.Principal;
 
 public class AppBuilder {
     private CardLayout layout;
@@ -48,7 +47,7 @@ public class AppBuilder {
     }
 
     public AppBuilder addExpenseView() {
-        var expenseView = new ExpenseView();
+        var expenseView = new AddExpenseView();
         cards.add(expenseView, ViewNames.expense);
         return this;
     }
