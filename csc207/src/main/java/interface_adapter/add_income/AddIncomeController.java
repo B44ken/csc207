@@ -15,7 +15,7 @@ import java.time.LocalDate;
  */
 public class AddIncomeController {
     private final AddIncomeInputBoundary addIncomeUseCaseInteractor;
-    public AddIncomeController(AddIncomeInputData addIncomeUseCaseInteractor) {
+    public AddIncomeController(AddIncomeInputBoundary addIncomeUseCaseInteractor) {
         this.addIncomeUseCaseInteractor = addIncomeUseCaseInteractor;
     }
 
