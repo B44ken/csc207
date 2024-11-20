@@ -8,7 +8,7 @@ package interface_adapter.add_income;
 import use_case.add_income.AddIncomeInputBoundary;
 import use_case.add_income.AddIncomeInputData;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * Controller for Add Income use case.
@@ -27,7 +27,7 @@ public class AddIncomeController {
      * @param date
      *
      */
-    public void execute(String name, double amount, String category, String date) {
+    public void execute(String name, double amount, String category, LocalDate date) {
         final AddIncomeInputData addIncomeInputData = new AddIncomeInputData(name, amount, category, date);
 
         addIncomeUseCaseInteractor.execute(addIncomeInputData);

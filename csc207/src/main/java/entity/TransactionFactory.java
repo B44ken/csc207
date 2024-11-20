@@ -2,6 +2,8 @@ package entity;
 
 //import java.util.Date;
 
+import java.time.LocalDate;
+
 /**
  * Factory for creating transactions.
  */
@@ -15,5 +17,5 @@ public interface TransactionFactory {
      * @param date of transaction.
      * @return the transaction.
      */
-    Transaction create(String name, double amount, String category, String date);
+    Transaction create(String name, double amount, String category, LocalDate date);
 }
