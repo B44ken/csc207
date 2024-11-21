@@ -109,7 +109,7 @@ public class ExpenseView extends JPanel {
 
     };
 
-    public void addViewSwitcher(ViewSwitcher viewSwitcher) {
+    public void setViewSwitcher(ViewSwitcher viewSwitcher) {
         this.viewSwitcher = viewSwitcher;
     }
 }
