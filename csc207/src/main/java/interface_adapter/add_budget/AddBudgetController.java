@@ -39,9 +39,9 @@ public class AddBudgetController {
     }
 
     /**
-     * Executes the "switch to Home View".
+     * Executes the "switch to BudgetView" Use Case.
      */
-    public void switchToHomeView() {
-        addBudgetInteractor.switchToHomeView();
+    public void switchToBudgetView() {
+        // addBudgetInteractor.switchToBudgetView();
     }
 }

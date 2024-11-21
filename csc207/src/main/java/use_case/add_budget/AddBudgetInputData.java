@@ -14,7 +14,7 @@ public class AddBudgetInputData {
         return categoryName;
     }
 
-    public double getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
