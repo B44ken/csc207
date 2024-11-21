@@ -1,5 +1,6 @@
 package entity;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -17,7 +18,7 @@ public class GoalHistory {
         return history;
     }
 
-    public GoalHistory getBetween(Date start, Date stop) {
+    public GoalHistory getBetween(LocalDate start, LocalDate stop) {
         var result = new GoalHistory();
         for (var t : history) {
             if (t.getDate().after(start) && t.getDate().before(stop)) {

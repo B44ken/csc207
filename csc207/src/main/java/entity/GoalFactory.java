@@ -1,7 +1,7 @@
 package entity;
 
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * Factory for creating goals.
@@ -15,8 +15,7 @@ public class GoalFactory {
      * @param date of goal.
      * @return the goal.
      */
-    public Goal create(String target, double amount, Date date) {
-        Date newdate = date;
-        return new Goal(target, amount, newdate);
+    public Goal create(String target, double amount, LocalDate date) {
+        return new Goal(target, amount, date);
     }
 }

@@ -1,5 +1,7 @@
 package use_case.add_expense;
 
+import java.time.LocalDate;
+
 /**
  * The Add Expense Interactor
  */
@@ -15,7 +17,7 @@ public class AddExpenseInteractor implements AddExpenseInputBoundary {
         final String name = addExpenseInputData.getName();
         final float amount = addExpenseInputData.getAmount();
         final String category = addExpenseInputData.getCategory();
-        final String date = addExpenseInputData.getDate();
+        final LocalDate date = addExpenseInputData.getDate();
 
         //to check: does the expense by name already exist?
         //if not, then create the expense and add to the expenses database
