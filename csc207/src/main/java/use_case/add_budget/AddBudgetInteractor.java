@@ -39,6 +39,6 @@ public class AddBudgetInteractor implements AddBudgetInputBoundary {
     }
     @Override
     public void switchToHomeView() {
-        userPresenter.switchToBudgetView();
+        userPresenter.switchToHomeView();
     }
 }
