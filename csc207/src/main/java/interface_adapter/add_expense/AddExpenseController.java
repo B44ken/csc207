@@ -3,6 +3,8 @@ package interface_adapter.add_expense;
 import use_case.add_expense.AddExpenseInputBoundary;
 import use_case.add_expense.AddExpenseInputData;
 
+import java.time.LocalDate;
+
 /**
  * The controller for the Add Expense Use Case.
  */
@@ -21,7 +23,7 @@ public class AddExpenseController {
      * @param category the category of the expense
      * @param date the date of the expense
      */
-    public void execute(String name, float amount, String category, String date){
+    public void execute(String name, float amount, String category, LocalDate date){
         final AddExpenseInputData addExpenseInputData = new AddExpenseInputData(amount, name, category, date);
 
         addExpenseUseCaseInteractor.execute(addExpenseInputData);

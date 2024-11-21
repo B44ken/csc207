@@ -29,7 +29,6 @@ public class AddIncomePresenter implements AddIncomeOutputBoundary {
         // On success, switch to the logged in view.
 
         final AddIncomeState addIncomeState = addIncomeViewModel.getState();
-        addIncomeState.setUsername(response.getUsername());
         this.addIncomeViewModel.setState(addIncomeState);
         this.addIncomeViewModel.firePropertyChanged();
 

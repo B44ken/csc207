@@ -8,7 +8,7 @@ package interface_adapter.add_goal;
 import use_case.add_goal.AddGoalInputData;
 import use_case.add_income.AddIncomeInputData;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * Controller for Add Income use case.
@@ -26,7 +26,7 @@ public class AddGoalController {
      * @param date
      *
      */
-    public void execute(String name, double amount, Date date) {
+    public void execute(String name, double amount, LocalDate date) {
         final AddGoalInputData addGoalInputData;
     }
 }

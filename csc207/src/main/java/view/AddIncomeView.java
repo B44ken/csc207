@@ -16,16 +16,15 @@ import interface_adapter.add_income.AddIncomeViewModel;
 public class AddIncomeView extends JPanel implements ActionListener, PropertyChangeListener {
     private String viewName = "Add Income";
 
-    private final AddIncomeController addIncomeController;
+    private AddIncomeController addIncomeController;
     private final AddIncomeViewModel addIncomeViewModel;
 
     private final JFrame outerFrame;
     // change above to what controller is actually called later
 
-    public AddIncomeView(AddIncomeViewModel incomeViewModel, AddIncomeController controller) {
+    public AddIncomeView(AddIncomeViewModel incomeViewModel) {
         super();
 
-        this.addIncomeController = controller;
         this.addIncomeViewModel = incomeViewModel;
         // addIncomeViewModel.addPropertyChangeListener(this);
 
@@ -97,7 +96,7 @@ public class AddIncomeView extends JPanel implements ActionListener, PropertyCha
 
         outerFrame = new JFrame("Add Income");
         outerFrame.setContentPane(mainPanel);
-        outerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        outerFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         outerFrame.pack();
         // frame.setVisible(true);
     };

@@ -1,6 +1,6 @@
 package entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * Factory for creating Expense.
@@ -17,10 +17,9 @@ public class ExpenseFactory implements TransactionFactory {
      * @return the transaction.
      */
     @Override
-    public Expense create(String name, double amount, String category, String date) {
-        Date newdate = new Date(date);
+    public Expense create(String name, double amount, String category, LocalDate date) {
         double negativeAmount = -amount;
-        return new Expense(name, negativeAmount, category, newdate);
+        return new Expense(name, negativeAmount, category, date);
     }
 
 }
