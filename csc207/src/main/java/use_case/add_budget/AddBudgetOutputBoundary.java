@@ -19,5 +19,5 @@ public interface AddBudgetOutputBoundary {
     /**
      * Switches to the Budget View.
      */
-    void switchToBudgetView();
+    void switchToHomeView();
 }
