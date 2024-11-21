@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 import javax.swing.JFrame;
 
-import data_access.TxtImportExport;
+import data_access.FileAccess;
 
 /**
  * App class.
@@ -25,9 +25,9 @@ public class App {
         final AppBuilder appBuilder = new AppBuilder();
         final JFrame application = appBuilder
                 .addHomeView()
-                .addHomeUseCase()
                 // .addIncomeHistoryView()
                 .addExpenseView()
+                .addUserData()
                 .build();
                 // .addAddIncomeView()
                 // .addAddExpenseView()
@@ -41,7 +41,7 @@ public class App {
     }
 
     public static void runChartDemo() {
-        var test = TxtImportExport.importData("testdata.csv");
+        var test = FileAccess.importData("testdata.csv");
 
         var cif = new data_access.ChartImageFactory(test);
         var chart = cif.createImage(LocalDate.of(2024, 10, 1), LocalDate.of(2024, 10, 7));

@@ -3,60 +3,58 @@ package com.labrats.app;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import view.ExpenseView;
-import view.HomeView;
-import view.ViewSwitcher;
-import view.IncomeHistoryView;
+import view.*;
+
+import data_access.UserData;
 
 import java.awt.CardLayout;
-import java.security.Principal;
 
 public class AppBuilder {
-    private CardLayout layout;
     private JPanel cards;
     private JFrame app;
-
+    
+    private UserData userData;
     private ViewSwitcher viewSwitcher;
 
-    private IncomeHistoryView incomeHistoryView;
     private HomeView homeView;
 
     public AppBuilder() {
         cards = new JPanel(new CardLayout());
-        viewSwitcher = new ViewSwitcher(cards, layout);
+        userData = new UserData("testdata.csv");
+        viewSwitcher = new ViewSwitcher(cards);
+    }
 
+    public AppBuilder addUserData() {
+        if(homeView != null)
+            homeView.setUserData(userData);
+        // TODO
+        // do user data stuff for other views
+        return this;
     }
 
     public AppBuilder addHomeView() {
         homeView = new HomeView();
-        cards.add(homeView, homeView.getName());
-        return this;
-    }
-
-    public AppBuilder addHomeUseCase() {
-        layout = (CardLayout) cards.getLayout();
-        viewSwitcher = new ViewSwitcher(cards, layout);
-        homeView.setHomeViewModel(viewSwitcher);
+        homeView.setViewSwitcher(viewSwitcher);
+        viewSwitcher.add(ViewNames.home, homeView);
         return this;
     }
 
     public AppBuilder addIncomeHistoryView() {
-        incomeHistoryView = new IncomeHistoryView();
-        cards.add(incomeHistoryView, ViewNames.incomeHistory);
-        System.out.println(incomeHistoryView.getViewName());
+        var incomeHistoryView = new IncomeHistoryView();
+        viewSwitcher.add(ViewNames.incomeHistory, incomeHistoryView);
         return this;
     }
 
     public AppBuilder addExpenseView() {
         var expenseView = new ExpenseView();
-        cards.add(expenseView, ViewNames.expense);
+        expenseView.setViewSwitcher(viewSwitcher);
+        viewSwitcher.add(ViewNames.expense, expenseView);
         return this;
     }
 
     public JFrame build() {
         app = new JFrame("My Cool Finance App");
         app.add(cards);
-        layout.show(cards, ViewNames.home);
         return app;
     }
 }

@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 /*
  * Example use case
  * TransactionHistory history = <some history>
- * LoclaDate start = <some start date>
+ * LocalDate start = <some start date>
  * LocalDate end = <some end date>
  * 
  * ChartAPI api = new ChartAPI();

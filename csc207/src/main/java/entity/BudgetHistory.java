@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Stores the Budget history for app.
  */
 public class BudgetHistory {
-    private ArrayList<Budget> history;
+    ArrayList<Budget> history;
 
     public BudgetHistory() {
         history = new ArrayList<>();

@@ -29,7 +29,8 @@ public class AddIncomeInteractor implements AddIncomeInputBoundary {
      */
     @Override
     public void execute(AddIncomeInputData addIncomeInputData) {
-        final Income income = null;
+        // final Income income = null;
+        final Income income = new Income(null, null, null, null);
         income.setName(addIncomeInputData.getName());
         income.setAmount(addIncomeInputData.getAmount());
         income.setCategory(addIncomeInputData.getCategory());
