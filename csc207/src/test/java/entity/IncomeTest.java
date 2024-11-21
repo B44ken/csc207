@@ -56,5 +56,15 @@ public class IncomeTest {
         }
     }
 
+    @Test
+    void setIncomeCategoryTest() throws Exception {
+        LocalDate date = LocalDate.of(2020, 1, 1);
+        Income income = new Income("bonus", 100.0, null, date);
+        income.setCategory("salary");
+        if (!"salary".equals(income.getCategory())) {
+            throw new Exception("setCategory() method error.");
+        }
+    }
+
 }
 
