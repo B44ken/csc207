@@ -2,7 +2,6 @@ package view;
 
 import com.labrats.app.ViewNames;
 import data_access.UserData;
-import interface_adapter.home.HomeController;
 import interface_adapter.income_history.IncomeHistoryViewController;
 import interface_adapter.income_history.IncomeHistoryState;
 import interface_adapter.income_history.IncomeHistoryViewModel;
