@@ -1,6 +1,6 @@
 package data_access;
 
-import entity.GoalHistory;
+import entity.GoalList;
 import entity.TransactionHistory;
 
 // public interface UserData {
@@ -14,7 +14,7 @@ public class UserData {
     private String file;
 
     private TransactionHistory history;
-    private GoalHistory goals;
+    private GoalList goals;
 
     public UserData(String fileName) {
         this.file = fileName;
@@ -25,7 +25,7 @@ public class UserData {
         return history;
     }
 
-    public GoalHistory getGoals() {
+    public GoalList getGoals() {
         return goals;
     }
 
