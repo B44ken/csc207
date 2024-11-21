@@ -30,7 +30,6 @@ public class ExpenseView extends JPanel {
     public ViewSwitcher viewSwitcher;
 
     public ExpenseView() {
-        this.viewSwitcher = viewSwitcher;
 
         final JLabel title = new JLabel("Add Expense");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
