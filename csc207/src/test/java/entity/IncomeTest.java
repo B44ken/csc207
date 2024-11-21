@@ -23,6 +23,17 @@ public class IncomeTest {
         if (!"bonus".equals(income.getName())) {
             throw new Exception("setName() method error.");
         }
+    }
+
+    @Test
+    void getIncomeAmountTest() throws Exception {
+        LocalDate date = LocalDate.of(2020, 1, 1);
+        Income income = new Income("bonus", 100.0, "salary", date);
+        Double amount = income.getAmount();
+        if (!amount.equals(100.0)) {
+            throw new Exception("getAmount() method error.");
+        }
+    }
 
 }
 
