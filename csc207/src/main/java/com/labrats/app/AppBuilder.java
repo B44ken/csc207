@@ -43,7 +43,7 @@ public class AppBuilder {
     public AppBuilder addIncomeHistoryView() {
         incomeHistoryView = new IncomeHistoryView();
         cards.add(incomeHistoryView, ViewNames.incomeHistory);
-        System.out.println(incomeHistoryView.getName());
+        System.out.println(incomeHistoryView.getViewName());
         return this;
     }
 
