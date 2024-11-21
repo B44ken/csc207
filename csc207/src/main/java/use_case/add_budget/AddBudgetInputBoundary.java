@@ -11,5 +11,5 @@ public interface AddBudgetInputBoundary {
     /**
      * Executes the switch to budget view use case.
      */
-    void switchToBudgetView();
+    void switchToHomeView();
 }
