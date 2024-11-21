@@ -1,22 +1,16 @@
 package view;
 
-import interface_adapter.home.HomeController;
-import interface_adapter.home.HomeViewModel;
-
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.temporal.ValueRange;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.labrats.app.ViewNames;
 
-import data_access.ChartImageFactory;
 import data_access.UserData;
 
 /**

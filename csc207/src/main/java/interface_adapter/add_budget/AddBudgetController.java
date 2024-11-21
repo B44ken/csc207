@@ -42,6 +42,6 @@ public class AddBudgetController {
      * Executes the "switch to BudgetView" Use Case.
      */
     public void switchToBudgetView() {
-        addBudgetInteractor.switchToBudgetView();
+        // addBudgetInteractor.switchToBudgetView();
     }
 }
