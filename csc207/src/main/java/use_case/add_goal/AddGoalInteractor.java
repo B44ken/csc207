@@ -1,7 +1,7 @@
 package use_case.add_goal;
 
 import entity.Goal;
-import entity.GoalHistory;
+import entity.Goals;
 
 /**
  * The Add Goal Interactor.
@@ -9,11 +9,11 @@ import entity.GoalHistory;
 public class AddGoalInteractor implements AddGoalInputBoundary {
     private final AddGoalUserDataAccessInterface userDataAccessObject;
     private final AddGoalOutputBoundary userPresenter;
-    private final Goal goals;
+    private final Goals goals;
 
     public AddGoalInteractor(AddGoalUserDataAccessInterface userDataAccessObject,
                                AddGoalOutputBoundary userPresenter,
-                               GoalHistory goalHistory) {
+                               Goals goals) {
         this.userDataAccessObject = userDataAccessObject;
         this.userPresenter = userPresenter;
         this.goals = goals;
@@ -29,8 +29,8 @@ public class AddGoalInteractor implements AddGoalInputBoundary {
         final Goal goal = null;
         goal.setTarget(addGoalInputData.getTarget());
         goal.setAmount(addGoalInputData.getAmount());
-        goal.setTargetDate(addGoalInputData.getDate());
-        goals.add(goal);
+        goal.setTargetDate(addGoalInputData.getTargetDate());
+        Goals.add(goal); //dk why this doesnt work
 
         userDataAccessObject.addGoal(goal);
         final AddGoalOutputData addGoalOutputData = new AddGoalOutputData(goal.getTarget(), false);

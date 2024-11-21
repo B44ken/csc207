@@ -13,7 +13,6 @@ public interface AddBudgetUserDataAccessInterface {
      * @param categoryName the categoryName to look for
      * @return true if a budget with the given categoryName exists; false otherwise
      */
-    boolean existsByName(String categoryName);
 
     /**
      * Adds Budget into Budget History.

@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import com.labrats.app.ViewNames;
 
 import data_access.ChartImageFactory;
+import data_access.UserData;
 
 /**
  * The view for the home view case.
@@ -25,15 +26,18 @@ public class HomeView extends JPanel {
 
     private final String viewName = "my cool finance app";
 
-    private ViewSwitcher homeViewModel;
-    private HomeController homeController;
+    private ViewSwitcher viewSwitcher;
+    private UserData userData;
 
     private final JButton addIncome;
     private final JButton addExpense;
 
+    private JLabel incomeValue;
+
     private final JButton incomeButton;
     private final JButton expenseButton;
     private final JButton goalButton;
+
 
     public HomeView() {
         final JLabel title = new JLabel("My Cool Finance App");
@@ -46,7 +50,8 @@ public class HomeView extends JPanel {
 
         final JLabel incomeText = new JLabel("Income");
         incomeText.setAlignmentX(Component.CENTER_ALIGNMENT);
-        final JLabel incomeValue = new JLabel(Float.toString(0));
+
+        incomeValue = new JLabel("?");
         incomeValue.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         final JLabel expenseText = new JLabel("Expenses");
@@ -87,14 +92,14 @@ public class HomeView extends JPanel {
         incomeButton.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-                        homeViewModel.switchTo(ViewNames.incomeHistory);
+                        viewSwitcher.switchTo(ViewNames.incomeHistory);
                     }
                 });
 
         expenseButton.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-                        homeViewModel.switchTo(ViewNames.expense);
+                        viewSwitcher.switchTo(ViewNames.expense);
                     }
                 });
 
@@ -122,11 +127,22 @@ public class HomeView extends JPanel {
         return viewName;
     }
 
-    // public void setHomeController(HomeController controller) {
-    //     this.homeController = controller;
-    // }
+    public void setViewSwitcher(ViewSwitcher vs) {
+        viewSwitcher = vs;
+    }
 
-    public void setHomeViewModel(ViewSwitcher homeViewModel) {
-        this.homeViewModel = homeViewModel;
+    public void setUserData(UserData ud) {
+        userData = ud;
+        this.repaint();
+    }
+
+    public void repaint() {
+        if(userData != null && incomeValue != null) {
+            incomeValue.setText(Float.toString(userData.getHistory().getAmountTotal()));
+        }
+        // TODO
+        // repaint is called when a Swing component is switched to
+        // use this to update numbers and stuff
+        // other components also need repaint() methods
     }
 }
