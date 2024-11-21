@@ -15,5 +15,14 @@ public class IncomeTest {
         }
     }
 
+    @Test
+    void setIncomeNameTest() throws Exception {
+        LocalDate date = LocalDate.of(2020, 1, 1);
+        Income income = new Income(null, 100.0, "salary", date);
+        income.setName("bonus");
+        if (!"bonus".equals(income.getName())) {
+            throw new Exception("setName() method error.");
+        }
+
 }
 
