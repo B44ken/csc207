@@ -6,10 +6,10 @@ import java.util.Date;
 /**
  * Stores the Transaction history for app.
  */
-public class GoalHistory {
+public class Goals {
     private ArrayList<Goal> history;
 
-    public GoalHistory() {
+    public Goals() {
         history = new ArrayList<>();
     }
 
@@ -17,10 +17,10 @@ public class GoalHistory {
         return history;
     }
 
-    public GoalHistory getBetween(Date start, Date stop) {
-        var result = new GoalHistory();
+    public Goals getBetween(Date start, Date stop) {
+        var result = new Goals();
         for (var t : history) {
-            if (t.getDate().after(start) && t.getDate().before(stop)) {
+            if (t.getTargetDate().after(start) && t.getTargetDate().before(stop)) {
                 result.add(t);
             }
         }

@@ -12,10 +12,10 @@ public class AddGoalInputData {
     private final double amount;
     private final Date targetDate;
 
-    public AddGoalInputData(String target, double amount, String targetDate) {
+    public AddGoalInputData(String target, double amount, Date targetDate) {
         this.target = target;
         this.amount = amount;
-        this.targetDate = new Date(targetDate);
+        this.targetDate = new Date(String.valueOf(targetDate));
     }
 
     String getTarget() {

@@ -11,7 +11,7 @@ public class Goal {
     private double amount;
     private Date targetDate;
 
-    public Goal(String name, double amount, Date date) {
+    public Goal(String target, double amount, Date targetDate) {
         this.target = target;
         this.amount = amount;
         this.targetDate = targetDate;
