@@ -46,5 +46,15 @@ public class IncomeTest {
             throw new Exception("setAmount() method error.");
         }
     }
+
+    @Test
+    void getIncomeCategoryTest() throws Exception {
+        LocalDate date = LocalDate.of(2020, 1, 1);
+        Income income = new Income("bonus", 100.0, "salary", date);
+        if (!"salary".equals(income.getCategory())) {
+            throw new Exception("getCategory() method error.");
+        }
+    }
+
 }
 
