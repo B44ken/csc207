@@ -32,4 +32,9 @@ public class AddGoalPresenter implements AddGoalOutputBoundary {
     public void prepareFailView(String errorMessage) {
         // this use case currently cannot fail.
     }
+
+    @Override
+    public void switchToHomeVIew() {
+        // remove in future
+    }
 }
