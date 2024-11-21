@@ -10,11 +10,11 @@ public class AddBudgetInputData {
         this.amount = amount;
     }
 
-    String getCategoryName() {
+    public String getCategoryName() {
         return categoryName;
     }
 
-    double getAmount() {
+    public double getAmount() {
         return amount;
     }
 
