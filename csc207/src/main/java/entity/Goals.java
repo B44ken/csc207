@@ -5,10 +5,10 @@ import java.util.ArrayList;
 /**
  * Stores the Transaction history for app.
  */
-public class GoalList {
+public class Goals {
     private ArrayList<Goal> goals;
 
-    public GoalList() {
+    public Goals() {
         goals = new ArrayList<>();
     }
 

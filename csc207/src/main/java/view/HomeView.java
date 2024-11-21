@@ -33,6 +33,8 @@ public class HomeView extends JPanel {
     private final JButton addExpense;
 
     private JLabel incomeValue;
+    private JLabel expensesValue;
+    private JLabel netBalanceValue;
 
     private final JButton incomeButton;
     private final JButton expenseButton;
@@ -56,14 +58,16 @@ public class HomeView extends JPanel {
 
         final JLabel expenseText = new JLabel("Expenses");
         expenseText.setAlignmentX(Component.CENTER_ALIGNMENT);
-        final JLabel expensesValue = new JLabel(Float.toString(0));
+        expensesValue = new JLabel(Float.toString(0));
         expensesValue.setAlignmentX(Component.CENTER_ALIGNMENT);
+        final JLabel netValue = new JLabel("Goal");
 
         final JPanel buttons1 = new JPanel();
         addIncome = new JButton("Add Income");
         buttons1.add(addIncome);
         addExpense = new JButton("Add Expense");
         buttons1.add(addExpense);
+
 
         addIncome.addActionListener(
                 new ActionListener() {
@@ -99,14 +103,14 @@ public class HomeView extends JPanel {
         expenseButton.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-                        viewSwitcher.switchTo(ViewNames.expense);
+                        viewSwitcher.switchTo(ViewNames.expenseHistory);
                     }
                 });
 
         goalButton.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-                        // homeController.switchToGoalView();
+                        viewSwitcher.switchTo(ViewNames.goals);
                     }
                 });
 
@@ -137,12 +141,19 @@ public class HomeView extends JPanel {
     }
 
     public void repaint() {
-        if(userData != null && incomeValue != null) {
+        if (userData != null && incomeValue != null) {
             incomeValue.setText(Float.toString(userData.getHistory().getAmountTotal()));
         }
+        if (userData != null && expensesValue != null) {
+            expensesValue.setText(Float.toString(userData.getHistory().getAmountTotal()));
+        }
+        if (userData != null && netBalanceValue != null) {
+            netBalanceValue.setText(Float.toString(userData.getHistory().getAmountTotal()));
+        }
+    }
+
         // TODO
         // repaint is called when a Swing component is switched to
         // use this to update numbers and stuff
         // other components also need repaint() methods
     }
-}

@@ -1,7 +1,7 @@
 package use_case.add_goal;
 
 import entity.Goal;
-import entity.GoalList;
+import entity.Goals;
 
 /**
  * The Add Goal Interactor.
@@ -9,11 +9,11 @@ import entity.GoalList;
 public class AddGoalInteractor implements AddGoalInputBoundary {
     private final AddGoalUserDataAccessInterface userDataAccessObject;
     private final AddGoalOutputBoundary userPresenter;
-    private final GoalList goals;
+    private final Goals goals;
 
     public AddGoalInteractor(AddGoalUserDataAccessInterface userDataAccessObject,
                                AddGoalOutputBoundary userPresenter,
-                               GoalList goals) {
+                               Goals goals) {
         this.userDataAccessObject = userDataAccessObject;
         this.userPresenter = userPresenter;
         this.goals = goals;
