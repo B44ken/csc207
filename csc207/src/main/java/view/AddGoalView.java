@@ -86,7 +86,6 @@ public class AddGoalView extends JPanel implements ActionListener, PropertyChang
         mainPanel.add(targetYearPanel);
         mainPanel.add(confirmPanel);
 
-
         outerFrame = new JFrame("Add Goal");
         outerFrame.setContentPane(mainPanel);
         outerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -110,11 +109,4 @@ public class AddGoalView extends JPanel implements ActionListener, PropertyChang
     public String getViewName() {
         return viewName;
     }
-}
-
-
-
-
-
-
 }

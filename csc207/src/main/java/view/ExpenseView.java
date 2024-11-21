@@ -1,7 +1,5 @@
 package view;
 
-import interface_adapter.add_expense.AddExpenseController;
-
 import java.util.Date;
 
 import java.awt.Component;
@@ -11,21 +9,28 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
+import com.labrats.app.ViewNames;
+
+import interface_adapter.add_income.AddIncomeController;
+import interface_adapter.add_income.AddIncomeState;
+import interface_adapter.add_income.AddIncomeViewModel;
 //change above to what its actually called if its different
 import interface_adapter.add_expense.AddExpenseController;
 import interface_adapter.add_expense.AddExpenseViewModel;
 
-public class AddExpenseView extends JPanel implements ActionListener, PropertyChangeListener {
+public class ExpenseView extends JPanel {
 
-    private final AddExpenseController addExpenseController;
-    private final AddExpenseViewModel addExpenseViewModel;
+    // private final AddExpenseController addExpenseController;
+    // private final AddExpenseViewModel addExpenseViewModel;
     // change above to what controller is actually called
 
-    public AddExpenseView(AddExpenseViewModel expenseViewModel, AddExpenseController controller) {
+    public ViewSwitcher viewSwitcher;
 
-        this.addExpenseController = controller;
-        this.addExpenseViewModel = expenseViewModel;
-        addExpenseViewModel.addPropertyChangeListener(this);
+    public ExpenseView() {
+        this.viewSwitcher = viewSwitcher;
 
         final JLabel title = new JLabel("Add Expense");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -70,16 +75,17 @@ public class AddExpenseView extends JPanel implements ActionListener, PropertyCh
 
         confirmButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String name = nameTextField.getText();
-                Double amount = Double.valueOf(amountTextField.getText());
-                String category = categoryTextField.getText();
-                Integer day = Integer.valueOf(dayTextField.getText());
-                Integer month = Integer.valueOf(monthTextField.getText());
-                Integer year = Integer.valueOf(yearTextField.getText());
-                Date date = new Date(year, month, day);
+                // String name = nameTextField.getText();
+                // Double amount = Double.valueOf(amountTextField.getText());
+                // String category = categoryTextField.getText();
+                // Integer day = Integer.valueOf(dayTextField.getText());
+                // Integer month = Integer.valueOf(monthTextField.getText());
+                // Integer year = Integer.valueOf(yearTextField.getText());
+                // Date date = new Date(year, month, day);
                 // input into text file here
                 // after everything funnelled into txt file go back to home
-                addExpenseController.switchToHomeView();
+                // addExpenseController.switchToHomeView();
+                viewSwitcher.switchTo(ViewNames.home);
             }
         });
 
@@ -91,22 +97,19 @@ public class AddExpenseView extends JPanel implements ActionListener, PropertyCh
         mainPanel.add(dayPanel);
         mainPanel.add(monthPanel);
         mainPanel.add(yearPanel);
+        mainPanel.add(confirmPanel);
 
-        JFrame frame = new JFrame("Add Expense");
-        frame.setContentPane(mainPanel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+        // JFrame frame = new JFrame("Add Expense");
+        // frame.setContentPane(mainPanel);
+        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        // frame.pack();
+        // frame.setVisible(true);
+
+        this.add(mainPanel);
+
     };
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        JOptionPane.showMessageDialog(this, "Action Performed not implemented yet.");
+    public void addViewSwitcher(ViewSwitcher viewSwitcher) {
+        this.viewSwitcher = viewSwitcher;
     }
-
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        JOptionPane.showMessageDialog(this, "Property Change not implemented yet.");
-    }
-
 }

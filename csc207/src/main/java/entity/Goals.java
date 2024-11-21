@@ -1,15 +1,16 @@
 package entity;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
 /**
  * Stores the Transaction history for app.
  */
-public class Goals {
+public class GoalHistory {
     private ArrayList<Goal> history;
 
-    public Goals() {
+    public GoalHistory() {
         history = new ArrayList<>();
     }
 
@@ -17,10 +18,10 @@ public class Goals {
         return history;
     }
 
-    public Goals getBetween(Date start, Date stop) {
-        var result = new Goals();
+    public GoalHistory getBetween(LocalDate start, LocalDate stop) {
+        var result = new GoalHistory();
         for (var t : history) {
-            if (t.getTargetDate().after(start) && t.getTargetDate().before(stop)) {
+            if (t.getDate().after(start) && t.getDate().before(stop)) {
                 result.add(t);
             }
         }

@@ -1,6 +1,6 @@
 package entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * Transaction parent class.
@@ -9,9 +9,9 @@ import java.util.Date;
 public class Goal {
     private String target;
     private double amount;
-    private Date targetDate;
+    private LocalDate targetDate;
 
-    public Goal(String target, double amount, Date targetDate) {
+    public Goal(String name, double amount, LocalDate date) {
         this.target = target;
         this.amount = amount;
         this.targetDate = targetDate;
@@ -33,9 +33,9 @@ public class Goal {
         this.amount = amount;
     }
 
-    public Date getTargetDate() {
+    public LocalDate getTargetDate() {
         return targetDate;
     }
 
-    public void setTargetDate(Date targetDate) {this.targetDate = targetDate;}
+    public void setTargetDate(LocalDate targetDate) {this.targetDate = targetDate;}
 }
