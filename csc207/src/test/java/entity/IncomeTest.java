@@ -74,5 +74,15 @@ public class IncomeTest {
             throw new Exception("getDate() method error.");
         }
     }
+
+    @Test
+    void setIncomeDateTest() throws Exception {
+        LocalDate date = LocalDate.of(2020, 1, 1);
+        Income income = new Income("bonus", 100.0, "salary", null);
+        income.setDate(date);
+        if (!income.getDate().equals(date)) {
+            throw new Exception("setDate() method error.");
+        }
+    }
 }
 
