@@ -17,16 +17,6 @@ public class Goals {
         return history;
     }
 
-    // do we really need this
-    public Goals getBetween(LocalDate start, LocalDate stop) {
-        var result = new Goals();
-        for (var t : history) {
-            if (t.getTargetDate().after(start) && t.getTargetDate().before(stop)) {
-                result.add(t);
-            }
-        }
-        return result;
-    }
 
     /**
      * Adds a goal into history.

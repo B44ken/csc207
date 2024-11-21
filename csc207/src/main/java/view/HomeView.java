@@ -99,14 +99,14 @@ public class HomeView extends JPanel {
         expenseButton.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-                        viewSwitcher.switchTo(ViewNames.expense);
+                        viewSwitcher.switchTo(ViewNames.expenseHistory);
                     }
                 });
 
         goalButton.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-                        // homeController.switchToGoalView();
+                        viewSwitcher.switchTo(ViewNames.goals);
                     }
                 });
 
