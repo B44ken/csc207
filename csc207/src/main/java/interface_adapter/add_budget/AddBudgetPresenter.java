@@ -43,7 +43,7 @@ public class AddBudgetPresenter implements AddBudgetOutputBoundary {
     }
 
     @Override
-    public void switchToBudgetView(){
+    public void switchToHomeView(){
         // need to implement budget view for this to work
         // viewManagerModel.setState(budgetViewModel.getViewName());
         // viewManagerModel.firePropertyChanged();
