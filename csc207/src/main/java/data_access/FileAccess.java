@@ -12,7 +12,7 @@ import entity.Income;
 import entity.Transaction;
 import entity.TransactionHistory;
 
-public class TxtImportExport {
+public class FileAccess {
     public static TransactionHistory importData(String path) {
         var history = new TransactionHistory();
         String fileContent;
