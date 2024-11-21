@@ -27,7 +27,7 @@ public class AddGoalInputData {
         return amount;
     }
 
-    LocalDate getDate() {
+    LocalDate getTargetDate() {
         return targetDate;
     }
 
