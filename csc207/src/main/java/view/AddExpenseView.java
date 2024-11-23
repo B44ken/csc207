@@ -3,29 +3,42 @@ package view;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 import java.io.FileWriter;
-import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.*;
 
 import com.labrats.app.ViewNames;
 import interface_adapter.add_expense.AddExpenseController;
+import interface_adapter.add_expense.AddExpenseState;
+import interface_adapter.add_expense.AddExpenseViewModel;
 
 //change above to what its actually called if its different
 
-
-public class AddExpenseView extends JPanel {
+/**
+ * The View for the Add Expense Use Case
+ */
+public class AddExpenseView extends JPanel implements ActionListener, PropertyChangeListener {
+    private final String viewName = "add expense view";
 
     private AddExpenseController addExpenseController;
-    // private final AddExpenseViewModel addExpenseViewModel;
-    // change above to what controller is actually called
+    private final AddExpenseViewModel addExpenseViewModel;
 
-    public ViewSwitcher viewSwitcher;
+    private final JButton confirmButton;
+    private final JButton cancelButton;
 
-    public AddExpenseView() {
-        this.viewSwitcher = viewSwitcher;
+    private final LocalDate date = LocalDate.now();
 
-        final JLabel title = new JLabel("Add Expense");
+    public AddExpenseView(AddExpenseViewModel addExpenseViewModel){
+
+        this.addExpenseViewModel = addExpenseViewModel;
+        addExpenseViewModel.addPropertyChangeListener(this);
+
+        final JLabel title = new JLabel(AddExpenseViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JPanel namePanel = new JPanel();
@@ -43,59 +56,27 @@ public class AddExpenseView extends JPanel {
         categoryPanel.add(new JLabel("Category:"));
         categoryPanel.add(categoryTextField);
 
-        JPanel dayPanel = new JPanel();
-        JTextField dayTextField = new JTextField(15);
-        dayPanel.add(new JLabel("Day:"));
-        dayPanel.add(dayTextField);
-
-        JPanel monthPanel = new JPanel();
-        JTextField monthTextField = new JTextField(15);
-        monthPanel.add(new JLabel("Month:"));
-        monthPanel.add(monthTextField);
-
-        JPanel yearPanel = new JPanel();
-        JTextField yearTextField = new JTextField(15);
-        yearPanel.add(new JLabel("Year:"));
-        yearPanel.add(yearTextField);
-
-        JPanel confirmPanel = new JPanel();
-        JButton confirmButton = new JButton("Confirm");
-        confirmPanel.add(confirmButton);
-
-        JPanel cancelPanel = new JPanel();
-        JButton cancelButton = new JButton("Cancel");
-        cancelPanel.add(cancelButton);
+        final JPanel buttons = new JPanel();
+        cancelButton = new JButton("Cancel");
+        buttons.add(cancelButton);
+        confirmButton = new JButton("Confirm");
+        buttons.add(confirmButton);
 
         confirmButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String name = nameTextField.getText();
-                Double amount = Double.valueOf(amountTextField.getText());
-                String category = categoryTextField.getText();
+                if (e.getSource().equals(confirmButton)) {
+                    final AddExpenseState currentState = addExpenseViewModel.getState();
+                    currentState.setName(nameTextField.getText());
+                    currentState.setAmount(Double.valueOf(amountTextField.getText()));
+                    currentState.setCategory(categoryTextField.getText());
+                    currentState.setDate(date);
 
-                try{
-                    FileWriter writer = new FileWriter("test.txt");
-                    writer.write("Name: " + name + "\nAmount: " + amount + "\nCategory: " + category);
-                    writer.write(System.lineSeparator());
-                    writer.flush();
-                    writer.close();
+                    addExpenseController.execute(currentState.getName(), currentState.getAmount(),
+                            currentState.getCategory(), currentState.getDate());
                 }
-                catch(IOException ex)
-                {
-                    System.out.println("Error!" + name + amount + category);
-                }
-                // String name = nameTextField.getText();
-                // Double amount = Double.valueOf(amountTextField.getText());
-                // String category = categoryTextField.getText();
-                // Integer day = Integer.valueOf(dayTextField.getText());
-                // Integer month = Integer.valueOf(monthTextField.getText());
-                // Integer year = Integer.valueOf(yearTextField.getText());
-                // Date date = new Date(year, month, day);
-                // input into text file here
-                // after everything funnelled into txt file go back to home
-                // addExpenseController.switchToHomeView();
-                viewSwitcher.switchTo(ViewNames.home);
             }
-        });
+        }
+        );
 
         cancelButton.addActionListener(
                 new ActionListener() {
@@ -106,36 +87,33 @@ public class AddExpenseView extends JPanel {
         }
         );
 
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-        mainPanel.add(namePanel);
-        mainPanel.add(amountPanel);
-        mainPanel.add(categoryPanel);
-        mainPanel.add(dayPanel);
-        mainPanel.add(monthPanel);
-        mainPanel.add(yearPanel);
-        mainPanel.add(confirmPanel);
-
-        // JFrame frame = new JFrame("Add Expense");
-        // frame.setContentPane(mainPanel);
-        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // frame.pack();
-        // frame.setVisible(true);
-
-        this.add(mainPanel);
+        this.add(title);
+        this.add(namePanel);
+        this.add(amountPanel);
+        this.add(categoryPanel);
+        this.add(buttons);
 
     };
 
-    public void setViewSwitcher(ViewSwitcher viewSwitcher) {
-        this.viewSwitcher = viewSwitcher;
+    @Override
+    public void actionPerformed(ActionEvent evt) {
+        JOptionPane.showMessageDialog(this, "Button not implemented yet.");
     }
-    /*
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        JOptionPane.showMessageDialog(this, "Property not implemented yet.");
+    }
+
     public String getViewName() {
         return viewName;
     }
 
-     */
+    public void setViewSwitcher(ViewSwitcher viewSwitcher) {
+        this.viewSwitcher = viewSwitcher;
+    }
 
     public void setAddExpenseController(AddExpenseController controller) {
         this.addExpenseController = controller;
