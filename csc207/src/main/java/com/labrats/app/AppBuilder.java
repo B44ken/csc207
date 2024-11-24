@@ -48,8 +48,20 @@ public class AppBuilder {
     public AppBuilder addExpenseView() {
         var expenseView = new ExpenseView();
         expenseView.setViewSwitcher(viewSwitcher);
-        viewSwitcher.add(ViewNames.expense, expenseView);
+        viewSwitcher.add(ViewNames.expenseHistory, expenseView);
         return this;
+    }
+
+    public AppBuilder addAddGoalView() {
+        var addGoalView = new AddGoalView();
+        addGoalView.setViewSwitcher(viewSwitcher);
+        viewSwitcher.add(ViewNames.addGoal, addGoalView);
+        return this;
+    }
+
+    public AppBuilder addGoalsView() {
+        var goalsView = new GoalsView();
+        goalsView.setViewSwitcher(viewSwitcher);
     }
 
     public JFrame build() {
