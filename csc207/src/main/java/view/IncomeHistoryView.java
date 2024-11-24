@@ -2,18 +2,15 @@ package view;
 
 import com.labrats.app.ViewNames;
 import data_access.UserData;
-import interface_adapter.income_history.IncomeHistoryViewController;
-import interface_adapter.income_history.IncomeHistoryState;
-import interface_adapter.income_history.IncomeHistoryViewModel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeListener;
-
-import java.beans.PropertyChangeEvent;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class IncomeHistoryView extends JPanel implements ActionListener {
     private final String viewName = "income history";
@@ -21,11 +18,15 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
     private final DefaultTableModel tableModel;
     private final JTable incomeHistoryTable;
 
+    private final JButton addIncome;
+
     private final JButton homeButton;
     private final JButton incomeButton;
     private final JButton expenseButton;
     private final JButton goalsButton;
     private ViewSwitcher viewSwitcher;
+
+    private UserData userData;
 
 
     public IncomeHistoryView() {
@@ -45,8 +46,26 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
         add(tableScrollPane, BorderLayout.CENTER);
 
         // add call to data here
+        loadDataFromFile("testdata.csv");
+        // userData.getData()
+
+        final JFrame table = new JFrame("List of Income:");
+        table.setSize(50, 100);
+        table.add(incomeHistoryTable);
 
         //Add chart API here!
+
+        final JPanel addIncomeBut = new JPanel();
+        addIncome = new JButton("AddIncome");
+        addIncomeBut.add(addIncome);
+
+        addIncome.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        viewSwitcher.switchTo(ViewNames.addIncome);
+                    }
+                }
+        );
 
         final JPanel buttons = new JPanel();
         homeButton = new JButton("Home");
@@ -90,12 +109,30 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
                 }
         );
 
-
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
+
         this.add(incomeHistoryTable);
+        this.add(addIncomeBut);
         this.add(buttons);
+    }
+
+    private void loadDataFromFile(String fileName) {
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                // Split each line by commas
+                String[] data = line.split(",");
+                // Add the data as a new row to the table model
+                if (data.length == 4) {  // Ensure correct number of columns
+                    tableModel.addRow(new Object[]{data[0], Double.parseDouble(data[1]), data[2], data[3]});
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 

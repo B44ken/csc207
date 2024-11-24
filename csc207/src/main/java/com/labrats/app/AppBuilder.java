@@ -17,6 +17,7 @@ public class AppBuilder {
     private ViewSwitcher viewSwitcher;
 
     private HomeView homeView;
+    private IncomeHistoryView incomeHistoryView;
 
     public AppBuilder() {
         cards = new JPanel(new CardLayout());
@@ -41,6 +42,7 @@ public class AppBuilder {
 
     public AppBuilder addIncomeHistoryView() {
         var incomeHistoryView = new IncomeHistoryView();
+        incomeHistoryView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.incomeHistory, incomeHistoryView);
         return this;
     }
