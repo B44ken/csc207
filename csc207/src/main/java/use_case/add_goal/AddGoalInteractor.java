@@ -30,7 +30,7 @@ public class AddGoalInteractor implements AddGoalInputBoundary {
         goal.setTarget(addGoalInputData.getTarget());
         goal.setAmount(addGoalInputData.getAmount());
         goal.setTargetDate(addGoalInputData.getTargetDate());
-        Goals.add(goal); //dk why this doesnt work
+        Goals.addGoal(goal);
 
         userDataAccessObject.addGoal(goal);
         final AddGoalOutputData addGoalOutputData = new AddGoalOutputData(goal.getTarget(), false);

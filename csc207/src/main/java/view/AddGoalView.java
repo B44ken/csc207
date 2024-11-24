@@ -1,5 +1,8 @@
 package view;
 
+import com.labrats.app.ViewNames;
+import data_access.UserData;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
@@ -12,7 +15,15 @@ import interface_adapter.add_goal.AddGoalController;
 import interface_adapter.add_goal.AddGoalViewModel;
 
 public class AddGoalView extends JPanel implements ActionListener, PropertyChangeListener {
-    private String viewName = "Goal View";
+    private String viewName = "Add Goal View";
+
+    private ViewSwitcher viewSwitcher;
+    private UserData userData;
+
+    private final JButton homeButton;
+    private final JButton incomeButton;
+    private final JButton expenseButton;
+    private final JButton goalButton;
 
     private final AddGoalController addGoalController;
     private final AddGoalViewModel addGoalViewModel;
@@ -69,21 +80,65 @@ public class AddGoalView extends JPanel implements ActionListener, PropertyChang
                 Integer targetDay = Integer.valueOf(dayTextField.getText());
                 Integer targetMonth = Integer.valueOf(monthTextField.getText());
                 Integer targetYear = Integer.valueOf(yearTextField.getText());
-                LocalDate date = LocalDate.of(targetYear, targetMonth, targetDay);
+                LocalDate targetDate = LocalDate.of(targetYear, targetMonth, targetDay);
                 // input into text file here
                 // after everything funnelled into txt file go back to home
                 // addIncomeController.switchToHomeView();
             }
         });
 
+        final JPanel buttons2 = new JPanel();
+        homeButton = new JButton("Home");
+        buttons2.add(homeButton);
+        incomeButton = new JButton("Income");
+        buttons2.add(incomeButton);
+        expenseButton = new JButton("Expense");
+        buttons2.add(expenseButton);
+        goalButton = new JButton("Goal");
+        buttons2.add(goalButton);
+
+        homeButton.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        viewSwitcher.switchTo(ViewNames.home);
+                    }
+                });
+
+        incomeButton.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        viewSwitcher.switchTo(ViewNames.incomeHistory);
+                    }
+                });
+
+        expenseButton.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        viewSwitcher.switchTo(ViewNames.expenseHistory);
+                    }
+                });
+
+        goalButton.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        viewSwitcher.switchTo(ViewNames.goals);
+                    }
+                });
+
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.add(title);
         mainPanel.add(targetPanel);
         mainPanel.add(amountPanel);
         mainPanel.add(targetDayPanel);
         mainPanel.add(targetMonthPanel);
         mainPanel.add(targetYearPanel);
         mainPanel.add(confirmPanel);
+        mainPanel.add(buttons2);
 
         outerFrame = new JFrame("Add Goal");
         outerFrame.setContentPane(mainPanel);
@@ -93,19 +148,33 @@ public class AddGoalView extends JPanel implements ActionListener, PropertyChang
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JOptionPane.showMessageDialog(this, "Action Performed not implemented yet.");
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        JOptionPane.showMessageDialog(this, "Property Change not implemented yet.");
     }
 
     public void setVisible(boolean visible) {
         outerFrame.setVisible(visible);
     }
 
-    public String getViewName() {
-        return viewName;
+    public void setViewSwitcher(ViewSwitcher vs) {
+        viewSwitcher = vs;
     }
+
+    public void setUserData(UserData ud) {
+        userData = ud;
+        this.repaint();
+    }
+
+    public void repaint() {
+        // TODO
+        // repaint is called when a Swing component is switched to
+        // use this to update numbers and stuff
+        // other components also need repaint() methods
+    }
+
+
+
+
 }

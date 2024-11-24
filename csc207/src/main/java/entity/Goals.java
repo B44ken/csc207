@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * Stores the Transaction history for app.
  */
 public class Goals {
-    private ArrayList<Goal> history;
+    private static ArrayList<Goal> history;
 
     public Goals() {
         history = new ArrayList<>();
@@ -22,7 +22,7 @@ public class Goals {
      * Adds a goal into history.
      * @param goal the goal to be added.
      */
-    public void add(Goal goal) {
+    public static void addGoal(Goal goal) {
         history.add(goal);
     }
 }

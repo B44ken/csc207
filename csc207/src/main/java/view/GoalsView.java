@@ -66,6 +66,14 @@ public class GoalsView extends JPanel implements  ActionListener, PropertyChange
         goalButton = new JButton("Goal");
         buttons2.add(goalButton);
 
+        addGoalButton.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        viewSwitcher.switchTo(ViewNames.addGoal);
+                    }
+                }
+        );
         homeButton.addActionListener(
                 new ActionListener() {
                     @Override
@@ -125,5 +133,21 @@ public class GoalsView extends JPanel implements  ActionListener, PropertyChange
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
 
+    }
+
+    public void setViewSwitcher(ViewSwitcher vs) {
+        viewSwitcher = vs;
+    }
+
+    public void setUserData(UserData ud) {
+        userData = ud;
+        this.repaint();
+    }
+
+    public void repaint() {
+        // TODO
+        // repaint is called when a Swing component is switched to
+        // use this to update numbers and stuff
+        // other components also need repaint() methods
     }
 }
