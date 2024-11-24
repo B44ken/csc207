@@ -3,6 +3,7 @@ package view;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -136,13 +137,13 @@ public class HomeView extends JPanel {
 
     public void repaint() {
         if (userData != null && incomeValue != null) {
-            incomeValue.setText(Float.toString(userData.getHistory().getAmountTotal()));
+            incomeValue.setText(Float.toString(userData.getHistory().getIncomeTotal()));
         }
         if (userData != null && expensesValue != null) {
-            expensesValue.setText(Float.toString(userData.getHistory().getAmountTotal()));
+            expensesValue.setText(Float.toString(userData.getHistory().getExpensesTotal()));
         }
         if (userData != null && netBalanceValue != null) {
-            netBalanceValue.setText(Float.toString(userData.getHistory().getAmountTotal()));
+            netBalanceValue.setText(Float.toString(userData.getHistory().getNetBalance()));
         }
     }
 
