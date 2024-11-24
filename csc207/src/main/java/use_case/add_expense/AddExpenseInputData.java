@@ -6,19 +6,19 @@ import java.time.LocalDate;
  * The input data for the Add Expense Use Case.
  */
 public class AddExpenseInputData {
-    private final float amount;
     private final String name;
+    private final double amount;
     private final String category;
     private final LocalDate date;
 
-    public AddExpenseInputData(float amount, String name, String category, LocalDate date) {
-        this.amount = amount;
+    public AddExpenseInputData(String name, double amount, String category, LocalDate date) {
         this.name = name;
+        this.amount = amount;
         this.category = category;
         this.date = date;
     }
 
-    float getAmount(){
+    double getAmount(){
         return amount;
     }
 

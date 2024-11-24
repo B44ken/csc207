@@ -24,13 +24,14 @@ public class AddExpensePresenter implements AddExpenseOutputBoundary {
 
     @Override
     public void prepareSuccessView(AddExpenseOutputData outputData) {
-        // to be implemented
+        viewManagerModel.setState(homeViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
     }
 
     @Override
     public void prepareFailView(String error) {
         final AddExpenseState addExpenseState = addExpenseViewModel.getState();
-        addExpenseState.setExpenseError(error);
+        addExpenseState.setNameError(error);
         addExpenseViewModel.firePropertyChanged();
     }
 

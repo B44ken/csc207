@@ -1,26 +1,41 @@
 package use_case.add_expense;
 
+import entity.TransactionFactory;
+import entity.Transaction;
+
 import java.time.LocalDate;
 
 /**
  * The Add Expense Interactor
  */
 public class AddExpenseInteractor implements AddExpenseInputBoundary {
+    private final AddExpenseDataAccessInterface addExpenseDataAccessObject;
     private final AddExpenseOutputBoundary addExpensePresenter;
+    private final TransactionFactory transactionFactory;
 
-    public AddExpenseInteractor(AddExpenseOutputBoundary addExpenseOutputBoundary) {
+    public AddExpenseInteractor(AddExpenseDataAccessInterface addExpenseDataAccessInterface,
+                                AddExpenseOutputBoundary addExpenseOutputBoundary,
+                                TransactionFactory transactionFactory) {
+        this.addExpenseDataAccessObject = addExpenseDataAccessInterface;
         this.addExpensePresenter = addExpenseOutputBoundary;
+        this.transactionFactory = transactionFactory;
     }
 
     @Override
     public void execute(AddExpenseInputData addExpenseInputData) {
-        final String name = addExpenseInputData.getName();
-        final float amount = addExpenseInputData.getAmount();
-        final String category = addExpenseInputData.getCategory();
-        final LocalDate date = addExpenseInputData.getDate();
 
-        //to check: does the expense by name already exist?
-        //if not, then create the expense and add to the expenses database
+        if (addExpenseDataAccessObject.existsByName(addExpenseInputData.getName())) {
+            addExpensePresenter.prepareFailView("Transaction already exists");
+        }
+        else {
+            final Transaction transaction = transactionFactory.create(addExpenseInputData.getName(),
+                    addExpenseInputData.getAmount(), addExpenseInputData.getCategory(), addExpenseInputData.getDate());
+
+            addExpenseDataAccessObject.save(transaction);
+
+            final AddExpenseOutputData addExpenseOutputData = new AddExpenseOutputData(transaction.getName(),
+                    false);
+        }
     }
 
     @Override
