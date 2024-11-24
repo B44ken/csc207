@@ -14,10 +14,9 @@ public class AddExpenseViewModel extends ViewModel<AddExpenseState>{
     public static final String DATE_LABEL = "Date";
 
     public static final String ENTER_BUTTON_LABEL = "Enter";
-    public static final String HOME_BUTTON_LEVEL = "Back to Home View";
 
     public AddExpenseViewModel() {
-        super("Add Expense");
+        super("add expense view");
         setState(new AddExpenseState());
     }
 }
