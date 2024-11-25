@@ -73,15 +73,15 @@ public class TransactionHistory {
     public TransactionHistory getBetween(LocalDate start, LocalDate stop) {
         var result = new TransactionHistory();
         for (var t : history) {
-            if(!t.getDate().isBefore(start) && !t.getDate().isAfter(stop)) {
+            if(!t.getDate().isBefore(start) && !t.getDate().isAfter(stop) ) {
                 result.add(t);
             }
         }
         return result;
     }
 
-    // returns a Transaction History of Incomes
-    // can use .getHistory() to get the ArrayList<>
+    // returns a TransactionHistory
+    // you can use .getHistory() to get the ArrayList
     public TransactionHistory getAllIncomes() {
         var history = new TransactionHistory();
         for (var t : history.getHistory()) {
@@ -99,50 +99,4 @@ public class TransactionHistory {
     public void add(Transaction transaction) {
         history.add(transaction);
     }
-
-    /**
-     * Returns all time net balance. Method implemented for HomeView repaint method.
-     * @return net amount.
-     */
-    public int getNetBalance() {
-        int sum = 0;
-        for (var t : history) {
-            sum += t.getAmount();
-        }
-        return sum;
-
-    }
-
-    /**
-     * Returns all time Income Total. Method implemented for HomeView repaint method.
-     * @return net amount.
-     */
-    public int getIncomeTotal() {
-        int sum = 0;
-        for (var t : history) {
-            if(t instanceof Income) {
-                sum += t.getAmount();
-            }
-        }
-        return sum;
-    }
-
-    /**
-     * Returns all time Expense Total. Method implemented for HomeView repaint method.
-     * @return net amount.
-     */
-    public int getExpensesTotal() {
-        int sum = 0;
-        for (var t : history) {
-            if(t instanceof Expense) {
-                sum += t.getAmount();
-            }
-        }
-        return sum;
-    }
-
-
-
-
-
 }

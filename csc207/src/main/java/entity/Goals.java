@@ -1,26 +1,28 @@
 package entity;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
  * Stores the Transaction history for app.
  */
 public class Goals {
-    private ArrayList<Goal> goals;
+    private static ArrayList<Goal> history;
 
     public Goals() {
-        goals = new ArrayList<>();
+        history = new ArrayList<>();
     }
 
-    public ArrayList<Goal> getGoals() {
-        return goals;
+    public ArrayList<Goal> getHistory() {
+        return history;
     }
+
 
     /**
      * Adds a goal into history.
      * @param goal the goal to be added.
      */
-    public void add(Goal goal) {
-        goals.add(goal);
+    public static void addGoal(Goal goal) {
+        history.add(goal);
     }
 }

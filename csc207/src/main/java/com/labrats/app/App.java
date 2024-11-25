@@ -24,18 +24,20 @@ public class App {
     public static void runWholeApp() {
         final AppBuilder appBuilder = new AppBuilder();
         final JFrame application = appBuilder
-                .addUserData()
                 .addHomeView()
-                .addIncomeHistoryView()
-                .addExpenseView()
-                .build();
+                // .addIncomeHistoryView()
+                .addAddExpenseView()
+                .addUserData()
+                .addGoalsView()
                 // .addAddIncomeView()
                 // .addAddExpenseView()
                 // .addExpenseHistoryView()
-                // .addGoalView()
+                .addAddGoalView()
+                // .addGoalsView()
                 // .addBudgetView()
                 // .addChangePasswordUseCase()
                 // .addLogoutUseCase()
+                .build();
         application.pack();
         application.setVisible(true);
     }
