@@ -15,15 +15,10 @@ import data_access.FileTransactionDataAccessObject;
 import entity.CommonTransactionFactory;
 import entity.TransactionFactory;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.home.HomeController;
-import interface_adapter.home.HomePresenter;
 import interface_adapter.home.HomeViewModel;
 import interface_adapter.add_expense.AddExpenseController;
 import interface_adapter.add_expense.AddExpensePresenter;
 import interface_adapter.add_expense.AddExpenseViewModel;
-import use_case.home.HomeInteractor;
-import use_case.home.HomeInputBoundary;
-import use_case.home.HomeOutputBoundary;
 import use_case.add_expense.AddExpenseInteractor;
 import use_case.add_expense.AddExpenseInputBoundary;
 import use_case.add_expense.AddExpenseOutputBoundary;
@@ -71,7 +66,7 @@ public class AppBuilder {
     }
 
     public AppBuilder addExpenseView() {
-        var expenseView = new ExpenseView();
+        var expenseView = new ExpenseHistoryView();
         expenseView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.expenseHistory, expenseView);
         return this;

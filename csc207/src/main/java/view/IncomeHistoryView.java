@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Objects;
 
 public class IncomeHistoryView extends JPanel implements ActionListener {
     private final String viewName = "income history";
@@ -26,7 +27,6 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
     private final JButton goalsButton;
     private ViewSwitcher viewSwitcher;
 
-    private UserData userData;
 
 
     public IncomeHistoryView() {
@@ -46,7 +46,7 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
         add(tableScrollPane, BorderLayout.CENTER);
 
         // add call to data here
-        loadDataFromFile("testdata.csv");
+        repaint("testdata.csv");
         // userData.getData()
 
         final JFrame table = new JFrame("List of Income:");
@@ -112,21 +112,21 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
-
         this.add(incomeHistoryTable);
         this.add(addIncomeBut);
         this.add(buttons);
     }
 
-    private void loadDataFromFile(String fileName) {
+    private void repaint(String fileName) {
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String line;
             while ((line = br.readLine()) != null) {
                 // Split each line by commas
                 String[] data = line.split(",");
                 // Add the data as a new row to the table model
-                if (data.length == 4) {  // Ensure correct number of columns
-                    tableModel.addRow(new Object[]{data[0], Double.parseDouble(data[1]), data[2], data[3]});
+
+                if (Objects.equals(data[4], "income"))  {  // Ensure correct number of columns
+                    tableModel.addRow(new Object[]{data[1], Double.parseDouble(data[0]), data[2], data[3]});
                 }
             }
         } catch (IOException e) {
@@ -136,10 +136,12 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
     }
 
 
+
     /**
      * React to a button click that results in evt.
      * @param evt the ActionEvent to react to
      */
+    @Override
     public void actionPerformed(ActionEvent evt) {System.out.println("Click " + evt.getActionCommand());}
 
 

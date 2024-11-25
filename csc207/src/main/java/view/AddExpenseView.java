@@ -27,6 +27,7 @@ public class AddExpenseView extends JPanel implements ActionListener, PropertyCh
 
     private AddExpenseController addExpenseController;
     private final AddExpenseViewModel addExpenseViewModel;
+    private ViewSwitcher viewSwitcher;
 
     private final JButton confirmButton;
     private final JButton cancelButton;
