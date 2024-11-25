@@ -27,6 +27,7 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
     private final JButton goalsButton;
     private ViewSwitcher viewSwitcher;
 
+    private UserData userData;
 
 
     public IncomeHistoryView() {
@@ -46,7 +47,7 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
         add(tableScrollPane, BorderLayout.CENTER);
 
         // add call to data here
-        repaint("testdata.csv");
+//        repaint();
         // userData.getData()
 
         final JFrame table = new JFrame("List of Income:");
@@ -117,23 +118,9 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
         this.add(buttons);
     }
 
-    private void repaint(String fileName) {
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                // Split each line by commas
-                String[] data = line.split(",");
-                // Add the data as a new row to the table model
-
-                if (Objects.equals(data[4], "income"))  {  // Ensure correct number of columns
-                    tableModel.addRow(new Object[]{data[1], Double.parseDouble(data[0]), data[2], data[3]});
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
+//    private void repaint() {
+//        userData.getHistory();
+//    }
 
 
 
@@ -151,5 +138,9 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
 
     public void setViewSwitcher(ViewSwitcher viewSwitcher) {
         this.viewSwitcher = viewSwitcher;
+    }
+
+    public void setUserData(UserData userData) {
+        this.userData = userData;
     }
 }

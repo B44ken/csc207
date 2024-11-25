@@ -24,6 +24,7 @@ import use_case.add_expense.AddExpenseInputBoundary;
 import use_case.add_expense.AddExpenseOutputBoundary;
 import view.ViewManager;
 import view.HomeView;
+import view.ExpenseHistoryView;
 import view.AddExpenseView;
 
 
