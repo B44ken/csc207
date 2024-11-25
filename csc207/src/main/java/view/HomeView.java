@@ -83,26 +83,34 @@ public class HomeView extends JPanel {
         goalButton = new JButton("Goal");
         buttons2.add(goalButton);
 
-        incomeButton.addActionListener(
-                new ActionListener() {
-                    public void actionPerformed(ActionEvent evt) {
-                        viewSwitcher.switchTo(ViewNames.incomeHistory);
-                    }
-                });
+        // incomeButton.addActionListener(
+        //         new ActionListener() {
+        //             public void actionPerformed(ActionEvent evt) {
+        //                 viewSwitcher.switchTo(ViewNames.incomeHistory);
+        //             }
+        //         });
 
-        expenseButton.addActionListener(
-                new ActionListener() {
-                    public void actionPerformed(ActionEvent evt) {
-                        viewSwitcher.switchTo(ViewNames.expense);
-                    }
-                });
+        // expenseButton.addActionListener(
+        //         new ActionListener() {
+        //             public void actionPerformed(ActionEvent evt) {
+        //                 viewSwitcher.switchTo(ViewNames.expenseHistory);
+        //             }
+        //         });
 
-        goalButton.addActionListener(
-                new ActionListener() {
-                    public void actionPerformed(ActionEvent evt) {
-                        // homeController.switchToGoalView();
-                    }
-                });
+        // goalButton.addActionListener(
+        //         new ActionListener() {
+        //             public void actionPerformed(ActionEvent evt) {
+        //                 // homeController.switchToGoalView();
+        //             }
+        //         });
+
+        // addIncome
+        attachSwitchToOnButton(addIncome, ViewNames.addIncome);
+        attachSwitchToOnButton(addExpense, ViewNames.addExpense);
+        attachSwitchToOnButton(incomeButton, ViewNames.incomeHistory);
+        attachSwitchToOnButton(expenseButton, ViewNames.expenseHistory);
+        attachSwitchToOnButton(goalButton, ViewNames.goalList);
+        
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -128,6 +136,15 @@ public class HomeView extends JPanel {
     public void setUserData(UserData ud) {
         userData = ud;
         this.repaint();
+    }
+
+    public void attachSwitchToOnButton(JButton button, String viewName) {
+        button.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        viewSwitcher.switchTo(viewName);
+                    }
+                });
     }
 
     public void repaint() {

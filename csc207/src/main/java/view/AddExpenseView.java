@@ -26,18 +26,13 @@ public class AddExpenseView extends JPanel implements ActionListener, PropertyCh
     private final String viewName = "add expense view";
 
     private AddExpenseController addExpenseController;
-    private final AddExpenseViewModel addExpenseViewModel;
 
     private final JButton confirmButton;
     private final JButton cancelButton;
 
     private final LocalDate date = LocalDate.now();
 
-    public AddExpenseView(AddExpenseViewModel addExpenseViewModel){
-
-        this.addExpenseViewModel = addExpenseViewModel;
-        addExpenseViewModel.addPropertyChangeListener(this);
-
+    public AddExpenseView(){
         final JLabel title = new JLabel(AddExpenseViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -109,10 +104,6 @@ public class AddExpenseView extends JPanel implements ActionListener, PropertyCh
 
     public String getViewName() {
         return viewName;
-    }
-
-    public void setViewSwitcher(ViewSwitcher viewSwitcher) {
-        this.viewSwitcher = viewSwitcher;
     }
 
     public void setAddExpenseController(AddExpenseController controller) {

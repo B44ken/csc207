@@ -68,10 +68,16 @@ public class AppBuilder {
         return this;
     }
 
-    public AppBuilder addExpenseView() {
-        var expenseView = new ExpenseView();
-        expenseView.setViewSwitcher(viewSwitcher);
-        viewSwitcher.add(ViewNames.expense, expenseView);
+    // public AppBuilder addExpenseView() {
+    //     var expenseView = new ExpenseView();
+    //     expenseView.setViewSwitcher(viewSwitcher);
+    //     viewSwitcher.add(ViewNames.expense, expenseView);
+    //     return this;
+    // }
+
+    public AppBuilder addAddExpenseView() {
+        var addExpenseView = new AddExpenseView();
+        viewSwitcher.add(ViewNames.addExpense, addExpenseView);
         return this;
     }
 
