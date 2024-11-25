@@ -2,16 +2,15 @@ package view;
 
 import com.labrats.app.ViewNames;
 import data_access.UserData;
+import entity.Transaction;
+import entity.TransactionHistory;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Objects;
+import java.time.LocalDate;
 
 public class IncomeHistoryView extends JPanel implements ActionListener {
     private final String viewName = "income history";
@@ -31,6 +30,7 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
 
 
     public IncomeHistoryView() {
+        super();
         final JLabel title = new JLabel("Income History");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -40,19 +40,23 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
 
         String[] columnNames = {"Name", "Amount", "Date", "Category"};
         tableModel = new DefaultTableModel(columnNames, 0);
+
+        if (this.userData != null) {
+            TransactionHistory data = userData.getHistory().getAllIncomes();
+            // DefaultTableModel model = (DefaultTableModel) incomeHistoryTable.getModel();
+            for (Transaction transaction : data.getHistory()) {
+                tableModel.addRow(new Object[]{transaction.getName(), transaction.getAmount(),
+                        transaction.getDate().toString(), transaction.getCategory()});
+                tableModel.addRow(new Object[]{"transaction.getName()", "transaction.getAmount()",
+                        "transaction.getDate()", "transaction.getCategory()"});
+            }
+        }
         incomeHistoryTable = new JTable(tableModel);
+
 
         incomeHistoryTable.setFillsViewportHeight(true);
         JScrollPane tableScrollPane = new JScrollPane(incomeHistoryTable);
         add(tableScrollPane, BorderLayout.CENTER);
-
-        // add call to data here
-//        repaint();
-        // userData.getData()
-
-        final JFrame table = new JFrame("List of Income:");
-        table.setSize(50, 100);
-        table.add(incomeHistoryTable);
 
         //Add chart API here!
 
@@ -113,16 +117,21 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
-        this.add(incomeHistoryTable);
+//        this.add(incomeHistoryTable);
         this.add(addIncomeBut);
         this.add(buttons);
     }
 
-//    private void repaint() {
-//        userData.getHistory();
+//    private void populateTable() {
+//        if (incomeHistoryTable != null) {
+//
+//            }
+//        }
 //    }
-
-
+//
+//    public void repaint() {
+//        populateTable();
+//    }
 
     /**
      * React to a button click that results in evt.
@@ -142,5 +151,6 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
 
     public void setUserData(UserData userData) {
         this.userData = userData;
+//        repaint();
     }
 }

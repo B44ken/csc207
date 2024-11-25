@@ -24,7 +24,7 @@ import use_case.add_expense.AddExpenseInputBoundary;
 import use_case.add_expense.AddExpenseOutputBoundary;
 import view.ViewManager;
 import view.HomeView;
-import view.ExpenseHistoryView;
+//import view.ExpenseHistoryView;
 import view.AddExpenseView;
 
 
@@ -47,6 +47,8 @@ public class AppBuilder {
     public AppBuilder addUserData() {
         if(homeView != null)
             homeView.setUserData(userData);
+        if (incomeHistoryView != null)
+            incomeHistoryView.setUserData(userData);
         // TODO
         // do user data stuff for other views
         return this;
@@ -60,16 +62,16 @@ public class AppBuilder {
     }
 
     public AppBuilder addIncomeHistoryView() {
-        var incomeHistoryView = new IncomeHistoryView();
+        incomeHistoryView = new IncomeHistoryView();
         incomeHistoryView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.incomeHistory, incomeHistoryView);
         return this;
     }
 
     public AppBuilder addExpenseView() {
-        var expenseView = new ExpenseHistoryView();
-        expenseView.setViewSwitcher(viewSwitcher);
-        viewSwitcher.add(ViewNames.expenseHistory, expenseView);
+//        var expenseView = new ExpenseHistoryView();
+//        expenseView.setViewSwitcher(viewSwitcher);
+//        viewSwitcher.add(ViewNames.expenseHistory, expenseView);
         return this;
     }
 

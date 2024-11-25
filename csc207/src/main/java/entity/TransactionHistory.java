@@ -80,6 +80,18 @@ public class TransactionHistory {
         return result;
     }
 
+    // returns a Transaction History of Incomes
+    // can use .getHistory() to get the ArrayList<>
+    public TransactionHistory getAllIncomes() {
+        var history = new TransactionHistory();
+        for (var t : history.getHistory()) {
+            if(t instanceof Income) {
+                history.add(t);
+            }
+        }
+        return history;
+    }
+
     /**
      * Adds a transaction into history.
      * @param transaction the transaction to be added.

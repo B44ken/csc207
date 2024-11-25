@@ -24,10 +24,10 @@ public class App {
     public static void runWholeApp() {
         final AppBuilder appBuilder = new AppBuilder();
         final JFrame application = appBuilder
+                .addUserData()
                 .addHomeView()
                 .addIncomeHistoryView()
                 .addExpenseView()
-                .addUserData()
                 .build();
                 // .addAddIncomeView()
                 // .addAddExpenseView()
