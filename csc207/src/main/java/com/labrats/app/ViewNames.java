@@ -1,6 +1,6 @@
 package com.labrats.app;
 
-public class ViewNames {
+public final class ViewNames {
     public static String home = "Home";
     public static String expenseHistory = "Expense";
     public static String addIncome = "Add Income";

@@ -13,7 +13,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.time.LocalDate;
 
-public class GoalsView extends JPanel implements  ActionListener, PropertyChangeListener {
+public class GoalsView extends JPanel implements ActionListener, PropertyChangeListener {
     private final String viewName = "Goals";
 
     private ViewSwitcher viewSwitcher;
@@ -36,7 +36,7 @@ public class GoalsView extends JPanel implements  ActionListener, PropertyChange
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
         add(titleLabel, BorderLayout.NORTH);
 
-        final String[] columnNames = {"Target", "Amount", "Target Date"};
+        final String[] columnNames = { "Target", "Amount", "Target Date" };
         tableModel = new DefaultTableModel(columnNames, 0);
         goalsTable = new JTable(tableModel);
 
@@ -51,10 +51,12 @@ public class GoalsView extends JPanel implements  ActionListener, PropertyChange
 
         addGoalButton.addActionListener(
                 new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        System.out.println("Add Goal button clicked");
+                        viewSwitcher.switchTo(ViewNames.addGoal);
+                    }
+                });
 
         final JPanel buttons2 = new JPanel();
         homeButton = new JButton("Home");
@@ -72,8 +74,7 @@ public class GoalsView extends JPanel implements  ActionListener, PropertyChange
                     public void actionPerformed(ActionEvent e) {
                         viewSwitcher.switchTo(ViewNames.addGoal);
                     }
-                }
-        );
+                });
         homeButton.addActionListener(
                 new ActionListener() {
                     @Override
@@ -113,9 +114,6 @@ public class GoalsView extends JPanel implements  ActionListener, PropertyChange
         this.add(buttons2);
     }
 
-
-
-
     public String getViewName() {
         return viewName;
     }
@@ -123,7 +121,6 @@ public class GoalsView extends JPanel implements  ActionListener, PropertyChange
     public JTable getGoalsTable() {
         return goalsTable;
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {

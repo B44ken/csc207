@@ -11,12 +11,7 @@ import java.time.LocalDate;
 
 import javax.swing.*;
 
-import interface_adapter.add_goal.AddGoalController;
-import interface_adapter.add_goal.AddGoalViewModel;
-
 public class AddGoalView extends JPanel implements ActionListener, PropertyChangeListener {
-    private String viewName = "Add Goal View";
-
     private ViewSwitcher viewSwitcher;
     private UserData userData;
 
@@ -25,17 +20,10 @@ public class AddGoalView extends JPanel implements ActionListener, PropertyChang
     private final JButton expenseButton;
     private final JButton goalButton;
 
-    private final AddGoalController addGoalController;
-    private final AddGoalViewModel addGoalViewModel;
-
     private final JFrame outerFrame;
 
-    public AddGoalView(AddGoalViewModel goalViewModel, AddGoalController controller) {
+    public AddGoalView() {
         super();
-
-        this.addGoalController = controller;
-        this.addGoalViewModel = goalViewModel;
-        addGoalViewModel.addPropertyChangeListener(this);
 
         final JLabel title = new JLabel("Add Goal");
         title.setAlignmentX((JComponent.CENTER_ALIGNMENT));
