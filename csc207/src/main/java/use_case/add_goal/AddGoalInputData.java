@@ -1,7 +1,6 @@
 package use_case.add_goal;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 /**
  * The input data for Add Goal use case.

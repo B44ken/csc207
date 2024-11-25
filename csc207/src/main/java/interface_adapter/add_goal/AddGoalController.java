@@ -21,11 +21,11 @@ public class AddGoalController {
     }
 
     /**
-     * Executes the Add goal use case.
-     * @param target to be added
-     * @param amount
-     * @param targetDate
+     * Adds a new goal using the use case.
      *
+     * @param target The name of the goal.
+     * @param amount The amount required to achieve the goal.
+     * @param targetDate The target date for achieving the goal.
      */
     public void execute(String target, double amount, LocalDate targetDate) {
         final AddGoalInputData addGoalInputData = new AddGoalInputData(target, amount, targetDate);

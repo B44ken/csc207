@@ -5,7 +5,7 @@ import interface_adapter.ViewModel;
 /**
  * The ViewModel for the Add Expense View.
  */
-public class AddExpenseViewModel extends ViewModel<AddExpenseState>{
+public class AddExpenseViewModel extends ViewModel<AddExpenseState> {
 
     public static final String TITLE_LABEL = "Add Expense View";
     public static final String NAME_LABEL = "Name";
