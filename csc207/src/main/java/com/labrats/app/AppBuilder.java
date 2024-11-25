@@ -1,36 +1,13 @@
 package com.labrats.app;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 import view.*;
 
 import data_access.UserData;
 
 import java.awt.CardLayout;
-import java.io.IOException;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.WindowConstants;
-
-import data_access.FileTransactionDataAccessObject;
-import entity.CommonTransactionFactory;
-import entity.TransactionFactory;
-import interface_adapter.ViewManagerModel;
-import interface_adapter.home.HomeController;
-import interface_adapter.home.HomePresenter;
-import interface_adapter.home.HomeViewModel;
-import interface_adapter.add_expense.AddExpenseController;
-import interface_adapter.add_expense.AddExpensePresenter;
-import interface_adapter.add_expense.AddExpenseViewModel;
-import use_case.home.HomeInteractor;
-import use_case.home.HomeInputBoundary;
-import use_case.home.HomeOutputBoundary;
-import use_case.add_expense.AddExpenseInteractor;
-import use_case.add_expense.AddExpenseInputBoundary;
-import use_case.add_expense.AddExpenseOutputBoundary;
-import view.ViewManager;
-import view.HomeView;
-import view.AddExpenseView;
-
 
 public class AppBuilder {
     private JPanel cards;

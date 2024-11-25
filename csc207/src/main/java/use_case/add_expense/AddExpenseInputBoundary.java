@@ -6,13 +6,13 @@ package use_case.add_expense;
 public interface AddExpenseInputBoundary {
 
     /**
-     * Executes the add expense use case.
+     * Exercutes the add expense use case.
      * @param addExpenseInputData the input data
      */
     void execute(AddExpenseInputData addExpenseInputData);
 
     /**
-     * Execytes the switch to home view use case/
+     * Execuytes the switch to home view use case/
      */
     void switchToHomeView();
 }

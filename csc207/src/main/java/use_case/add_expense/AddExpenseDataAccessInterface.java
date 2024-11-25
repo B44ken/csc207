@@ -10,7 +10,7 @@ public interface AddExpenseDataAccessInterface {
     /**
      * Checks if the given expense name exists.
      * @param name the name of the expense to look for
-     * @return true if an expense with the name exists; false otherwise
+     * @return true if an expense with the same name existsl; false otherwise
      */
     boolean existsByName(String name);
 
