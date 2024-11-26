@@ -19,7 +19,6 @@ public class AddGoalOutputData {
         return target;
     }
 
-    // why is this never used i'm gonna cry.
     public boolean isUseCaseFailed() {
         return useCaseFailed;
     }

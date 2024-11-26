@@ -73,11 +73,23 @@ public class TransactionHistory {
     public TransactionHistory getBetween(LocalDate start, LocalDate stop) {
         var result = new TransactionHistory();
         for (var t : history) {
-            if(!t.getDate().isBefore(start) && !t.getDate().isAfter(stop)) {
+            if(!t.getDate().isBefore(start) && !t.getDate().isAfter(stop) ) {
                 result.add(t);
             }
         }
         return result;
+    }
+
+    // returns a TransactionHistory
+    // you can use .getHistory() to get the ArrayList
+    public TransactionHistory getAllIncomes() {
+        var history = new TransactionHistory();
+        for (var t : history.getHistory()) {
+            if(t instanceof Income) {
+                history.add(t);
+            }
+        }
+        return history;
     }
 
     /**

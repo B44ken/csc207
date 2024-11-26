@@ -7,28 +7,33 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.LinkedHashMap;
 import java.util.Map;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import entity.Transaction;
 import entity.TransactionFactory;
+import use_case.add_expense.AddExpenseDataAccessInterface;
+
 /**
  * DAO for user data implemented using a File to persist the data.
  */
-public class InMemoryUserDataAccessObject {
-/*
+public class FileTransactionDataAccessObject implements AddExpenseDataAccessInterface{
+
     private static final String HEADER = "name,amount,category,date";
 
-    private final File csvFile;
-    private final Map<String, Integer> headers = new HashMap<>();
+    private final File txtFile;
+    private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final Map<String, Transaction> transactions = new HashMap<>();
     //private String currentTransaction;
 
-    public FileTransactionDataAccessObject(String txtPath, TransactionHistory transactionFactory) throws IOException {
+    public FileTransactionDataAccessObject(String txtPath, TransactionFactory transactionFactory) throws IOException{
 
-        txtFile = new File (txtPath);
+        txtFile = new File(txtPath);
         headers.put("name", 0);
-        headers.put("amount", 1);
+        headers.put("amount", 0);
         headers.put("category", 2);
         headers.put("date", 3);
 
@@ -41,7 +46,7 @@ public class InMemoryUserDataAccessObject {
                 final String header = reader.readLine();
 
                 if (!header.equals(HEADER)) {
-                    throw new RuntimeException(String.format("header should be%n: %s%but was %n%s", HEADER, header));
+                    throw new RuntimeException(String.format("header should be %n: %s%but was %n%s", HEADER, header));
                 }
 
                 String row;
@@ -50,7 +55,10 @@ public class InMemoryUserDataAccessObject {
                     final String name = String.valueOf(col[headers.get("name")]);
                     final double amount = Double.valueOf(col[headers.get("amount")]);
                     final String category = String.valueOf(col[headers.get("category")]);
-                    final String date = String.valueOf(col[headers.get("date")]);
+
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                    final LocalDate date = LocalDate.parse(col[headers.get("date")], formatter);
+
                     final Transaction transaction = transactionFactory.create(name, amount, category, date);
                     transactions.put(name, transaction);
                 }
@@ -66,17 +74,19 @@ public class InMemoryUserDataAccessObject {
             writer.newLine();
 
             for (Transaction transaction : transactions.values()) {
-                final String line = String.format("%d,%f,%s,%s",
-                        transaction.getName(), transaction.getAmount(), transaction.getCategory(), transaction.getDate());
+                final String line = String.format("%s,%f,%s,%s",
+                        transaction.getName(), transaction.getAmount(), transaction.getCategory(),
+                        transaction.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
                 writer.write(line);
                 writer.newLine();
                 System.out.println(line);
             }
 
-            write.close();
+            writer.close();
+
         }
-        catch (IOException ex) {
-            throw new RuntimeException(ex);
+        catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -91,5 +101,4 @@ public class InMemoryUserDataAccessObject {
         //return accounts.containsKey(identifier);
         return false;
     }
-*/
 }

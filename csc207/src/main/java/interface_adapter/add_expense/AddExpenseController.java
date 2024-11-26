@@ -23,8 +23,8 @@ public class AddExpenseController {
      * @param category the category of the expense
      * @param date the date of the expense
      */
-    public void execute(String name, float amount, String category, LocalDate date){
-        final AddExpenseInputData addExpenseInputData = new AddExpenseInputData(amount, name, category, date);
+    public void execute(String name, double amount, String category, LocalDate date){
+        final AddExpenseInputData addExpenseInputData = new AddExpenseInputData(name, amount, category, date);
 
         addExpenseUseCaseInteractor.execute(addExpenseInputData);
     }
