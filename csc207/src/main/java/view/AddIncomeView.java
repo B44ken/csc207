@@ -22,19 +22,18 @@ public class AddIncomeView extends JPanel implements ActionListener, PropertyCha
     private String viewName = "Add Income";
 
     private AddIncomeController addIncomeController;
-    private final AddIncomeViewModel addIncomeViewModel;
+    // private final AddIncomeViewModel addIncomeViewModel;
 
     private ViewSwitcher viewSwitcher;
     private UserData userData;
 
-    private ViewSwitcher viewSwitcher;
     // change above to what controller is actually called later
 
     public AddIncomeView() {
         super();
 
 
-        this.addIncomeViewModel = incomeViewModel;
+        // this.addIncomeViewModel = incomeViewModel;
 
 
         final JLabel title = new JLabel("Add Income");
@@ -138,9 +137,10 @@ public class AddIncomeView extends JPanel implements ActionListener, PropertyCha
 
     public void repaint() {
         // TODO
+    }
 
     public void setViewSwitcher(ViewSwitcher viewSwitcher) {
         this.viewSwitcher = viewSwitcher;
-
     }
 }
+

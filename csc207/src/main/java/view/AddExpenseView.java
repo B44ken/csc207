@@ -63,6 +63,7 @@ public class AddExpenseView extends JPanel implements ActionListener, PropertyCh
         buttons.add(confirmButton);
 
         confirmButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource().equals(confirmButton)) {
                     var name = nameTextField.getText();
@@ -85,6 +86,7 @@ public class AddExpenseView extends JPanel implements ActionListener, PropertyCh
 
         cancelButton.addActionListener(
                 new ActionListener() {
+                    @Override
                     public void actionPerformed(ActionEvent evt) {
                         viewSwitcher.switchTo(ViewNames.home);
                     }
@@ -98,7 +100,7 @@ public class AddExpenseView extends JPanel implements ActionListener, PropertyCh
         this.add(categoryPanel);
         this.add(buttons);
 
-    };
+    }
 
     public void setUserData(UserData ud) {
         userData = ud;
@@ -110,5 +112,15 @@ public class AddExpenseView extends JPanel implements ActionListener, PropertyCh
 
     public void setAddExpenseController(AddExpenseController controller) {
         this.addExpenseController = controller;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+
     }
 }
