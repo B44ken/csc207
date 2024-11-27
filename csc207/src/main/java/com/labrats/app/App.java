@@ -26,18 +26,19 @@ public class App {
         final JFrame application = appBuilder
                 .addHomeView()
                 .addIncomeHistoryView()
-                .addGetInsightView()
-                .addUserData()
-                .addAddExpenseView()
+                .addExpenseView()
                 .addGoalsView()
-                .addAddIncomeView()
+                .addAddGoalView()
+                .addUserData()
+                .build();
+                // .addAddIncomeView()
                 // .addAddExpenseView()
                 // .addExpenseHistoryView()
-                .addAddGoalView()
+                // ,addAddGoalView()
                 // .addGoalsView()
                 // .addBudgetView()
-                // .addAddIncomeUseCase()
-                .build();
+                // .addChangePasswordUseCase()
+                // .addLogoutUseCase()
         application.pack();
         application.setVisible(true);
     }
