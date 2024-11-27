@@ -22,9 +22,8 @@ public class GoalsView extends JPanel implements  ActionListener, PropertyChange
     private ViewSwitcher viewSwitcher;
     private UserData userData;
 
-    private JPanel panel;
-    private JTable goalsTable;
-    private DefaultTableModel tableModel;
+    private final JTable goalsTable;
+    private final DefaultTableModel tableModel;
     private final JButton addGoalButton;
 
     private final JButton homeButton;
@@ -36,14 +35,18 @@ public class GoalsView extends JPanel implements  ActionListener, PropertyChange
         super();
 
         final JLabel titleLabel = new JLabel("Goals");
-
-        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
         add(titleLabel, BorderLayout.NORTH);
 
-        this.panel = new JPanel();
+        final String[] columnNames = {"Target", "Amount", "Target Date"};
+        tableModel = new DefaultTableModel(columnNames, 0);
+        goalsTable = new JTable(tableModel);
+
+        goalsTable.setFillsViewportHeight(true);
+        JScrollPane tableScrollPane = new JScrollPane(goalsTable);
+        add(tableScrollPane, BorderLayout.CENTER);
+
         final JPanel buttons1 = new JPanel();
         addGoalButton = new JButton("Add New Goal");
         buttons1.add(addGoalButton);
@@ -94,14 +97,13 @@ public class GoalsView extends JPanel implements  ActionListener, PropertyChange
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        viewSwitcher.switchTo(ViewNames.goals);
+                        viewSwitcher.switchTo(ViewNames.goalList);
                     }
                 });
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(titleLabel);
-        this.add(panel);
         this.add(buttons1);
         this.add(buttons2);
     }
@@ -134,32 +136,19 @@ public class GoalsView extends JPanel implements  ActionListener, PropertyChange
 
     public void setUserData(UserData ud) {
         userData = ud;
-        populateTable();
+        this.repaint();
     }
 
     private void populateTable() {
-        GoalList data = userData.getGoals();
-        JPanel pane = new JPanel();
-
-        String[] columnNames = {"Target", "Amount", "Target Date"};
-        tableModel = new DefaultTableModel(columnNames, 0);
-
-        for (Goal goal : data.getHistory()) {
-            tableModel.addRow(new String[]{goal.getTarget(), String.valueOf(goal.getAmount()),
-                    goal.getTargetDate().toString()});
+        if(goalsTable != null) {
+            DefaultTableModel model = (DefaultTableModel) goalsTable.getModel();
+            model.addRow(new Object[]{"1", "2", "3"});
         }
+        // for every entry...
 
-        goalsTable = new JTable(tableModel);
-        JScrollPane tableScrollPane = new JScrollPane(goalsTable);
-        goalsTable.setFillsViewportHeight(true);
-        goalsTable.setVisible(true);
-        JPanel tablePanel = new JPanel();
-        tablePanel.add(tableScrollPane);
-        tablePanel.setSize(300, 400);
-        tablePanel.setVisible(true);
-        pane.add(tablePanel);
+    }
 
-        this.panel.setComponentZOrder(pane, 0);
-
+    public void repaint() {
+        populateTable();
     }
 }
