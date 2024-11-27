@@ -26,7 +26,6 @@ public class AddGoalView extends JPanel implements ActionListener, PropertyChang
     private final JButton expenseButton;
     private final JButton goalButton;
 
-    private final JFrame outerFrame;
 
     public AddGoalView() {
         super();
@@ -135,10 +134,9 @@ public class AddGoalView extends JPanel implements ActionListener, PropertyChang
         mainPanel.add(confirmPanel);
         mainPanel.add(buttons2);
 
-        outerFrame = new JFrame("Add Goal");
-        outerFrame.setContentPane(mainPanel);
-        outerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        outerFrame.pack();
+        this.add(mainPanel);
+
+
     }
 
     @Override
@@ -147,10 +145,6 @@ public class AddGoalView extends JPanel implements ActionListener, PropertyChang
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-    }
-
-    public void setVisible(boolean visible) {
-        outerFrame.setVisible(visible);
     }
 
     public void setViewSwitcher(ViewSwitcher vs) {

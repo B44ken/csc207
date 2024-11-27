@@ -1,5 +1,6 @@
 package com.labrats.app;
 
+import data_access.UserDataFile;
 import view.*;
 
 import data_access.UserData;
@@ -25,7 +26,6 @@ import use_case.add_expense.AddExpenseOutputBoundary;
 import view.ViewManager;
 import view.HomeView;
 import view.AddExpenseView;
-import view.ExpenseHistoryView;
 
 
 public class AppBuilder {
@@ -41,7 +41,7 @@ public class AppBuilder {
 
     public AppBuilder() {
         cards = new JPanel(new CardLayout());
-        userData = new UserData("testdata.csv");
+        userData = new UserDataFile("testdata.csv");
         viewSwitcher = new ViewSwitcher(cards);
     }
 
@@ -68,7 +68,7 @@ public class AppBuilder {
     }
 
     public AppBuilder addExpenseView() {
-        var expenseView = new ExpenseHistoryView();
+//        var expenseView = new ExpenseHistoryView();
 //        expenseView.setViewSwitcher(viewSwitcher);
 //        viewSwitcher.add(ViewNames.expenseHistory, expenseView);
         return this;
