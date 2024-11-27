@@ -35,6 +35,8 @@ public class AddExpenseView extends JPanel implements ActionListener, PropertyCh
 
     private UserData userData;
 
+    private final LocalDate date = LocalDate.now();
+
     public AddExpenseView() {
         final JLabel title = new JLabel(AddExpenseViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);

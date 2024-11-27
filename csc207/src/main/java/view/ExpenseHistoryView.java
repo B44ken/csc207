@@ -1,6 +1,8 @@
 package view;
 
 import use_case.history.ExpenseHistoryController;
+import data_access.UserData;
+import view.ViewSwitcher;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

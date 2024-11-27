@@ -23,6 +23,7 @@ public class AppBuilder {
     private HomeView homeView;
     private IncomeHistoryView incomeHistoryView;
     private AddIncomeView addIncomeView;
+    private GetInsightView getInsightView;
 
     public AppBuilder() {
         cards = new JPanel(new CardLayout());
@@ -34,6 +35,7 @@ public class AppBuilder {
     public AppBuilder addUserData() {
         homeView.setUserData(userData);
         incomeHistoryView.setUserData(this.userData);
+        getInsightView.setUserData(this.userData);
         // TODO
         // do user data stuff for other views
         return this;
@@ -55,7 +57,7 @@ public class AppBuilder {
 
     public AppBuilder addAddIncomeView() {
         addIncomeView = new AddIncomeView(new AddIncomeViewModel());
-        // addIncomeView.setViewSwitcher(viewSwitcher);
+        addIncomeView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.addIncome, addIncomeView);
         return this;
     }
@@ -87,6 +89,13 @@ public class AppBuilder {
         var goalsView = new GoalsView();
         goalsView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.goals, goalsView);
+        return this;
+    }
+
+    public AppBuilder addGetInsightView() {
+        getInsightView = new GetInsightView();
+        getInsightView.setViewSwitcher(viewSwitcher);
+        viewSwitcher.add(ViewNames.getInsight, getInsightView);
         return this;
     }
 

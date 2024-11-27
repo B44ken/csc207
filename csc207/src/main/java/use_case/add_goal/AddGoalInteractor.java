@@ -30,18 +30,14 @@ public class AddGoalInteractor implements AddGoalInputBoundary {
         goal.setTarget(addGoalInputData.getTarget());
         goal.setAmount(addGoalInputData.getAmount());
         goal.setTargetDate(addGoalInputData.getTargetDate());
-        goals.add(goal); //dk why this doesnt work
-
+        goals.add(goal);
         userDataAccessObject.addGoal(goal);
         final AddGoalOutputData addGoalOutputData = new AddGoalOutputData(goal.getTarget(), false);
         userPresenter.prepareSuccessView(addGoalOutputData);
     }
 
-    /**
-     *
-     */
     @Override
     public void switchToHomeView() {
-        userPresenter.switchToHomeVIew();
+
     }
 }
