@@ -49,6 +49,7 @@ public class AppBuilder {
         var expenseView = new AddExpenseView();
         expenseView.setViewSwitcher(viewSwitcher);
         // expenseView.setAddExpenseController();
+        expenseView.setUserData(userData);
         viewSwitcher.add(ViewNames.expenseHistory, expenseView);
         return this;
     }

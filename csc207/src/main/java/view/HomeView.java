@@ -3,6 +3,7 @@ package view;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -11,6 +12,7 @@ import javax.swing.JPanel;
 
 import com.labrats.app.ViewNames;
 
+import data_access.ChartImageFactory;
 import data_access.UserData;
 
 /**
@@ -31,7 +33,6 @@ public class HomeView extends JPanel {
     private final JButton incomeButton;
     private final JButton expenseButton;
     private final JButton goalButton;
-
 
     public HomeView() {
         final JLabel title = new JLabel("My Cool Finance App");
@@ -84,11 +85,11 @@ public class HomeView extends JPanel {
         buttons2.add(goalButton);
 
         // incomeButton.addActionListener(
-        //         new ActionListener() {
-        //             public void actionPerformed(ActionEvent evt) {
-        //                 viewSwitcher.switchTo(ViewNames.incomeHistory);
-        //             }
-        //         });
+        // new ActionListener() {
+        // public void actionPerformed(ActionEvent evt) {
+        // viewSwitcher.switchTo(ViewNames.incomeHistory);
+        // }
+        // });
 
         expenseButton.addActionListener(
                 new ActionListener() {
@@ -139,13 +140,18 @@ public class HomeView extends JPanel {
                 });
     }
 
+    public JLabel chart;
+
     public void repaint() {
-        if(userData != null && incomeValue != null) {
+        if (userData != null) {
             incomeValue.setText(Float.toString(userData.getHistory().getAmountTotal()));
+            var api = new ChartImageFactory(userData.getHistory());
+            if (chart != null)
+                this.remove(chart);
+            chart = api.createImage(
+                    LocalDate.of(2024, 10, 1), LocalDate.of(2024, 10, 7));
+            chart.setSize(400, 300);
+            this.add(chart);
         }
-        // TODO
-        // repaint is called when a Swing component is switched to
-        // use this to update numbers and stuff
-        // other components also need repaint() methods
     }
 }
