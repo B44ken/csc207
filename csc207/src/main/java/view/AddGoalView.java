@@ -11,6 +11,7 @@ import java.time.LocalDate;
 
 import javax.swing.*;
 
+import entity.Goal;
 import interface_adapter.add_goal.AddGoalController;
 import interface_adapter.add_goal.AddGoalViewModel;
 
@@ -25,17 +26,10 @@ public class AddGoalView extends JPanel implements ActionListener, PropertyChang
     private final JButton expenseButton;
     private final JButton goalButton;
 
-    private final AddGoalController addGoalController;
-    private final AddGoalViewModel addGoalViewModel;
-
     private final JFrame outerFrame;
 
-    public AddGoalView(AddGoalViewModel goalViewModel, AddGoalController controller) {
+    public AddGoalView() {
         super();
-
-        this.addGoalController = controller;
-        this.addGoalViewModel = goalViewModel;
-        addGoalViewModel.addPropertyChangeListener(this);
 
         final JLabel title = new JLabel("Add Goal");
         title.setAlignmentX((JComponent.CENTER_ALIGNMENT));
@@ -81,9 +75,10 @@ public class AddGoalView extends JPanel implements ActionListener, PropertyChang
                 Integer targetMonth = Integer.valueOf(monthTextField.getText());
                 Integer targetYear = Integer.valueOf(yearTextField.getText());
                 LocalDate targetDate = LocalDate.of(targetYear, targetMonth, targetDay);
-                // input into text file here
-                // after everything funnelled into txt file go back to home
-                // addIncomeController.switchToHomeView();
+                Goal newGoal = new Goal(target, amount, targetDate);
+                userData.getGoals().add(newGoal);
+                userData.save();
+                viewSwitcher.switchTo(ViewNames.home);
             }
         });
 
@@ -161,20 +156,5 @@ public class AddGoalView extends JPanel implements ActionListener, PropertyChang
     public void setViewSwitcher(ViewSwitcher vs) {
         viewSwitcher = vs;
     }
-
-    public void setUserData(UserData ud) {
-        userData = ud;
-        this.repaint();
-    }
-
-    public void repaint() {
-        // TODO
-        // repaint is called when a Swing component is switched to
-        // use this to update numbers and stuff
-        // other components also need repaint() methods
-    }
-
-
-
 
 }

@@ -2,9 +2,12 @@ package view;
 
 import com.labrats.app.ViewNames;
 import data_access.UserData;
+import entity.Goal;
+import entity.GoalList;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.text.View;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -49,13 +52,6 @@ public class GoalsView extends JPanel implements  ActionListener, PropertyChange
         buttons1.add(addGoalButton);
         add(buttons1, BorderLayout.SOUTH);
 
-        addGoalButton.addActionListener(
-                new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
-
         final JPanel buttons2 = new JPanel();
         homeButton = new JButton("Home");
         buttons2.add(homeButton);
@@ -72,8 +68,7 @@ public class GoalsView extends JPanel implements  ActionListener, PropertyChange
                     public void actionPerformed(ActionEvent e) {
                         viewSwitcher.switchTo(ViewNames.addGoal);
                     }
-                }
-        );
+                });
         homeButton.addActionListener(
                 new ActionListener() {
                     @Override
@@ -144,10 +139,17 @@ public class GoalsView extends JPanel implements  ActionListener, PropertyChange
         this.repaint();
     }
 
+    private void populateTable() {
+        System.out.println(goalsTable);
+        if(goalsTable != null) {
+            DefaultTableModel model = (DefaultTableModel) goalsTable.getModel();
+            model.addRow(new Object[]{"1", "2", "3"});
+        }
+        // for every entry...
+
+    }
+
     public void repaint() {
-        // TODO
-        // repaint is called when a Swing component is switched to
-        // use this to update numbers and stuff
-        // other components also need repaint() methods
+        populateTable();
     }
 }
