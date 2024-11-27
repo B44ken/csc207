@@ -16,6 +16,7 @@ public class TransactionHistory {
 
     /**
      * Returns total amount spent??? net balance.
+     *
      * @return total amount
      */
     public int getAmountTotal() {
@@ -28,14 +29,15 @@ public class TransactionHistory {
 
     /**
      * Returns net amount between start and stop dates.
+     *
      * @param start the start date (inclusive)
-     * @param stop the end date (inclusive)
+     * @param stop  the end date (inclusive)
      * @return net amount.
      */
     public int getAmountBetween(LocalDate start, LocalDate stop) {
         int sum = 0;
         for (var t : history) {
-            if(!t.getDate().isBefore(start) && !t.getDate().isAfter(stop)) {
+            if (!t.getDate().isBefore(start) && !t.getDate().isAfter(stop)) {
                 sum += t.getAmount();
             }
         }
@@ -45,8 +47,8 @@ public class TransactionHistory {
     public int getExpensesBetween(LocalDate start, LocalDate stop) {
         int sum = 0;
         for (var t : history) {
-            if(!t.getDate().isBefore(start) && !t.getDate().isAfter(stop)) {
-                if(t instanceof Expense) {
+            if (!t.getDate().isBefore(start) && !t.getDate().isAfter(stop)) {
+                if (t instanceof Expense) {
                     sum += t.getAmount();
                 }
             }
@@ -57,8 +59,8 @@ public class TransactionHistory {
     public int getIncomeBetween(LocalDate start, LocalDate stop) {
         int sum = 0;
         for (var t : history) {
-            if(!t.getDate().isBefore(start) && !t.getDate().isAfter(stop)) {
-                if(t instanceof Income) {
+            if (!t.getDate().isBefore(start) && !t.getDate().isAfter(stop)) {
+                if (t instanceof Income) {
                     sum += t.getAmount();
                 }
             }
@@ -73,7 +75,20 @@ public class TransactionHistory {
     public TransactionHistory getBetween(LocalDate start, LocalDate stop) {
         var result = new TransactionHistory();
         for (var t : history) {
-            if(!t.getDate().isBefore(start) && !t.getDate().isAfter(stop)) {
+            if (!t.getDate().isBefore(start) && !t.getDate().isAfter(stop)) {
+                result.add(t);
+            }
+        }
+        return result;
+    }
+
+    // returns a TransactionHistory
+    // you can use .getHistory() to get the ArrayList
+    public TransactionHistory getAllIncomes() {
+        TransactionHistory result = new TransactionHistory();
+        for (var t : history) {
+            System.out.println("yes");
+            if (t instanceof Income) {
                 result.add(t);
             }
         }
@@ -82,9 +97,34 @@ public class TransactionHistory {
 
     /**
      * Adds a transaction into history.
+     *
      * @param transaction the transaction to be added.
      */
     public void add(Transaction transaction) {
         history.add(transaction);
+    }
+
+    public double getIncomeTotal() {
+        double result = 0;
+        for (Transaction t : history) {
+            if (t instanceof Income) {
+                result += t.getAmount();
+            }
+        }
+        return result;
+    }
+
+    public double getExpensesTotal() {
+        double result = 0;
+        for (Transaction t : history) {
+            if (t instanceof Expense) {
+                result += t.getAmount();
+            }
+        }
+        return result;
+    }
+
+    public double getNetBalance() {
+        return getIncomeTotal() - getExpensesTotal();
     }
 }

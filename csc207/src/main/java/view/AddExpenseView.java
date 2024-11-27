@@ -23,10 +23,9 @@ import interface_adapter.add_expense.AddExpenseViewModel;
  * The View for the Add Expense Use Case
  */
 public class AddExpenseView extends JPanel implements ActionListener, PropertyChangeListener {
-    private final String viewName = "add expense view";
-
     private AddExpenseController addExpenseController;
-    private final AddExpenseViewModel addExpenseViewModel;
+
+    private ViewSwitcher viewSwitcher;
 
     private final JButton confirmButton;
     private final JButton cancelButton;
@@ -34,11 +33,7 @@ public class AddExpenseView extends JPanel implements ActionListener, PropertyCh
     private final LocalDate date = LocalDate.now();
     private ViewSwitcher viewSwitcher;
 
-    public AddExpenseView(AddExpenseViewModel addExpenseViewModel){
-
-        this.addExpenseViewModel = addExpenseViewModel;
-        addExpenseViewModel.addPropertyChangeListener(this);
-
+    public AddExpenseView() {
         final JLabel title = new JLabel(AddExpenseViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -66,27 +61,29 @@ public class AddExpenseView extends JPanel implements ActionListener, PropertyCh
         confirmButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource().equals(confirmButton)) {
-                    final AddExpenseState currentState = addExpenseViewModel.getState();
-                    currentState.setName(nameTextField.getText());
-                    currentState.setAmount(Double.valueOf(amountTextField.getText()));
-                    currentState.setCategory(categoryTextField.getText());
-                    currentState.setDate(date);
+                    var name = nameTextField.getText();
+                    var amount = 0.0;
+                    try {
+                        amount = Double.valueOf(amountTextField.getText());
+                    } catch (NumberFormatException ex) {
+                    }
+                    var category = categoryTextField.getText();
+                    var date = LocalDate.now();
 
-                    addExpenseController.execute(currentState.getName(), currentState.getAmount(),
-                            currentState.getCategory(), currentState.getDate());
+                    if(addExpenseController != null)
+                        addExpenseController.execute(name, amount, category, date);
+
+                    viewSwitcher.switchTo(ViewNames.home);
                 }
             }
-        }
-        );
+        });
 
         cancelButton.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-                    JOptionPane.showMessageDialog(cancelButton, "Adding an expense cancelled. Going back to Home.");
-                    addExpenseController.switchToHomeView();
-            }
-        }
-        );
+                        viewSwitcher.switchTo(ViewNames.home);
+                    }
+                });
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -106,10 +103,6 @@ public class AddExpenseView extends JPanel implements ActionListener, PropertyCh
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         JOptionPane.showMessageDialog(this, "Property not implemented yet.");
-    }
-
-    public String getViewName() {
-        return viewName;
     }
 
     public void setViewSwitcher(ViewSwitcher viewSwitcher) {
