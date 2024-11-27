@@ -1,32 +1,16 @@
 package com.labrats.app;
 
-import data_access.UserDataFile;
+import entity.Income;
+import interface_adapter.add_income.AddIncomeViewModel;
 import view.*;
 
 import data_access.UserData;
+import data_access.UserDataFile;
 
 import java.awt.CardLayout;
-import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.WindowConstants;
-
-import data_access.FileTransactionDataAccessObject;
-import entity.CommonTransactionFactory;
-import entity.TransactionFactory;
-import interface_adapter.ViewManagerModel;
-import interface_adapter.home.HomeViewModel;
-import interface_adapter.add_expense.AddExpenseController;
-import interface_adapter.add_expense.AddExpensePresenter;
-import interface_adapter.add_expense.AddExpenseViewModel;
-import use_case.add_expense.AddExpenseInteractor;
-import use_case.add_expense.AddExpenseInputBoundary;
-import use_case.add_expense.AddExpenseOutputBoundary;
-import view.ViewManager;
-import view.HomeView;
-import view.AddExpenseView;
-
 
 public class AppBuilder {
     private JPanel cards;
@@ -36,8 +20,9 @@ public class AppBuilder {
     private ViewSwitcher viewSwitcher;
 
     private HomeView homeView;
-    private GoalsView goalsView;
-    private AddGoalView addGoalView;
+    private IncomeHistoryView incomeHistoryView;
+    private AddIncomeView addIncomeView;
+    private GetInsightView getInsightView;
 
     public AppBuilder() {
         cards = new JPanel(new CardLayout());
@@ -46,11 +31,11 @@ public class AppBuilder {
     }
 
     public AppBuilder addUserData() {
-        if(homeView != null)
-            homeView.setUserData(userData);
+        homeView.setUserData(userData);
+        incomeHistoryView.setUserData(this.userData);
+        getInsightView.setUserData(this.userData);
         // TODO
         // do user data stuff for other views
-        goalsView.setUserData(userData);
         return this;
     }
 
@@ -62,29 +47,45 @@ public class AppBuilder {
     }
 
     public AppBuilder addIncomeHistoryView() {
-        var incomeHistoryView = new IncomeHistoryView();
+        incomeHistoryView = new IncomeHistoryView();
+        incomeHistoryView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.incomeHistory, incomeHistoryView);
         return this;
     }
 
-    public AppBuilder addExpenseView() {
-//        var expenseView = new ExpenseHistoryView();
-//        expenseView.setViewSwitcher(viewSwitcher);
-//        viewSwitcher.add(ViewNames.expenseHistory, expenseView);
+    public AppBuilder addAddIncomeView() {
+        addIncomeView = new AddIncomeView(new AddIncomeViewModel());
+        addIncomeView.setViewSwitcher(viewSwitcher);
+        viewSwitcher.add(ViewNames.addIncome, addIncomeView);
+        return this;
+    }
+
+    public AppBuilder addAddExpenseView() {
+        var expenseView = new AddExpenseView();
+        expenseView.setViewSwitcher(viewSwitcher);
+        // expenseView.setAddExpenseController();
+        viewSwitcher.add(ViewNames.expenseHistory, expenseView);
         return this;
     }
 
     public AppBuilder addAddGoalView() {
-        addGoalView = new AddGoalView();
+        var addGoalView = new AddGoalView();
         addGoalView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.addGoal, addGoalView);
         return this;
     }
 
     public AppBuilder addGoalsView() {
-        goalsView = new GoalsView();
+        var goalsView = new GoalsView();
         goalsView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.goals, goalsView);
+        return this;
+    }
+
+    public AppBuilder addGetInsightView() {
+        getInsightView = new GetInsightView();
+        getInsightView.setViewSwitcher(viewSwitcher);
+        viewSwitcher.add(ViewNames.getInsight, getInsightView);
         return this;
     }
 
