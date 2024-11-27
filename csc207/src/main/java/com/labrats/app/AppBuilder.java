@@ -35,6 +35,7 @@ public class AppBuilder {
     public AppBuilder addUserData() {
         homeView.setUserData(userData);
         incomeHistoryView.setUserData(this.userData);
+        goalsView.setUserData(this.userData);
         // getInsightView.setUserData(this.userData);
         // TODO
         // do user data stuff for other views

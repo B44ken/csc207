@@ -43,7 +43,7 @@ public class GoalsView extends JPanel implements  ActionListener, PropertyChange
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
         add(titleLabel, BorderLayout.NORTH);
 
-
+        this.panel = new JPanel();
         final JPanel buttons1 = new JPanel();
         addGoalButton = new JButton("Add New Goal");
         buttons1.add(addGoalButton);
@@ -134,7 +134,7 @@ public class GoalsView extends JPanel implements  ActionListener, PropertyChange
 
     public void setUserData(UserData ud) {
         userData = ud;
-        this.repaint();
+        populateTable();
     }
 
     private void populateTable() {
