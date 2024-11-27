@@ -27,6 +27,7 @@ public class App {
                 .addIncomeHistoryView()
                 .addUserData()
                 .addAddExpenseView()
+                .addExpenseHistoryView()
                 .addGoalsView()
                 .addAddIncomeView()
                 .addAddGoalView()
