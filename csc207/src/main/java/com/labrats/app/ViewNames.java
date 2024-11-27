@@ -8,4 +8,5 @@ public final class ViewNames {
     public static String incomeHistory = "Income History";
     public static String addGoal = "Add Goal";
     public static String goals = "GoalList";
+    public static String getInsight = "Get Insight";
 }

@@ -2,9 +2,12 @@ package view;
 
 import com.labrats.app.ViewNames;
 import data_access.UserData;
+import entity.Goal;
+import entity.GoalList;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.text.View;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,8 +16,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.time.LocalDate;
 
-public class GoalsView extends JPanel implements ActionListener, PropertyChangeListener {
-    private final String viewName = "GoalList";
+public class GoalsView extends JPanel implements  ActionListener, PropertyChangeListener {
+    private final String viewName = "Goals";
 
     private ViewSwitcher viewSwitcher;
     private UserData userData;
@@ -31,12 +34,12 @@ public class GoalsView extends JPanel implements ActionListener, PropertyChangeL
     public GoalsView() {
         super();
 
-        final JLabel titleLabel = new JLabel("GoalList");
+        final JLabel titleLabel = new JLabel("Goals");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
         add(titleLabel, BorderLayout.NORTH);
 
-        final String[] columnNames = { "Target", "Amount", "Target Date" };
+        final String[] columnNames = {"Target", "Amount", "Target Date"};
         tableModel = new DefaultTableModel(columnNames, 0);
         goalsTable = new JTable(tableModel);
 
@@ -48,15 +51,6 @@ public class GoalsView extends JPanel implements ActionListener, PropertyChangeL
         addGoalButton = new JButton("Add New Goal");
         buttons1.add(addGoalButton);
         add(buttons1, BorderLayout.SOUTH);
-
-        addGoalButton.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        System.out.println("Add Goal button clicked");
-                        viewSwitcher.switchTo(ViewNames.addGoal);
-                    }
-                });
 
         final JPanel buttons2 = new JPanel();
         homeButton = new JButton("Home");
@@ -114,6 +108,9 @@ public class GoalsView extends JPanel implements ActionListener, PropertyChangeL
         this.add(buttons2);
     }
 
+
+
+
     public String getViewName() {
         return viewName;
     }
@@ -121,6 +118,7 @@ public class GoalsView extends JPanel implements ActionListener, PropertyChangeL
     public JTable getGoalsTable() {
         return goalsTable;
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -141,10 +139,17 @@ public class GoalsView extends JPanel implements ActionListener, PropertyChangeL
         this.repaint();
     }
 
+    private void populateTable() {
+        System.out.println(goalsTable);
+        if(goalsTable != null) {
+            DefaultTableModel model = (DefaultTableModel) goalsTable.getModel();
+            model.addRow(new Object[]{"1", "2", "3"});
+        }
+        // for every entry...
+
+    }
+
     public void repaint() {
-        // TODO
-        // repaint is called when a Swing component is switched to
-        // use this to update numbers and stuff
-        // other components also need repaint() methods
+        populateTable();
     }
 }
