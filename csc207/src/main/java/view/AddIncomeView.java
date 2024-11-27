@@ -9,7 +9,11 @@ import java.time.LocalDate;
 
 import javax.swing.*;
 
+
 import data_access.UserData;
+
+import com.labrats.app.ViewNames;
+
 import interface_adapter.add_income.AddIncomeController;
 import interface_adapter.add_income.AddIncomeViewModel;
 //change above to what its actually called if its different
@@ -18,19 +22,20 @@ public class AddIncomeView extends JPanel implements ActionListener, PropertyCha
     private String viewName = "Add Income";
 
     private AddIncomeController addIncomeController;
-    // private final AddIncomeViewModel addIncomeViewModel;
+    private final AddIncomeViewModel addIncomeViewModel;
 
     private ViewSwitcher viewSwitcher;
     private UserData userData;
 
-    private final JFrame outerFrame;
+    private ViewSwitcher viewSwitcher;
     // change above to what controller is actually called later
 
     public AddIncomeView() {
         super();
 
-        // this.addIncomeViewModel = incomeViewModel;
-        // addIncomeViewModel.addPropertyChangeListener(this);
+
+        this.addIncomeViewModel = incomeViewModel;
+
 
         final JLabel title = new JLabel("Add Income");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -82,9 +87,15 @@ public class AddIncomeView extends JPanel implements ActionListener, PropertyCha
                 Integer month = Integer.valueOf(monthTextField.getText());
                 Integer year = Integer.valueOf(yearTextField.getText());
                 LocalDate date = LocalDate.of(year, month, day);
-                // input into text file here
+                // input into text file here using controller (--> interactor --> presenter)
                 // after everything funnelled into txt file go back to home
-                // addIncomeController.switchToHomeView();
+                viewSwitcher.switchTo(ViewNames.home);
+            }
+        });
+
+        cancelButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                viewSwitcher.switchTo(ViewNames.home);
             }
         });
 
@@ -98,13 +109,11 @@ public class AddIncomeView extends JPanel implements ActionListener, PropertyCha
         mainPanel.add(monthPanel);
         mainPanel.add(yearPanel);
         mainPanel.add(confirmPanel);
+        mainPanel.add(cancelPanel);
 
-        outerFrame = new JFrame("Add Income");
-        outerFrame.setContentPane(mainPanel);
-        outerFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        outerFrame.pack();
-        // frame.setVisible(true);
-    };
+        this.add(title);
+        this.add(mainPanel);
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -116,17 +125,11 @@ public class AddIncomeView extends JPanel implements ActionListener, PropertyCha
         // JOptionPane.showMessageDialog(this, "Property Change not implemented yet.");
     }
 
-    public void setVisible(boolean visible) {
-        outerFrame.setVisible(visible);
-    }
 
     public String getViewName() {
         return viewName;
     }
 
-    public void setViewSwitcher(ViewSwitcher vs) {
-        viewSwitcher = vs;
-    }
 
     public void setUserData(UserData ud) {
         userData = ud;
@@ -135,5 +138,9 @@ public class AddIncomeView extends JPanel implements ActionListener, PropertyCha
 
     public void repaint() {
         // TODO
+
+    public void setViewSwitcher(ViewSwitcher viewSwitcher) {
+        this.viewSwitcher = viewSwitcher;
+
     }
 }

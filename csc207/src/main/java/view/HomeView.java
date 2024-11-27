@@ -3,14 +3,13 @@ package view;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import com.labrats.app.ViewNames;
 
+import data_access.ChartImageFactory;
 import data_access.UserData;
 
 /**
@@ -25,13 +24,15 @@ public class HomeView extends JPanel {
 
     private final JButton addIncome;
     private final JButton addExpense;
+    private final JButton getInsight;
 
     private JLabel incomeValue;
+    private JLabel expensesValue;
+    private JLabel netBalanceValue;
 
     private final JButton incomeButton;
     private final JButton expenseButton;
     private final JButton goalButton;
-
 
     public HomeView() {
         final JLabel title = new JLabel("My Cool Finance App");
@@ -50,8 +51,11 @@ public class HomeView extends JPanel {
 
         final JLabel expenseText = new JLabel("Expenses");
         expenseText.setAlignmentX(Component.CENTER_ALIGNMENT);
-        final JLabel expensesValue = new JLabel(Float.toString(0));
+        expensesValue = new JLabel(Float.toString(0));
         expensesValue.setAlignmentX(Component.CENTER_ALIGNMENT);
+        final JLabel netValue = new JLabel("Goal");
+
+        // add chart API here
 
         final JPanel buttons1 = new JPanel();
         addIncome = new JButton("Add Income");
@@ -59,20 +63,28 @@ public class HomeView extends JPanel {
         addExpense = new JButton("Add Expense");
         buttons1.add(addExpense);
 
+        getInsight = new JButton("Get Insight");
+        buttons1.add(getInsight, 0);
+
+        getInsight.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        viewSwitcher.switchTo(ViewNames.getInsight);
+                    }
+        });
+
         addIncome.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         viewSwitcher.switchTo(ViewNames.addIncome);
-                        // homeController.switchToAddIncome();
+
                     }
                 });
 
         addExpense.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-                        // homeController.switchToAddExpense();
-                        // System.out.println("switching to add expense");
-                        // homeViewModel.switchTo(ViewNames.addExpense);
+                        viewSwitcher.switchTo(ViewNames.addExpense);
                     }
                 });
 
@@ -84,12 +96,12 @@ public class HomeView extends JPanel {
         goalButton = new JButton("Goal");
         buttons2.add(goalButton);
 
-        // incomeButton.addActionListener(
-        //         new ActionListener() {
-        //             public void actionPerformed(ActionEvent evt) {
-        //                 viewSwitcher.switchTo(ViewNames.incomeHistory);
-        //             }
-        //         });
+        incomeButton.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        viewSwitcher.switchTo(ViewNames.incomeHistory);
+                    }
+                });
 
         expenseButton.addActionListener(
                 new ActionListener() {
@@ -101,7 +113,7 @@ public class HomeView extends JPanel {
         goalButton.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-                        viewSwitcher.switchTo(ViewNames.goals);
+                        viewSwitcher.switchTo(ViewNames.goalList);
                     }
                 });
 
@@ -140,13 +152,27 @@ public class HomeView extends JPanel {
                 });
     }
 
+    public JLabel chart;
+
     public void repaint() {
-        if(userData != null && incomeValue != null) {
-            incomeValue.setText(Float.toString(userData.getHistory().getAmountTotal()));
+        if (userData != null) {
+            var api = new ChartImageFactory(userData.getHistory());
+            if (chart != null)
+                this.remove(chart);
+            chart = api.createImage(
+                    LocalDate.of(2024, 10, 1), LocalDate.of(2024, 10, 7));
+            chart.setSize(400, 300);
+            this.add(chart);
         }
-        // TODO
-        // repaint is called when a Swing component is switched to
-        // use this to update numbers and stuff
-        // other components also need repaint() methods
+
+        if (userData != null && incomeValue != null) {
+            incomeValue.setText(Double.toString(userData.getHistory().getIncomeTotal()));
+        }
+        if (userData != null && expensesValue != null) {
+            expensesValue.setText(Double.toString(userData.getHistory().getExpensesTotal()));
+        }
+        if (userData != null && netBalanceValue != null) {
+            netBalanceValue.setText(Double.toString(userData.getHistory().getNetBalance()));
+        }
     }
 }

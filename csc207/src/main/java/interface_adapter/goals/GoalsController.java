@@ -6,7 +6,7 @@ import use_case.add_goal.AddGoalInputData;
 import java.time.LocalDate;
 
 /**
- * Controller for managing Goals.
+ * Controller for managing GoalList.
  */
 public class GoalsController {
     private final AddGoalInputBoundary addGoalUseCase;

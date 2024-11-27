@@ -11,7 +11,13 @@ import java.time.LocalDate;
 
 import javax.swing.*;
 
+import entity.Goal;
+import interface_adapter.add_goal.AddGoalController;
+import interface_adapter.add_goal.AddGoalViewModel;
+
 public class AddGoalView extends JPanel implements ActionListener, PropertyChangeListener {
+    private String viewName = "Add Goal View";
+
     private ViewSwitcher viewSwitcher;
     private UserData userData;
 
@@ -20,7 +26,6 @@ public class AddGoalView extends JPanel implements ActionListener, PropertyChang
     private final JButton expenseButton;
     private final JButton goalButton;
 
-    private final JFrame outerFrame;
 
     public AddGoalView() {
         super();
@@ -69,9 +74,10 @@ public class AddGoalView extends JPanel implements ActionListener, PropertyChang
                 Integer targetMonth = Integer.valueOf(monthTextField.getText());
                 Integer targetYear = Integer.valueOf(yearTextField.getText());
                 LocalDate targetDate = LocalDate.of(targetYear, targetMonth, targetDay);
-                // input into text file here
-                // after everything funnelled into txt file go back to home
-                // addIncomeController.switchToHomeView();
+                Goal newGoal = new Goal(target, amount, targetDate);
+                userData.getGoals().add(newGoal);
+                userData.save();
+                viewSwitcher.switchTo(ViewNames.home);
             }
         });
 
@@ -113,7 +119,7 @@ public class AddGoalView extends JPanel implements ActionListener, PropertyChang
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        viewSwitcher.switchTo(ViewNames.goals);
+                        viewSwitcher.switchTo(ViewNames.goalList);
                     }
                 });
 
@@ -128,10 +134,9 @@ public class AddGoalView extends JPanel implements ActionListener, PropertyChang
         mainPanel.add(confirmPanel);
         mainPanel.add(buttons2);
 
-        outerFrame = new JFrame("Add Goal");
-        outerFrame.setContentPane(mainPanel);
-        outerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        outerFrame.pack();
+        this.add(mainPanel);
+
+
     }
 
     @Override
@@ -142,27 +147,8 @@ public class AddGoalView extends JPanel implements ActionListener, PropertyChang
     public void propertyChange(PropertyChangeEvent evt) {
     }
 
-    public void setVisible(boolean visible) {
-        outerFrame.setVisible(visible);
-    }
-
     public void setViewSwitcher(ViewSwitcher vs) {
         viewSwitcher = vs;
     }
-
-    public void setUserData(UserData ud) {
-        userData = ud;
-        this.repaint();
-    }
-
-    public void repaint() {
-        // TODO
-        // repaint is called when a Swing component is switched to
-        // use this to update numbers and stuff
-        // other components also need repaint() methods
-    }
-
-
-
 
 }
