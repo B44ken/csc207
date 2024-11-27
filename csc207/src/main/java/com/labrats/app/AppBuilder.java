@@ -53,7 +53,7 @@ public class AppBuilder {
 
     public AppBuilder addAddIncomeView() {
         addIncomeView = new AddIncomeView(new AddIncomeViewModel());
-        // addIncomeView.setViewSwitcher(viewSwitcher);
+        addIncomeView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.addIncome, addIncomeView);
         return this;
     }
