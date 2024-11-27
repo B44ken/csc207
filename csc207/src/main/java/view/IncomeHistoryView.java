@@ -86,7 +86,7 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
         goalsButton.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-                        viewSwitcher.switchTo(ViewNames.goals);
+                        viewSwitcher.switchTo(ViewNames.goalList);
                     }
                 }
         );

@@ -112,7 +112,7 @@ public class HomeView extends JPanel {
         goalButton.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-                        viewSwitcher.switchTo(ViewNames.goals);
+                        viewSwitcher.switchTo(ViewNames.goalList);
                     }
                 });
 

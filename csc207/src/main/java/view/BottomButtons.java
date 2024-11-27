@@ -13,7 +13,7 @@ public class BottomButtons extends JPanel {
         makeAndAddButton(ViewNames.home);
         makeAndAddButton(ViewNames.incomeHistory);
         makeAndAddButton(ViewNames.expenseHistory);
-        makeAndAddButton(ViewNames.goals);
+        makeAndAddButton(ViewNames.goalList);
     }
 
     void makeAndAddButton(String name) {

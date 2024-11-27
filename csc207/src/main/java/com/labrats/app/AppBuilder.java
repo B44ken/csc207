@@ -35,7 +35,7 @@ public class AppBuilder {
     public AppBuilder addUserData() {
         homeView.setUserData(userData);
         incomeHistoryView.setUserData(this.userData);
-        getInsightView.setUserData(this.userData);
+        // getInsightView.setUserData(this.userData);
         // TODO
         // do user data stuff for other views
         return this;
@@ -88,7 +88,7 @@ public class AppBuilder {
     public AppBuilder addGoalsView() {
         var goalsView = new GoalsView();
         goalsView.setViewSwitcher(viewSwitcher);
-        viewSwitcher.add(ViewNames.goals, goalsView);
+        viewSwitcher.add(ViewNames.goalList, goalsView);
         return this;
     }
 

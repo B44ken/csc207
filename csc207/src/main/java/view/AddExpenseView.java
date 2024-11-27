@@ -69,7 +69,9 @@ public class AddExpenseView extends JPanel implements ActionListener, PropertyCh
                     var amount = 0.0;
                     try {
                         amount = Double.valueOf(amountTextField.getText());
-                    } catch (NumberFormatException ex) { }
+                    } catch (NumberFormatException ex) {
+                        System.out.println("failed to parse amount");
+                    };
                     var category = categoryTextField.getText();
                     var date = LocalDate.now();
 
