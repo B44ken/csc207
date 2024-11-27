@@ -21,6 +21,8 @@ public class AppBuilder {
 
     private HomeView homeView;
     private IncomeHistoryView incomeHistoryView;
+    private ExpenseHistoryView expenseHistoryView;
+    private GoalsView goalsView;
     private AddIncomeView addIncomeView;
     private GetInsightView getInsightView;
 
@@ -33,7 +35,7 @@ public class AppBuilder {
     public AppBuilder addUserData() {
         homeView.setUserData(userData);
         incomeHistoryView.setUserData(this.userData);
-        getInsightView.setUserData(this.userData);
+        // getInsightView.setUserData(this.userData);
         // TODO
         // do user data stuff for other views
         return this;
@@ -50,6 +52,13 @@ public class AppBuilder {
         incomeHistoryView = new IncomeHistoryView();
         incomeHistoryView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.incomeHistory, incomeHistoryView);
+        return this;
+    }
+
+    public AppBuilder addExpenseHistoryView() {
+        expenseHistoryView = new ExpenseHistoryView();
+        expenseHistoryView.setViewSwitcher(viewSwitcher);
+        viewSwitcher.add(ViewNames.expenseHistory, expenseHistoryView);
         return this;
     }
 
@@ -76,7 +85,7 @@ public class AppBuilder {
     }
 
     public AppBuilder addGoalsView() {
-        var goalsView = new GoalsView();
+        goalsView = new GoalsView();
         goalsView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.goals, goalsView);
         return this;
