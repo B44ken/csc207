@@ -48,6 +48,13 @@ public class AppBuilder {
         return this;
     }
 
+    public AppBuilder addAddIncomeView() {
+        var addIncomeView = new AddIncomeView();
+        // addIncomeView.setViewSwitcher(viewSwitcher);
+        viewSwitcher.add(ViewNames.addIncome, addIncomeView);
+        return this;
+    }
+
     public AppBuilder addIncomeHistoryView() {
         incomeHistoryView = new IncomeHistoryView();
         incomeHistoryView.setViewSwitcher(viewSwitcher);
@@ -72,9 +79,17 @@ public class AppBuilder {
     }
 
     public AppBuilder addExpenseHistoryView() {
+        var expenseHistoryView = new ExpenseHistoryView();
+        expenseHistoryView.setViewSwitcher(viewSwitcher);
+        viewSwitcher.add(ViewNames.expenseHistory, expenseHistoryView);
+        return this;
+    }
+
+    public AppBuilder addAddBudgetView() {
         var controller = new ExpenseHistoryController(userData);
         var expenseView = new ExpenseHistoryView(bottomButtons, controller);
         viewSwitcher.add(ViewNames.expenseHistory, expenseView);
+
         return this;
     }
 
@@ -102,6 +117,8 @@ public class AppBuilder {
     public JFrame build() {
         app = new JFrame("My Cool Finance App");
         app.add(cards);
+        viewSwitcher.switchTo(ViewNames.expenseHistory);
         return app;
     }
+
 }

@@ -9,7 +9,11 @@ import java.time.LocalDate;
 
 import javax.swing.*;
 
+
+import data_access.UserData;
+
 import com.labrats.app.ViewNames;
+
 import interface_adapter.add_income.AddIncomeController;
 import interface_adapter.add_income.AddIncomeViewModel;
 //change above to what its actually called if its different
@@ -21,12 +25,17 @@ public class AddIncomeView extends JPanel implements ActionListener, PropertyCha
     private final AddIncomeViewModel addIncomeViewModel;
 
     private ViewSwitcher viewSwitcher;
+    private UserData userData;
+
+    private ViewSwitcher viewSwitcher;
     // change above to what controller is actually called later
 
-    public AddIncomeView(AddIncomeViewModel incomeViewModel) {
+    public AddIncomeView() {
         super();
 
+
         this.addIncomeViewModel = incomeViewModel;
+
 
         final JLabel title = new JLabel("Add Income");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -92,6 +101,7 @@ public class AddIncomeView extends JPanel implements ActionListener, PropertyCha
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.add(title);
         mainPanel.add(namePanel);
         mainPanel.add(amountPanel);
         mainPanel.add(categoryPanel);
@@ -107,12 +117,12 @@ public class AddIncomeView extends JPanel implements ActionListener, PropertyCha
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JOptionPane.showMessageDialog(this, "Action Performed not implemented yet.");
+        // JOptionPane.showMessageDialog(this, "Action Performed not implemented yet.");
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        JOptionPane.showMessageDialog(this, "Property Change not implemented yet.");
+        // JOptionPane.showMessageDialog(this, "Property Change not implemented yet.");
     }
 
 
@@ -120,7 +130,17 @@ public class AddIncomeView extends JPanel implements ActionListener, PropertyCha
         return viewName;
     }
 
+
+    public void setUserData(UserData ud) {
+        userData = ud;
+        this.repaint();
+    }
+
+    public void repaint() {
+        // TODO
+
     public void setViewSwitcher(ViewSwitcher viewSwitcher) {
         this.viewSwitcher = viewSwitcher;
+
     }
 }

@@ -31,6 +31,8 @@ public class App {
                 .addGoalsView()
                 .addAddIncomeView()
                 .addAddGoalView()
+                .addAddBudgetView()
+
                 .build();
         application.pack();
         application.setVisible(true);
