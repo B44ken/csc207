@@ -15,21 +15,17 @@ import data_access.FileTransactionDataAccessObject;
 import entity.CommonTransactionFactory;
 import entity.TransactionFactory;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.home.HomeController;
-import interface_adapter.home.HomePresenter;
 import interface_adapter.home.HomeViewModel;
 import interface_adapter.add_expense.AddExpenseController;
 import interface_adapter.add_expense.AddExpensePresenter;
 import interface_adapter.add_expense.AddExpenseViewModel;
-import use_case.home.HomeInteractor;
-import use_case.home.HomeInputBoundary;
-import use_case.home.HomeOutputBoundary;
 import use_case.add_expense.AddExpenseInteractor;
 import use_case.add_expense.AddExpenseInputBoundary;
 import use_case.add_expense.AddExpenseOutputBoundary;
 import view.ViewManager;
 import view.HomeView;
 import view.AddExpenseView;
+import view.ExpenseHistoryView;
 
 
 public class AppBuilder {
@@ -40,6 +36,8 @@ public class AppBuilder {
     private ViewSwitcher viewSwitcher;
 
     private HomeView homeView;
+    private GoalsView goalsView;
+    private AddGoalView addGoalView;
 
     public AppBuilder() {
         cards = new JPanel(new CardLayout());
@@ -52,6 +50,7 @@ public class AppBuilder {
             homeView.setUserData(userData);
         // TODO
         // do user data stuff for other views
+        goalsView.setUserData(userData);
         return this;
     }
 
@@ -69,22 +68,24 @@ public class AppBuilder {
     }
 
     public AppBuilder addExpenseView() {
-        var expenseView = new ExpenseView();
-        expenseView.setViewSwitcher(viewSwitcher);
-        viewSwitcher.add(ViewNames.expenseHistory, expenseView);
+        var expenseView = new ExpenseHistoryView();
+//        expenseView.setViewSwitcher(viewSwitcher);
+//        viewSwitcher.add(ViewNames.expenseHistory, expenseView);
         return this;
     }
 
     public AppBuilder addAddGoalView() {
-        var addGoalView = new AddGoalView();
+        addGoalView = new AddGoalView();
         addGoalView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.addGoal, addGoalView);
         return this;
     }
 
     public AppBuilder addGoalsView() {
-        var goalsView = new GoalsView();
+        goalsView = new GoalsView();
         goalsView.setViewSwitcher(viewSwitcher);
+        viewSwitcher.add(ViewNames.goals, goalsView);
+        return this;
     }
 
     public JFrame build() {

@@ -32,6 +32,7 @@ public class AddExpenseView extends JPanel implements ActionListener, PropertyCh
     private final JButton cancelButton;
 
     private final LocalDate date = LocalDate.now();
+    private ViewSwitcher viewSwitcher;
 
     public AddExpenseView(AddExpenseViewModel addExpenseViewModel){
 
