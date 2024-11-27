@@ -85,13 +85,14 @@ public class TransactionHistory {
     // returns a TransactionHistory
     // you can use .getHistory() to get the ArrayList
     public TransactionHistory getAllIncomes() {
-        var history = new TransactionHistory();
-        for (var t : history.getHistory()) {
+        TransactionHistory result = new TransactionHistory();
+        for (var t : history) {
+            System.out.println("yes");
             if (t instanceof Income) {
-                history.add(t);
+                result.add(t);
             }
         }
-        return history;
+        return result;
     }
 
     /**
