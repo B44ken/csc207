@@ -29,6 +29,8 @@ public class HomeView extends JPanel {
     private final JButton addExpense;
 
     private JLabel incomeValue;
+    private JLabel expensesValue;
+    private JLabel netBalanceValue;
 
     private final JButton incomeButton;
     private final JButton expenseButton;
@@ -51,8 +53,11 @@ public class HomeView extends JPanel {
 
         final JLabel expenseText = new JLabel("Expenses");
         expenseText.setAlignmentX(Component.CENTER_ALIGNMENT);
-        final JLabel expensesValue = new JLabel(Float.toString(0));
+        expensesValue = new JLabel(Float.toString(0));
         expensesValue.setAlignmentX(Component.CENTER_ALIGNMENT);
+        final JLabel netValue = new JLabel("Goal");
+
+        // add chart API here
 
         final JPanel buttons1 = new JPanel();
         addIncome = new JButton("Add Income");
@@ -63,16 +68,14 @@ public class HomeView extends JPanel {
         addIncome.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-                        // homeController.switchToAddIncome();
+                        viewSwitcher.switchTo(ViewNames.addIncome);
                     }
                 });
 
         addExpense.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-                        // homeController.switchToAddExpense();
-                        // System.out.println("switching to add expense");
-                        // homeViewModel.switchTo(ViewNames.addExpense);
+                        viewSwitcher.switchTo(ViewNames.addExpense);
                     }
                 });
 
@@ -84,12 +87,12 @@ public class HomeView extends JPanel {
         goalButton = new JButton("Goal");
         buttons2.add(goalButton);
 
-        // incomeButton.addActionListener(
-        // new ActionListener() {
-        // public void actionPerformed(ActionEvent evt) {
-        // viewSwitcher.switchTo(ViewNames.incomeHistory);
-        // }
-        // });
+        incomeButton.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        viewSwitcher.switchTo(ViewNames.incomeHistory);
+                    }
+                });
 
         expenseButton.addActionListener(
                 new ActionListener() {
@@ -144,7 +147,6 @@ public class HomeView extends JPanel {
 
     public void repaint() {
         if (userData != null) {
-            incomeValue.setText(Float.toString(userData.getHistory().getAmountTotal()));
             var api = new ChartImageFactory(userData.getHistory());
             if (chart != null)
                 this.remove(chart);
@@ -152,6 +154,16 @@ public class HomeView extends JPanel {
                     LocalDate.of(2024, 10, 1), LocalDate.of(2024, 10, 7));
             chart.setSize(400, 300);
             this.add(chart);
+        }
+
+        if (userData != null && incomeValue != null) {
+            incomeValue.setText(Double.toString(userData.getHistory().getIncomeTotal()));
+        }
+        if (userData != null && expensesValue != null) {
+            expensesValue.setText(Double.toString(userData.getHistory().getExpensesTotal()));
+        }
+        if (userData != null && netBalanceValue != null) {
+            netBalanceValue.setText(Double.toString(userData.getHistory().getNetBalance()));
         }
     }
 }

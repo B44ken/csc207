@@ -7,5 +7,5 @@ public final class ViewNames {
     public static String addExpense = "Add Expense";
     public static String incomeHistory = "Income History";
     public static String addGoal = "Add Goal";
-    public static String goals = "Goals";
+    public static String goals = "GoalList";
 }

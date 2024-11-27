@@ -24,18 +24,12 @@ public class App {
         final AppBuilder appBuilder = new AppBuilder();
         final JFrame application = appBuilder
                 .addHomeView()
-                // .addIncomeHistoryView()
+                .addIncomeHistoryView()
+                .addUserData()
                 .addAddExpenseView()
                 .addGoalsView()
-                // .addAddIncomeView()
-                // .addAddExpenseView()
-                // .addExpenseHistoryView()
+                .addAddIncomeView()
                 .addAddGoalView()
-                // .addGoalsView()
-                // .addBudgetView()
-                // .addChangePasswordUseCase()
-                // .addLogoutUseCase()
-                .addUserData()
                 .build();
         application.pack();
         application.setVisible(true);
