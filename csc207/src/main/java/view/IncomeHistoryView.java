@@ -32,7 +32,6 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
 
     private UserData userData;
 
-
     public IncomeHistoryView() {
         final JLabel title = new JLabel("Income History");
 
