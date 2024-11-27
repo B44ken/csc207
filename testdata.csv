@@ -1,13 +1,11 @@
-2300.0,category,2024-10-01
-60.0,category,2024-10-02
-100.0,category,2024-10-03
-100.0,category,2024-10-04
-100.0,category,2024-10-05
-60.0,category,2024-10-06
-300.0,category,2024-10-01
-300.0,category,2024-10-03
-300.0,category,2024-10-05
-300.0,category,2024-10-07
-10.0,category,2024-11-25
-0.0,category,2024-11-25
-0.0,,2024-11-25
+amount,name,category,date,type
+60.0,mcdonalds,food,2024-10-02,expense
+2300.0,luxury beachfront cottage,rent,2024-10-01,expense
+100.0,wingstop,food,2024-10-03,expense
+100.0,mcdonalds,food,2024-10-04,expense
+100.0,mcdonalds,food,2024-10-05,expense
+60.0,phone,phone,2024-10-06,expense
+300.0,job,income,2024-10-01,income
+300.0,job,income,2024-10-03,income
+300.0,job,income,2024-10-05,income
+300.0,side hustle ifykyk,income,2024-10-07,income
