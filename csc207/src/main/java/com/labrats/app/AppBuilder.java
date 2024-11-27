@@ -70,8 +70,8 @@ public class AppBuilder {
     }
 
     public AppBuilder addExpenseHistoryView() {
-        var interactor = new ExpenseHistoryController(userData);
-        var expenseView = new ExpenseHistoryView(bottomButtons, interactor);
+        var controller = new ExpenseHistoryController(userData);
+        var expenseView = new ExpenseHistoryView(bottomButtons, controller);
         viewSwitcher.add(ViewNames.expenseHistory, expenseView);
         return this;
     }

@@ -2,6 +2,7 @@ package data_access;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
@@ -51,27 +52,20 @@ public class FileAccess {
     }
 
     public static void exportData(TransactionHistory history, String path) {
-        var sb = new StringBuilder();
-        for (var t : history.getHistory()) {
-            sb.append(t.getAmount());
-            sb.append(",");
-            sb.append(t.getCategory());
-            sb.append(",");
-            sb.append(t.getDate().toString());
-            sb.append("\n");
-        }
-        var data = sb.toString();
         try {
             var file = new FileWriter(new File(path));
-            file.write(data);
+            for (var t : history.getHistory())
+                file.write(
+                    String.format("%f,%s,%s,%s,%s\n",
+                    t.getAmount(),
+                    t.getName(),
+                    t.getCategory(),
+                    t.getDate().toString(),
+                    t.getClass().getSimpleName().toLowerCase()
+                ));
             file.close();
-        } catch (Exception err) {
+        } catch (IOException err) {
             throw new RuntimeException("File not found");
         }
-    }
-
-    // cursed
-    static LocalDate makeDate(int year, int month, int day) {
-        return LocalDate.of(year, month, day);
     }
 }
