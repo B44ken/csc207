@@ -39,6 +39,13 @@ public class AppBuilder {
         return this;
     }
 
+    public AppBuilder addAddIncomeView() {
+        var addIncomeView = new AddIncomeView();
+        // addIncomeView.setViewSwitcher(viewSwitcher);
+        viewSwitcher.add(ViewNames.addIncome, addIncomeView);
+        return this;
+    }
+
     public AppBuilder addIncomeHistoryView() {
         var incomeHistoryView = new IncomeHistoryView();
         viewSwitcher.add(ViewNames.incomeHistory, incomeHistoryView);
@@ -49,7 +56,21 @@ public class AppBuilder {
         var expenseView = new AddExpenseView();
         expenseView.setViewSwitcher(viewSwitcher);
         // expenseView.setAddExpenseController();
-        viewSwitcher.add(ViewNames.expenseHistory, expenseView);
+        viewSwitcher.add(ViewNames.addExpense, expenseView);
+        return this;
+    }
+
+    public AppBuilder addExpenseHistoryView() {
+        var expenseHistoryView = new ExpenseHistoryView();
+        expenseHistoryView.setViewSwitcher(viewSwitcher);
+        viewSwitcher.add(ViewNames.expenseHistory, expenseHistoryView);
+        return this;
+    }
+
+    public AppBuilder addAddBudgetView() {
+        var budgetView = new AddBudgetView();
+        budgetView.setViewSwitcher(viewSwitcher);
+        viewSwitcher.add(ViewNames.addBudget, budgetView);
         return this;
     }
 
@@ -72,4 +93,5 @@ public class AppBuilder {
         app.add(cards);
         return app;
     }
+
 }

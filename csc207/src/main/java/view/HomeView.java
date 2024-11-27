@@ -62,6 +62,7 @@ public class HomeView extends JPanel {
         addIncome.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
+                        viewSwitcher.switchTo(ViewNames.addIncome);
                         // homeController.switchToAddIncome();
                     }
                 });
