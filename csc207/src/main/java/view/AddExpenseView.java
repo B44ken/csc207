@@ -13,6 +13,9 @@ import java.time.format.DateTimeFormatter;
 import javax.swing.*;
 
 import com.labrats.app.ViewNames;
+
+import data_access.UserData;
+import entity.Expense;
 import interface_adapter.add_expense.AddExpenseController;
 import interface_adapter.add_expense.AddExpenseState;
 import interface_adapter.add_expense.AddExpenseViewModel;
@@ -30,8 +33,9 @@ public class AddExpenseView extends JPanel implements ActionListener, PropertyCh
     private final JButton confirmButton;
     private final JButton cancelButton;
 
+    private UserData userData;
+
     private final LocalDate date = LocalDate.now();
-//    private ViewSwitcher viewSwitcher;
 
     public AddExpenseView() {
         final JLabel title = new JLabel(AddExpenseViewModel.TITLE_LABEL);
@@ -66,12 +70,13 @@ public class AddExpenseView extends JPanel implements ActionListener, PropertyCh
                     try {
                         amount = Double.valueOf(amountTextField.getText());
                     } catch (NumberFormatException ex) {
-                    }
+                        System.out.println("failed to parse amount");
+                    };
                     var category = categoryTextField.getText();
                     var date = LocalDate.now();
 
-                    if(addExpenseController != null)
-                        addExpenseController.execute(name, amount, category, date);
+                    userData.getHistory().add(new Expense(name, amount, category, date));
+                    userData.save();
 
                     viewSwitcher.switchTo(ViewNames.home);
                 }
@@ -95,14 +100,8 @@ public class AddExpenseView extends JPanel implements ActionListener, PropertyCh
 
     };
 
-    @Override
-    public void actionPerformed(ActionEvent evt) {
-        JOptionPane.showMessageDialog(this, "Button not implemented yet.");
-    }
-
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        JOptionPane.showMessageDialog(this, "Property not implemented yet.");
+    public void setUserData(UserData ud) {
+        userData = ud;
     }
 
     public void setViewSwitcher(ViewSwitcher viewSwitcher) {

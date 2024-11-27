@@ -9,6 +9,7 @@ import javax.swing.*;
 
 import com.labrats.app.ViewNames;
 
+import data_access.ChartImageFactory;
 import data_access.UserData;
 
 /**
@@ -32,7 +33,6 @@ public class HomeView extends JPanel {
     private final JButton incomeButton;
     private final JButton expenseButton;
     private final JButton goalButton;
-
 
     public HomeView() {
         final JLabel title = new JLabel("My Cool Finance App");
@@ -73,11 +73,10 @@ public class HomeView extends JPanel {
                     }
         });
 
-
         addIncome.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-                         viewSwitcher.switchTo(ViewNames.addIncome);
+                        viewSwitcher.switchTo(ViewNames.addIncome);
                     }
                 });
 
@@ -96,12 +95,12 @@ public class HomeView extends JPanel {
         goalButton = new JButton("Goal");
         buttons2.add(goalButton);
 
-         incomeButton.addActionListener(
-                 new ActionListener() {
-                     public void actionPerformed(ActionEvent evt) {
-                         viewSwitcher.switchTo(ViewNames.incomeHistory);
-                     }
-                 });
+        incomeButton.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        viewSwitcher.switchTo(ViewNames.incomeHistory);
+                    }
+                });
 
         expenseButton.addActionListener(
                 new ActionListener() {
@@ -113,7 +112,7 @@ public class HomeView extends JPanel {
         goalButton.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-                        viewSwitcher.switchTo(ViewNames.goals);
+                        viewSwitcher.switchTo(ViewNames.goalList);
                     }
                 });
 
@@ -152,7 +151,18 @@ public class HomeView extends JPanel {
                 });
     }
 
+    public JLabel chart;
+
     public void repaint() {
+        if (userData != null) {
+            var api = new ChartImageFactory(userData.getHistory());
+            if (chart != null)
+                this.remove(chart);
+            chart = api.createImage(
+                    LocalDate.of(2024, 10, 1), LocalDate.of(2024, 10, 7));
+            chart.setSize(400, 300);
+            this.add(chart);
+        }
 
         if (userData != null && incomeValue != null) {
             incomeValue.setText(Double.toString(userData.getHistory().getIncomeTotal()));
@@ -164,9 +174,4 @@ public class HomeView extends JPanel {
             netBalanceValue.setText(Double.toString(userData.getHistory().getNetBalance()));
         }
     }
-
-        // TODO
-        // repaint is called when a Swing component is switched to
-        // use this to update numbers and stuff
-        // other components also need repaint() methods
-    }
+}

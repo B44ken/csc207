@@ -97,7 +97,7 @@ public class GoalsView extends JPanel implements  ActionListener, PropertyChange
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        viewSwitcher.switchTo(ViewNames.goals);
+                        viewSwitcher.switchTo(ViewNames.goalList);
                     }
                 });
 
@@ -140,7 +140,6 @@ public class GoalsView extends JPanel implements  ActionListener, PropertyChange
     }
 
     private void populateTable() {
-        System.out.println(goalsTable);
         if(goalsTable != null) {
             DefaultTableModel model = (DefaultTableModel) goalsTable.getModel();
             model.addRow(new Object[]{"1", "2", "3"});

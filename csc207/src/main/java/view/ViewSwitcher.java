@@ -33,4 +33,5 @@ public class ViewSwitcher {
         views.add(name);
         cards.add(panel, name);
     }
+
 }
