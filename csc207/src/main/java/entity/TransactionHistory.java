@@ -95,6 +95,16 @@ public class TransactionHistory {
         return result;
     }
 
+    public TransactionHistory getAllExpenses() {
+        TransactionHistory result = new TransactionHistory();
+        for (var t : history) {
+            if (t instanceof Expense) {
+                result.add(t);
+            }
+        }
+        return result;
+    }
+
     /**
      * Adds a transaction into history.
      *

@@ -93,14 +93,6 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
                 }
         );
 
-//        incomeButton.addActionListener(
-//                new ActionListener() {
-//                    public void actionPerformed(ActionEvent evt) {
-//                        viewSwitcher.switchTo(ViewNames.incomeHistory);
-//                    }
-//                }
-//        );
-
         goalsButton.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {

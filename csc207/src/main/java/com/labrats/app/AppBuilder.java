@@ -1,7 +1,7 @@
 package com.labrats.app;
 
-import entity.Income;
 import interface_adapter.add_income.AddIncomeViewModel;
+import use_case.history.ExpenseHistoryController;
 import view.*;
 
 import data_access.UserData;
@@ -15,9 +15,10 @@ import javax.swing.JPanel;
 public class AppBuilder {
     private JPanel cards;
     private JFrame app;
-    
+
     private UserData userData;
     private ViewSwitcher viewSwitcher;
+    private BottomButtons bottomButtons;
 
     private HomeView homeView;
     private IncomeHistoryView incomeHistoryView;
@@ -27,6 +28,7 @@ public class AppBuilder {
         cards = new JPanel(new CardLayout());
         userData = new UserDataFile("testdata.csv");
         viewSwitcher = new ViewSwitcher(cards);
+        bottomButtons = new BottomButtons(viewSwitcher);
     }
 
     public AppBuilder addUserData() {
@@ -63,6 +65,13 @@ public class AppBuilder {
         expenseView.setViewSwitcher(viewSwitcher);
         // expenseView.setAddExpenseController();
         expenseView.setUserData(userData);
+        viewSwitcher.add(ViewNames.addExpense, expenseView);
+        return this;
+    }
+
+    public AppBuilder addExpenseHistoryView() {
+        var interactor = new ExpenseHistoryController(userData);
+        var expenseView = new ExpenseHistoryView(bottomButtons, interactor);
         viewSwitcher.add(ViewNames.expenseHistory, expenseView);
         return this;
     }
