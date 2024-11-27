@@ -3,6 +3,7 @@ package view;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -27,6 +28,8 @@ public class HomeView extends JPanel {
     private final JButton addExpense;
 
     private JLabel incomeValue;
+    private JLabel expensesValue;
+    private JLabel netBalanceValue;
 
     private final JButton incomeButton;
     private final JButton expenseButton;
@@ -50,8 +53,11 @@ public class HomeView extends JPanel {
 
         final JLabel expenseText = new JLabel("Expenses");
         expenseText.setAlignmentX(Component.CENTER_ALIGNMENT);
-        final JLabel expensesValue = new JLabel(Float.toString(0));
+        expensesValue = new JLabel(Float.toString(0));
         expensesValue.setAlignmentX(Component.CENTER_ALIGNMENT);
+        final JLabel netValue = new JLabel("Goal");
+
+        // add chart API here
 
         final JPanel buttons1 = new JPanel();
         addIncome = new JButton("Add Income");
@@ -59,19 +65,18 @@ public class HomeView extends JPanel {
         addExpense = new JButton("Add Expense");
         buttons1.add(addExpense);
 
+
         addIncome.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-                        // homeController.switchToAddIncome();
+                         viewSwitcher.switchTo(ViewNames.addIncome);
                     }
                 });
 
         addExpense.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-                        // homeController.switchToAddExpense();
-                        // System.out.println("switching to add expense");
-                        // homeViewModel.switchTo(ViewNames.addExpense);
+                        viewSwitcher.switchTo(ViewNames.addExpense);
                     }
                 });
 
@@ -83,12 +88,12 @@ public class HomeView extends JPanel {
         goalButton = new JButton("Goal");
         buttons2.add(goalButton);
 
-        // incomeButton.addActionListener(
-        //         new ActionListener() {
-        //             public void actionPerformed(ActionEvent evt) {
-        //                 viewSwitcher.switchTo(ViewNames.incomeHistory);
-        //             }
-        //         });
+         incomeButton.addActionListener(
+                 new ActionListener() {
+                     public void actionPerformed(ActionEvent evt) {
+                         viewSwitcher.switchTo(ViewNames.incomeHistory);
+                     }
+                 });
 
         expenseButton.addActionListener(
                 new ActionListener() {
@@ -140,12 +145,20 @@ public class HomeView extends JPanel {
     }
 
     public void repaint() {
-        if(userData != null && incomeValue != null) {
-            incomeValue.setText(Float.toString(userData.getHistory().getAmountTotal()));
+
+        if (userData != null && incomeValue != null) {
+            incomeValue.setText(Double.toString(userData.getHistory().getIncomeTotal()));
         }
+        if (userData != null && expensesValue != null) {
+            expensesValue.setText(Double.toString(userData.getHistory().getExpensesTotal()));
+        }
+        if (userData != null && netBalanceValue != null) {
+            netBalanceValue.setText(Double.toString(userData.getHistory().getNetBalance()));
+        }
+    }
+
         // TODO
         // repaint is called when a Swing component is switched to
         // use this to update numbers and stuff
         // other components also need repaint() methods
     }
-}

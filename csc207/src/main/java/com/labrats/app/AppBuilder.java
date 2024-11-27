@@ -1,5 +1,7 @@
 package com.labrats.app;
 
+import entity.Income;
+import interface_adapter.add_income.AddIncomeViewModel;
 import view.*;
 
 import data_access.UserData;
@@ -18,6 +20,8 @@ public class AppBuilder {
     private ViewSwitcher viewSwitcher;
 
     private HomeView homeView;
+    private IncomeHistoryView incomeHistoryView;
+    private AddIncomeView addIncomeView;
 
     public AppBuilder() {
         cards = new JPanel(new CardLayout());
@@ -27,6 +31,7 @@ public class AppBuilder {
 
     public AppBuilder addUserData() {
         homeView.setUserData(userData);
+        incomeHistoryView.setUserData(this.userData);
         // TODO
         // do user data stuff for other views
         return this;
@@ -40,8 +45,16 @@ public class AppBuilder {
     }
 
     public AppBuilder addIncomeHistoryView() {
-        var incomeHistoryView = new IncomeHistoryView();
+        incomeHistoryView = new IncomeHistoryView();
+        incomeHistoryView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.incomeHistory, incomeHistoryView);
+        return this;
+    }
+
+    public AppBuilder addAddIncomeView() {
+        addIncomeView = new AddIncomeView(new AddIncomeViewModel());
+        // addIncomeView.setViewSwitcher(viewSwitcher);
+        viewSwitcher.add(ViewNames.addIncome, addIncomeView);
         return this;
     }
 

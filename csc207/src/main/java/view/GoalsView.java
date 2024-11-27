@@ -14,7 +14,7 @@ import java.beans.PropertyChangeListener;
 import java.time.LocalDate;
 
 public class GoalsView extends JPanel implements ActionListener, PropertyChangeListener {
-    private final String viewName = "Goals";
+    private final String viewName = "GoalList";
 
     private ViewSwitcher viewSwitcher;
     private UserData userData;
@@ -31,7 +31,7 @@ public class GoalsView extends JPanel implements ActionListener, PropertyChangeL
     public GoalsView() {
         super();
 
-        final JLabel titleLabel = new JLabel("Goals");
+        final JLabel titleLabel = new JLabel("GoalList");
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
         add(titleLabel, BorderLayout.NORTH);
