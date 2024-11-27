@@ -36,7 +36,7 @@ public class AddBudgetView extends JPanel implements ActionListener, PropertyCha
     private final JButton confirmButton;
     private final JButton cancelButton;
 
-    private final JFrame outerFrame;
+    // private final JFrame outerFrame;
     private ViewSwitcher viewSwitcher;
     private UserData userData;
 
@@ -126,16 +126,13 @@ public class AddBudgetView extends JPanel implements ActionListener, PropertyCha
                     }
                 });
 
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-        mainPanel.add(categoryNamePanel);
-        mainPanel.add(amountPanel);
-
-        outerFrame = new JFrame("Add Budget");
-        // JFrame outerFrame = new JFrame("Add Budget");
-        outerFrame.setContentPane(mainPanel);
-        outerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        outerFrame.pack();
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        
+        this.add(title);
+        this.add(categoryNamePanel);
+        this.add(amountPanel);
+        this.add(buttonPanel);
+        this.add(buttons2);
     }
 
     @Override
@@ -145,10 +142,6 @@ public class AddBudgetView extends JPanel implements ActionListener, PropertyCha
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
     }
-
-    // public void setVisible(boolean visible) {
-        // outerFrame.setVisible(visible);
-    // }
 
     public void setViewSwitcher(ViewSwitcher vs) {
         viewSwitcher = vs;

@@ -1,6 +1,5 @@
 package com.labrats.app;
 
-import java.io.IOException;
 import java.time.LocalDate;
 
 import javax.swing.JFrame;
@@ -26,19 +25,15 @@ public class App {
         final JFrame application = appBuilder
                 .addHomeView()
                 .addIncomeHistoryView()
-                .addExpenseView()
-                .addGoalsView()
-                .addAddGoalView()
+                .addExpenseHistoryView()
                 .addUserData()
+                .addAddExpenseView()
+                .addGoalsView()
+                .addAddIncomeView()
+                .addAddGoalView()
+                .addAddBudgetView()
+
                 .build();
-                // .addAddIncomeView()
-                // .addAddExpenseView()
-                // .addExpenseHistoryView()
-                // ,addAddGoalView()
-                // .addGoalsView()
-                // .addBudgetView()
-                // .addChangePasswordUseCase()
-                // .addLogoutUseCase()
         application.pack();
         application.setVisible(true);
     }

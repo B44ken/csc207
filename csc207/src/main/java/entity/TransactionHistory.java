@@ -87,8 +87,17 @@ public class TransactionHistory {
     public TransactionHistory getAllIncomes() {
         TransactionHistory result = new TransactionHistory();
         for (var t : history) {
-            System.out.println("yes");
             if (t instanceof Income) {
+                result.add(t);
+            }
+        }
+        return result;
+    }
+
+    public TransactionHistory getAllExpenses() {
+        TransactionHistory result = new TransactionHistory();
+        for (var t : history) {
+            if (t instanceof Expense) {
                 result.add(t);
             }
         }
