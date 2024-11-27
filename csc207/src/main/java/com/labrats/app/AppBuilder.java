@@ -91,6 +91,7 @@ public class AppBuilder {
     public JFrame build() {
         app = new JFrame("My Cool Finance App");
         app.add(cards);
+        viewSwitcher.switchTo(ViewNames.expenseHistory);
         return app;
     }
 
