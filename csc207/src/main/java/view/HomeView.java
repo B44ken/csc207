@@ -57,6 +57,8 @@ public class HomeView extends JPanel {
         expensesValue.setAlignmentX(Component.CENTER_ALIGNMENT);
         final JLabel netValue = new JLabel("Goal");
 
+        // add chart API here
+
         final JPanel buttons1 = new JPanel();
         addIncome = new JButton("Add Income");
         buttons1.add(addIncome);
@@ -67,16 +69,14 @@ public class HomeView extends JPanel {
         addIncome.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-                        // homeController.switchToAddIncome();
+                         viewSwitcher.switchTo(ViewNames.addIncome);
                     }
                 });
 
         addExpense.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
-                        // homeController.switchToAddExpense();
-                        // System.out.println("switching to add expense");
-                        // homeViewModel.switchTo(ViewNames.addExpense);
+                        viewSwitcher.switchTo(ViewNames.addExpense);
                     }
                 });
 
@@ -88,12 +88,12 @@ public class HomeView extends JPanel {
         goalButton = new JButton("Goal");
         buttons2.add(goalButton);
 
-        // incomeButton.addActionListener(
-        //         new ActionListener() {
-        //             public void actionPerformed(ActionEvent evt) {
-        //                 viewSwitcher.switchTo(ViewNames.incomeHistory);
-        //             }
-        //         });
+         incomeButton.addActionListener(
+                 new ActionListener() {
+                     public void actionPerformed(ActionEvent evt) {
+                         viewSwitcher.switchTo(ViewNames.incomeHistory);
+                     }
+                 });
 
         expenseButton.addActionListener(
                 new ActionListener() {
@@ -145,6 +145,7 @@ public class HomeView extends JPanel {
     }
 
     public void repaint() {
+
         if (userData != null && incomeValue != null) {
             incomeValue.setText(Double.toString(userData.getHistory().getIncomeTotal()));
         }

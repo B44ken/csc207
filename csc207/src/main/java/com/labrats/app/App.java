@@ -36,7 +36,6 @@ public class App {
                 // .addGoalsView()
                 // .addBudgetView()
                 // .addAddIncomeUseCase()
-                // .addLogoutUseCase()
                 .build();
         application.pack();
         application.setVisible(true);

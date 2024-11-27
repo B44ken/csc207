@@ -31,7 +31,7 @@ public class AppBuilder {
 
     public AppBuilder addUserData() {
         homeView.setUserData(userData);
-        // incomeHistoryView.setUserData(userData);
+        incomeHistoryView.setUserData(this.userData);
         // TODO
         // do user data stuff for other views
         return this;
@@ -45,7 +45,7 @@ public class AppBuilder {
     }
 
     public AppBuilder addIncomeHistoryView() {
-        var incomeHistoryView = new IncomeHistoryView();
+        incomeHistoryView = new IncomeHistoryView();
         incomeHistoryView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.incomeHistory, incomeHistoryView);
         return this;
