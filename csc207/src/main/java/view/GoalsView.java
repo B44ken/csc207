@@ -4,6 +4,7 @@ import com.labrats.app.ViewNames;
 import data_access.UserData;
 import entity.Goal;
 import entity.GoalList;
+import interface_adapter.goals.GoalsController;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -31,7 +32,7 @@ public class GoalsView extends JPanel implements  ActionListener, PropertyChange
     private final JButton expenseButton;
     private final JButton goalButton;
 
-    public GoalsView() {
+    public GoalsView(BottomButtons bottomButtons, GoalsController goalsController) {
         super();
 
         final JLabel titleLabel = new JLabel("Goals");

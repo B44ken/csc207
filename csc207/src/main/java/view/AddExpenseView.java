@@ -111,4 +111,14 @@ public class AddExpenseView extends JPanel implements ActionListener, PropertyCh
     public void setAddExpenseController(AddExpenseController controller) {
         this.addExpenseController = controller;
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+
+    }
 }

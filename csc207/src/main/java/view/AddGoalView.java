@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import javax.swing.*;
 
 import entity.Goal;
+import view.BottomButtons;
 import interface_adapter.add_goal.AddGoalController;
 import interface_adapter.add_goal.AddGoalViewModel;
 
@@ -27,7 +28,7 @@ public class AddGoalView extends JPanel implements ActionListener, PropertyChang
     private final JButton goalButton;
 
 
-    public AddGoalView() {
+    public AddGoalView(BottomButtons bottomButtons, AddGoalController addGoalController) {
         super();
 
         final JLabel title = new JLabel("Add Goal");
@@ -132,9 +133,9 @@ public class AddGoalView extends JPanel implements ActionListener, PropertyChang
         mainPanel.add(targetMonthPanel);
         mainPanel.add(targetYearPanel);
         mainPanel.add(confirmPanel);
-        mainPanel.add(buttons2);
 
         this.add(mainPanel);
+        this.add(BottomButtons);
 
 
     }

@@ -1,6 +1,8 @@
 package com.labrats.app;
 
+import interface_adapter.add_goal.AddGoalViewModel;
 import interface_adapter.add_income.AddIncomeViewModel;
+import interface_adapter.goals.GoalsController;
 import use_case.history.ExpenseHistoryController;
 import view.*;
 
@@ -86,7 +88,7 @@ public class AppBuilder {
     }
 
     public AppBuilder addGoalsView() {
-        var goalsView = new GoalsView();
+        var goalsView = new GoalsView(bottomButtons, new GoalsController());
         goalsView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.goalList, goalsView);
         return this;
