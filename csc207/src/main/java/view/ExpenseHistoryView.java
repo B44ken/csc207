@@ -24,8 +24,8 @@ public class ExpenseHistoryView extends JPanel {
 
     // private IncomeHistoryControlerl interactor;
 
-    public ExpenseHistoryView(BottomButtons bottomButtons, ExpenseHistoryController interactor) {
-        // this.interactor = interactor;
+    public ExpenseHistoryView(BottomButtons bottomButtons, ExpenseHistoryController expenseInteractor) {
+        this.expenseInteractor = expenseInteractor;
 
         final JLabel title = new JLabel("Expense History");
 
@@ -52,13 +52,13 @@ public class ExpenseHistoryView extends JPanel {
         
         setupExpenseTable();
         setupBudgetTable();
-        add(expenseTablePanel);
-        add(budgetTablePanel);
-        
+        this.add(expenseTablePanel);
+        this.add(budgetTablePanel);
 
         this.add(addExpenseButton);
-        add(bottomButtons, BorderLayout.AFTER_LAST_LINE);
+        this.add(bottomButtons, BorderLayout.AFTER_LAST_LINE);
 
+        repaint();
     }
 
     public void setViewSwitcher(ViewSwitcher viewSwitcher) {
@@ -66,8 +66,8 @@ public class ExpenseHistoryView extends JPanel {
     }
 
     public void repaint() {
-        // if (interactor != null)
-        //     interactor.execute(tableModel);
+        if(expenseInteractor != null)
+            expenseInteractor.execute(expenseTableModel);
     }
 
     public void attachSwitchToOnButton(JButton button, String viewName) {
