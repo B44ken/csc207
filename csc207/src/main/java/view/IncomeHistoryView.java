@@ -22,8 +22,6 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
     private JTable incomeHistoryTable;
     private JPanel panel;
 
-    private final JButton addIncome;
-
     private final JButton homeButton;
     private final JButton incomeButton;
     private final JButton expenseButton;
@@ -32,7 +30,9 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
 
     private UserData userData;
 
-    public IncomeHistoryView() {
+    public IncomeHistoryView(ViewSwitcher vs) {
+        viewSwitcher = vs;
+
         final JLabel title = new JLabel("Income History");
 
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -45,17 +45,8 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
 
         this.panel = new JPanel();
 
-        final JPanel addIncomeBut = new JPanel();
-        addIncome = new JButton("AddIncome");
-        addIncomeBut.add(addIncome);
-
-        addIncome.addActionListener(
-                new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        viewSwitcher.switchTo(ViewNames.addIncome);
-                    }
-                }
-        );
+         var addIncomeButton = new JButton(ViewNames.addIncome);
+         viewSwitcher.listenForButton(addIncomeButton, ViewNames.addIncome);
 
         final JPanel buttons = new JPanel();
         homeButton = new JButton("Home");
@@ -96,7 +87,7 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
         this.add(title);
         this.add(panel);
         // this.add(ChartAPI);
-        this.add(addIncomeBut);
+        this.add(addIncomeButton);
         this.add(buttons, BorderLayout.AFTER_LAST_LINE);
     }
 

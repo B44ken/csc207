@@ -77,6 +77,7 @@ public class HomeView extends JPanel {
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         viewSwitcher.switchTo(ViewNames.addIncome);
+
                     }
                 });
 
