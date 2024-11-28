@@ -24,6 +24,7 @@ public class AppBuilder {
     private IncomeHistoryView incomeHistoryView;
     private AddIncomeView addIncomeView;
     private GetInsightView getInsightView;
+    private ExpenseHistoryView expenseHistoryView;
 
     public AppBuilder() {
         cards = new JPanel(new CardLayout());
@@ -35,6 +36,7 @@ public class AppBuilder {
     public AppBuilder addUserData() {
         homeView.setUserData(userData);
         incomeHistoryView.setUserData(this.userData);
+        expenseHistoryView.setUserData(this.userData);
         // getInsightView.setUserData(this.userData);
         // TODO
         // do user data stuff for other views
@@ -62,12 +64,14 @@ public class AppBuilder {
         return this;
     }
 
+    /*
     public AppBuilder addAddIncomeView() {
         addIncomeView = new AddIncomeView(new AddIncomeViewModel());
         addIncomeView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.addIncome, addIncomeView);
         return this;
     }
+     */
 
     public AppBuilder addAddExpenseView() {
         var expenseView = new AddExpenseView();
@@ -79,16 +83,16 @@ public class AppBuilder {
     }
 
     public AppBuilder addExpenseHistoryView() {
-        var expenseHistoryView = new ExpenseHistoryView();
+        expenseHistoryView = new ExpenseHistoryView();
         expenseHistoryView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.expenseHistory, expenseHistoryView);
         return this;
     }
 
     public AppBuilder addAddBudgetView() {
-        var controller = new ExpenseHistoryController(userData);
-        var expenseView = new ExpenseHistoryView(bottomButtons, controller);
-        viewSwitcher.add(ViewNames.expenseHistory, expenseView);
+        //var controller = new ExpenseHistoryController(userData);
+        //var expenseView = new ExpenseHistoryView(bottomButtons, controller);
+        //viewSwitcher.add(ViewNames.expenseHistory, expenseView);
 
         return this;
     }
@@ -117,7 +121,7 @@ public class AppBuilder {
     public JFrame build() {
         app = new JFrame("My Cool Finance App");
         app.add(cards);
-        viewSwitcher.switchTo(ViewNames.expenseHistory);
+        viewSwitcher.switchTo(ViewNames.home);
         return app;
     }
 

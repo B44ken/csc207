@@ -25,17 +25,20 @@ import interface_adapter.add_expense.AddExpenseViewModel;
 /**
  * The View for the Add Expense Use Case
  */
-public class AddExpenseView extends JPanel implements ActionListener, PropertyChangeListener {
-    private AddExpenseController addExpenseController;
-
-    private ViewSwitcher viewSwitcher;
+public class AddExpenseView extends JPanel implements ActionListener {
+    private final String viewName = "add expense";
 
     private final JButton confirmButton;
     private final JButton cancelButton;
 
-    private UserData userData;
+    private final JButton homeButton;
+    private final JButton incomeButton;
+    private final JButton expenseButton;
+    private final JButton goalsButton;
 
+    private ViewSwitcher viewSwitcher;
     private final LocalDate date = LocalDate.now();
+    private UserData userData;
 
     public AddExpenseView() {
         final JLabel title = new JLabel(AddExpenseViewModel.TITLE_LABEL);
@@ -56,11 +59,11 @@ public class AddExpenseView extends JPanel implements ActionListener, PropertyCh
         categoryPanel.add(new JLabel("Category:"));
         categoryPanel.add(categoryTextField);
 
-        final JPanel buttons = new JPanel();
+        final JPanel buttons1 = new JPanel();
         cancelButton = new JButton("Cancel");
-        buttons.add(cancelButton);
+        buttons1.add(cancelButton);
         confirmButton = new JButton("Confirm");
-        buttons.add(confirmButton);
+        buttons1.add(confirmButton);
 
         confirmButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -77,7 +80,6 @@ public class AddExpenseView extends JPanel implements ActionListener, PropertyCh
 
                     userData.getHistory().add(new Expense(name, amount, category, date));
                     userData.save();
-
                     viewSwitcher.switchTo(ViewNames.home);
                 }
             }
@@ -90,25 +92,70 @@ public class AddExpenseView extends JPanel implements ActionListener, PropertyCh
                     }
                 });
 
+        final JPanel buttons2 = new JPanel();
+        homeButton = new JButton("Home");
+        buttons2.add(homeButton);
+        incomeButton = new JButton("Income");
+        buttons2.add(incomeButton);
+        expenseButton = new JButton("Expense");
+        buttons2.add(expenseButton);
+        goalsButton = new JButton("Goals");
+        buttons2.add(goalsButton);
+
+        homeButton.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        viewSwitcher.switchTo(ViewNames.home);
+                    }
+                }
+        );
+
+        expenseButton.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        viewSwitcher.switchTo(ViewNames.expenseHistory);
+                    }
+                }
+        );
+
+        incomeButton.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        viewSwitcher.switchTo(ViewNames.incomeHistory);
+                    }
+                }
+        );
+
+        goalsButton.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        viewSwitcher.switchTo(ViewNames.goalList);
+                    }
+                }
+        );
+
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
         this.add(namePanel);
         this.add(amountPanel);
         this.add(categoryPanel);
-        this.add(buttons);
+        this.add(buttons1);
+        this.add(buttons2);
 
     };
 
+    @Override
+    public void actionPerformed(ActionEvent evt) {
+        JOptionPane.showMessageDialog(this, "Button not implemented yet");
+    }
+
     public void setUserData(UserData ud) {
-        userData = ud;
+        this.userData = ud;
     }
 
     public void setViewSwitcher(ViewSwitcher viewSwitcher) {
         this.viewSwitcher = viewSwitcher;
     }
 
-    public void setAddExpenseController(AddExpenseController controller) {
-        this.addExpenseController = controller;
-    }
 }
