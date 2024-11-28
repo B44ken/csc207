@@ -3,6 +3,7 @@ package view;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -34,4 +35,7 @@ public class ViewSwitcher {
         cards.add(panel, name);
     }
 
+    public void listenForButton(JButton cancelButton, String home) {
+        cancelButton.addActionListener(e -> switchTo(home));
+    }
 }
