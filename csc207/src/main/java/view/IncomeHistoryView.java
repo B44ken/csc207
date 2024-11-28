@@ -10,16 +10,17 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
-import java.util.ArrayList;
+
+
+/**
+ * Class for IncomeHistoryView. Includes Title, incomeHistory, addIncome, CHARTAPI, home buttons.
+ */
 
 public class IncomeHistoryView extends JPanel implements ActionListener {
     private final String viewName = "income history";
     private DefaultTableModel tableModel;
     private JTable incomeHistoryTable;
     private JPanel panel;
-
-    private final JButton addIncome;
 
     private final JButton homeButton;
     private final JButton incomeButton;
@@ -29,8 +30,9 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
 
     private UserData userData;
 
+    public IncomeHistoryView(ViewSwitcher vs) {
+        viewSwitcher = vs;
 
-    public IncomeHistoryView() {
         final JLabel title = new JLabel("Income History");
 
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -39,33 +41,12 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
         title.setFont(new Font("Arial", Font.BOLD, 20));
         add(title, BorderLayout.NORTH);
 
-//        String[] columnNames = {"Name", "Amount", "Date", "Category"};
-//
-//        tableModel = new DefaultTableModel(columnNames, 0);
-//
-//        incomeHistoryTable = new JTable(tableModel);
-//        JScrollPane tableScrollPane = new JScrollPane(incomeHistoryTable);
-//        incomeHistoryTable.setFillsViewportHeight(true);
-//        incomeHistoryTable.setVisible(true);
-//        tablePanel.add(tableScrollPane);
-//        tablePanel.setSize(300, 400);
-//        tablePanel.setVisible(true);
-
         //Add chart API here!
 
          this.panel = new JPanel();
 
-        final JPanel addIncomeBut = new JPanel();
-        addIncome = new JButton("AddIncome");
-        addIncomeBut.add(addIncome);
-
-        addIncome.addActionListener(
-                new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        viewSwitcher.switchTo(ViewNames.addIncome);
-                    }
-                }
-        );
+         var addIncomeButton = new JButton(ViewNames.addIncome);
+         viewSwitcher.listenForButton(addIncomeButton, ViewNames.addIncome);
 
         final JPanel buttons = new JPanel();
         homeButton = new JButton("Home");
@@ -93,14 +74,6 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
                 }
         );
 
-//        incomeButton.addActionListener(
-//                new ActionListener() {
-//                    public void actionPerformed(ActionEvent evt) {
-//                        viewSwitcher.switchTo(ViewNames.incomeHistory);
-//                    }
-//                }
-//        );
-
         goalsButton.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
@@ -113,8 +86,8 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
 
         this.add(title);
         this.add(panel);
-        // this.add(CHartAPI);
-        this.add(addIncomeBut);
+        // this.add(ChartAPI);
+        this.add(addIncomeButton);
         this.add(buttons, BorderLayout.AFTER_LAST_LINE);
     }
 
@@ -140,6 +113,9 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
         populateTable();
     }
 
+    /**
+     * Populates table when .addUserData() is run in App.
+     */
     public void populateTable() {
         TransactionHistory data = userData.getHistory().getAllIncomes();
         JPanel pane = new JPanel();
@@ -163,6 +139,7 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
         tablePanel.setVisible(true);
         pane.add(tablePanel);
 
+        // refreshes the component! instead of using .add() which would incorrectly put the table at the bottom of UI.
         this.panel.setComponentZOrder(pane, 0);
     }
 

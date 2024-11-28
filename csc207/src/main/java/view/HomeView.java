@@ -5,10 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import com.labrats.app.ViewNames;
 
@@ -27,6 +24,7 @@ public class HomeView extends JPanel {
 
     private final JButton addIncome;
     private final JButton addExpense;
+    private final JButton getInsight;
 
     private JLabel incomeValue;
     private JLabel expensesValue;
@@ -65,10 +63,21 @@ public class HomeView extends JPanel {
         addExpense = new JButton("Add Expense");
         buttons1.add(addExpense);
 
+        getInsight = new JButton("Get Insight");
+        buttons1.add(getInsight, 0);
+
+        getInsight.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        viewSwitcher.switchTo(ViewNames.getInsight);
+                    }
+        });
+
         addIncome.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         viewSwitcher.switchTo(ViewNames.addIncome);
+
                     }
                 });
 

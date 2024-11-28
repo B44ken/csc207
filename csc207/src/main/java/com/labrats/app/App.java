@@ -25,12 +25,14 @@ public class App {
         final JFrame application = appBuilder
                 .addHomeView()
                 .addIncomeHistoryView()
+                .addExpenseHistoryView()
                 .addUserData()
                 .addAddExpenseView()
-                .addExpenseHistoryView()
                 .addGoalsView()
                 .addAddIncomeView()
                 .addAddGoalView()
+                .addAddBudgetView()
+
                 .build();
         application.pack();
         application.setVisible(true);

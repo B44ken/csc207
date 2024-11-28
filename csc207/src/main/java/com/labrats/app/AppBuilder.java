@@ -1,6 +1,5 @@
 package com.labrats.app;
 
-import interface_adapter.add_income.AddIncomeViewModel;
 import use_case.ExpenseHistoryController;
 import use_case.AddExpenseController;
 import view.*;
@@ -16,14 +15,14 @@ import javax.swing.JPanel;
 public class AppBuilder {
     private JPanel cards;
     private JFrame app;
-    
+
     private UserData userData;
     private ViewSwitcher viewSwitcher;
     private BottomButtons bottomButtons;
 
     private HomeView homeView;
     private IncomeHistoryView incomeHistoryView;
-    private AddIncomeView addIncomeView;
+    private GetInsightView getInsightView;
 
 
     public AppBuilder() {
@@ -36,6 +35,7 @@ public class AppBuilder {
     public AppBuilder addUserData() {
         homeView.setUserData(userData);
         incomeHistoryView.setUserData(this.userData);
+        // getInsightView.setUserData(this.userData);
         // TODO
         // do user data stuff for other views
         return this;
@@ -48,30 +48,35 @@ public class AppBuilder {
         return this;
     }
 
-    public AppBuilder addIncomeHistoryView() {
-        incomeHistoryView = new IncomeHistoryView();
-        incomeHistoryView.setViewSwitcher(viewSwitcher);
-        viewSwitcher.add(ViewNames.incomeHistory, incomeHistoryView);
+    public AppBuilder addAddIncomeView() {
+        var addIncomeView = new AddIncomeView();
+        addIncomeView.setViewSwitcher(viewSwitcher);
+        viewSwitcher.add(ViewNames.addIncome, addIncomeView);
         return this;
     }
 
-    public AppBuilder addAddIncomeView() {
-        addIncomeView = new AddIncomeView(new AddIncomeViewModel());
-        // addIncomeView.setViewSwitcher(viewSwitcher);
-        viewSwitcher.add(ViewNames.addIncome, addIncomeView);
+    public AppBuilder addIncomeHistoryView() {
+        incomeHistoryView = new IncomeHistoryView(viewSwitcher);
+        viewSwitcher.add(ViewNames.incomeHistory, incomeHistoryView);
         return this;
     }
 
     public AppBuilder addAddExpenseView() {
         var controller = new AddExpenseController(viewSwitcher, userData);
-        viewSwitcher.add(ViewNames.addExpense, new AddExpenseView(controller, viewSwitcher));
+        var view = new AddExpenseView(controller, viewSwitcher);
+        viewSwitcher.add(ViewNames.addExpense, view);
         return this;
     }
 
     public AppBuilder addExpenseHistoryView() {
         var controller = new ExpenseHistoryController(userData);
-        var expenseView = new ExpenseHistoryView(bottomButtons, controller);
-        viewSwitcher.add(ViewNames.expenseHistory, expenseView);
+        var expenseHistoryView = new ExpenseHistoryView(bottomButtons, controller);
+        expenseHistoryView.setViewSwitcher(viewSwitcher);
+        viewSwitcher.add(ViewNames.expenseHistory, expenseHistoryView);
+        return this;
+    }
+
+    public AppBuilder addAddBudgetView() {
         return this;
     }
 
@@ -89,9 +94,17 @@ public class AppBuilder {
         return this;
     }
 
+    public AppBuilder addGetInsightView() {
+        getInsightView = new GetInsightView();
+        getInsightView.setViewSwitcher(viewSwitcher);
+        viewSwitcher.add(ViewNames.getInsight, getInsightView);
+        return this;
+    }
+
     public JFrame build() {
         app = new JFrame("My Cool Finance App");
         app.add(cards);
+        viewSwitcher.switchTo(ViewNames.expenseHistory);
         return app;
     }
 }

@@ -76,6 +76,5 @@ public class AddExpenseView extends JPanel {
         this.add(amountPanel);
         this.add(categoryPanel);
         this.add(buttons);
-
     };
 }

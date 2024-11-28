@@ -101,8 +101,6 @@ public class ChartAPI {
             out.flush();
             out.close();
 
-            System.err.println("downloading chart");
-
             return connection.getInputStream().readAllBytes();
         } catch (IOException err) {
             System.out.println("failed");
