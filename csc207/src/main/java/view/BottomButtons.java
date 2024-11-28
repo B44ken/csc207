@@ -19,6 +19,6 @@ public class BottomButtons extends JPanel {
     void makeAndAddButton(String name) {
         var button = new JButton(name);
         button.addActionListener(e -> vs.switchTo(name));
-        add(button);
+        this.add(button);
     }
 }

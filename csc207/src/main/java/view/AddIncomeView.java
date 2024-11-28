@@ -15,23 +15,17 @@ import data_access.UserData;
 import com.labrats.app.ViewNames;
 
 import interface_adapter.add_income.AddIncomeController;
-import interface_adapter.add_income.AddIncomeViewModel;
 //change above to what its actually called if its different
 
 public class AddIncomeView extends JPanel implements ActionListener, PropertyChangeListener {
     private String viewName = "Add Income";
 
-    private AddIncomeController addIncomeController;
-
     private ViewSwitcher viewSwitcher;
-    private UserData userData;
 
     // change above to what controller is actually called later
 
-    public AddIncomeView(AddIncomeController addIncomeController) {
+    public AddIncomeView() {
         super();
-
-        this.addIncomeController = addIncomeController;
 
         final JLabel title = new JLabel("Add Income");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -111,7 +105,6 @@ public class AddIncomeView extends JPanel implements ActionListener, PropertyCha
         this.add(mainPanel);
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
         // JOptionPane.showMessageDialog(this, "Action Performed not implemented yet.");
@@ -127,17 +120,12 @@ public class AddIncomeView extends JPanel implements ActionListener, PropertyCha
         return viewName;
     }
 
-
-    public void setUserData(UserData ud) {
-        userData = ud;
-        this.repaint();
-    }
-
     public void repaint() {
         // TODO
     }
 
     public void setViewSwitcher(ViewSwitcher viewSwitcher) {
         this.viewSwitcher = viewSwitcher;
+
     }
 }
