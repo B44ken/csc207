@@ -12,25 +12,41 @@ import java.beans.PropertyChangeListener;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.text.View;
 
+import com.labrats.app.ViewNames;
+import data_access.UserData;
 import interface_adapter.add_budget.AddBudgetController;
 import interface_adapter.add_budget.AddBudgetState;
 import interface_adapter.add_budget.AddBudgetViewModel;
 
 
 public class AddBudgetView extends JPanel implements ActionListener, PropertyChangeListener {
-    private final String viewName = "add budget";
+    private final String viewName = "Add Budget";
     private AddBudgetController addBudgetController;
-    private final AddBudgetViewModel addBudgetViewModel;
+    // private final AddBudgetViewModel addBudgetViewModel;
     // change above to what controller is actually called later
     // need to move the input fields out here unfortunately!!!!!!!!!!!
 
-    public AddBudgetView(AddBudgetViewModel budgetViewModel, AddBudgetController controller) {
+    private final JButton homeButton;
+    private final JButton incomeButton;
+    private final JButton expenseButton;
+    private final JButton goalButton;
 
-        this.addBudgetController = controller;
-        this.addBudgetViewModel = budgetViewModel;
-        addBudgetViewModel.addPropertyChangeListener(this);
+    private final JButton confirmButton;
+    private final JButton cancelButton;
 
+    // private final JFrame outerFrame;
+    private ViewSwitcher viewSwitcher;
+    private UserData userData;
+
+    public AddBudgetView() {
+
+        // this.addBudgetController = controller;
+        // this.addBudgetViewModel = budgetViewModel;
+        // addBudgetViewModel.addPropertyChangeListener(this);
+
+        super();
         final JLabel title = new JLabel("Add Budget");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -44,68 +60,102 @@ public class AddBudgetView extends JPanel implements ActionListener, PropertyCha
         amountPanel.add(new JLabel("Amount:"));
         amountPanel.add(amountTextField);
 
-        JPanel confirmPanel = new JPanel();
-        JButton confirmButton = new JButton("Confirm");
-        confirmPanel.add(confirmButton);
-
-        JPanel cancelPanel = new JPanel();
-        JButton cancelButton = new JButton("Cancel");
-        cancelPanel.add(cancelButton);
+        final JPanel buttonPanel = new JPanel();
+        confirmButton = new JButton("Confirm");
+        buttonPanel.add(confirmButton);
+        cancelButton = new JButton("Cancel");
+        buttonPanel.add(cancelButton);
 
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String categoryName = categoryNameTextField.getText();
-                String amount = amountTextField.getText();
+                Double amount = Double.valueOf(amountTextField.getText());
                 addBudgetController.createUserData(categoryName, amount);
                 // i believe this inputs into budget text file here ^
                 // switch back to budget view?:
                 // addBudgetController.switchToBudgetView();
+                viewSwitcher.switchTo(ViewNames.home);
             }
         });
 
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-        mainPanel.add(categoryNamePanel);
-        mainPanel.add(amountPanel);
+        cancelButton.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {viewSwitcher.switchTo(ViewNames.home);}
+        });
 
-        JFrame frame = new JFrame("Add Budget");
-        frame.setContentPane(mainPanel);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+        final JPanel buttons2 = new JPanel();
+        homeButton = new JButton("Home");
+        buttons2.add(homeButton);
+        incomeButton = new JButton("Income");
+        buttons2.add(incomeButton);
+        expenseButton = new JButton("Expense");
+        buttons2.add(expenseButton);
+        goalButton = new JButton("Goal");
+        buttons2.add(goalButton);
+
+        homeButton.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        viewSwitcher.switchTo(ViewNames.home);
+                    }
+                });
+
+        incomeButton.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        viewSwitcher.switchTo(ViewNames.incomeHistory);
+                    }
+                });
+
+        expenseButton.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        viewSwitcher.switchTo(ViewNames.expenseHistory);
+                    }
+                });
+
+        goalButton.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        viewSwitcher.switchTo(ViewNames.goals);
+                    }
+                });
+
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        
+        this.add(title);
+        this.add(categoryNamePanel);
+        this.add(amountPanel);
+        this.add(buttonPanel);
+        this.add(buttons2);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JOptionPane.showMessageDialog(this, "Action Performed not implemented yet.");
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        JOptionPane.showMessageDialog(this, "Property Change not implemented yet.");
     }
+
+    public void setViewSwitcher(ViewSwitcher vs) {
+        viewSwitcher = vs;
+    }
+
+    public void setUserData(UserData ud) {
+        userData = ud;
+        this.repaint();
+    }
+
+    // public void repaint() {}
 
     public String getViewName() {return viewName;}
 
-    public void setAddBudgetState(AddBudgetController controller) {this.addBudgetController = controller;}
+    public void setAddBudgetController(AddBudgetController controller) {this.addBudgetController = controller;}
 
-    private static boolean isEntryUnique(String fileName, String input) {
-        File file = new File(fileName);
-        if (!file.exists()) {
-            return true;
-        }
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                if (line.contains(input)) {
-                    return false;
-                }
-            }
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-        return true;
-    }
 }

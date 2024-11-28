@@ -41,8 +41,8 @@ public class IncomeTest {
         Income income = new Income("bonus", null, "salary", date);
         Double newAmount = 100.0;
         income.setAmount(newAmount);
-        Double setAmount = income.getAmount();
-        if (!setAmount.equals(100.0)) {
+        // Double setAmount = income.getAmount();
+        if (!newAmount.equals(income.getAmount())) {
             throw new Exception("setAmount() method error.");
         }
     }

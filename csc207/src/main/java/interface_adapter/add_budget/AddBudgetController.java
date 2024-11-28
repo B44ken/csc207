@@ -28,9 +28,8 @@ public class AddBudgetController {
      * @param amount
      *
      */
-    public void createUserData(String categoryName, String amount) {
-        Double convertedAmount = Double.valueOf(amount);
-        final AddBudgetInputData addBudgetInputData = new AddBudgetInputData(categoryName, convertedAmount);
+    public void createUserData(String categoryName, Double amount) {
+        final AddBudgetInputData addBudgetInputData = new AddBudgetInputData(categoryName, amount);
         final Budget budget = new Budget(null, null);
         budget.setAmount(addBudgetInputData.getAmount());
         budget.setCategoryName(addBudgetInputData.getCategoryName());
