@@ -135,7 +135,6 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
         for (Transaction transaction : data.getHistory()) {
             tableModel.addRow(new String[]{transaction.getName(), String.valueOf(transaction.getAmount()),
                     transaction.getDate().toString(), transaction.getCategory()});
-            // System.out.println("user data not null");
         }
 
         incomeHistoryTable = new JTable(tableModel);

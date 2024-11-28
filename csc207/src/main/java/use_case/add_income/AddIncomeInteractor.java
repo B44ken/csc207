@@ -1,52 +1,41 @@
 package use_case.add_income;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
+import data_access.UserData;
 import entity.Income;
-import entity.TransactionHistory;
 
+
+// this class no longer implements AddIncomeInputBoundary
 /**
  * The Add Income Interactor.
  */
-public class AddIncomeInteractor implements AddIncomeInputBoundary {
-    private final AddIncomeUserDataAccessInterface userDataAccessObject;
-    private final AddIncomeOutputBoundary userPresenter;
-    private final TransactionHistory transactionHistory;
+public class AddIncomeInteractor{
+    private final UserData userData;
+    // private final AddIncomeOutputBoundary userPresenter;
 
-    public AddIncomeInteractor(AddIncomeUserDataAccessInterface userDataAccessObject,
-                                AddIncomeOutputBoundary userPresenter,
-                                TransactionHistory transactionHistory) {
-        this.userDataAccessObject = userDataAccessObject;
-        this.userPresenter = userPresenter;
-        this.transactionHistory = transactionHistory;
+    public AddIncomeInteractor(UserData userData) {
+        this.userData = userData;
+        // this.userPresenter = userPresenter;
     }
 
     /**
      * Execute the Change Password Use Case.
      *
-     * @param addIncomeInputData the input data for this use case
+     * @param userData the input data for this use case
      */
-    @Override
-    public void execute(AddIncomeInputData addIncomeInputData) {
-        // final Income income = null;
-        final Income income = new Income(null, null, null, null);
-        income.setName(addIncomeInputData.getName());
-        income.setAmount(addIncomeInputData.getAmount());
-        income.setCategory(addIncomeInputData.getCategory());
-        income.setDate(addIncomeInputData.getDate());
-        transactionHistory.add(income);
+    // @Override
+    public void execute(UserData userData) {
+        userData.getHistory().add(new Income("food", 10.0, "income", LocalDate.of(2024, 12, 12)));
+        // is the above code how we add new Transaction object into txt file?
 
-        userDataAccessObject.addIncome(income);
-        final AddIncomeOutputData addIncomeOutputData = new AddIncomeOutputData(income.getName(), false);
-        userPresenter.prepareSuccessView(addIncomeOutputData);
     }
 
-    /**
-     *
-     */
-    @Override
-    public void switchToHomeView() {
-        userPresenter.switchToHomeVIew();
-    }
+//    /**
+//     *
+//     */
+//    @Override
+//    public void switchToHomeView() {
+//        userPresenter.switchToHomeVIew();
+//    }
 }

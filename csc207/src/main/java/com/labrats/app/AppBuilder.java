@@ -1,6 +1,8 @@
 package com.labrats.app;
 
+import interface_adapter.add_income.AddIncomeController;
 import interface_adapter.add_income.AddIncomeViewModel;
+import use_case.add_income.AddIncomeInteractor;
 import use_case.history.ExpenseHistoryController;
 import view.*;
 
@@ -49,7 +51,9 @@ public class AppBuilder {
     }
 
     public AppBuilder addAddIncomeView() {
-        var addIncomeView = new AddIncomeView();
+        AddIncomeInteractor interactor = new AddIncomeInteractor(userData);
+        AddIncomeController addIncomeController = new AddIncomeController(interactor);
+        var addIncomeView = new AddIncomeView(addIncomeController);
         // addIncomeView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.addIncome, addIncomeView);
         return this;
@@ -63,7 +67,9 @@ public class AppBuilder {
     }
 
     public AppBuilder addAddIncomeView() {
-        addIncomeView = new AddIncomeView(new AddIncomeViewModel());
+        AddIncomeInteractor interactor = new AddIncomeInteractor(userData);
+        AddIncomeController addIncomeController = new AddIncomeController(interactor, userData);
+        addIncomeView = new AddIncomeView(userData);
         addIncomeView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.addIncome, addIncomeView);
         return this;
