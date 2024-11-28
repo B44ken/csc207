@@ -1,9 +1,6 @@
 package view;
 
-
-import use_case.history.ExpenseHistoryController;
-import data_access.UserData;
-import view.ViewSwitcher;
+import use_case.ExpenseHistoryController;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -25,9 +22,10 @@ public class ExpenseHistoryView extends JPanel {
     private DefaultTableModel budgetTableModel;
     private JPanel budgetTablePanel;
 
+    // private IncomeHistoryControlerl interactor;
 
-    public ExpenseHistoryView(BottomButtons bottomButtons, ExpenseHistoryController interactor) {
-        this.expenseInteractor = interactor;
+    public ExpenseHistoryView(BottomButtons bottomButtons, ExpenseHistoryController expenseInteractor) {
+        this.expenseInteractor = expenseInteractor;
 
         final JLabel title = new JLabel("Expense History");
 
@@ -54,13 +52,13 @@ public class ExpenseHistoryView extends JPanel {
         
         setupExpenseTable();
         setupBudgetTable();
-        add(expenseTablePanel);
-        add(budgetTablePanel);
-        
+        this.add(expenseTablePanel);
+        this.add(budgetTablePanel);
 
         this.add(addExpenseButton);
-        add(bottomButtons, BorderLayout.AFTER_LAST_LINE);
+        this.add(bottomButtons, BorderLayout.AFTER_LAST_LINE);
 
+        repaint();
     }
 
     public void setViewSwitcher(ViewSwitcher viewSwitcher) {
@@ -68,7 +66,7 @@ public class ExpenseHistoryView extends JPanel {
     }
 
     public void repaint() {
-        if (expenseInteractor != null)
+        if(expenseInteractor != null)
             expenseInteractor.execute(expenseTableModel);
     }
 
@@ -92,7 +90,8 @@ public class ExpenseHistoryView extends JPanel {
         expenseTablePanel = new JPanel();
         expenseTablePanel.add(tableScrollPane);
         expenseTablePanel.setSize(300, 400);
-        expenseTablePanel.setVisible(true);}
+        expenseTablePanel.setVisible(true);
+    }
 
     public void setupBudgetTable() {
       String[] columnNames = { "Category", "Amount" };

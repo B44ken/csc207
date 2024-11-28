@@ -14,30 +14,23 @@ import javax.swing.*;
 
 import com.labrats.app.ViewNames;
 
-import data_access.UserData;
-import entity.Expense;
-import interface_adapter.add_expense.AddExpenseController;
-import interface_adapter.add_expense.AddExpenseState;
 import interface_adapter.add_expense.AddExpenseViewModel;
+import use_case.AddExpenseController;
 
 //change above to what its actually called if its different
 
 /**
  * The View for the Add Expense Use Case
  */
-public class AddExpenseView extends JPanel implements ActionListener, PropertyChangeListener {
-    private AddExpenseController addExpenseController;
-
-    private ViewSwitcher viewSwitcher;
-
+public class AddExpenseView extends JPanel {
     private final JButton confirmButton;
     private final JButton cancelButton;
 
-    private UserData userData;
+    private AddExpenseController controller;
 
-    private final LocalDate date = LocalDate.now();
+    public AddExpenseView(AddExpenseController controller, ViewSwitcher viewSwitcher) {
+        this.controller = controller;
 
-    public AddExpenseView() {
         final JLabel title = new JLabel(AddExpenseViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -63,34 +56,18 @@ public class AddExpenseView extends JPanel implements ActionListener, PropertyCh
         buttons.add(confirmButton);
 
         confirmButton.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource().equals(confirmButton)) {
-                    var name = nameTextField.getText();
-                    var amount = 0.0;
-                    try {
-                        amount = Double.valueOf(amountTextField.getText());
-                    } catch (NumberFormatException ex) {
-                        System.out.println("failed to parse amount");
-                    };
-                    var category = categoryTextField.getText();
-                    var date = LocalDate.now();
-
-                    userData.getHistory().add(new Expense(name, amount, category, date));
-                    userData.save();
-
-                    viewSwitcher.switchTo(ViewNames.home);
+                    controller.addExpense(
+                            nameTextField.getText(),
+                            amountTextField.getText(),
+                            categoryTextField.getText());
                 }
+                controller.switchToHome();
             }
         });
 
-        cancelButton.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent evt) {
-                        viewSwitcher.switchTo(ViewNames.home);
-                    }
-                });
+        viewSwitcher.listenForButton(cancelButton, ViewNames.home);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -99,28 +76,5 @@ public class AddExpenseView extends JPanel implements ActionListener, PropertyCh
         this.add(amountPanel);
         this.add(categoryPanel);
         this.add(buttons);
-
-    }
-
-    public void setUserData(UserData ud) {
-        userData = ud;
-    }
-
-    public void setViewSwitcher(ViewSwitcher viewSwitcher) {
-        this.viewSwitcher = viewSwitcher;
-    }
-
-    public void setAddExpenseController(AddExpenseController controller) {
-        this.addExpenseController = controller;
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
-
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-
-    }
+    };
 }
