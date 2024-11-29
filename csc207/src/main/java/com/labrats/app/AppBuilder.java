@@ -1,5 +1,6 @@
 package com.labrats.app;
 
+import interface_adapter.get_insight.GetInsightController;
 import use_case.ExpenseHistoryController;
 import use_case.AddExpenseController;
 import view.*;
@@ -95,7 +96,7 @@ public class AppBuilder {
     }
 
     public AppBuilder addGetInsightView() {
-        getInsightView = new GetInsightView();
+        getInsightView = new GetInsightView(bottomButtons, new GetInsightController(userData));
         getInsightView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.getInsight, getInsightView);
         return this;
