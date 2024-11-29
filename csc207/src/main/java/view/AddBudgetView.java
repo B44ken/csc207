@@ -122,6 +122,7 @@ public class AddBudgetView extends JPanel implements ActionListener, PropertyCha
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        //viewSwitcher.switchTo(ViewNames.goals);
                         viewSwitcher.switchTo(ViewNames.goalList);
                     }
                 });
