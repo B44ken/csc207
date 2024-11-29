@@ -16,9 +16,11 @@ import javax.swing.text.View;
 
 import com.labrats.app.ViewNames;
 import data_access.UserData;
+import entity.Budget;
 import interface_adapter.add_budget.AddBudgetController;
 import interface_adapter.add_budget.AddBudgetState;
 import interface_adapter.add_budget.AddBudgetViewModel;
+import use_case.AddExpenseController;
 
 
 public class AddBudgetView extends JPanel implements ActionListener, PropertyChangeListener {
@@ -36,17 +38,17 @@ public class AddBudgetView extends JPanel implements ActionListener, PropertyCha
     private final JButton confirmButton;
     private final JButton cancelButton;
 
-    // private final JFrame outerFrame;
     private ViewSwitcher viewSwitcher;
     private UserData userData;
 
-    public AddBudgetView() {
+    private AddBudgetController controller;
+
+    public AddBudgetView(AddBudgetController controller, ViewSwitcher viewSwitcher) {
 
         // this.addBudgetController = controller;
         // this.addBudgetViewModel = budgetViewModel;
         // addBudgetViewModel.addPropertyChangeListener(this);
-
-        super();
+        this.controller = controller;
         final JLabel title = new JLabel("Add Budget");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -67,15 +69,13 @@ public class AddBudgetView extends JPanel implements ActionListener, PropertyCha
         buttonPanel.add(cancelButton);
 
         confirmButton.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
-                String categoryName = categoryNameTextField.getText();
-                Double amount = Double.valueOf(amountTextField.getText());
-                addBudgetController.createUserData(categoryName, amount);
-                // i believe this inputs into budget text file here ^
-                // switch back to budget view?:
-                // addBudgetController.switchToBudgetView();
-                viewSwitcher.switchTo(ViewNames.home);
+                if (e.getSource().equals(confirmButton)) {
+                    controller.addBudget(
+                            categoryNameTextField.getText(),
+                            amountTextField.getText());
+                }
+                controller.switchToHomeView();
             }
         });
 
