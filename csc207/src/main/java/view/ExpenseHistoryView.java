@@ -67,7 +67,7 @@ public class ExpenseHistoryView extends JPanel {
 
     public void repaint() {
         if(expenseInteractor != null)
-            expenseInteractor.execute(expenseTableModel);
+            expenseInteractor.execute(expenseTableModel, budgetTableModel);
     }
 
     public void attachSwitchToOnButton(JButton button, String viewName) {

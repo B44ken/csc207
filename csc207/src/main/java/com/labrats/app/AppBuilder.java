@@ -5,7 +5,7 @@ import use_case.AddExpenseController;
 import view.*;
 
 import data_access.UserData;
-import data_access.UserDataFile;
+import data_access.UserDataFileAccess;
 
 import java.awt.CardLayout;
 
@@ -27,7 +27,7 @@ public class AppBuilder {
 
     public AppBuilder() {
         cards = new JPanel(new CardLayout());
-        userData = new UserDataFile("testdata.csv");
+        userData = new UserDataFileAccess("testdata.csv");
         viewSwitcher = new ViewSwitcher(cards);
         bottomButtons = new BottomButtons(viewSwitcher);
     }
@@ -89,6 +89,7 @@ public class AppBuilder {
 
     public AppBuilder addGoalsView() {
         var goalsView = new GoalsView();
+        goalsView.setUserData(userData);
         goalsView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.goalList, goalsView);
         return this;
