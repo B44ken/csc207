@@ -25,12 +25,7 @@ public class GoalsView extends JPanel implements  ActionListener, PropertyChange
 
     private final JTable goalsTable;
     private final DefaultTableModel tableModel;
-    private final JButton addGoalButton;
 
-    private final JButton homeButton;
-    private final JButton incomeButton;
-    private final JButton expenseButton;
-    private final JButton goalButton;
 
     public GoalsView(BottomButtons bottomButtons, GoalsController goalsController) {
         super();
@@ -48,77 +43,18 @@ public class GoalsView extends JPanel implements  ActionListener, PropertyChange
         JScrollPane tableScrollPane = new JScrollPane(goalsTable);
         add(tableScrollPane, BorderLayout.CENTER);
 
-        final JPanel buttons1 = new JPanel();
-        addGoalButton = new JButton("Add New Goal");
-        buttons1.add(addGoalButton);
-        add(buttons1, BorderLayout.SOUTH);
+        final JPanel addGoalButton = new JPanel();
+        JButton addNewGoal = new JButton("Add New Goal");
+        addGoalButton.add(addNewGoal);
 
-        final JPanel buttons2 = new JPanel();
-        homeButton = new JButton("Home");
-        buttons2.add(homeButton);
-        incomeButton = new JButton("Income");
-        buttons2.add(incomeButton);
-        expenseButton = new JButton("Expense");
-        buttons2.add(expenseButton);
-        goalButton = new JButton("Goal");
-        buttons2.add(goalButton);
-
-        addGoalButton.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        viewSwitcher.switchTo(ViewNames.addGoal);
-                    }
-                });
-        homeButton.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        viewSwitcher.switchTo(ViewNames.home);
-                    }
-                });
-
-        incomeButton.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        viewSwitcher.switchTo(ViewNames.incomeHistory);
-                    }
-                });
-
-        expenseButton.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        viewSwitcher.switchTo(ViewNames.expenseHistory);
-                    }
-                });
-
-        goalButton.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        viewSwitcher.switchTo(ViewNames.goalList);
-                    }
-                });
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(titleLabel);
-        this.add(buttons1);
-        this.add(buttons2);
+        this.add(addGoalButton);
     }
 
 
-
-
-    public String getViewName() {
-        return viewName;
-    }
-
-    public JTable getGoalsTable() {
-        return goalsTable;
-    }
 
 
     @Override
@@ -132,7 +68,7 @@ public class GoalsView extends JPanel implements  ActionListener, PropertyChange
     }
 
     public void setViewSwitcher(ViewSwitcher vs) {
-        viewSwitcher = vs;
+        viewSwitcher = viewSwitcher;
     }
 
     public void setUserData(UserData ud) {

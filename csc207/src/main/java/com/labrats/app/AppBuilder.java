@@ -1,5 +1,6 @@
 package com.labrats.app;
 
+import interface_adapter.add_goal.AddGoalController;
 import use_case.ExpenseHistoryController;
 import use_case.AddExpenseController;
 import view.*;
