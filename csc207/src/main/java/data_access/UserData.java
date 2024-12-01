@@ -35,7 +35,7 @@ public class UserData {
     public BudgetHistory getBudgets() { return budgets; }
 
     public void save() {
-        FileAccess.exportData(history, file);
+        // FileAccess.exportData(history, file);
 
     }
 }
