@@ -1,6 +1,7 @@
 package com.labrats.app;
 
 
+to ruimport entity.Expense;
 import entity.GoalList;
 import interface_adapter.add_budget.AddBudgetController;
 import interface_adapter.add_goal.AddGoalController;
@@ -11,6 +12,9 @@ import use_case.goals.GoalListController;
 import use_case.history.BudgetHistoryController;
 
 import interface_adapter.add_income.AddIncomeViewModel;
+import interface_adapter.get_insight.GetInsightController;
+import interface_adapter.get_insight.GetInsightViewModel;
+import use_case.get_insight.GetInsightInteractor;
 import use_case.ExpenseHistoryController;
 
 import view.*;
@@ -19,6 +23,7 @@ import data_access.UserData;
 import data_access.UserDataFileAccess;
 
 import java.awt.CardLayout;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -35,7 +40,7 @@ public class AppBuilder {
     private IncomeHistoryView incomeHistoryView;
     private AddIncomeView addIncomeView;
     private GetInsightView getInsightView;
-    private Expense expenseHistoryView;
+    private ExpenseHistoryView expenseHistoryView;
     private GoalListView goalListView;
 
     public AppBuilder() {
@@ -45,9 +50,18 @@ public class AppBuilder {
         bottomButtons = new BottomButtons(viewSwitcher);
     }
 
+    public AppBuilder addUserData() {
+        homeView.setUserData(userData);
+        incomeHistoryView.setUserData(this.userData);
+        // expenseHistoryView.setUserData(this.userData);
+        // getInsightView.setUserData(this.userData);
+        // TODO
+        // do user data stuff for other views
+        return this;
+    }
+
     public AppBuilder addHomeView() {
         homeView = new HomeView();
-        homeView.setUserData(userData);
         homeView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.home, homeView);
         return this;
@@ -62,8 +76,7 @@ public class AppBuilder {
 
     public AppBuilder addIncomeHistoryView() {
         incomeHistoryView = new IncomeHistoryView(viewSwitcher);
-        incomeHistoryView.setUserData(this.userData);
-        incomeHistoryView.setViewSwitcher(viewSwitcher);
+        // incomeHistoryView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.incomeHistory, incomeHistoryView);
         return this;
     }
@@ -90,7 +103,6 @@ public class AppBuilder {
         var expenseController = new ExpenseHistoryController(userData);
         var budgetController = new BudgetHistoryController(userData);
         var expenseHistoryView = new ExpenseHistoryView(bottomButtons, expenseController, budgetController);
-        expenseHistoryView.setUserData(this.userData);
         expenseHistoryView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.expenseHistory, expenseHistoryView);
         return this;
@@ -121,8 +133,11 @@ public class AppBuilder {
         return this;
     }
 
+
+    // TODO need to fix
     public AppBuilder addGetInsightView() {
-        getInsightView = new GetInsightView();
+        // GetInsightInteractor interactor = new GetInsightInteractor();
+        GetInsightView getInsightView = new GetInsightView(bottomButtons, new GetInsightViewModel());
         getInsightView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.getInsight, getInsightView);
         return this;

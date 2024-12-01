@@ -33,9 +33,7 @@ public class AddIncomeView extends JPanel implements ActionListener, PropertyCha
     public AddIncomeView() {
         super();
 
-
         //this.addIncomeViewModel = incomeViewModel;
-
 
         final JLabel title = new JLabel("Add Income");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
