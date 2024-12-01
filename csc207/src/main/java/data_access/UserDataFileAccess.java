@@ -91,11 +91,11 @@ public class UserDataFileAccess extends UserData {
         }
     }
 
-    public void save(TransactionHistory history, String path) {
+    public void save(TransactionHistory history, String filePath) {
         // TODO
         //copied previous code from exportData to save for current testing
         try {
-            var file = new FileWriter(new File(path));
+            var file = new FileWriter(new File(filePath));
             file.write(String.format("amount, name, category, date, type\n"));
             for (var t: history.getHistory())
                 file.write(
@@ -107,7 +107,8 @@ public class UserDataFileAccess extends UserData {
                                 t.getClass().getSimpleName().toLowerCase()
                         ));
             file.close();
-        }  catch (IOException err) {
+        }
+        catch (IOException err) {
             throw new RuntimeException("File not found");
         }
     }
