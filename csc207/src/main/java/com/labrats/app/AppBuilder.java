@@ -1,6 +1,7 @@
 package com.labrats.app;
 
 
+to ruimport entity.Expense;
 import entity.GoalList;
 import interface_adapter.add_budget.AddBudgetController;
 import interface_adapter.add_goal.AddGoalController;
@@ -39,7 +40,7 @@ public class AppBuilder {
     private IncomeHistoryView incomeHistoryView;
     private AddIncomeView addIncomeView;
     private GetInsightView getInsightView;
-    private Expense expenseHistoryView;
+    private ExpenseHistoryView expenseHistoryView;
     private GoalListView goalListView;
 
     public AppBuilder() {
@@ -52,7 +53,7 @@ public class AppBuilder {
     public AppBuilder addUserData() {
         homeView.setUserData(userData);
         incomeHistoryView.setUserData(this.userData);
-        expenseHistoryView.setUserData(this.userData);
+        // expenseHistoryView.setUserData(this.userData);
         // getInsightView.setUserData(this.userData);
         // TODO
         // do user data stuff for other views
