@@ -1,6 +1,9 @@
 package com.labrats.app;
 
 import interface_adapter.add_income.AddIncomeViewModel;
+import interface_adapter.get_insight.GetInsightController;
+import interface_adapter.get_insight.GetInsightViewModel;
+import use_case.get_insight.GetInsightInteractor;
 import use_case.history.ExpenseHistoryController;
 import view.*;
 
@@ -58,8 +61,8 @@ public class AppBuilder {
     }
 
     public AppBuilder addIncomeHistoryView() {
-        incomeHistoryView = new IncomeHistoryView();
-        incomeHistoryView.setViewSwitcher(viewSwitcher);
+        incomeHistoryView = new IncomeHistoryView(viewSwitcher);
+        // incomeHistoryView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.incomeHistory, incomeHistoryView);
         return this;
     }
@@ -111,10 +114,13 @@ public class AppBuilder {
         return this;
     }
 
+
+    //need to fix
     public AppBuilder addGetInsightView() {
-        getInsightView = new GetInsightView();
-        getInsightView.setViewSwitcher(viewSwitcher);
-        viewSwitcher.add(ViewNames.getInsight, getInsightView);
+//        GetInsightInteractor interactor = new GetInsightInteractor();
+//        GetInsightView getInsightView = new GetInsightView(bottomButtons, new GetInsightViewModel());
+//        getInsightView.setViewSwitcher(viewSwitcher);
+//        viewSwitcher.add(ViewNames.getInsight, getInsightView);
         return this;
     }
 

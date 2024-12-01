@@ -30,6 +30,7 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
 
     private UserData userData;
 
+    // should we also remove the setViewSwitcher method then? if we are just going to pass the vs into the class
     public IncomeHistoryView(ViewSwitcher vs) {
         viewSwitcher = vs;
 
