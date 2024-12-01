@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Stores the Transaction history for app.
  */
 public class GoalList {
-    private ArrayList<Goal> history;
+    private static ArrayList<Goal> history;
 
     public GoalList() {
         history = new ArrayList<>();
@@ -25,4 +25,7 @@ public class GoalList {
         history.add(goal);
     }
 
+    public ArrayList<Goal> getList() {
+        return history;
+    }
 }

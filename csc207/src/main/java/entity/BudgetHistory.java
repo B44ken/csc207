@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Stores the Budget history for app.
  */
 public class BudgetHistory {
-    ArrayList<Budget> history;
+    private ArrayList<Budget> history;
 
     public BudgetHistory() {
         history = new ArrayList<>();
@@ -20,17 +20,7 @@ public class BudgetHistory {
         history.add(budget);
     }
 
-    public BudgetHistory getAllBudgets() {
-        BudgetHistory result = new BudgetHistory();
-        for (var t : history) {
-            if (t instanceof Budget) {
-                result.add(t);
-            }
-        }
-        return result;
-    }
-
-    public ArrayList<Budget> getHistory() {
+    public ArrayList<Budget> getList() {
         return history;
     }
 }

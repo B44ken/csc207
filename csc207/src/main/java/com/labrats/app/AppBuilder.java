@@ -1,16 +1,11 @@
 package com.labrats.app;
 
-import interface_adapter.add_budget.AddBudgetController;
-import interface_adapter.add_goal.AddGoalController;
+import interface_adapter.add_income.AddIncomeViewModel;
 import use_case.ExpenseHistoryController;
-import use_case.AddExpenseController;
-import use_case.add_budget.AddBudgetInteractor;
-import use_case.goals.GoalsController;
-import use_case.history.BudgetHistoryController;
 import view.*;
 
 import data_access.UserData;
-import data_access.UserDataFile;
+import data_access.UserDataFileAccess;
 
 import java.awt.CardLayout;
 
@@ -27,12 +22,13 @@ public class AppBuilder {
 
     private HomeView homeView;
     private IncomeHistoryView incomeHistoryView;
+    private AddIncomeView addIncomeView;
     private GetInsightView getInsightView;
-
+    private ExpenseHistoryView expenseHistoryView;
 
     public AppBuilder() {
         cards = new JPanel(new CardLayout());
-        userData = new UserDataFile("testdata.csv");
+        userData = new UserDataFileAccess("testdata.csv");
         viewSwitcher = new ViewSwitcher(cards);
         bottomButtons = new BottomButtons(viewSwitcher);
     }
@@ -40,6 +36,7 @@ public class AppBuilder {
     public AppBuilder addUserData() {
         homeView.setUserData(userData);
         incomeHistoryView.setUserData(this.userData);
+        expenseHistoryView.setUserData(this.userData);
         // getInsightView.setUserData(this.userData);
         // TODO
         // do user data stuff for other views
@@ -55,52 +52,62 @@ public class AppBuilder {
 
     public AppBuilder addAddIncomeView() {
         var addIncomeView = new AddIncomeView();
-        addIncomeView.setViewSwitcher(viewSwitcher);
+        // addIncomeView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.addIncome, addIncomeView);
         return this;
     }
 
     public AppBuilder addIncomeHistoryView() {
         incomeHistoryView = new IncomeHistoryView(viewSwitcher);
+        incomeHistoryView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.incomeHistory, incomeHistoryView);
         return this;
     }
 
+    /*
+    public AppBuilder addAddIncomeView() {
+        addIncomeView = new AddIncomeView(new AddIncomeViewModel());
+        addIncomeView.setViewSwitcher(viewSwitcher);
+        viewSwitcher.add(ViewNames.addIncome, addIncomeView);
+        return this;
+    }
+     */
+
     public AppBuilder addAddExpenseView() {
-        var controller = new AddExpenseController(viewSwitcher, userData);
-     //   var view = new AddExpenseView(controller, viewSwitcher);
-     //   viewSwitcher.add(ViewNames.addExpense, view);
+        var expenseView = new AddExpenseView();
+        expenseView.setViewSwitcher(viewSwitcher);
+        // expenseView.setAddExpenseController();
+        expenseView.setUserData(userData);
+        viewSwitcher.add(ViewNames.addExpense, expenseView);
         return this;
     }
 
     public AppBuilder addExpenseHistoryView() {
-        var expenseController = new ExpenseHistoryController(userData);
-        var budgetController = new BudgetHistoryController(userData);
-        var expenseHistoryView = new ExpenseHistoryView(bottomButtons, expenseController, budgetController);
+        var interactor = new ExpenseHistoryController(userData);
+        expenseHistoryView = new ExpenseHistoryView(interactor);
         expenseHistoryView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.expenseHistory, expenseHistoryView);
         return this;
     }
 
     public AppBuilder addAddBudgetView() {
-        var addBudgetController = new AddBudgetController(viewSwitcher, userData);
-        var addBudgetView = new AddBudgetView(addBudgetController, viewSwitcher);
-        addBudgetView.setViewSwitcher(viewSwitcher);
-        viewSwitcher.add(ViewNames.addBudget, addBudgetView);
+        //var controller = new ExpenseHistoryController(userData);
+        //var expenseView = new ExpenseHistoryView(bottomButtons, controller);
+        //viewSwitcher.add(ViewNames.expenseHistory, expenseView);
+
         return this;
     }
 
     public AppBuilder addAddGoalView() {
-        var addGoalController = new AddGoalController(viewSwitcher, userData);
-        var addGoalView = new AddGoalView(addGoalController, viewSwitcher);
+        var addGoalView = new AddGoalView();
         addGoalView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.addGoal, addGoalView);
         return this;
     }
 
     public AppBuilder addGoalsView() {
-        var goalsController = new GoalsController(userData);
-        var goalsView = new GoalsView(bottomButtons, goalsController);
+        var goalsView = new GoalsView();
+        goalsView.setUserData(userData);
         goalsView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.goalList, goalsView);
         return this;
@@ -119,4 +126,5 @@ public class AppBuilder {
         viewSwitcher.switchTo(ViewNames.home);
         return app;
     }
+
 }
