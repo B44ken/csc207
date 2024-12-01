@@ -1,3 +1,4 @@
+amount,name,category,date,type
 60.000000,mcdonalds,food,2024-10-02,expense
 2300.000000,luxury beachfront cottage,rent,2024-10-01,expense
 100.000000,wingstop,food,2024-10-03,expense
@@ -9,3 +10,4 @@
 300.000000,job,income,2024-10-05,income
 300.000000,side hustle ifykyk,income,2024-10-07,income
 10.000000,wingstop,food,2024-11-27,expense
+100.0,test goal,,2024-11-27,goal

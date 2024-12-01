@@ -2,10 +2,10 @@ package view;
 
 
 import com.labrats.app.ViewNames;
-import use_case.history.ExpenseHistoryController;
 import data_access.UserData;
 import entity.Transaction;
 import entity.TransactionHistory;
+import use_case.ExpenseHistoryController;
 import view.ViewSwitcher;
 
 import javax.swing.*;
@@ -33,7 +33,7 @@ public class ExpenseHistoryView extends JPanel implements ActionListener {
     private DefaultTableModel expenseTableModel;
     private JPanel expenseTablePanel;
 
-    //private ExpenseHistoryController interactor;
+    private ExpenseHistoryController interactor;
 
     private JPanel budgetTablePanel;
     private JTable budgetTable;
@@ -41,7 +41,7 @@ public class ExpenseHistoryView extends JPanel implements ActionListener {
 
     //private IncomeHistoryController interactor;
 
-    public ExpenseHistoryView() {
+    public ExpenseHistoryView(ExpenseHistoryController interactor) {
         //this.interactor = interactor;
 
         final JLabel title = new JLabel("Expense History");
@@ -121,6 +121,11 @@ public class ExpenseHistoryView extends JPanel implements ActionListener {
 
     public void setViewSwitcher(ViewSwitcher viewSwitcher) {
         this.viewSwitcher = viewSwitcher;
+    }
+
+    public void repaint() {
+        if(interactor != null)
+            interactor.execute(expenseTableModel, budgetTableModel);
     }
 
     public void setUserData(UserData userData) {

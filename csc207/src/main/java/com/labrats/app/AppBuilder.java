@@ -8,7 +8,7 @@ import use_case.history.ExpenseHistoryController;
 import view.*;
 
 import data_access.UserData;
-import data_access.UserDataFile;
+import data_access.UserDataFileAccess;
 
 import java.awt.CardLayout;
 
@@ -31,7 +31,7 @@ public class AppBuilder {
 
     public AppBuilder() {
         cards = new JPanel(new CardLayout());
-        userData = new UserDataFile("testdata.csv");
+        userData = new UserDataFileAccess("testdata.csv");
         viewSwitcher = new ViewSwitcher(cards);
         bottomButtons = new BottomButtons(viewSwitcher);
     }
@@ -86,7 +86,8 @@ public class AppBuilder {
     }
 
     public AppBuilder addExpenseHistoryView() {
-        expenseHistoryView = new ExpenseHistoryView();
+        var interactor = new ExpenseHistoryController(userData);
+        expenseHistoryView = new ExpenseHistoryView(interactor);
         expenseHistoryView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.expenseHistory, expenseHistoryView);
         return this;
@@ -109,13 +110,14 @@ public class AppBuilder {
 
     public AppBuilder addGoalsView() {
         var goalsView = new GoalsView();
+        goalsView.setUserData(userData);
         goalsView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.goalList, goalsView);
         return this;
     }
 
 
-    //need to fix
+    // TODO need to fix
     public AppBuilder addGetInsightView() {
 //        GetInsightInteractor interactor = new GetInsightInteractor();
 //        GetInsightView getInsightView = new GetInsightView(bottomButtons, new GetInsightViewModel());
