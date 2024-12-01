@@ -1,7 +1,7 @@
 package com.labrats.app;
 
 
-to ruimport entity.Expense;
+import entity.Expense;
 import entity.GoalList;
 import interface_adapter.add_budget.AddBudgetController;
 import interface_adapter.add_goal.AddGoalController;

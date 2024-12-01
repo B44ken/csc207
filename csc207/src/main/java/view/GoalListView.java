@@ -19,9 +19,15 @@ public class GoalListView extends JPanel {
     private JPanel goalsTablePanel;
     private JPanel panel;
 
+    private final JButton homeButton;
+    private final JButton incomeButton;
+    private final JButton expenseButton;
+    private final JButton goalsButton;
+    private final JButton addGoalButton;
+    private ViewSwitcher viewSwitcher;
+
     private GoalListController goalsInteractor;
 
-    private ViewSwitcher viewSwitcher;
     private UserData userData;
 
     public GoalListView(BottomButtons bottomButtons, GoalListController goalsInteractor) {
@@ -37,10 +43,50 @@ public class GoalListView extends JPanel {
 
         this.panel = new JPanel();
 
-        JPanel addGoalButton = new JPanel();
-        JButton addGoal = new JButton("Add New Goal");
-        addGoalButton.add(addGoal);
+        final JPanel addGoal = new JPanel();
+        addGoalButton = new JButton("Add New Goal");
+        addGoal.add(addGoalButton);
 
+        final JPanel buttons = new JPanel();
+        homeButton = new JButton("Home");
+        buttons.add(homeButton);
+        incomeButton = new JButton("Income");
+        buttons.add(incomeButton);
+        expenseButton = new JButton("Expense");
+        buttons.add(expenseButton);
+        goalsButton = new JButton("Goal");
+        buttons.add(goalsButton);
+
+        addGoalButton.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        viewSwitcher.switchTo(ViewNames.addGoal);
+                    }
+                }
+        );
+        homeButton.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        viewSwitcher.switchTo(ViewNames.home);
+                    }
+                }
+        );
+
+        expenseButton.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        viewSwitcher.switchTo(ViewNames.expenseHistory);
+                    }
+                }
+        );
+
+        goalsButton.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        viewSwitcher.switchTo(ViewNames.goalList);
+                    }
+                }
+        );
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(titleLabel);
@@ -48,12 +94,10 @@ public class GoalListView extends JPanel {
 
         setupGoalsTable();
 
-        attachSwitchToOnButton(addGoal, ViewNames.addGoal);
-
         this.add(goalsTablePanel);
 
         this.add(addGoalButton);
-        this.add(bottomButtons, BorderLayout.AFTER_LAST_LINE);
+        this.add(buttons, BorderLayout.AFTER_LAST_LINE);
 
         repaint();
     }
