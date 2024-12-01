@@ -5,9 +5,15 @@ package interface_adapter.add_goal;
 // create input data object containing that info
 // call method to start a use case, pass the input data into the use case
 
+import com.labrats.app.ViewNames;
+import data_access.UserData;
+import entity.Budget;
+import entity.Goal;
 import use_case.add_goal.AddGoalInputData;
 import use_case.add_goal.AddGoalInputBoundary;
+import view.ViewSwitcher;
 
+import javax.swing.text.View;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -15,21 +21,33 @@ import java.util.Date;
  * Controller for Add Income use case.
  */
 public class AddGoalController {
-    private final AddGoalInputBoundary addGoalUseCaseInteractor;
-    public AddGoalController(AddGoalInputBoundary addGoalUseCaseInteractor) {
-        this.addGoalUseCaseInteractor = addGoalUseCaseInteractor;
+    private UserData userData;
+    private ViewSwitcher viewSwitcher;
+
+    public AddGoalController(ViewSwitcher vs, UserData ud) {
+        userData = ud;
+        viewSwitcher = vs;
     }
 
-    /**
-     * Adds a new goal using the use case.
-     *
-     * @param target The name of the goal.
-     * @param amount The amount required to achieve the goal.
-     * @param targetDate The target date for achieving the goal.
-     */
-    public void execute(String target, double amount, LocalDate targetDate) {
-        final AddGoalInputData addGoalInputData = new AddGoalInputData(target, amount, targetDate);
+    public void addGoal(String target, String amountstr, LocalDate targetDate) {
 
-        addGoalUseCaseInteractor.execute(addGoalInputData);
+        if (target == null || amountstr == null || targetDate == null) {
+            System.out.println("invalid input");
+            return;
+        }
+        try {
+            var amount = Double.parseDouble(amountstr);
+            var g = new Goal(target, amount, targetDate);
+            userData.getGoals().add(g);
+            userData.save();
+        } catch (NumberFormatException ex) {
+            System.out.println("failed to parse amount");
+        }
+
+
+    }
+
+    public void switchToHomeView() {
+        viewSwitcher.switchTo(ViewNames.home);
     }
 }

@@ -12,10 +12,6 @@ public class GoalList {
         history = new ArrayList<>();
     }
 
-    public ArrayList<Goal> getHistory() {
-        return history;
-    }
-
 
     /**
      * Adds a goal into history.

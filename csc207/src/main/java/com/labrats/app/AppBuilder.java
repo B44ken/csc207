@@ -1,10 +1,13 @@
 package com.labrats.app;
 
 
+import entity.GoalList;
 import interface_adapter.add_budget.AddBudgetController;
+import interface_adapter.add_goal.AddGoalController;
 import use_case.ExpenseHistoryController;
 import use_case.AddExpenseController;
 import use_case.add_budget.AddBudgetInteractor;
+import use_case.goals.GoalListController;
 import use_case.history.BudgetHistoryController;
 
 import interface_adapter.add_income.AddIncomeViewModel;
@@ -32,7 +35,8 @@ public class AppBuilder {
     private IncomeHistoryView incomeHistoryView;
     private AddIncomeView addIncomeView;
     private GetInsightView getInsightView;
-    private ExpenseHistoryView expenseHistoryView;
+    private Expense expenseHistoryView;
+    private GoalListView goalListView;
 
     public AppBuilder() {
         cards = new JPanel(new CardLayout());
@@ -108,17 +112,19 @@ public class AppBuilder {
     }
 
     public AppBuilder addAddGoalView() {
-        var addGoalView = new AddGoalView();
-        addGoalView.setViewSwitcher(viewSwitcher);
-        viewSwitcher.add(ViewNames.addGoal, addGoalView);
+        var controller = new AddGoalController(viewSwitcher, userData);
+        var goalsView = new AddGoalView(controller, viewSwitcher);
+        goalsView.setViewSwitcher(viewSwitcher);
+        goalsView.setUserData(userData);
+        viewSwitcher.add(ViewNames.addGoal, goalsView);
         return this;
     }
 
     public AppBuilder addGoalsView() {
-        var goalsView = new GoalsView();
-        goalsView.setUserData(userData);
-        goalsView.setViewSwitcher(viewSwitcher);
-        viewSwitcher.add(ViewNames.goalList, goalsView);
+        var interactor = new GoalListController(userData);
+        goalListView = new GoalListView(bottomButtons, interactor);
+        goalListView.setViewSwitcher(viewSwitcher);
+        viewSwitcher.add(ViewNames.goalList, goalListView);
         return this;
     }
 
