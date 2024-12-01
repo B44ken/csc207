@@ -21,7 +21,11 @@ public class GoalList {
      * Adds a goal into history.
      * @param goal the goal to be added.
      */
-    public static void add(Goal goal) {
+    public void add(Goal goal) {
         history.add(goal);
+    }
+
+    public ArrayList<Goal> getList() {
+        return history;
     }
 }

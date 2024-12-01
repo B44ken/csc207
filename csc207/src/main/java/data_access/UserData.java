@@ -1,5 +1,6 @@
 package data_access;
 
+import entity.BudgetHistory;
 import entity.GoalList;
 import entity.TransactionHistory;
 
@@ -11,14 +12,14 @@ import entity.TransactionHistory;
 
 // public class UserDataFile implements UserData {
 public class UserData {
-    private String file;
-
     TransactionHistory history;
     GoalList goals;
+    BudgetHistory budgets;
 
     public UserData() {
         history = new TransactionHistory();
-        goals = new GoalList();        
+        goals = new GoalList();     
+        budgets = new BudgetHistory();   
     }
 
     public TransactionHistory getHistory() {
@@ -29,7 +30,9 @@ public class UserData {
         return goals;
     }
 
-    public void save() {
-        FileAccess.exportData(history, file);
+    public BudgetHistory getBudgets() {
+        return budgets;
     }
+
+    public void save() {}
 }
