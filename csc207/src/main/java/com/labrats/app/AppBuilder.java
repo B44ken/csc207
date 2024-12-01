@@ -1,7 +1,15 @@
 package com.labrats.app;
 
+
+import interface_adapter.add_budget.AddBudgetController;
+import use_case.ExpenseHistoryController;
+import use_case.AddExpenseController;
+import use_case.add_budget.AddBudgetInteractor;
+import use_case.history.BudgetHistoryController;
+
 import interface_adapter.add_income.AddIncomeViewModel;
 import use_case.ExpenseHistoryController;
+
 import view.*;
 
 import data_access.UserData;
@@ -83,18 +91,19 @@ public class AppBuilder {
     }
 
     public AppBuilder addExpenseHistoryView() {
-        var interactor = new ExpenseHistoryController(userData);
-        expenseHistoryView = new ExpenseHistoryView(interactor);
+        var expenseController = new ExpenseHistoryController(userData);
+        var budgetController = new BudgetHistoryController(userData);
+        var expenseHistoryView = new ExpenseHistoryView(bottomButtons, expenseController, budgetController);
         expenseHistoryView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.expenseHistory, expenseHistoryView);
         return this;
     }
 
     public AppBuilder addAddBudgetView() {
-        //var controller = new ExpenseHistoryController(userData);
-        //var expenseView = new ExpenseHistoryView(bottomButtons, controller);
-        //viewSwitcher.add(ViewNames.expenseHistory, expenseView);
-
+        var addBudgetController = new AddBudgetController(viewSwitcher, userData);
+        var addBudgetView = new AddBudgetView(addBudgetController, viewSwitcher);
+        addBudgetView.setViewSwitcher(viewSwitcher);
+        viewSwitcher.add(ViewNames.addBudget, addBudgetView);
         return this;
     }
 
