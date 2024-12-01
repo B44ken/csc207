@@ -14,7 +14,7 @@ public class GoalListController {
     public void execute(DefaultTableModel model) {
         model.setRowCount(0);
 
-        var goals = userData.getGoals().getHistory();
+        var goals = userData.getGoals().getList();
         for (Goal g : goals)
             model.addRow(new String[] {
                     g.getTarget(),

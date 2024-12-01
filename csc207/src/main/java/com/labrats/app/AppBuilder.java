@@ -1,5 +1,6 @@
 package com.labrats.app;
 
+import interface_adapter.add_goal.AddGoalController;
 import use_case.ExpenseHistoryController;
 import use_case.goals.GoalListController;
 import view.*;
@@ -100,9 +101,11 @@ public class AppBuilder {
     }
 
     public AppBuilder addAddGoalView() {
-        var controller = new GoalListController(userData);
-        var addGoalView = new GoalListView(bottomButtons, controller);
-        viewSwitcher.add(ViewNames.addGoal, addGoalView);
+        var controller = new AddGoalController(viewSwitcher, userData);
+        var goalsView = new AddGoalView(controller, viewSwitcher);
+        goalsView.setViewSwitcher(viewSwitcher);
+        goalsView.setUserData(userData);
+        viewSwitcher.add(ViewNames.addGoal, goalsView);
         return this;
     }
 

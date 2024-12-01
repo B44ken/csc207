@@ -20,13 +20,13 @@ public class AddGoalInteractor implements AddGoalInputBoundary {
     }
 
     /**
-     * Execute the Change Password Use Case.
+     * Execute the Add Goal Use Case.
      *
      * @param addGoalInputData the input data for this use case
      */
     @Override
     public void execute(AddGoalInputData addGoalInputData) {
-        final Goal goal = null;
+        final Goal goal = new Goal(null, null, null);
         goal.setTarget(addGoalInputData.getTarget());
         goal.setAmount(addGoalInputData.getAmount());
         goal.setTargetDate(addGoalInputData.getTargetDate());
