@@ -1,5 +1,6 @@
 package view;
 
+
 import com.labrats.app.ViewNames;
 import data_access.UserData;
 import entity.Budget;
@@ -9,6 +10,8 @@ import entity.TransactionHistory;
 import interface_adapter.add_budget.AddBudgetController;
 import use_case.ExpenseHistoryController;
 import use_case.history.BudgetHistoryController;
+import view.ViewSwitcher;
+
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -17,20 +20,28 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Class for ExpenseHistoryView, Includes Title, expenseHistory, addExpense, CHARTAPI, home buttons.
+ */
 public class ExpenseHistoryView extends JPanel {
-    private JPanel panel;
+    
+  private JPanel panel;
     private ViewSwitcher viewSwitcher;
 
     private JTable expenseTable;
     private DefaultTableModel expenseTableModel;
     private JPanel expenseTablePanel;
 
+
     private ExpenseHistoryController expenseInteractor;
     private BudgetHistoryController budgetInteractor;
 
+
+
+    private JPanel budgetTablePanel;
     private JTable budgetTable;
     private DefaultTableModel budgetTableModel;
-    private JPanel budgetTablePanel;
+
 
     private JTable budgetHistoryTable;
 
@@ -53,12 +64,14 @@ public class ExpenseHistoryView extends JPanel {
         this.panel = new JPanel();
 
         JPanel addExpenseButton = new JPanel();
-        JButton addExpense = new JButton("Add Expense");
+        addExpense = new JButton("Add Expense");
         addExpenseButton.add(addExpense);
+
 
         JPanel addBudgetButton = new JPanel();
         JButton addBudget = new JButton("Add Budget");
         addBudgetButton.add(addBudget);
+
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -78,8 +91,10 @@ public class ExpenseHistoryView extends JPanel {
         this.add(addBudgetButton);
         this.add(bottomButtons, BorderLayout.AFTER_LAST_LINE);
 
-        repaint();
+        repaint()
+
     }
+
 
     public void setViewSwitcher(ViewSwitcher viewSwitcher) {
         this.viewSwitcher = viewSwitcher;
@@ -90,7 +105,18 @@ public class ExpenseHistoryView extends JPanel {
             expenseInteractor.execute(expenseTableModel);
         if (budgetInteractor != null)
             budgetInteractor.execute(budgetTableModel);
+
     }
+
+
+    }
+
+    /*
+    public void repaint() {
+        if (interactor != null)
+            interactor.execute(expenseTableModel);
+    }
+     */
 
     public void attachSwitchToOnButton(JButton button, String viewName) {
         button.addActionListener(
@@ -101,9 +127,17 @@ public class ExpenseHistoryView extends JPanel {
                 });
     }
 
+    /**
+     * Populates table when.addUserData() is run in App.
+     */
     public void setupExpenseTable() {
         String[] columnNames = {"Name", "Amount", "Date", "Category"};
         expenseTableModel = new DefaultTableModel(columnNames, 0);
+
+        for (Transaction transaction : data.getHistory()) {
+            expenseTableModel.addRow(new String[]{transaction.getName(), String.valueOf(transaction.getAmount()),
+            transaction.getDate().toString(), transaction.getCategory()});
+        }
 
         expenseTable = new JTable(expenseTableModel);
         JScrollPane tableScrollPane = new JScrollPane(expenseTable);
@@ -116,12 +150,11 @@ public class ExpenseHistoryView extends JPanel {
         expenseTablePanel.setSize(300, 400);
         expenseTablePanel.setVisible(true);
     }
-
     public void setupBudgetTable() {
         String[] columnNames = {"Category", "Amount"};
         budgetTableModel = new DefaultTableModel(columnNames, 0);
 
-        budgetTable = new JTable(budgetTableModel);
+        expenseTable = new JTable(budgetTableModel);
         JScrollPane tableScrollPane = new JScrollPane(budgetTable);
         TitledBorder tableTitle = BorderFactory.createTitledBorder("Budget List");
         tableScrollPane.setBorder(tableTitle);

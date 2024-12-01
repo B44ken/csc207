@@ -1,14 +1,19 @@
 package com.labrats.app;
 
+
 import interface_adapter.add_budget.AddBudgetController;
 import use_case.ExpenseHistoryController;
 import use_case.AddExpenseController;
 import use_case.add_budget.AddBudgetInteractor;
 import use_case.history.BudgetHistoryController;
+
+import interface_adapter.add_income.AddIncomeViewModel;
+import use_case.ExpenseHistoryController;
+
 import view.*;
 
 import data_access.UserData;
-import data_access.UserDataFile;
+import data_access.UserDataFileAccess;
 
 import java.awt.CardLayout;
 
@@ -25,12 +30,13 @@ public class AppBuilder {
 
     private HomeView homeView;
     private IncomeHistoryView incomeHistoryView;
+    private AddIncomeView addIncomeView;
     private GetInsightView getInsightView;
-
+    private ExpenseHistoryView expenseHistoryView;
 
     public AppBuilder() {
         cards = new JPanel(new CardLayout());
-        userData = new UserDataFile("testdata.csv");
+        userData = new UserDataFileAccess("testdata.csv");
         viewSwitcher = new ViewSwitcher(cards);
         bottomButtons = new BottomButtons(viewSwitcher);
     }
@@ -38,6 +44,7 @@ public class AppBuilder {
     public AppBuilder addUserData() {
         homeView.setUserData(userData);
         incomeHistoryView.setUserData(this.userData);
+        expenseHistoryView.setUserData(this.userData);
         // getInsightView.setUserData(this.userData);
         // TODO
         // do user data stuff for other views
@@ -53,21 +60,33 @@ public class AppBuilder {
 
     public AppBuilder addAddIncomeView() {
         var addIncomeView = new AddIncomeView();
-        addIncomeView.setViewSwitcher(viewSwitcher);
+        // addIncomeView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.addIncome, addIncomeView);
         return this;
     }
 
     public AppBuilder addIncomeHistoryView() {
         incomeHistoryView = new IncomeHistoryView(viewSwitcher);
+        incomeHistoryView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.incomeHistory, incomeHistoryView);
         return this;
     }
 
+    /*
+    public AppBuilder addAddIncomeView() {
+        addIncomeView = new AddIncomeView(new AddIncomeViewModel());
+        addIncomeView.setViewSwitcher(viewSwitcher);
+        viewSwitcher.add(ViewNames.addIncome, addIncomeView);
+        return this;
+    }
+     */
+
     public AppBuilder addAddExpenseView() {
-        var controller = new AddExpenseController(viewSwitcher, userData);
-        var view = new AddExpenseView(controller, viewSwitcher);
-        viewSwitcher.add(ViewNames.addExpense, view);
+        var expenseView = new AddExpenseView();
+        expenseView.setViewSwitcher(viewSwitcher);
+        // expenseView.setAddExpenseController();
+        expenseView.setUserData(userData);
+        viewSwitcher.add(ViewNames.addExpense, expenseView);
         return this;
     }
 
@@ -97,6 +116,7 @@ public class AppBuilder {
 
     public AppBuilder addGoalsView() {
         var goalsView = new GoalsView();
+        goalsView.setUserData(userData);
         goalsView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.goalList, goalsView);
         return this;
@@ -112,7 +132,8 @@ public class AppBuilder {
     public JFrame build() {
         app = new JFrame("My Cool Finance App");
         app.add(cards);
-        viewSwitcher.switchTo(ViewNames.expenseHistory);
+        viewSwitcher.switchTo(ViewNames.home);
         return app;
     }
+
 }

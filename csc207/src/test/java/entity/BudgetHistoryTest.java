@@ -11,7 +11,7 @@ public class BudgetHistoryTest {
         budget.setCategoryName("food");
         budget.setAmount(50.0);
         budgetHistory.add(budget);
-        if(!budgetHistory.history.contains(budget)){
+        if(!budgetHistory.getList().contains(budget)){
             throw new Exception("add() method error.");
         }
     }

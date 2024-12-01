@@ -4,7 +4,8 @@ import java.time.LocalDate;
 
 import javax.swing.JFrame;
 
-import data_access.FileAccess;
+import data_access.ChartImageFactory;
+import data_access.UserDataFileAccess;
 
 /**
  * App class.
@@ -24,24 +25,26 @@ public class App {
         final AppBuilder appBuilder = new AppBuilder();
         final JFrame application = appBuilder
                 .addHomeView()
+                //.addAddIncomeView()
+                .addAddExpenseView()
                 .addIncomeHistoryView()
                 .addExpenseHistoryView()
                 .addUserData()
-                .addAddExpenseView()
                 .addGoalsView()
-                .addAddIncomeView()
                 .addAddGoalView()
                 .addAddBudgetView()
-
+                //.addAddIncomeUseCase()
+                //.addAddExpenseUseCase()
                 .build();
         application.pack();
         application.setVisible(true);
     }
 
     public static void runChartDemo() {
-        var test = FileAccess.importData("testdata.csv");
+        // var test = FileAccess.importData("testdata.csv");
+        var test = new UserDataFileAccess("testdata.csv");
 
-        var cif = new data_access.ChartImageFactory(test);
+        var cif = new ChartImageFactory(test.getHistory());
         var chart = cif.createImage(LocalDate.of(2024, 10, 1), LocalDate.of(2024, 10, 7));
         chart.setVisible(true);
 

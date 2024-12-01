@@ -140,10 +140,12 @@ public class GoalsView extends JPanel implements  ActionListener, PropertyChange
     }
 
     private void populateTable() {
-        if(goalsTable != null) {
-            DefaultTableModel model = (DefaultTableModel) goalsTable.getModel();
-            model.addRow(new Object[]{"1", "2", "3"});
-        }
+        if(goalsTable == null || userData == null)
+            return;
+        DefaultTableModel model = (DefaultTableModel) goalsTable.getModel();
+        model.setRowCount(0);
+        for(var g : userData.getGoals().getList())
+            model.addRow(new Object[]{g.getTarget(), g.getAmount(), g.getTargetDate()});
         // for every entry...
 
     }

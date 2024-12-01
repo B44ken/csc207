@@ -12,16 +12,16 @@ import entity.TransactionHistory;
 
 // public class UserDataFile implements UserData {
 public class UserData {
-    private String file;
-
     TransactionHistory history;
     GoalList goals;
     BudgetHistory budgets;
 
     public UserData() {
         history = new TransactionHistory();
+
         goals = new GoalList();
         budgets = new BudgetHistory();
+
     }
 
     public TransactionHistory getHistory() {
@@ -36,5 +36,6 @@ public class UserData {
 
     public void save() {
         FileAccess.exportData(history, file);
+
     }
 }
