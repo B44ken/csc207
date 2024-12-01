@@ -31,4 +31,14 @@ public class ChartImageFactory {
         byte[] image = api.fetchImage(history.getAllIncomes(), start, end); // method of ChartAPI
         return new JLabel(new ImageIcon(image));
     }
+
+    public JLabel createExpenseImage(LocalDate start, LocalDate end) {
+        byte[] image = api.fetchImage(history.getAllExpenses(), start, end);
+        return new JLabel(new ImageIcon(image));
+    }
+
+    public JLabel createQRCode () {
+        return new JLabel(api.fetchQRCode());
+
+    }
 }

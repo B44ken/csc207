@@ -4,13 +4,14 @@ import interface_adapter.add_income.AddIncomeViewModel;
 import interface_adapter.get_insight.GetInsightController;
 import interface_adapter.get_insight.GetInsightViewModel;
 import use_case.get_insight.GetInsightInteractor;
-import use_case.history.ExpenseHistoryController;
+import use_case.ExpenseHistoryController;
 import view.*;
 
 import data_access.UserData;
 import data_access.UserDataFileAccess;
 
 import java.awt.CardLayout;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -119,10 +120,10 @@ public class AppBuilder {
 
     // TODO need to fix
     public AppBuilder addGetInsightView() {
-//        GetInsightInteractor interactor = new GetInsightInteractor();
-//        GetInsightView getInsightView = new GetInsightView(bottomButtons, new GetInsightViewModel());
-//        getInsightView.setViewSwitcher(viewSwitcher);
-//        viewSwitcher.add(ViewNames.getInsight, getInsightView);
+        // GetInsightInteractor interactor = new GetInsightInteractor();
+        GetInsightView getInsightView = new GetInsightView(bottomButtons, new GetInsightViewModel());
+        getInsightView.setViewSwitcher(viewSwitcher);
+        viewSwitcher.add(ViewNames.getInsight, getInsightView);
         return this;
     }
 
