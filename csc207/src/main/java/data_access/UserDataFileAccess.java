@@ -1,22 +1,19 @@
 package data_access;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.lang.reflect.Array;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import javax.lang.model.type.UnionType;
+import javax.swing.JOptionPane;
 
 import entity.Budget;
 import entity.Expense;
 import entity.Goal;
 import entity.Income;
 import entity.Transaction;
-import entity.TransactionHistory;
 
 public class UserDataFileAccess extends UserData {
     private ArrayList<ArrayList<String>> csv;
@@ -91,7 +88,57 @@ public class UserDataFileAccess extends UserData {
         }
     }
 
+    public String serializeBudget(Budget budget) {
+        // amount,name,category,date,type
+        return String.format(
+            "%s,,%s,,budget\n",
+            budget.getAmount(),
+            budget.getCategoryName()
+        );
+    }
+
+    public String serializeGoal(Goal goal) {
+        return String.format(
+            "%s,%s,,%s,goal\n",
+            goal.getTarget(),
+            goal.getAmount(),  
+            goal.getTargetDate()
+        );
+    }
+
+    public String serializeTransaction(Transaction txn) {
+        return String.format(
+            "%s,%s,%s,%s,%s\n",
+            txn.getAmount(),
+            txn.getName(),
+            txn.getCategory(),
+            txn.getDate(),
+            txn.getClass().getSimpleName().toLowerCase()
+        );
+    }
+
+    public String serializeSomething(Object s) {
+        if(s instanceof Transaction)
+            return serializeTransaction((Transaction) s);
+        else if(s instanceof Goal)
+            return serializeGoal((Goal) s);
+        else if(s instanceof Budget)
+            return serializeBudget((Budget) s);
+        return "uh oh";
+    }
+
     public void save() {
-        // TODO
+        try {
+            var file = new PrintWriter(filePath);
+            for(var g : getGoals().getList())
+                file.write(serializeGoal(g));
+            for(var b : getBudgets().getList())
+                file.write(serializeBudget(b));
+            for(var t : getHistory().getHistory())
+                file.write(serializeTransaction(t));
+            file.flush();
+        } catch (FileNotFoundException x) {
+            JOptionPane.showMessageDialog(null, "couldnt find file " + filePath);
+        }
     }
 }
