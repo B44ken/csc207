@@ -16,7 +16,7 @@ public class BudgetHistoryController {
     public void execute(DefaultTableModel model) {
         model.setRowCount(0);
 
-        var history = userData.getBudgets().getHistory();
+        var history = userData.getBudgets().getList();
         for (Budget t : history)
             model.addRow(new String[] {
                     t.getCategoryName(),

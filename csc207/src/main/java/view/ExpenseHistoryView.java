@@ -64,7 +64,7 @@ public class ExpenseHistoryView extends JPanel {
         this.panel = new JPanel();
 
         JPanel addExpenseButton = new JPanel();
-        addExpense = new JButton("Add Expense");
+        JButton addExpense = new JButton("Add Expense");
         addExpenseButton.add(addExpense);
 
 
@@ -91,7 +91,7 @@ public class ExpenseHistoryView extends JPanel {
         this.add(addBudgetButton);
         this.add(bottomButtons, BorderLayout.AFTER_LAST_LINE);
 
-        repaint()
+        repaint();
 
     }
 
@@ -105,9 +105,6 @@ public class ExpenseHistoryView extends JPanel {
             expenseInteractor.execute(expenseTableModel);
         if (budgetInteractor != null)
             budgetInteractor.execute(budgetTableModel);
-
-    }
-
 
     }
 
@@ -134,11 +131,6 @@ public class ExpenseHistoryView extends JPanel {
         String[] columnNames = {"Name", "Amount", "Date", "Category"};
         expenseTableModel = new DefaultTableModel(columnNames, 0);
 
-        for (Transaction transaction : data.getHistory()) {
-            expenseTableModel.addRow(new String[]{transaction.getName(), String.valueOf(transaction.getAmount()),
-            transaction.getDate().toString(), transaction.getCategory()});
-        }
-
         expenseTable = new JTable(expenseTableModel);
         JScrollPane tableScrollPane = new JScrollPane(expenseTable);
         TitledBorder tableTitle = BorderFactory.createTitledBorder("Expense History");
@@ -154,7 +146,7 @@ public class ExpenseHistoryView extends JPanel {
         String[] columnNames = {"Category", "Amount"};
         budgetTableModel = new DefaultTableModel(columnNames, 0);
 
-        expenseTable = new JTable(budgetTableModel);
+        budgetTable = new JTable(budgetTableModel);
         JScrollPane tableScrollPane = new JScrollPane(budgetTable);
         TitledBorder tableTitle = BorderFactory.createTitledBorder("Budget List");
         tableScrollPane.setBorder(tableTitle);
@@ -179,7 +171,7 @@ public class ExpenseHistoryView extends JPanel {
         String[] budgetColumnNames = {"Category", "Amount"};
         budgetTableModel = new DefaultTableModel(budgetColumnNames, 0);
 
-        for (Budget budget : budgetData.getHistory()) {
+        for (Budget budget : budgetData.getList()) {
             budgetTableModel.addRow(new String[]{budget.getCategoryName(), String.valueOf(budget.getAmount())});
             // System.out.println("user data not null");
 

@@ -28,11 +28,11 @@ public class App {
                 //.addAddIncomeView()
                 .addAddExpenseView()
                 .addIncomeHistoryView()
-                .addExpenseHistoryView()
-                .addUserData()
+                // .addUserData()
                 .addGoalsView()
                 .addAddGoalView()
                 .addAddBudgetView()
+                .addExpenseHistoryView()
                 //.addAddIncomeUseCase()
                 //.addAddExpenseUseCase()
                 .build();
