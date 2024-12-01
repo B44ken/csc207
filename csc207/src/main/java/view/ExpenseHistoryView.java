@@ -108,6 +108,7 @@ public class ExpenseHistoryView extends JPanel {
 
     }
 
+
     /*
     public void repaint() {
         if (interactor != null)

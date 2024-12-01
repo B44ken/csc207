@@ -43,7 +43,7 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
 
         //Add chart API here!
 
-         this.panel = new JPanel();
+        this.panel = new JPanel();
 
          var addIncomeButton = new JButton(ViewNames.addIncome);
          viewSwitcher.listenForButton(addIncomeButton, ViewNames.addIncome);
