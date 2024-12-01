@@ -1,13 +1,17 @@
 package com.labrats.app;
 
 
-to ruimport entity.Expense;
+import entity.Expense;
 import entity.GoalList;
+import entity.IncomeFactory;
 import interface_adapter.add_budget.AddBudgetController;
 import interface_adapter.add_goal.AddGoalController;
+import interface_adapter.add_income.AddIncomeController;
+import interface_adapter.add_income.AddIncomePresenter;
 import use_case.ExpenseHistoryController;
 import use_case.AddExpenseController;
 import use_case.add_budget.AddBudgetInteractor;
+import use_case.add_income.AddIncomeInteractor;
 import use_case.goals.GoalListController;
 import use_case.history.BudgetHistoryController;
 
@@ -35,6 +39,7 @@ public class AppBuilder {
     private UserData userData;
     private ViewSwitcher viewSwitcher;
     private BottomButtons bottomButtons;
+    private final IncomeFactory incomeFactory = new IncomeFactory();
 
     private HomeView homeView;
     private IncomeHistoryView incomeHistoryView;
@@ -43,21 +48,12 @@ public class AppBuilder {
     private ExpenseHistoryView expenseHistoryView;
     private GoalListView goalListView;
 
+
     public AppBuilder() {
         cards = new JPanel(new CardLayout());
         userData = new UserDataFileAccess("testdata.csv");
         viewSwitcher = new ViewSwitcher(cards);
         bottomButtons = new BottomButtons(viewSwitcher);
-    }
-
-    public AppBuilder addUserData() {
-        homeView.setUserData(userData);
-        incomeHistoryView.setUserData(this.userData);
-        // expenseHistoryView.setUserData(this.userData);
-        // getInsightView.setUserData(this.userData);
-        // TODO
-        // do user data stuff for other views
-        return this;
     }
 
     public AppBuilder addHomeView() {
@@ -68,7 +64,7 @@ public class AppBuilder {
     }
 
     public AppBuilder addAddIncomeView() {
-        var addIncomeView = new AddIncomeView();
+        addIncomeView = new AddIncomeView(viewSwitcher);
         // addIncomeView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.addIncome, addIncomeView);
         return this;
@@ -76,19 +72,19 @@ public class AppBuilder {
 
     public AppBuilder addIncomeHistoryView() {
         incomeHistoryView = new IncomeHistoryView(viewSwitcher);
-        // incomeHistoryView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.incomeHistory, incomeHistoryView);
         return this;
     }
 
-    /*
-    public AppBuilder addAddIncomeView() {
-        addIncomeView = new AddIncomeView(new AddIncomeViewModel());
-        addIncomeView.setViewSwitcher(viewSwitcher);
-        viewSwitcher.add(ViewNames.addIncome, addIncomeView);
+
+    public AppBuilder addAddIncomeUseCase() {
+        final AddIncomePresenter presenter = new AddIncomePresenter();
+        final AddIncomeInteractor interactor = new AddIncomeInteractor(userData, presenter, incomeFactory);
+        final AddIncomeController controller = new AddIncomeController(interactor);
+        addIncomeView.setAddIncomeController(controller);
+//      viewSwitcher.add(ViewNames.addIncome, addIncomeView);
         return this;
     }
-     */
 
     public AppBuilder addAddExpenseView() {
         var expenseView = new AddExpenseView();
