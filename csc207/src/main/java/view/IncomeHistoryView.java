@@ -33,9 +33,8 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
     private UserData userData;
 
     // should we also remove the setViewSwitcher method then? if we are just going to pass the vs into the class
-    public IncomeHistoryView(ViewSwitcher vs) {
-        viewSwitcher = vs;
-
+    public IncomeHistoryView(ViewSwitcher viewSwitcher) {
+        this.viewSwitcher = viewSwitcher;
         final JLabel title = new JLabel("Income History");
 
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -47,9 +46,13 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
         //Add chart API here!
 
         this.panel = new JPanel();
+        var addIncomeButton = new JButton(ViewNames.addIncome);
 
-         var addIncomeButton = new JButton(ViewNames.addIncome);
-         viewSwitcher.listenForButton(addIncomeButton, ViewNames.addIncome);
+        addIncomeButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                viewSwitcher.switchTo(ViewNames.addIncome);
+            }
+        });
 
         final JPanel buttons = new JPanel();
         homeButton = new JButton("Home");
@@ -87,9 +90,13 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
+        var api = new ChartImageFactory(new TransactionHistory());
+        JLabel incomeChart = api.createIncomeImage(LocalDate.of(2024, 1, 1), LocalDate.now());
+
+
         this.add(title);
         this.add(panel);
-        // this.add(ChartAPI);
+        this.add(incomeChart);
         this.add(addIncomeButton);
         this.add(buttons, BorderLayout.AFTER_LAST_LINE);
     }
@@ -140,11 +147,9 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
         tablePanel.setSize(300, 400);
         tablePanel.setVisible(true);
         pane.add(tablePanel);
-        ChartImageFactory chart = new ChartImageFactory(userData.getHistory());
-        chart.createIncomeImage(LocalDate.of(2024, 1,1),LocalDate.now());
+        panel.setComponentZOrder(tablePanel, 0);
 
         // refreshes the component! instead of using .add() which would incorrectly put the table at the bottom of UI.
-        this.panel.setComponentZOrder(pane, 0);
     }
 
 }
