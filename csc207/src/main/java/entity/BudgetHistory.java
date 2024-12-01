@@ -20,6 +20,19 @@ public class BudgetHistory {
         history.add(budget);
     }
 
+
+    public BudgetHistory getAllBudgets() {
+        BudgetHistory result = new BudgetHistory();
+        for (var t : history) {
+            if (t instanceof Budget) {
+                result.add(t);
+            }
+        }
+        return result;
+    }
+
+    public ArrayList<Budget> getHistory() {
+
     public ArrayList<Budget> getList() {
         return history;
     }

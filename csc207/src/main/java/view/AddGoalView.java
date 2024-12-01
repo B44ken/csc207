@@ -10,33 +10,35 @@ import java.beans.PropertyChangeListener;
 import java.time.LocalDate;
 
 import javax.swing.*;
+import javax.swing.text.View;
 
+import entity.Expense;
 import entity.Goal;
+import view.BottomButtons;
 import interface_adapter.add_goal.AddGoalController;
 import interface_adapter.add_goal.AddGoalViewModel;
 
 public class AddGoalView extends JPanel implements ActionListener, PropertyChangeListener {
     private String viewName = "Add Goal View";
+    private AddGoalController addGoalController;
+
+    private final JButton confirmButton;
+    private final JButton cancelButton;
 
     private ViewSwitcher viewSwitcher;
     private UserData userData;
 
-    private final JButton homeButton;
-    private final JButton incomeButton;
-    private final JButton expenseButton;
-    private final JButton goalButton;
+    private AddGoalController controller;
 
-
-    public AddGoalView() {
-        super();
-
+    public AddGoalView(AddGoalController controller, ViewSwitcher viewSwitcher) {
+        this.controller = controller;
         final JLabel title = new JLabel("Add Goal");
         title.setAlignmentX((JComponent.CENTER_ALIGNMENT));
 
         JPanel targetPanel = new JPanel();
-        JTextField nameTextField = new JTextField(15);
+        JTextField targetTextField = new JTextField(15);
         targetPanel.add(new JLabel("Target:"));
-        targetPanel.add(nameTextField);
+        targetPanel.add(targetTextField);
 
         JPanel amountPanel = new JPanel();
         JTextField amountTextField = new JTextField(15);
@@ -58,68 +60,30 @@ public class AddGoalView extends JPanel implements ActionListener, PropertyChang
         targetYearPanel.add(new JLabel("Target Year:"));
         targetYearPanel.add(yearTextField);
 
-        JPanel confirmPanel = new JPanel();
-        JButton confirmButton = new JButton("Confirm");
-        confirmPanel.add(confirmButton);
+        final JPanel buttons1 = new JPanel();
+        cancelButton = new JButton("Cancel");
+        buttons1.add(cancelButton);
+        confirmButton = new JButton("Confirm");
+        buttons1.add(confirmButton);
 
-        JPanel cancelPanel = new JPanel();
-        JButton cancelButton = new JButton("Cancel");
-        cancelPanel.add(cancelButton);
 
         confirmButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String target = nameTextField.getText();
-                Double amount = Double.valueOf(amountTextField.getText());
-                Integer targetDay = Integer.valueOf(dayTextField.getText());
-                Integer targetMonth = Integer.valueOf(monthTextField.getText());
-                Integer targetYear = Integer.valueOf(yearTextField.getText());
-                LocalDate targetDate = LocalDate.of(targetYear, targetMonth, targetDay);
-                Goal newGoal = new Goal(target, amount, targetDate);
-                userData.getGoals().add(newGoal);
-                userData.save();
-                viewSwitcher.switchTo(ViewNames.home);
+                if (e.getSource().equals(confirmButton)) {
+                    LocalDate exampleDate = LocalDate.of(Integer.parseInt(yearTextField.getText()),
+                            Integer.parseInt(monthTextField.getText()),
+                            Integer.parseInt(dayTextField.getText()));
+                    controller.addGoal(
+                            targetTextField.getText(), amountTextField.getText(), exampleDate);
+                }
+                controller.switchToHomeView();
             }
         });
 
-        final JPanel buttons2 = new JPanel();
-        homeButton = new JButton("Home");
-        buttons2.add(homeButton);
-        incomeButton = new JButton("Income");
-        buttons2.add(incomeButton);
-        expenseButton = new JButton("Expense");
-        buttons2.add(expenseButton);
-        goalButton = new JButton("Goal");
-        buttons2.add(goalButton);
-
-        homeButton.addActionListener(
+        cancelButton.addActionListener(
                 new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
+                    public void actionPerformed(ActionEvent evt) {
                         viewSwitcher.switchTo(ViewNames.home);
-                    }
-                });
-
-        incomeButton.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        viewSwitcher.switchTo(ViewNames.incomeHistory);
-                    }
-                });
-
-        expenseButton.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        viewSwitcher.switchTo(ViewNames.expenseHistory);
-                    }
-                });
-
-        goalButton.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        viewSwitcher.switchTo(ViewNames.goalList);
                     }
                 });
 
@@ -131,8 +95,7 @@ public class AddGoalView extends JPanel implements ActionListener, PropertyChang
         mainPanel.add(targetDayPanel);
         mainPanel.add(targetMonthPanel);
         mainPanel.add(targetYearPanel);
-        mainPanel.add(confirmPanel);
-        mainPanel.add(buttons2);
+        mainPanel.add(buttons1);
 
         this.add(mainPanel);
 
@@ -150,5 +113,12 @@ public class AddGoalView extends JPanel implements ActionListener, PropertyChang
     public void setViewSwitcher(ViewSwitcher vs) {
         viewSwitcher = vs;
     }
+
+    public void setUserData(UserData ud) {
+        userData = ud;
+        this.repaint();
+    }
+
+    public String getViewName() {return viewName;}
 
 }
