@@ -1,8 +1,18 @@
 package com.labrats.app;
 
+
+import entity.GoalList;
+import interface_adapter.add_budget.AddBudgetController;
 import interface_adapter.add_goal.AddGoalController;
 import use_case.ExpenseHistoryController;
+import use_case.AddExpenseController;
+import use_case.add_budget.AddBudgetInteractor;
 import use_case.goals.GoalListController;
+import use_case.history.BudgetHistoryController;
+
+import interface_adapter.add_income.AddIncomeViewModel;
+import use_case.ExpenseHistoryController;
+
 import view.*;
 
 import data_access.UserData;
@@ -25,7 +35,7 @@ public class AppBuilder {
     private IncomeHistoryView incomeHistoryView;
     private AddIncomeView addIncomeView;
     private GetInsightView getInsightView;
-    private ExpenseHistoryView expenseHistoryView;
+    private Expense expenseHistoryView;
     private GoalListView goalListView;
 
     public AppBuilder() {
@@ -85,18 +95,19 @@ public class AppBuilder {
     }
 
     public AppBuilder addExpenseHistoryView() {
-        var interactor = new ExpenseHistoryController(userData);
-        expenseHistoryView = new ExpenseHistoryView(interactor);
+        var expenseController = new ExpenseHistoryController(userData);
+        var budgetController = new BudgetHistoryController(userData);
+        var expenseHistoryView = new ExpenseHistoryView(bottomButtons, expenseController, budgetController);
         expenseHistoryView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.expenseHistory, expenseHistoryView);
         return this;
     }
 
     public AppBuilder addAddBudgetView() {
-        //var controller = new ExpenseHistoryController(userData);
-        //var expenseView = new ExpenseHistoryView(bottomButtons, controller);
-        //viewSwitcher.add(ViewNames.expenseHistory, expenseView);
-
+        var addBudgetController = new AddBudgetController(viewSwitcher, userData);
+        var addBudgetView = new AddBudgetView(addBudgetController, viewSwitcher);
+        addBudgetView.setViewSwitcher(viewSwitcher);
+        viewSwitcher.add(ViewNames.addBudget, addBudgetView);
         return this;
     }
 
