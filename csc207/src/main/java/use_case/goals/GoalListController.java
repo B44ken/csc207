@@ -4,10 +4,10 @@ import javax.swing.table.DefaultTableModel;
 import data_access.UserData;
 import entity.Goal;
 
-public class GoalsController {
+public class GoalListController {
     private UserData userData;
 
-    public GoalsController(UserData ud) {
+    public GoalListController(UserData ud) {
         this.userData = ud;
     }
 

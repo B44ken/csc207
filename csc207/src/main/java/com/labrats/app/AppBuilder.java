@@ -1,7 +1,7 @@
 package com.labrats.app;
 
-import interface_adapter.add_income.AddIncomeViewModel;
 import use_case.ExpenseHistoryController;
+import use_case.goals.GoalListController;
 import view.*;
 
 import data_access.UserData;
@@ -25,6 +25,7 @@ public class AppBuilder {
     private AddIncomeView addIncomeView;
     private GetInsightView getInsightView;
     private ExpenseHistoryView expenseHistoryView;
+    private GoalListView goalListView;
 
     public AppBuilder() {
         cards = new JPanel(new CardLayout());
@@ -99,17 +100,17 @@ public class AppBuilder {
     }
 
     public AppBuilder addAddGoalView() {
-        var addGoalView = new AddGoalView();
-        addGoalView.setViewSwitcher(viewSwitcher);
+        var controller = new GoalListController(userData);
+        var addGoalView = new GoalListView(bottomButtons, controller);
         viewSwitcher.add(ViewNames.addGoal, addGoalView);
         return this;
     }
 
     public AppBuilder addGoalsView() {
-        var goalsView = new GoalsView();
-        goalsView.setUserData(userData);
-        goalsView.setViewSwitcher(viewSwitcher);
-        viewSwitcher.add(ViewNames.goalList, goalsView);
+        var interactor = new GoalListController(userData);
+        goalListView = new GoalListView(bottomButtons, interactor);
+        goalListView.setViewSwitcher(viewSwitcher);
+        viewSwitcher.add(ViewNames.goalList, goalListView);
         return this;
     }
 

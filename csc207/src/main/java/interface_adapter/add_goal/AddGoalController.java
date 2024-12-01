@@ -38,7 +38,7 @@ public class AddGoalController {
         try {
             var amount = Double.parseDouble(amountstr);
             var g = new Goal(target, amount, targetDate);
-            userData.getList().add(g);
+            userData.getGoals().add(g);
             userData.save();
         } catch (NumberFormatException ex) {
             System.out.println("failed to parse amount");

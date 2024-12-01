@@ -2,23 +2,16 @@ package view;
 
 import com.labrats.app.ViewNames;
 import data_access.UserData;
-import entity.Goal;
-import entity.GoalList;
-import use_case.goals.GoalsController;
+import use_case.goals.GoalListController;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import javax.swing.text.View;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.time.LocalDate;
 
-public class GoalsView extends JPanel {
+public class GoalListView extends JPanel {
     private final String viewName = "Goals";
 
     private DefaultTableModel goalsTableModel;
@@ -26,12 +19,12 @@ public class GoalsView extends JPanel {
     private JPanel goalsTablePanel;
     private JPanel panel;
 
-    private GoalsController goalsInteractor;
+    private GoalListController goalsInteractor;
 
     private ViewSwitcher viewSwitcher;
     private UserData userData;
 
-    public GoalsView(BottomButtons bottomButtons, GoalsController goalsInteractor) {
+    public GoalListView(BottomButtons bottomButtons, GoalListController goalsInteractor) {
         this.goalsInteractor = goalsInteractor;
 
         final JLabel titleLabel = new JLabel("Goals");
