@@ -8,19 +8,28 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AddGoalInteractorTest {
-    private AddGoalUserDataAccessInterface userDataAccessInterface;
-    private AddGoalOutputBoundary userPresenter;
-    private GoalList goalList;
-    private AddGoalInteractor interactor;
 
+    @Test
     void successTest() {
-        LocalDate exampleDate = LocalDate.of(2024, 12, 31);
-        AddGoalInputData inputData = new AddGoalInputData("car", 4000,
-                LocalDate.of(2024, 12, 31));
+        AddGoalInputData inputData = new AddGoalInputData(
+                "car", 2000, LocalDate.of(2024, 12,12));
+        GoalList goalList =  new GoalList();
 
-        interactor.execute(inputData);
+        AddGoalOutputBoundary successPresenter = new AddGoalOutputBoundary() {
+            @Override
+            public void prepareSuccessView(AddGoalOutputData goals) {
+                assertEquals("goal", goals.getTarget());
+            }
 
-        // assertEquals(1, goalList.size());
+            @Override
+            public void prepareFailView(String errorMessage) {
+                fail("Use case failure is unexpected.");
+            }
 
+            @Override
+            public void switchToHomeVIew() {
+
+            }
+        };
     }
 }

@@ -2,7 +2,6 @@ package use_case.add_goal;
 
 /**
  * The output Data for Add Goal Use Case.
- * This creates an Output Data Object for Interactor to update Database/Presenter to update the View.
  */
 
 public class AddGoalOutputData {
