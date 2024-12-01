@@ -23,6 +23,5 @@ public class ExpenseHistoryController {
                     t.getDate().toString(),
                     t.getCategory()
             });
-
+        }
     }
-}

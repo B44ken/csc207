@@ -1,6 +1,7 @@
 package view;
 
 import com.labrats.app.ViewNames;
+import data_access.ChartImageFactory;
 import data_access.UserData;
 import entity.Transaction;
 import entity.TransactionHistory;
@@ -10,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 
 
 /**
@@ -30,6 +32,7 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
 
     private UserData userData;
 
+    // should we also remove the setViewSwitcher method then? if we are just going to pass the vs into the class
     public IncomeHistoryView(ViewSwitcher vs) {
         viewSwitcher = vs;
 
@@ -126,7 +129,6 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
         for (Transaction transaction : data.getHistory()) {
             tableModel.addRow(new String[]{transaction.getName(), String.valueOf(transaction.getAmount()),
                     transaction.getDate().toString(), transaction.getCategory()});
-            // System.out.println("user data not null");
         }
 
         incomeHistoryTable = new JTable(tableModel);
@@ -138,6 +140,8 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
         tablePanel.setSize(300, 400);
         tablePanel.setVisible(true);
         pane.add(tablePanel);
+        ChartImageFactory chart = new ChartImageFactory(userData.getHistory());
+        chart.createIncomeImage(LocalDate.of(2024, 1,1),LocalDate.now());
 
         // refreshes the component! instead of using .add() which would incorrectly put the table at the bottom of UI.
         this.panel.setComponentZOrder(pane, 0);

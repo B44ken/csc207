@@ -2,8 +2,12 @@ package data_access;
 
 import entity.TransactionHistory;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.image.BufferedImage;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -33,6 +37,8 @@ public class ChartAPI {
             this.expenses = expenses;
         }
     }
+
+    private String qrEndpoint = "https://quickchart.io/qr?text=https://clnx.utoronto.ca/home.htm";
 
     private String endpoint = "https://quickchart.io/chart/render/zm-203d31f0-9c91-4750-917b-1e888d1bea24";
     private String failImage = "https://steemitimages.com/640x0/http://backofthebook.ca/wp-content/uploads/2013/03/sad-puppy.jpg";
@@ -86,6 +92,23 @@ public class ChartAPI {
             } catch (MalformedURLException e2) {
                 throw new RuntimeException("something has gone terribly wrong");
             }
+        }
+    }
+
+    public ImageIcon fetchQRCode(){
+        try {
+            URL url = new URL(qrEndpoint);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            // Get the InputStream to read the image
+            InputStream inputStream = connection.getInputStream();
+            // Read the image into a BufferedImage
+            BufferedImage image = ImageIO.read(inputStream);
+
+            return new ImageIcon(image);
+        } catch (IOException e) {
+            System.out.println("Error");
+            return new ImageIcon(failImage);
         }
     }
 
