@@ -30,9 +30,10 @@ public class UserData {
         return goals;
     }
 
-    public BudgetHistory getBudgets() {
-        return budgets;
-    }
+    public BudgetHistory getBudgets() { return budgets; }
 
-    public void save() {}
+    public void save() {
+//        FileAccess.exportData(history, file);
+
+    }
 }

@@ -12,7 +12,7 @@ public class ExpenseHistoryController {
         this.userData = ud;
     }
 
-    public void execute(DefaultTableModel expenseTableModel, DefaultTableModel budgetTableModel) {
+    public void execute(DefaultTableModel expenseTableModel) {
         expenseTableModel.setRowCount(0);
 
         var history = userData.getHistory().getAllExpenses().getHistory();
@@ -24,13 +24,5 @@ public class ExpenseHistoryController {
                     t.getCategory()
             });
 
-        var budgets = userData.getBudgets().getList();
-        for (Budget b : budgets) {
-            System.out.println(b);
-            budgetTableModel.addRow(new String[] {
-                b.getCategoryName(),
-                String.valueOf(b.getAmount())
-            });
-        }
     }
 }

@@ -5,6 +5,12 @@ import use_case.ExpenseHistoryController;
 import use_case.goals.GoalListController;
 import view.*;
 
+import interface_adapter.add_budget.AddBudgetController;
+import use_case.ExpenseHistoryController;
+import use_case.AddExpenseController;
+import use_case.add_budget.AddBudgetInteractor;
+import use_case.history.BudgetHistoryController;
+
 import data_access.UserData;
 import data_access.UserDataFileAccess;
 
@@ -35,19 +41,10 @@ public class AppBuilder {
         bottomButtons = new BottomButtons(viewSwitcher);
     }
 
-    public AppBuilder addUserData() {
-        homeView.setUserData(userData);
-        incomeHistoryView.setUserData(this.userData);
-        expenseHistoryView.setUserData(this.userData);
-        // getInsightView.setUserData(this.userData);
-        // TODO
-        // do user data stuff for other views
-        return this;
-    }
-
     public AppBuilder addHomeView() {
         homeView = new HomeView();
         homeView.setViewSwitcher(viewSwitcher);
+        homeView.setUserData(userData);
         viewSwitcher.add(ViewNames.home, homeView);
         return this;
     }
@@ -61,6 +58,7 @@ public class AppBuilder {
 
     public AppBuilder addIncomeHistoryView() {
         incomeHistoryView = new IncomeHistoryView(viewSwitcher);
+        incomeHistoryView.setUserData(this.userData);
         incomeHistoryView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.incomeHistory, incomeHistoryView);
         return this;
@@ -85,18 +83,20 @@ public class AppBuilder {
     }
 
     public AppBuilder addExpenseHistoryView() {
-        var interactor = new ExpenseHistoryController(userData);
-        expenseHistoryView = new ExpenseHistoryView(interactor);
+        var expenseController = new ExpenseHistoryController(userData);
+        var budgetController = new BudgetHistoryController(userData);
+        var expenseHistoryView = new ExpenseHistoryView(bottomButtons, expenseController, budgetController);
+        expenseHistoryView.setUserData(this.userData);
         expenseHistoryView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.expenseHistory, expenseHistoryView);
         return this;
     }
 
     public AppBuilder addAddBudgetView() {
-        //var controller = new ExpenseHistoryController(userData);
-        //var expenseView = new ExpenseHistoryView(bottomButtons, controller);
-        //viewSwitcher.add(ViewNames.expenseHistory, expenseView);
-
+        var addBudgetController = new AddBudgetController(viewSwitcher, userData);
+        var addBudgetView = new AddBudgetView(addBudgetController, viewSwitcher);
+        addBudgetView.setViewSwitcher(viewSwitcher);
+        viewSwitcher.add(ViewNames.addBudget, addBudgetView);
         return this;
     }
 
