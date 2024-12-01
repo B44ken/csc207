@@ -23,6 +23,7 @@ public class AppBuilder {
     private HomeView homeView;
     private IncomeHistoryView incomeHistoryView;
     private AddIncomeView addIncomeView;
+    private AddExpenseView addExpenseView;
     private GetInsightView getInsightView;
     private ExpenseHistoryView expenseHistoryView;
 
@@ -74,11 +75,11 @@ public class AppBuilder {
      */
 
     public AppBuilder addAddExpenseView() {
-        var expenseView = new AddExpenseView();
-        expenseView.setViewSwitcher(viewSwitcher);
+        addExpenseView = new AddExpenseView(expenseHistoryView);
+        addExpenseView.setViewSwitcher(viewSwitcher);
         // expenseView.setAddExpenseController();
-        expenseView.setUserData(userData);
-        viewSwitcher.add(ViewNames.addExpense, expenseView);
+        addExpenseView.setUserData(userData);
+        viewSwitcher.add(ViewNames.addExpense, addExpenseView);
         return this;
     }
 

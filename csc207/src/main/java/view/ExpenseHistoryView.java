@@ -42,7 +42,7 @@ public class ExpenseHistoryView extends JPanel implements ActionListener {
     //private IncomeHistoryController interactor;
 
     public ExpenseHistoryView(ExpenseHistoryController interactor) {
-        //this.interactor = interactor;
+        this.interactor = interactor;
 
         final JLabel title = new JLabel("Expense History");
 
@@ -67,6 +67,19 @@ public class ExpenseHistoryView extends JPanel implements ActionListener {
         JPanel addBudgetButton = new JPanel();
         JButton addBudget = new JButton("Add Budget");
         addBudgetButton.add(addBudget);
+
+        final JLabel budgetTitle = new JLabel("Budget History");
+        budgetTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        this.budgetTablePanel = new JPanel(); // add
+
+        budgetTable = new JTable(budgetTableModel);
+        JScrollPane tableScrollPane = new JScrollPane(budgetTable);
+        budgetTable.setFillsViewportHeight(true);
+        budgetTable.setVisible(true);
+        budgetTablePanel.add(tableScrollPane);
+        budgetTablePanel.setSize(300, 100);
+        budgetTablePanel.setVisible(true);
 
         final JPanel buttons = new JPanel();
         homeButton = new JButton("Home");
@@ -94,20 +107,17 @@ public class ExpenseHistoryView extends JPanel implements ActionListener {
             }
         });
 
+        if (userData != null) {
+            this.setUserData(userData);
+        }
+
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
         this.add(panel);
-
-        /*
-        setupExpenseTable();
-        setupBudgetTable();
-        add(expenseTablePanel);
-        add(budgetTablePanel);
-        */
-
         this.add(addExpenseButton);
-        //add(bottomButtons, BorderLayout.AFTER_LAST_LINE);
+        this.add(budgetTitle);
+        //this.add(budgetTablePanel);
         this.add(buttons, BorderLayout.AFTER_LAST_LINE);
 
     }
@@ -130,7 +140,7 @@ public class ExpenseHistoryView extends JPanel implements ActionListener {
 
     public void setUserData(UserData userData) {
         this.userData = userData;
-        setupExpenseTable();
+        this.setupExpenseTable();
     }
 
     /*
@@ -154,7 +164,7 @@ public class ExpenseHistoryView extends JPanel implements ActionListener {
      */
     public void setupExpenseTable() {
         TransactionHistory data = userData.getHistory().getAllExpenses();
-        JPanel pane = new JPanel();
+        //JPanel pane = new JPanel();
 
         String[] columnNames = {"Name", "Amount", "Date", "Category"};
         expenseTableModel = new DefaultTableModel(columnNames, 0);
@@ -172,10 +182,17 @@ public class ExpenseHistoryView extends JPanel implements ActionListener {
         expenseTablePanel.add(tableScrollPane);
         expenseTablePanel.setSize(300, 400);
         expenseTablePanel.setVisible(true);
-        pane.add(expenseTablePanel);
+
+        if (panel != null) {
+            panel.removeAll();
+        }
+
+        panel.add(expenseTablePanel);
+
+        //pane.add(expenseTablePanel);
 
         // refreshes the component instead of using .add() which would incorrectly put the table at the bottom of UI
-        this.panel.setComponentZOrder(pane, 0);
+        //this.panel.setComponentZOrder(pane, 0);
     }
     public void setupBudgetTable() {
       String[] columnNames = { "Category", "Amount" };
