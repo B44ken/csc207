@@ -1,9 +1,11 @@
 package com.labrats.app;
 
 import interface_adapter.add_budget.AddBudgetController;
+import interface_adapter.add_goal.AddGoalController;
 import use_case.ExpenseHistoryController;
 import use_case.AddExpenseController;
 import use_case.add_budget.AddBudgetInteractor;
+import use_case.goals.GoalsController;
 import use_case.history.BudgetHistoryController;
 import view.*;
 
@@ -66,8 +68,8 @@ public class AppBuilder {
 
     public AppBuilder addAddExpenseView() {
         var controller = new AddExpenseController(viewSwitcher, userData);
-        var view = new AddExpenseView(controller, viewSwitcher);
-        viewSwitcher.add(ViewNames.addExpense, view);
+     //   var view = new AddExpenseView(controller, viewSwitcher);
+     //   viewSwitcher.add(ViewNames.addExpense, view);
         return this;
     }
 
@@ -89,14 +91,16 @@ public class AppBuilder {
     }
 
     public AppBuilder addAddGoalView() {
-        var addGoalView = new AddGoalView();
+        var addGoalController = new AddGoalController(viewSwitcher, userData);
+        var addGoalView = new AddGoalView(addGoalController, viewSwitcher);
         addGoalView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.addGoal, addGoalView);
         return this;
     }
 
     public AppBuilder addGoalsView() {
-        var goalsView = new GoalsView();
+        var goalsController = new GoalsController(userData);
+        var goalsView = new GoalsView(bottomButtons, goalsController);
         goalsView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.goalList, goalsView);
         return this;
@@ -112,7 +116,7 @@ public class AppBuilder {
     public JFrame build() {
         app = new JFrame("My Cool Finance App");
         app.add(cards);
-        viewSwitcher.switchTo(ViewNames.expenseHistory);
+        viewSwitcher.switchTo(ViewNames.home);
         return app;
     }
 }

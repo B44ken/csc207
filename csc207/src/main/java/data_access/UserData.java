@@ -28,7 +28,7 @@ public class UserData {
         return history;
     }
 
-    public GoalList getGoals() {
+    public GoalList getList() {
         return goals;
     }
 
@@ -37,4 +37,5 @@ public class UserData {
     public void save() {
         FileAccess.exportData(history, file);
     }
+
 }

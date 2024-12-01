@@ -37,5 +37,6 @@ public class Goal {
         return targetDate;
     }
 
-    public void setTargetDate(LocalDate targetDate) {this.targetDate = targetDate;}
+    public void setTargetDate(LocalDate targetDate) {
+        this.targetDate = targetDate;}
 }
