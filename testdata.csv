@@ -1,3 +1,4 @@
+amount,name,category,date,type
 60.0,mcdonalds,food,2024-10-02,expense
 2300.0,luxury beachfront cottage,rent,2024-10-01,expense
 100.0,wingstop,food,2024-10-03,expense
@@ -12,4 +13,3 @@
 1000.0,what,income,2024-01-01,income
 10000.0,what,food,2024-12-01,expense
 100000.0,job,wingstop,2024-01-01,income
-20.0,KFC,28,2024-12-02,expense
