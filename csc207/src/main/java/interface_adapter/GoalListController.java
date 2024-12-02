@@ -1,4 +1,4 @@
-package use_case.goals;
+package interface_adapter;
 
 import javax.swing.table.DefaultTableModel;
 import data_access.UserData;
@@ -19,7 +19,7 @@ public class GoalListController {
             model.addRow(new String[] {
                     g.getTarget(),
                     String.valueOf(g.getAmount()),
-                    String.valueOf(g.getTargetDate()),
+                    g.getTargetDate().toString(),
             });
     }
 }

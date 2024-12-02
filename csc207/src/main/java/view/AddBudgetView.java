@@ -58,6 +58,7 @@ public class AddBudgetView extends JPanel implements ActionListener, PropertyCha
         confirmButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 controller.addBudget(categoryNameTextField.getText(), amountTextField.getText());
+                // TODO: move vs to controller
                 viewSwitcher.switchTo(ViewNames.home);
             }
         });

@@ -6,35 +6,33 @@ import com.labrats.app.ViewNames;
 
 import data_access.UserData;
 import entity.Expense;
+import use_case.add_expense.AddExpenseInputData;
+import use_case.add_expense.AddExpenseInteractor;
+import use_case.add_expense.AddExpenseOutputBoundary;
+import use_case.add_expense.AddExpenseOutputData;
+import use_case.add_income.AddIncomeInputData;
+import view.AddExpenseView;
 import view.ViewSwitcher;
 
 public class AddExpenseController {
-    private UserData userData;
-    private ViewSwitcher viewSwitcher;
+   private final AddExpenseInteractor addExpenseInteractor;
 
-    public AddExpenseController(ViewSwitcher vs, UserData ud) {
-        this.userData = ud;
-        this.viewSwitcher = vs;
+    public AddExpenseController(AddExpenseInteractor addExpenseInteractor) {
+        this.addExpenseInteractor = addExpenseInteractor;
     }
 
-    public void addExpense(String name, String amountStr, String category) {
-        var date = LocalDate.now();
-
-        if (name == null || amountStr == null || category == null) {
-            System.out.println("invalid input");
-            return;
-        }
-        try {
-            var amount = Double.parseDouble(amountStr);
-            var t = new Expense(name, amount, category, date);
-            userData.getHistory().add(t);
-            userData.save();
-        } catch (NumberFormatException ex) {
-            System.out.println("failed to parse amount");
-        }
-    }
-
-    public void switchToHome() {
-        viewSwitcher.switchTo(ViewNames.home);
+    /**
+     * Executes the Add Income use case by passing UserData into Interactor
+     * @param name
+     * @param amount
+     * @param category
+     * @param date
+     *
+     */
+    public void execute(String name, String amount, String category, String year, String month, String date) {
+        Double doubleAmount = Double.valueOf(amount);
+        LocalDate localDate = LocalDate.of(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(date));
+        final AddExpenseInputData addExpenseInputData = new AddExpenseInputData(name, doubleAmount, category, localDate);
+        addExpenseInteractor.execute(addExpenseInputData);
     }
 }

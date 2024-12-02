@@ -1,45 +1,30 @@
 package use_case.add_expense;
 
-import entity.TransactionFactory;
-import entity.Transaction;
+import data_access.UserData;
+import entity.Expense;
+import entity.ExpenseFactory;
 
 import java.time.LocalDate;
 
 /**
  * The Add Expense Interactor
  */
-public class AddExpenseInteractor implements AddExpenseInputBoundary {
-    private final AddExpenseDataAccessInterface addExpenseDataAccessObject;
-    private final AddExpenseOutputBoundary addExpensePresenter;
-    private final TransactionFactory transactionFactory;
+public class AddExpenseInteractor {
+    private final UserData userData;
+    private final ExpenseFactory expenseFactory;
+    private final AddExpenseOutputBoundary userPresenter;
 
-    public AddExpenseInteractor(AddExpenseDataAccessInterface addExpenseDataAccessInterface,
-                                AddExpenseOutputBoundary addExpenseOutputBoundary,
-                                TransactionFactory transactionFactory) {
-        this.addExpenseDataAccessObject = addExpenseDataAccessInterface;
-        this.addExpensePresenter = addExpenseOutputBoundary;
-        this.transactionFactory = transactionFactory;
+    public AddExpenseInteractor(UserData userData, AddExpenseOutputBoundary userPresenter,
+                                ExpenseFactory expenseFactory) {
+        this.userData = userData;
+        this.expenseFactory = expenseFactory;
+        this.userPresenter = userPresenter;
     }
 
-    @Override
     public void execute(AddExpenseInputData addExpenseInputData) {
-
-        if (addExpenseDataAccessObject.existsByName(addExpenseInputData.getName())) {
-            addExpensePresenter.prepareFailView("Transaction already exists");
-        }
-        else {
-            final Transaction transaction = transactionFactory.create(addExpenseInputData.getName(),
-                    addExpenseInputData.getAmount(), addExpenseInputData.getCategory(), addExpenseInputData.getDate());
-
-            addExpenseDataAccessObject.save(transaction);
-
-            final AddExpenseOutputData addExpenseOutputData = new AddExpenseOutputData(transaction.getName(),
-                    false);
-        }
-    }
-
-    @Override
-    public void switchToHomeView() {
-        addExpensePresenter.switchToHomeView();
+        final Expense expense = expenseFactory.create(addExpenseInputData.getName(), addExpenseInputData.getAmount(),
+                addExpenseInputData.getCategory(), addExpenseInputData.getDate());
+        userData.getHistory().add(expense);
+        userData.save();
     }
 }
