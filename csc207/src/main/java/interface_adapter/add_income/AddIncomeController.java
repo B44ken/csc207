@@ -5,8 +5,12 @@ package interface_adapter.add_income;
 // create input data object containing that info
 // call method to start a use case, pass the input data into the use case
 
+import data_access.UserData;
+import entity.Income;
 import use_case.add_income.AddIncomeInputBoundary;
 import use_case.add_income.AddIncomeInputData;
+import use_case.add_income.AddIncomeInteractor;
+import use_case.add_income.AddIncomeOutputBoundary;
 
 import java.time.LocalDate;
 
@@ -14,32 +18,26 @@ import java.time.LocalDate;
  * Controller for Add Income use case.
  */
 public class AddIncomeController {
-    private final AddIncomeInputBoundary addIncomeUseCaseInteractor;
-    public AddIncomeController(AddIncomeInputBoundary addIncomeUseCaseInteractor) {
-        this.addIncomeUseCaseInteractor = addIncomeUseCaseInteractor;
-    }
+    private final AddIncomeInteractor addIncomeInteractor;
 
+    public AddIncomeController(AddIncomeInteractor addIncomeInteractor) {
+        this.addIncomeInteractor = addIncomeInteractor;
+    }
     /**
-     * Executes the Add Income use case.
-     * @param name to be added
+     * Executes the Add Income use case by passing UserData into Interactor
+     * @param name
      * @param amount
      * @param category
+     * @param year
+     * @param month
      * @param date
      *
      */
-    public void execute(String name, double amount, String category, LocalDate date) {
-        final AddIncomeInputData addIncomeInputData = new AddIncomeInputData(name, amount, category, date);
-
-        addIncomeUseCaseInteractor.execute(addIncomeInputData);
+    public void execute(String name, String amount, String category, String year, String month, String date) {
+        Double doubleAmount = Double.valueOf(amount);
+        LocalDate localDate = LocalDate.of(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(date));
+        final AddIncomeInputData addIncomeInputData = new AddIncomeInputData(name, doubleAmount, category, localDate);
+        addIncomeInteractor.execute(addIncomeInputData);
     }
-
-    /**
-     * Executes the "switch to LoginView" Use Case.
-     */
-    public void switchToHomeView() {
-        addIncomeUseCaseInteractor.switchToHomeView();
-    }
-
-
 
 }

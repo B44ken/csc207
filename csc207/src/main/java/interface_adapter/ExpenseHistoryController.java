@@ -1,8 +1,7 @@
-package use_case;
+package interface_adapter;
 
 import javax.swing.table.DefaultTableModel;
 import data_access.UserData;
-import entity.Budget;
 import entity.Transaction;
 
 public class ExpenseHistoryController {
@@ -12,7 +11,7 @@ public class ExpenseHistoryController {
         this.userData = ud;
     }
 
-    public void execute(DefaultTableModel expenseTableModel, DefaultTableModel budgetTableModel) {
+    public void execute(DefaultTableModel expenseTableModel) {
         expenseTableModel.setRowCount(0);
 
         var history = userData.getHistory().getAllExpenses().getHistory();
@@ -23,14 +22,5 @@ public class ExpenseHistoryController {
                     t.getDate().toString(),
                     t.getCategory()
             });
-
-        var budgets = userData.getBudgets().getList();
-        for (Budget b : budgets) {
-            System.out.println(b);
-            budgetTableModel.addRow(new String[] {
-                b.getCategoryName(),
-                String.valueOf(b.getAmount())
-            });
         }
     }
-}

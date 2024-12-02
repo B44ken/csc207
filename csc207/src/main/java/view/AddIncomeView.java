@@ -22,21 +22,12 @@ public class AddIncomeView extends JPanel implements ActionListener, PropertyCha
     private String viewName = "Add Income";
 
     private AddIncomeController addIncomeController;
-    //private final AddIncomeViewModel addIncomeViewModel;
 
     private ViewSwitcher viewSwitcher;
-    private UserData userData;
 
-    //private ViewSwitcher viewSwitcher;
-    // change above to what controller is actually called later
-
-    public AddIncomeView() {
+    public AddIncomeView(ViewSwitcher vs) {
         super();
-
-
-        //this.addIncomeViewModel = incomeViewModel;
-
-
+        this.viewSwitcher = vs;
         final JLabel title = new JLabel("Add Income");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -80,16 +71,11 @@ public class AddIncomeView extends JPanel implements ActionListener, PropertyCha
 
         confirmButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String name = nameTextField.getText();
-                Double amount = Double.valueOf(amountTextField.getText());
-                String category = categoryTextField.getText();
-                Integer day = Integer.valueOf(dayTextField.getText());
-                Integer month = Integer.valueOf(monthTextField.getText());
-                Integer year = Integer.valueOf(yearTextField.getText());
-                LocalDate date = LocalDate.of(year, month, day);
                 // input into text file here using controller (--> interactor --> presenter)
                 // after everything funnelled into txt file go back to home
-                viewSwitcher.switchTo(ViewNames.home);
+                addIncomeController.execute(nameTextField.getText(), amountTextField.getText()
+                        ,categoryTextField.getText(), yearTextField.getText(), monthTextField.getText(), dayTextField.getText());
+                viewSwitcher.switchTo(ViewNames.incomeHistory);
             }
         });
 
@@ -130,17 +116,12 @@ public class AddIncomeView extends JPanel implements ActionListener, PropertyCha
         return viewName;
     }
 
-
-    public void setUserData(UserData ud) {
-        userData = ud;
-        this.repaint();
-    }
-
-    public void repaint() {
-        // TODO
-    }
     public void setViewSwitcher(ViewSwitcher viewSwitcher) {
         this.viewSwitcher = viewSwitcher;
 
+    }
+
+    public void setAddIncomeController(AddIncomeController controller) {
+        this.addIncomeController = controller;
     }
 }

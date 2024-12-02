@@ -25,15 +25,18 @@ public class App {
         final AppBuilder appBuilder = new AppBuilder();
         final JFrame application = appBuilder
                 .addHomeView()
-                //.addAddIncomeView()
+                .addExpenseHistoryView()
                 .addAddExpenseView()
                 .addIncomeHistoryView()
-                .addExpenseHistoryView()
-                .addUserData()
-                .addGoalsView()
+                .addAddIncomeView()
+                .addGoalListView()
                 .addAddGoalView()
+                .addReportView()
                 .addAddBudgetView()
-                //.addAddIncomeUseCase()
+                .addAddIncomeUseCase()
+                .addAddBudgetUseCase()
+                .addAddExpenseUseCase()
+                .addReportUseCase()
                 //.addAddExpenseUseCase()
                 .build();
         application.pack();

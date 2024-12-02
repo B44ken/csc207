@@ -18,8 +18,10 @@ public class UserData {
 
     public UserData() {
         history = new TransactionHistory();
-        goals = new GoalList();     
-        budgets = new BudgetHistory();   
+
+        goals = new GoalList();
+        budgets = new BudgetHistory();
+
     }
 
     public TransactionHistory getHistory() {
@@ -30,9 +32,7 @@ public class UserData {
         return goals;
     }
 
-    public BudgetHistory getBudgets() {
-        return budgets;
-    }
+    public BudgetHistory getBudgets() { return budgets; }
 
-    public void save() {}
+    public void save() { }
 }

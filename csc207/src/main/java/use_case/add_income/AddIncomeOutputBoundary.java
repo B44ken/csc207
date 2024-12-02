@@ -6,9 +6,8 @@ package use_case.add_income;
 public interface AddIncomeOutputBoundary {
     /**
      * Prepares the success view for the Add Income Use Case.
-     * @param outputData the output data
      */
-    void prepareSuccessView(AddIncomeOutputData outputData);
+    void prepareSuccessView();
 
     /**
      * Prepares the failure view for the Add Income Use Case.
@@ -16,8 +15,4 @@ public interface AddIncomeOutputBoundary {
      */
     void prepareFailView(String errorMessage);
 
-    /**
-     * Switches to the Home View.
-     */
-    void switchToHomeVIew();
 }

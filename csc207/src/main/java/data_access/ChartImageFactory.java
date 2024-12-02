@@ -23,7 +23,22 @@ public class ChartImageFactory {
 
     // create an image that can be added to a view
     public JLabel createImage(LocalDate start, LocalDate end) {
-        byte[] image = api.fetchImage(history.getAllExpenses(), start, end); // method of ChartAPI
+        byte[] image = api.fetchImage(history, start, end); // method of ChartAPI
         return new JLabel(new ImageIcon(image));
+    }
+
+    public JLabel createIncomeImage(LocalDate start, LocalDate end) {
+        byte[] image = api.fetchImage(history.getAllIncomes(), start, end); // method of ChartAPI
+        return new JLabel(new ImageIcon(image));
+    }
+
+    public JLabel createExpenseImage(LocalDate start, LocalDate end) {
+        byte[] image = api.fetchImage(history.getAllExpenses(), start, end);
+        return new JLabel(new ImageIcon(image));
+    }
+
+    public JLabel createQRCode () {
+        return new JLabel(api.fetchQRCode());
+
     }
 }

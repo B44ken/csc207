@@ -1,6 +1,6 @@
 package interface_adapter.add_expense;
 
-import java.time.LocalDate;
+import interface_adapter.add_income.AddIncomeState;
 
 /**
  * The state for the Add Expense View Model.
@@ -8,72 +8,28 @@ import java.time.LocalDate;
 public class AddExpenseState {
 
     private String name = "";
-    private String nameError;
-    private double amount = 0;
-    private double amountError;
-    private String category = "";
-    private String categoryError;
-    private LocalDate date = LocalDate.now();
-    private LocalDate dateError;
+
+    private String addFail;
+
+    public AddExpenseState(AddExpenseState copy) {
+        this.name = copy.name;
+        this.addFail = copy.addFail;
+    }
+
+    // Because of the previous copy constructor, the default constructor must be explicit.
+    // I DON'T GET THIS
+    public AddExpenseState() {
+    }
 
     public String getName() {
         return name;
     }
 
-    public String getNameError() {
-        return nameError;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-    public double getAmountError() {
-        return amountError;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public String getCategoryError() {
-        return categoryError;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-    public LocalDate getDateError() {
-        return dateError;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
-    public void setNameError(String nameError) {
-        this.nameError = nameError;
-    }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
-    public void setAmountError(double amountError) {
-        this.amountError = amountError;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-    public void setDateError(LocalDate dateError) {
-        this.dateError = dateError;
-    }
-
-    @Override
-    public String toString() {
-        return "To be implemented/ in progress";
+    public void setAddFail(String addFail) {
+        this.addFail = addFail;
     }
 }

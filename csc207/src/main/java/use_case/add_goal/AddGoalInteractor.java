@@ -1,43 +1,33 @@
 package use_case.add_goal;
 
+import data_access.UserData;
 import entity.Goal;
+import entity.GoalFactory;
 import entity.GoalList;
 
 /**
  * The Add Goal Interactor.
  */
-public class AddGoalInteractor implements AddGoalInputBoundary {
-    private final AddGoalUserDataAccessInterface userDataAccessObject;
+public class AddGoalInteractor {
+    private final UserData userData;
+    private final GoalFactory goalFactory;
     private final AddGoalOutputBoundary userPresenter;
-    private final GoalList goals;
 
-    public AddGoalInteractor(AddGoalUserDataAccessInterface userDataAccessObject,
-                               AddGoalOutputBoundary userPresenter,
-                               GoalList goals) {
-        this.userDataAccessObject = userDataAccessObject;
+    public AddGoalInteractor(UserData userData, AddGoalOutputBoundary userPresenter, GoalFactory goalFactory) {
+        this.userData = userData;
+        this.goalFactory = goalFactory;
         this.userPresenter = userPresenter;
-        this.goals = goals;
     }
 
     /**
-     * Execute the Change Password Use Case.
+     * Execute the Add Goal Use Case.
      *
      * @param addGoalInputData the input data for this use case
      */
-    @Override
     public void execute(AddGoalInputData addGoalInputData) {
-        final Goal goal = null;
-        goal.setTarget(addGoalInputData.getTarget());
-        goal.setAmount(addGoalInputData.getAmount());
-        goal.setTargetDate(addGoalInputData.getTargetDate());
-        goals.add(goal);
-        userDataAccessObject.addGoal(goal);
-        final AddGoalOutputData addGoalOutputData = new AddGoalOutputData(goal.getTarget(), false);
-        userPresenter.prepareSuccessView(addGoalOutputData);
-    }
-
-    @Override
-    public void switchToHomeView() {
-
+        final Goal goal = goalFactory.create(addGoalInputData.getTarget(), addGoalInputData.getAmount(),
+                addGoalInputData.getTargetDate());
+        userData.getGoals().add(goal);
+        userData.save();
     }
 }

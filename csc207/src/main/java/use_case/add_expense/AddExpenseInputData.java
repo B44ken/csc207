@@ -18,19 +18,19 @@ public class AddExpenseInputData {
         this.date = date;
     }
 
-    double getAmount(){
+    double getAmount() {
         return amount;
     }
 
-    String getName(){
+    String getName() {
         return name;
     }
 
-    String getCategory(){
+    String getCategory() {
         return category;
     }
 
-    LocalDate getDate(){
+    public LocalDate getDate() {
         return date;
     }
 }

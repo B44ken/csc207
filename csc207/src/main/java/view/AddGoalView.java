@@ -20,18 +20,14 @@ import interface_adapter.add_goal.AddGoalViewModel;
 
 public class AddGoalView extends JPanel implements ActionListener, PropertyChangeListener {
     private String viewName = "Add Goal View";
+
     private AddGoalController addGoalController;
 
-    private final JButton confirmButton;
-    private final JButton cancelButton;
-
     private ViewSwitcher viewSwitcher;
-    private UserData userData;
 
-    private AddGoalController controller;
-
-    public AddGoalView(AddGoalController controller, ViewSwitcher viewSwitcher) {
-        this.controller = controller;
+    public AddGoalView(ViewSwitcher vs) {
+        super();
+        this.viewSwitcher = vs;
         final JLabel title = new JLabel("Add Goal");
         title.setAlignmentX((JComponent.CENTER_ALIGNMENT));
 
@@ -60,32 +56,27 @@ public class AddGoalView extends JPanel implements ActionListener, PropertyChang
         targetYearPanel.add(new JLabel("Target Year:"));
         targetYearPanel.add(yearTextField);
 
-        final JPanel buttons1 = new JPanel();
-        cancelButton = new JButton("Cancel");
-        buttons1.add(cancelButton);
-        confirmButton = new JButton("Confirm");
-        buttons1.add(confirmButton);
+        JPanel confirmPanel = new JPanel();
+        JButton confirmButton = new JButton("Confirm");
+        confirmPanel.add(confirmButton);
 
+        JPanel cancelPanel = new JPanel();
+        JButton cancelButton = new JButton("Cancel");
+        cancelPanel.add(cancelButton);
 
         confirmButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (e.getSource().equals(confirmButton)) {
-                    LocalDate exampleDate = LocalDate.of(Integer.parseInt(yearTextField.getText()),
-                            Integer.parseInt(monthTextField.getText()),
-                            Integer.parseInt(dayTextField.getText()));
-                    controller.addGoal(
-                            targetTextField.getText(), amountTextField.getText(), exampleDate);
-                }
-                controller.switchToHomeView();
+                addGoalController.execute(targetTextField.getText(), amountTextField.getText(),
+                        dayTextField.getText(), monthTextField.getText(), yearTextField.getText());
+                viewSwitcher.switchTo(ViewNames.goalList);
             }
         });
 
-        cancelButton.addActionListener(
-                new ActionListener() {
-                    public void actionPerformed(ActionEvent evt) {
-                        viewSwitcher.switchTo(ViewNames.home);
-                    }
-                });
+        cancelButton.addActionListener( new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                viewSwitcher.switchTo(ViewNames.home);
+            }
+        });
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
@@ -95,11 +86,11 @@ public class AddGoalView extends JPanel implements ActionListener, PropertyChang
         mainPanel.add(targetDayPanel);
         mainPanel.add(targetMonthPanel);
         mainPanel.add(targetYearPanel);
-        mainPanel.add(buttons1);
+        mainPanel.add(confirmPanel);
+        mainPanel.add(cancelPanel);
 
+        this.add(title);
         this.add(mainPanel);
-
-
     }
 
     @Override
@@ -110,15 +101,15 @@ public class AddGoalView extends JPanel implements ActionListener, PropertyChang
     public void propertyChange(PropertyChangeEvent evt) {
     }
 
-    public void setViewSwitcher(ViewSwitcher vs) {
-        viewSwitcher = vs;
+    public String getViewName() {
+        return viewName;
     }
 
-    public void setUserData(UserData ud) {
-        userData = ud;
-        this.repaint();
+    public void setViewSwitcher(ViewSwitcher viewSwitcher) {
+        this.viewSwitcher = viewSwitcher;
     }
 
-    public String getViewName() {return viewName;}
-
+    public void setAddGoalController(AddGoalController controller) {
+        this.addGoalController = controller;
+    }
 }

@@ -1,38 +1,38 @@
-// package interface_adapter.add_expense;
+package interface_adapter.add_expense;
 
-// import use_case.add_expense.AddExpenseInputBoundary;
-// import use_case.add_expense.AddExpenseInputData;
+import java.time.LocalDate;
 
-// import java.time.LocalDate;
+import com.labrats.app.ViewNames;
 
-// /**
-//  * The controller for the Add Expense Use Case.
-//  */
-// public class AddExpenseController {
+import data_access.UserData;
+import entity.Expense;
+import use_case.add_expense.AddExpenseInputData;
+import use_case.add_expense.AddExpenseInteractor;
+import use_case.add_expense.AddExpenseOutputBoundary;
+import use_case.add_expense.AddExpenseOutputData;
+import use_case.add_income.AddIncomeInputData;
+import view.AddExpenseView;
+import view.ViewSwitcher;
 
-//     private final AddExpenseInputBoundary addExpenseUseCaseInteractor;
+public class AddExpenseController {
+   private final AddExpenseInteractor addExpenseInteractor;
 
-//     public AddExpenseController(AddExpenseInputBoundary addExpenseUseCaseInteractor) {
-//         this.addExpenseUseCaseInteractor = addExpenseUseCaseInteractor;
-//     }
+    public AddExpenseController(AddExpenseInteractor addExpenseInteractor) {
+        this.addExpenseInteractor = addExpenseInteractor;
+    }
 
-//     /**
-//      * Executes the Add Expense Use Case.
-//      * @param name the name of the expense
-//      * @param amount the amount of the expense
-//      * @param category the category of the expense
-//      * @param date the date of the expense
-//      */
-//     public void execute(String name, double amount, String category, LocalDate date){
-//         final AddExpenseInputData addExpenseInputData = new AddExpenseInputData(name, amount, category, date);
-
-//         addExpenseUseCaseInteractor.execute(addExpenseInputData);
-//     }
-
-//     /**
-//      * Executes the "switch to HomeView" Use Case.
-//      */
-//     public void switchToHomeView() {
-//         addExpenseUseCaseInteractor.switchToHomeView();
-//     }
-// }
+    /**
+     * Executes the Add Income use case by passing UserData into Interactor
+     * @param name
+     * @param amount
+     * @param category
+     * @param date
+     *
+     */
+    public void execute(String name, String amount, String category, String year, String month, String date) {
+        Double doubleAmount = Double.valueOf(amount);
+        LocalDate localDate = LocalDate.of(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(date));
+        final AddExpenseInputData addExpenseInputData = new AddExpenseInputData(name, doubleAmount, category, localDate);
+        addExpenseInteractor.execute(addExpenseInputData);
+    }
+}

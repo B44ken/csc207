@@ -1,5 +1,7 @@
 package use_case.add_expense;
 
+import entity.Expense;
+import entity.Goal;
 import entity.Transaction;
 
 /**
@@ -8,16 +10,9 @@ import entity.Transaction;
 public interface AddExpenseDataAccessInterface {
 
     /**
-     * Checks if the given expense name exists.
-     * @param name the name of the expense to look for
-     * @return true if an expense with the name exists; false otherwise
-     */
-    boolean existsByName(String name);
-
-    /**
      * Saves the expense transaction.
      * @param expense the transaction to save
      */
-    void save(Transaction expense);
+    void addExpense(Expense expense);
 
 }

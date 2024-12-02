@@ -1,52 +1,38 @@
 package use_case.add_income;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
+import data_access.UserData;
 import entity.Income;
-import entity.TransactionHistory;
+import entity.IncomeFactory;
 
+
+// this class no longer implements AddIncomeInputBoundary
 /**
  * The Add Income Interactor.
  */
-public class AddIncomeInteractor implements AddIncomeInputBoundary {
-    private final AddIncomeUserDataAccessInterface userDataAccessObject;
+public class AddIncomeInteractor{
+    private final UserData userData;
+    private final IncomeFactory incomeFactory;
     private final AddIncomeOutputBoundary userPresenter;
-    private final TransactionHistory transactionHistory;
 
-    public AddIncomeInteractor(AddIncomeUserDataAccessInterface userDataAccessObject,
-                                AddIncomeOutputBoundary userPresenter,
-                                TransactionHistory transactionHistory) {
-        this.userDataAccessObject = userDataAccessObject;
+    public AddIncomeInteractor(UserData userData, AddIncomeOutputBoundary userPresenter, IncomeFactory incomeFactory) {
+        this.userData = userData;
+        this.incomeFactory = incomeFactory;
         this.userPresenter = userPresenter;
-        this.transactionHistory = transactionHistory;
     }
 
     /**
      * Execute the Change Password Use Case.
      *
-     * @param addIncomeInputData the input data for this use case
+     * @param addIncomeInputData the input data for add income use case
      */
-    @Override
+    // @Override
     public void execute(AddIncomeInputData addIncomeInputData) {
-        // final Income income = null;
-        final Income income = new Income(null, null, null, null);
-        income.setName(addIncomeInputData.getName());
-        income.setAmount(addIncomeInputData.getAmount());
-        income.setCategory(addIncomeInputData.getCategory());
-        income.setDate(addIncomeInputData.getDate());
-        transactionHistory.add(income);
-
-        userDataAccessObject.addIncome(income);
-        final AddIncomeOutputData addIncomeOutputData = new AddIncomeOutputData(income.getName(), false);
-        userPresenter.prepareSuccessView(addIncomeOutputData);
+        final Income income = incomeFactory.create(addIncomeInputData.getName(), addIncomeInputData.getAmount(),
+                addIncomeInputData.getCategory(), addIncomeInputData.getDate());
+        userData.getHistory().add(income);
+        userData.save();
     }
 
-    /**
-     *
-     */
-    @Override
-    public void switchToHomeView() {
-        userPresenter.switchToHomeVIew();
-    }
 }

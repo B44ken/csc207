@@ -1,5 +1,7 @@
 package use_case.add_income;
 
+import data_access.UserData;
+
 /**
  * Add Income Use Case.
  */
@@ -7,9 +9,9 @@ package use_case.add_income;
 public interface AddIncomeInputBoundary {
     /**
      * Execute the Change Password Use Case.
-     * @param addIncomeInputData the input data for this use case
+     * @param userData the input data for this use case
      */
-    void execute(AddIncomeInputData addIncomeInputData);
+    void execute(UserData userData);
 
     void switchToHomeView();
 
