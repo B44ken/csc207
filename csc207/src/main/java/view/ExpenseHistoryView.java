@@ -15,7 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Class for ExpenseHistoryView, Includes Title, expenseHistory, addExpense, CHARTAPI, home buttons.
+ * Class for ExpenseHistoryView, Includes Title, expenseHistory, execute, CHARTAPI, home buttons.
  */
 public class ExpenseHistoryView extends JPanel {
     

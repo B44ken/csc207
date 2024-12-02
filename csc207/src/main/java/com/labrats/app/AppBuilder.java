@@ -112,7 +112,7 @@ public class AppBuilder {
     }
 
     public AppBuilder addAddExpenseUseCase() {
-        final AddExpensePresenter presenter = new AddExpensePresenter();
+        final AddExpensePresenter presenter = new AddExpensePresenter(viewSwitcher);
         final AddExpenseInteractor interactor = new AddExpenseInteractor(userData, presenter, expenseFactory);
         final AddExpenseController controller = new AddExpenseController(interactor);
         addExpenseView.setAddExpenseController(controller);

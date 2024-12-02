@@ -13,14 +13,25 @@ import view.ViewSwitcher;
  */
 public class AddExpensePresenter implements AddExpenseOutputBoundary {
 
-    public AddExpensePresenter() {
+    private final ViewSwitcher viewSwitcher;
+
+    public AddExpensePresenter(ViewSwitcher vs) {
+        this.viewSwitcher = vs;
     }
     @Override
-    public void prepareSuccessView() {
+    public void prepareSuccessView(AddExpenseOutputData outputData) {
+        JOptionPane.showMessageDialog(null, "Expense " + outputData.getName() + " successfully added!");
+        viewSwitcher.switchTo(ViewNames.home);
     }
 
     @Override
     public void prepareFailView(String error) {
+        JOptionPane.showMessageDialog(null, error);
+    }
+
+    @Override
+    public void switchToHomeView() {
+        viewSwitcher.switchTo(ViewNames.home);
     }
 
 }
