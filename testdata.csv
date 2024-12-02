@@ -1,3 +1,4 @@
+amount,name,category,date,type
 100.0,wingstop,food,2024-12-03,expense
 100.0,mcdonalds,food,2024-12-04,expense
 100.0,mcdonalds,food,2024-12-05,expense
@@ -6,10 +7,11 @@
 300.0,job,income,2024-12-03,income
 300.0,job,income,2024-12-05,income
 300.0,side hustle,income,2024-12-07,income
-amount,name,category,date,type
 1000.0,pet snake,,2024-12-31,goal
 600.0,another pet snake,,2024-12-31,goal
 2000.0,car,,2024-12-12,goal
+2000.0,bag,,2024-12-20,goal
+500.0,scooter,,2024-12-31,goal
 11.99,,fortnite battle pass,,budget
 2300.0,luxury beachfront cottage,rent,2024-10-01,expense
 100.0,wingstop,food,2024-10-03,expense
