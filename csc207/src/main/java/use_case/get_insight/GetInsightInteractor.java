@@ -1,8 +1,13 @@
 package use_case.get_insight;
 
 import data_access.UserData;
+import entity.*;
 import interface_adapter.get_insight.GetInsightPresenter;
 import use_case.get_insight.GetInsightInputData;
+
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Objects;
 
 public class GetInsightInteractor implements GetInsightInputBoundary {
 
@@ -11,9 +16,12 @@ public class GetInsightInteractor implements GetInsightInputBoundary {
     // constant: average spending of UOFT student
     private double AVERAGE_SPENDING = 1000;
 
-    public GetInsightInteractor(GetInsightInputData getInsightInputData) {
+    public GetInsightInteractor(UserData userData) {
         this.userData = userData;
+    }
 
+    public void setUserData(UserData userData) {
+        this.userData = userData;
     }
 
     /**
@@ -24,13 +32,16 @@ public class GetInsightInteractor implements GetInsightInputBoundary {
      *         tell the presenter to prepare a success view.
      * @param inputData
      */
-    public void execute(GetInsightInputData inputData) {
-        final GetInsightOutputData outputData = new GetInsightOutputData("", false);
-        presenter.prepareSuccessView(outputData);
+    public ArrayList<Deductible> execute(GetInsightInputData inputData) {
+        ArrayList<Deductible> result = new ArrayList<>();
+        // for every charity category transaction,
+        for (Transaction t : inputData.getInputData()) {
+            if (Objects.equals(t.getCategory(), "charity") && t instanceof Expense) {
+                Deductible deductible = new Deductible((Expense) t, new Income(t.getName(), t.getAmount() * 0.75, t.getCategory(), t.getDate()));
+                result.add(deductible);
+            }
         }
+        return result;
     }
 
-    // Data access objects:
-    // output what the net balance spending is
-    // your expenses this week are currently below/above/similar to what a UofT student spends on average!
-    // check out these resources to manage your spending better:
+}
