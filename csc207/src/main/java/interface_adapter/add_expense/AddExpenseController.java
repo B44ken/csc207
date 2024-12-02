@@ -1,38 +1,40 @@
-// package interface_adapter.add_expense;
+package interface_adapter.add_expense;
 
-// import use_case.add_expense.AddExpenseInputBoundary;
-// import use_case.add_expense.AddExpenseInputData;
+import java.time.LocalDate;
 
-// import java.time.LocalDate;
+import com.labrats.app.ViewNames;
 
-// /**
-//  * The controller for the Add Expense Use Case.
-//  */
-// public class AddExpenseController {
+import data_access.UserData;
+import entity.Expense;
+import view.ViewSwitcher;
 
-//     private final AddExpenseInputBoundary addExpenseUseCaseInteractor;
+public class AddExpenseController {
+    private UserData userData;
+    private ViewSwitcher viewSwitcher;
 
-//     public AddExpenseController(AddExpenseInputBoundary addExpenseUseCaseInteractor) {
-//         this.addExpenseUseCaseInteractor = addExpenseUseCaseInteractor;
-//     }
+    public AddExpenseController(ViewSwitcher vs, UserData ud) {
+        this.userData = ud;
+        this.viewSwitcher = vs;
+    }
 
-//     /**
-//      * Executes the Add Expense Use Case.
-//      * @param name the name of the expense
-//      * @param amount the amount of the expense
-//      * @param category the category of the expense
-//      * @param date the date of the expense
-//      */
-//     public void execute(String name, double amount, String category, LocalDate date){
-//         final AddExpenseInputData addExpenseInputData = new AddExpenseInputData(name, amount, category, date);
+    public void addExpense(String name, String amountStr, String category) {
+        var date = LocalDate.now();
 
-//         addExpenseUseCaseInteractor.execute(addExpenseInputData);
-//     }
+        if (name == null || amountStr == null || category == null) {
+            System.out.println("invalid input");
+            return;
+        }
+        try {
+            var amount = Double.parseDouble(amountStr);
+            var t = new Expense(name, amount, category, date);
+            userData.getHistory().add(t);
+            userData.save();
+        } catch (NumberFormatException ex) {
+            System.out.println("failed to parse amount");
+        }
+    }
 
-//     /**
-//      * Executes the "switch to HomeView" Use Case.
-//      */
-//     public void switchToHomeView() {
-//         addExpenseUseCaseInteractor.switchToHomeView();
-//     }
-// }
+    public void switchToHome() {
+        viewSwitcher.switchTo(ViewNames.home);
+    }
+}

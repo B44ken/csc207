@@ -1,26 +1,18 @@
 package com.labrats.app;
 
 
-import entity.Expense;
-import entity.GoalList;
 import entity.IncomeFactory;
 import interface_adapter.add_budget.AddBudgetController;
 import interface_adapter.add_goal.AddGoalController;
 import interface_adapter.add_income.AddIncomeController;
 import interface_adapter.add_income.AddIncomePresenter;
 import interface_adapter.income_history.IncomeHistoryController;
-import use_case.ExpenseHistoryController;
-import use_case.AddExpenseController;
-import use_case.add_budget.AddBudgetInteractor;
+import interface_adapter.ExpenseHistoryController;
 import use_case.add_income.AddIncomeInteractor;
 import use_case.goals.GoalListController;
 import use_case.history.BudgetHistoryController;
 
-import interface_adapter.add_income.AddIncomeViewModel;
-import interface_adapter.get_insight.GetInsightController;
 import interface_adapter.get_insight.GetInsightViewModel;
-import use_case.get_insight.GetInsightInteractor;
-import use_case.ExpenseHistoryController;
 
 import view.*;
 
@@ -28,7 +20,6 @@ import data_access.UserData;
 import data_access.UserDataFileAccess;
 
 import java.awt.CardLayout;
-import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -58,6 +49,7 @@ public class AppBuilder {
     }
 
     public AppBuilder addHomeView() {
+        HomeController controller = new HomeController(userData);
         homeView = new HomeView();
         homeView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.home, homeView);

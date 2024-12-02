@@ -3,14 +3,8 @@ package view;
 
 import com.labrats.app.ViewNames;
 import data_access.UserData;
-import entity.Budget;
-import entity.BudgetHistory;
-import entity.Transaction;
-import entity.TransactionHistory;
-import interface_adapter.add_budget.AddBudgetController;
-import use_case.ExpenseHistoryController;
+import interface_adapter.ExpenseHistoryController;
 import use_case.history.BudgetHistoryController;
-import view.ViewSwitcher;
 
 
 import javax.swing.*;
