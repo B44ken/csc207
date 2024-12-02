@@ -1,7 +1,7 @@
 package view;
 
 import com.labrats.app.ViewNames;
-import use_case.goals.GoalListController;
+import interface_adapter.GoalListController;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;

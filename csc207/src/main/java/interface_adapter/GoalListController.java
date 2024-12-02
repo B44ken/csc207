@@ -1,4 +1,4 @@
-package use_case.goals;
+package interface_adapter;
 
 import javax.swing.table.DefaultTableModel;
 import data_access.UserData;

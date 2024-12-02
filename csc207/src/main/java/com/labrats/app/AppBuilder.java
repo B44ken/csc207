@@ -14,7 +14,7 @@ import interface_adapter.income_history.IncomeHistoryController;
 import interface_adapter.ExpenseHistoryController;
 import use_case.add_goal.AddGoalInteractor;
 import use_case.add_income.AddIncomeInteractor;
-import use_case.goals.GoalListController;
+import interface_adapter.GoalListController;
 import use_case.history.BudgetHistoryController;
 
 import interface_adapter.get_insight.GetInsightViewModel;
