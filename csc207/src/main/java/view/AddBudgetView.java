@@ -50,10 +50,10 @@ public class AddBudgetView extends JPanel implements ActionListener, PropertyCha
         amountPanel.add(amountTextField);
 
         final JPanel buttonPanel = new JPanel();
-        confirmButton = new JButton("Confirm");
-        buttonPanel.add(confirmButton);
         cancelButton = new JButton("Cancel");
         buttonPanel.add(cancelButton);
+        confirmButton = new JButton("Confirm");
+        buttonPanel.add(confirmButton);
 
         confirmButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
