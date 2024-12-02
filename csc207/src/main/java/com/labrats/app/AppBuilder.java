@@ -18,6 +18,7 @@ import use_case.add_budget.AddBudgetInteractor;
 import use_case.add_expense.AddExpenseInteractor;
 import use_case.add_goal.AddGoalInteractor;
 import use_case.add_income.AddIncomeInteractor;
+import use_case.budget_report.BudgetReportInteractor;
 import use_case.history.BudgetHistoryController;
 
 import interface_adapter.get_insight.GetInsightViewModel;
@@ -166,10 +167,24 @@ public class AppBuilder {
         return this;
     }
 
+    private BudgetReportView budgetReportView;
+
+    public AppBuilder addReportView() {
+       budgetReportView = new BudgetReportView(bottomButtons);
+       viewSwitcher.add(ViewNames.budgetReport, budgetReportView);
+       return this;
+    }
+
+    public AppBuilder addReportUseCase() {
+        BudgetReportInteractor interactor = new BudgetReportInteractor(userData);
+        budgetReportView.setInteractor(interactor);
+        return this;
+    }
+
     public JFrame build() {
         app = new JFrame("My Cool Finance App");
         app.add(cards);
-        viewSwitcher.switchTo(ViewNames.home);
+        viewSwitcher.switchTo(ViewNames.budgetReport);
         return app;
     }
 

@@ -4,6 +4,7 @@ public final class ViewNames {
     public static String home = "Home";
 
     public static String getInsight = "Get Insight";
+    public static String budgetReport = "Budget Report";
 
     public static String addIncome = "Add Income";
     public static String addExpense = "Add Expense";

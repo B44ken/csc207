@@ -167,7 +167,6 @@ public class HomeView extends JPanel {
             this.remove(chart);
             this.add(chartController.execute(chart));
         }
-        // TODO WHY THE FUCK IS THIS NULL WHEN APP RUNS IM GONNA KMS
         if (this.valuesController != null)
             valuesController.execute(incomeValue, expensesValue, netBalanceValue);
     }
