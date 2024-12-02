@@ -3,7 +3,12 @@ package com.labrats.app;
 
 import entity.BudgetFactory;
 import entity.IncomeFactory;
+
 import interface_adapter.add_budget.AddBudgetPresenter;
+
+import interface_adapter.add_expense.AddExpenseController;
+import interface_adapter.add_expense.AddExpensePresenter;
+
 import interface_adapter.home.HomeChartController;
 import interface_adapter.home.HomeValuesController;
 import interface_adapter.add_budget.AddBudgetController;
@@ -12,7 +17,11 @@ import interface_adapter.add_income.AddIncomeController;
 import interface_adapter.add_income.AddIncomePresenter;
 import interface_adapter.income_history.IncomeHistoryController;
 import interface_adapter.ExpenseHistoryController;
+
 import use_case.add_budget.AddBudgetInteractor;
+
+import use_case.add_expense.AddExpenseOutputBoundary;
+
 import use_case.add_income.AddIncomeInteractor;
 import use_case.goals.GoalListController;
 import use_case.history.BudgetHistoryController;
@@ -91,11 +100,14 @@ public class AppBuilder {
     }
 
     public AppBuilder addAddExpenseView() {
-        addExpenseView = new AddExpenseView(expenseHistoryView);
-        addExpenseView.setViewSwitcher(viewSwitcher);
-        // expenseView.setAddExpenseController();
-        addExpenseView.setUserData(userData);
-        viewSwitcher.add(ViewNames.addExpense, addExpenseView);
+        final AddExpenseOutputBoundary addExpenseOutputBoundary = new AddExpensePresenter(viewSwitcher);
+        var addExpenseController = new AddExpenseController(viewSwitcher, userData, addExpenseOutputBoundary);
+
+        var expenseView = new AddExpenseView();
+        expenseView.setAddExpenseController(addExpenseController);
+        expenseView.setViewSwitcher(viewSwitcher);
+        expenseView.setUserData(userData);
+        viewSwitcher.add(ViewNames.addExpense, expenseView);
         return this;
     }
 
