@@ -8,6 +8,7 @@ import interface_adapter.add_budget.AddBudgetController;
 import interface_adapter.add_goal.AddGoalController;
 import interface_adapter.add_income.AddIncomeController;
 import interface_adapter.add_income.AddIncomePresenter;
+import interface_adapter.income_history.IncomeHistoryController;
 import use_case.ExpenseHistoryController;
 import use_case.AddExpenseController;
 import use_case.add_budget.AddBudgetInteractor;
@@ -71,7 +72,9 @@ public class AppBuilder {
     }
 
     public AppBuilder addIncomeHistoryView() {
-        incomeHistoryView = new IncomeHistoryView(viewSwitcher);
+        IncomeHistoryController controller = new IncomeHistoryController(userData);
+        incomeHistoryView = new IncomeHistoryView(controller);
+        incomeHistoryView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.incomeHistory, incomeHistoryView);
         return this;
     }

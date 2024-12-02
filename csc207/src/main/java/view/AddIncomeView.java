@@ -116,10 +116,6 @@ public class AddIncomeView extends JPanel implements ActionListener, PropertyCha
         return viewName;
     }
 
-
-    public void repaint() {
-        // TODO
-    }
     public void setViewSwitcher(ViewSwitcher viewSwitcher) {
         this.viewSwitcher = viewSwitcher;
 

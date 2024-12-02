@@ -33,9 +33,6 @@ public class AddIncomeInteractor{
                 addIncomeInputData.getCategory(), addIncomeInputData.getDate());
         userData.getHistory().add(income);
         userData.save();
-        System.out.println("saved");
-        // is the above code how we add new Transaction object into txt file?
-
     }
 
 }
