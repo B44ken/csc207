@@ -1,4 +1,7 @@
-60.0,mcdonalds,food,2024-10-02,expense
+amount,name,category,date,type
+1000.0,pet snake,,2024-12-31,goal
+600.0,another pet snake,,2024-12-31,goal
+11.99,,fortnite battle pass,,budget
 2300.0,luxury beachfront cottage,rent,2024-10-01,expense
 100.0,wingstop,food,2024-10-03,expense
 100.0,mcdonalds,food,2024-10-04,expense
