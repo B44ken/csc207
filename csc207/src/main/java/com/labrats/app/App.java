@@ -31,10 +31,12 @@ public class App {
                 .addAddIncomeView()
                 .addGoalListView()
                 .addAddGoalView()
+                .addReportView()
                 .addAddBudgetView()
                 .addAddIncomeUseCase()
                 .addAddBudgetUseCase()
                 .addAddExpenseUseCase()
+                .addReportUseCase()
                 .addAddGoalUseCase()
                 //.addAddExpenseUseCase()
                 .build();
