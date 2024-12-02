@@ -57,7 +57,7 @@ public class ExpenseTest {
     @Test
     void setAmountTest() throws Exception {
         LocalDate date = LocalDate.of(2024, 12, 2);
-        Expense expense = new Expense("McDonald's", null, "food", date);
+        Expense expense = new Expense("McDonald's", 1.0, "food", date);
         Double amount = 100.0;
         expense.setAmount(amount);
         Double setAmount = expense.getAmount();

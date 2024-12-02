@@ -132,11 +132,8 @@ public class UserDataFileAccess extends UserData {
             }
             for (var b : getBudgets().getList())
                 file.write(serializeBudget(b));
-            for (var t : getHistory().getHistory()) {
-                // file.write(String.format("amount,name,category,date,type\n"));
-                String s = serializeTransaction(t);
-                file.write(s);
-            }
+            for(var t : getHistory().getHistory())
+                file.write(serializeTransaction(t));
             file.flush();
         } catch (FileNotFoundException x) {
             JOptionPane.showMessageDialog(null, "couldnt find file " + filePath);
