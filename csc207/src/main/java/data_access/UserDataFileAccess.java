@@ -43,7 +43,7 @@ public class UserDataFileAccess extends UserData {
                 row.add(part);
             csv.add(row);
         }
-        //csv.remove(0);
+        csv.remove(0);
         return csv;
     }
 

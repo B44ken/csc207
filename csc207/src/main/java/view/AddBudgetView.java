@@ -15,7 +15,6 @@ import interface_adapter.add_budget.AddBudgetController;
 
 public class AddBudgetView extends JPanel implements ActionListener, PropertyChangeListener {
     private final String viewName = "Add Budget";
-    private AddBudgetController addBudgetController;
     // private final AddBudgetViewModel addBudgetViewModel;
     // change above to what controller is actually called later
     // need to move the input fields out here unfortunately!!!!!!!!!!!
@@ -29,12 +28,14 @@ public class AddBudgetView extends JPanel implements ActionListener, PropertyCha
 
     private AddBudgetController controller;
 
-    public AddBudgetView(AddBudgetController controller) {
+    public AddBudgetView(ViewSwitcher viewSwitcher) {
 
         // this.addBudgetController = controller;
         // this.addBudgetViewModel = budgetViewModel;
         // addBudgetViewModel.addPropertyChangeListener(this);
-        this.controller = controller;
+        //this.controller = controller;
+        this.viewSwitcher = viewSwitcher;
+
         final JLabel title = new JLabel("Add Budget");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -56,12 +57,8 @@ public class AddBudgetView extends JPanel implements ActionListener, PropertyCha
 
         confirmButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (e.getSource().equals(confirmButton)) {
-                    controller.addBudget(
-                            categoryNameTextField.getText(),
-                            amountTextField.getText());
-                }
-                controller.switchToHomeView();
+                controller.addBudget(categoryNameTextField.getText(), amountTextField.getText());
+                viewSwitcher.switchTo(ViewNames.home);
             }
         });
 
@@ -100,6 +97,6 @@ public class AddBudgetView extends JPanel implements ActionListener, PropertyCha
 
     public String getViewName() {return viewName;}
 
-    public void setAddBudgetController(AddBudgetController controller) {this.addBudgetController = controller;}
+    public void setAddBudgetController(AddBudgetController controller) {this.controller = controller;}
 
 }
