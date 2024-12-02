@@ -135,6 +135,7 @@ public class UserDataFileAccess extends UserData {
             for(var b : getBudgets().getList())
                 file.write(serializeBudget(b));
             for(var t : getHistory().getHistory()) {
+                file.write(String.format("amount,name,category,date,type\n"));
                 String s = serializeTransaction(t);
                 System.err.println(s);
                 file.write(s);
