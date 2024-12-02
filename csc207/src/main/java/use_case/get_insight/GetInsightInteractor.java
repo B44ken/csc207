@@ -4,7 +4,7 @@ import data_access.UserData;
 import interface_adapter.get_insight.GetInsightPresenter;
 import use_case.get_insight.GetInsightInputData;
 
-public class GetInsightInteractor {
+public class GetInsightInteractor implements GetInsightInputBoundary {
 
     public UserData userData;
     public GetInsightPresenter presenter;

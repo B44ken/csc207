@@ -7,15 +7,9 @@ public class GetInsightOutputData {
     public GetInsightOutputData(String expensesLevel, boolean useCaseFailed) {
         // save the parameters in the instance variables.
         this.expensesLevel = expensesLevel;
-        this.useCaseFailed = useCaseFailed;
     }
 
     public String getExpensesLevel() {
         return expensesLevel;
     }
-
-    public boolean isUseCaseFailed() {
-        return useCaseFailed;
-    }
-
 }
