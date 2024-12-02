@@ -1,8 +1,7 @@
-package use_case;
+package interface_adapter;
 
 import javax.swing.table.DefaultTableModel;
 import data_access.UserData;
-import entity.Budget;
 import entity.Transaction;
 
 public class ExpenseHistoryController {

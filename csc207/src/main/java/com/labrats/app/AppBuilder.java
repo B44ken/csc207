@@ -1,21 +1,20 @@
 package com.labrats.app;
 
 
-import entity.Expense;
-import entity.GoalList;
+import entity.IncomeFactory;
+import interface_adapter.home.HomeChartController;
+import interface_adapter.home.HomeValuesController;
 import interface_adapter.add_budget.AddBudgetController;
 import interface_adapter.add_goal.AddGoalController;
-import use_case.ExpenseHistoryController;
-import use_case.AddExpenseController;
-import use_case.add_budget.AddBudgetInteractor;
+import interface_adapter.add_income.AddIncomeController;
+import interface_adapter.add_income.AddIncomePresenter;
+import interface_adapter.income_history.IncomeHistoryController;
+import interface_adapter.ExpenseHistoryController;
+import use_case.add_income.AddIncomeInteractor;
 import use_case.goals.GoalListController;
 import use_case.history.BudgetHistoryController;
 
-import interface_adapter.add_income.AddIncomeViewModel;
-import interface_adapter.get_insight.GetInsightController;
 import interface_adapter.get_insight.GetInsightViewModel;
-import use_case.get_insight.GetInsightInteractor;
-import use_case.ExpenseHistoryController;
 
 import view.*;
 
@@ -23,7 +22,6 @@ import data_access.UserData;
 import data_access.UserDataFileAccess;
 
 import java.awt.CardLayout;
-import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -35,6 +33,7 @@ public class AppBuilder {
     private UserData userData;
     private ViewSwitcher viewSwitcher;
     private BottomButtons bottomButtons;
+    private final IncomeFactory incomeFactory = new IncomeFactory();
 
     private HomeView homeView;
     private IncomeHistoryView incomeHistoryView;
@@ -44,6 +43,7 @@ public class AppBuilder {
     private ExpenseHistoryView expenseHistoryView;
     private GoalListView goalListView;
 
+
     public AppBuilder() {
         cards = new JPanel(new CardLayout());
         userData = new UserDataFileAccess("testdata.csv");
@@ -51,45 +51,39 @@ public class AppBuilder {
         bottomButtons = new BottomButtons(viewSwitcher);
     }
 
-    public AppBuilder addUserData() {
-        homeView.setUserData(userData);
-        incomeHistoryView.setUserData(this.userData);
-        // expenseHistoryView.setUserData(this.userData);
-        // getInsightView.setUserData(this.userData);
-        // TODO
-        // do user data stuff for other views
-        return this;
-    }
-
     public AppBuilder addHomeView() {
-        homeView = new HomeView();
+        HomeValuesController valuesController = new HomeValuesController(userData);
+        HomeChartController chartController = new HomeChartController(userData);
+        homeView = new HomeView(valuesController, chartController);
         homeView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.home, homeView);
         return this;
     }
 
     public AppBuilder addAddIncomeView() {
-        var addIncomeView = new AddIncomeView();
+        addIncomeView = new AddIncomeView(viewSwitcher);
         // addIncomeView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.addIncome, addIncomeView);
         return this;
     }
 
     public AppBuilder addIncomeHistoryView() {
-        incomeHistoryView = new IncomeHistoryView(viewSwitcher);
-        // incomeHistoryView.setViewSwitcher(viewSwitcher);
+        IncomeHistoryController controller = new IncomeHistoryController(userData);
+        incomeHistoryView = new IncomeHistoryView(controller);
+        incomeHistoryView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.incomeHistory, incomeHistoryView);
         return this;
     }
 
-    /*
-    public AppBuilder addAddIncomeView() {
-        addIncomeView = new AddIncomeView(new AddIncomeViewModel());
-        addIncomeView.setViewSwitcher(viewSwitcher);
-        viewSwitcher.add(ViewNames.addIncome, addIncomeView);
+
+    public AppBuilder addAddIncomeUseCase() {
+        final AddIncomePresenter presenter = new AddIncomePresenter();
+        final AddIncomeInteractor interactor = new AddIncomeInteractor(userData, presenter, incomeFactory);
+        final AddIncomeController controller = new AddIncomeController(interactor);
+        addIncomeView.setAddIncomeController(controller);
+//      viewSwitcher.add(ViewNames.addIncome, addIncomeView);
         return this;
     }
-     */
 
     public AppBuilder addAddExpenseView() {
         addExpenseView = new AddExpenseView(expenseHistoryView);

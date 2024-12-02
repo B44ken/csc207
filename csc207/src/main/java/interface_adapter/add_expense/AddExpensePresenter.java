@@ -1,7 +1,6 @@
 package interface_adapter.add_expense;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.home.HomeViewModel;
 import use_case.add_expense.AddExpenseOutputBoundary;
 import use_case.add_expense.AddExpenseOutputData;
 
@@ -11,33 +10,30 @@ import use_case.add_expense.AddExpenseOutputData;
 public class AddExpensePresenter implements AddExpenseOutputBoundary {
 
     private final AddExpenseViewModel addExpenseViewModel;
-    private final HomeViewModel homeViewModel;
     private final ViewManagerModel viewManagerModel;
 
     public AddExpensePresenter (ViewManagerModel viewManagerModel,
-                                AddExpenseViewModel addExpenseViewModel,
-                                HomeViewModel homeViewModel) {
+                                AddExpenseViewModel addExpenseViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.addExpenseViewModel = addExpenseViewModel;
-        this.homeViewModel = homeViewModel;
     }
 
     @Override
     public void prepareSuccessView(AddExpenseOutputData outputData) {
-        viewManagerModel.setState(homeViewModel.getViewName());
-        viewManagerModel.firePropertyChanged();
+//        viewManagerModel.setState(homeViewModel.getViewName());
+//        viewManagerModel.firePropertyChanged();
     }
 
     @Override
     public void prepareFailView(String error) {
-        final AddExpenseState addExpenseState = addExpenseViewModel.getState();
-        addExpenseState.setNameError(error);
-        addExpenseViewModel.firePropertyChanged();
+//        final AddExpenseState addExpenseState = addExpenseViewModel.getState();
+//        addExpenseState.setNameError(error);
+//        addExpenseViewModel.firePropertyChanged();
     }
 
     @Override
     public void switchToHomeView() {
-        viewManagerModel.setState(homeViewModel.getViewName());
-        viewManagerModel.firePropertyChanged();
+//        viewManagerModel.setState(homeViewModel.getViewName());
+//        viewManagerModel.firePropertyChanged();
     }
 }

@@ -9,3 +9,7 @@ amount,name,category,date,type
 300.0,job,income,2024-10-03,income
 300.0,job,income,2024-10-05,income
 300.0,side hustle ifykyk,income,2024-10-07,income
+10.0,wingstop,food,2024-11-27,expense
+1000.0,what,income,2024-01-01,income
+10000.0,what,food,2024-12-01,expense
+100000.0,job,wingstop,2024-01-01,income
