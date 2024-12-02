@@ -14,14 +14,14 @@ public class HomeChartController {
         this.userData = userData;
     }
 
-    public JLabel execute(JLabel chart) {
+    public JLabel execute() {
         if (userData != null) {
             var api = new ChartImageFactory(userData.getHistory());
             JLabel result = api.createImage(
-                    LocalDate.of(2024, 10, 1), LocalDate.of(2024, 10, 7));
+                    LocalDate.of(2024, 12, 1), LocalDate.of(2024, 12, 31));
             result.setSize(400, 300);
             return result;
         }
-        return chart;
+        return null;
     }
 }
