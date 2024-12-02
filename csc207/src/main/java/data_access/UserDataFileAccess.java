@@ -77,8 +77,8 @@ public class UserDataFileAccess extends UserData {
                 var entry = new Budget(category, amount);
                 budgets.add(entry);
             } else if (type.equals("goal")) {
-                var target = row.get(0);
-                var amount = Double.parseDouble(row.get(1));
+                var amount = Double.parseDouble(row.get(0));
+                var target = row.get(1);
                 var targetDate = LocalDate.parse(row.get(3));
                 var entry = new Goal(target, amount, targetDate);
                 goals.add(entry );
@@ -126,16 +126,19 @@ public class UserDataFileAccess extends UserData {
     }
 
     public void save() {
+        System.err.println("saving...");
         try {
             var file = new PrintWriter(filePath);
-            for(var g : getGoals().getList())
+            file.write("amount,name,category,date,type\n");
+            for(var g : getGoals().getList()) {
                 file.write(serializeGoal(g));
+                System.err.print(serializeGoal(g));
+            }
             for(var b : getBudgets().getList())
                 file.write(serializeBudget(b));
             for(var t : getHistory().getHistory()) {
                 //file.write(String.format("amount,name,category,date,type\n"));
                 String s = serializeTransaction(t);
-                System.err.println(s);
                 file.write(s);
             }
             file.flush();

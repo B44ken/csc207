@@ -37,15 +37,9 @@ public class AddBudgetInteractor implements AddBudgetInputBoundary {
     public void execute(AddBudgetInputData addBudgetInputData) {
         final Budget budget = budgetFactory.create(addBudgetInputData.getCategoryName(), addBudgetInputData.getAmount());
         userData.getBudgets().add(budget);
-        // budget.setAmount(addBudgetInputData.getAmount());
-        // budget.setCategoryName(addBudgetInputData.getCategoryName());
-        // budgetHistory.add(budget);
-        // userDataAccessObject.save(budget);
-        // do we want a save for this? do we need one?
-        // userDataAccessObject.addBudget(budget);
-        // final AddBudgetOutputData addBudgetOutputData = new AddBudgetOutputData(budget.getCategoryName(), false);
-        //userPresenter.prepareSuccessView(addBudgetOutputData);
+        userData.save();    
     }
+
     @Override
     public void switchToHomeView() {
         // userPresenter.switchToBudgetView();
