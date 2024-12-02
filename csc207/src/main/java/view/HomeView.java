@@ -66,8 +66,6 @@ public class HomeView extends JPanel {
         expensesValue.setAlignmentX(Component.CENTER_ALIGNMENT);
         final JLabel netValue = new JLabel("Goal");
 
-        // add chart API here
-
         final JPanel buttons1 = new JPanel();
         addIncome = new JButton("Add Income");
         buttons1.add(addIncome);
@@ -76,6 +74,12 @@ public class HomeView extends JPanel {
 
         getInsight = new JButton("Financial Insights");
         buttons1.add(getInsight, 0);
+
+        var budgetReport = new JButton("Budget Report");
+        buttons1.add(budgetReport, 0);
+        budgetReport.addActionListener(
+            x -> viewSwitcher.switchTo(ViewNames.budgetReport)
+        );
 
         getInsight.addActionListener(
                 new ActionListener() {
@@ -165,9 +169,10 @@ public class HomeView extends JPanel {
     public void repaint() {
         if (chart != null) {
             this.remove(chart);
-            this.add(chartController.execute(chart));
+            chart = chartController.execute();
+            this.add(chart);
         }
-        // TODO WHY THE FUCK IS THIS NULL WHEN APP RUNS IM GONNA KMS
+
         if (this.valuesController != null)
             valuesController.execute(incomeValue, expensesValue, netBalanceValue);
     }

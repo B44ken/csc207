@@ -115,6 +115,7 @@ public class ChartAPI {
     public byte[] fetchImage(ChartData data) {
         try {
             URL url = buildURL(data);
+            System.err.println(url.toURI());
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Content-Type", "image/png");
@@ -125,7 +126,7 @@ public class ChartAPI {
             out.close();
 
             return connection.getInputStream().readAllBytes();
-        } catch (IOException err) {
+        } catch (Exception e) {
             System.out.println("failed");
             return new byte[0];
         }

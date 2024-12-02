@@ -22,6 +22,7 @@ import use_case.add_goal.AddGoalInteractor;
 import interface_adapter.income_history.IncomeHistoryRepainter;
 import use_case.add_income.AddIncomeInteractor;
 import use_case.get_insight.GetInsightInteractor;
+import use_case.budget_report.BudgetReportInteractor;
 import use_case.history.BudgetHistoryController;
 
 import interface_adapter.get_insight.GetInsightViewModel;
@@ -134,7 +135,7 @@ public class AppBuilder {
     }
 
     public AppBuilder addAddExpenseUseCase() {
-        final AddExpensePresenter presenter = new AddExpensePresenter();
+        final AddExpensePresenter presenter = new AddExpensePresenter(viewSwitcher);
         final AddExpenseInteractor interactor = new AddExpenseInteractor(userData, presenter, expenseFactory);
         final AddExpenseController controller = new AddExpenseController(interactor);
         addExpenseView.setAddExpenseController(controller);
@@ -179,6 +180,19 @@ public class AppBuilder {
         return this;
     }
 
+    private BudgetReportView budgetReportView;
+
+    public AppBuilder addReportView() {
+       budgetReportView = new BudgetReportView(bottomButtons);
+       viewSwitcher.add(ViewNames.budgetReport, budgetReportView);
+       return this;
+    }
+
+    public AppBuilder addReportUseCase() {
+        BudgetReportInteractor interactor = new BudgetReportInteractor(userData);
+        budgetReportView.setInteractor(interactor);
+        return this;
+    }
 
     public JFrame build() {
         app = new JFrame("My Cool Finance App");

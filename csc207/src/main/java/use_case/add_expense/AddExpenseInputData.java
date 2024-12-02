@@ -7,30 +7,43 @@ import java.time.LocalDate;
  */
 public class AddExpenseInputData {
     private final String name;
-    private final double amount;
+    private final String amount;
     private final String category;
-    private final LocalDate date;
 
-    public AddExpenseInputData(String name, double amount, String category, LocalDate date) {
+    private final String day;
+    private final String month;
+    private final String year;
+
+    public AddExpenseInputData(String name, String amount, String category, String day, String month, String year) {
         this.name = name;
         this.amount = amount;
         this.category = category;
-        this.date = date;
+        this.day = day;
+        this.month = month;
+        this.year = year;
     }
 
-    double getAmount() {
+    String getAmountString(){
         return amount;
     }
 
-    String getName() {
+    String getName(){
         return name;
     }
 
-    String getCategory() {
+    String getCategory(){
         return category;
     }
 
-    public LocalDate getDate() {
-        return date;
+    String getDay(){
+        return day;
+    }
+
+    String getMonth(){
+        return month;
+    }
+
+    String getYear(){
+        return year;
     }
 }

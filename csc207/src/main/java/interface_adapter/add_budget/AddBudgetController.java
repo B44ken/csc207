@@ -42,11 +42,8 @@ public class AddBudgetController {
         }
         try {
             var amount = Double.parseDouble(amountStr);
-            // var t = new Budget(categoryName, amount);
             final AddBudgetInputData addBudgetInputData = new AddBudgetInputData(categoryName, amount);
             addBudgetInteractor.execute(addBudgetInputData);
-            // userData.getBudgets().add(t);
-            // userData.save();
         } catch (NumberFormatException ex) {
             System.out.println("failed to parse amount");
         }
