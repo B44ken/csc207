@@ -1,14 +1,11 @@
 package com.labrats.app;
 
 
-import entity.BudgetFactory;
-import entity.IncomeFactory;
-
+import entity.*;
+import interface_adapter.GoalListController;
 import interface_adapter.add_budget.AddBudgetPresenter;
-
 import interface_adapter.add_expense.AddExpenseController;
 import interface_adapter.add_expense.AddExpensePresenter;
-
 import interface_adapter.home.HomeChartController;
 import interface_adapter.home.HomeValuesController;
 import interface_adapter.add_budget.AddBudgetController;
@@ -17,13 +14,10 @@ import interface_adapter.add_income.AddIncomeController;
 import interface_adapter.add_income.AddIncomePresenter;
 import interface_adapter.income_history.IncomeHistoryController;
 import interface_adapter.ExpenseHistoryController;
-
 import use_case.add_budget.AddBudgetInteractor;
-
-import use_case.add_expense.AddExpenseOutputBoundary;
-
+import use_case.add_expense.AddExpenseInteractor;
+import use_case.add_goal.AddGoalInteractor;
 import use_case.add_income.AddIncomeInteractor;
-import use_case.goals.GoalListController;
 import use_case.history.BudgetHistoryController;
 
 import interface_adapter.get_insight.GetInsightViewModel;
@@ -46,14 +40,17 @@ public class AppBuilder {
     private ViewSwitcher viewSwitcher;
     private BottomButtons bottomButtons;
     private final IncomeFactory incomeFactory = new IncomeFactory();
+    private final ExpenseFactory expenseFactory = new ExpenseFactory();
     private final BudgetFactory budgetFactory = new BudgetFactory();
+    private final GoalFactory goalFactory = new GoalFactory();
 
     private HomeView homeView;
     private IncomeHistoryView incomeHistoryView;
     private AddIncomeView addIncomeView;
     private AddExpenseView addExpenseView;
-    private GetInsightView getInsightView;
     private AddBudgetView addBudgetView;
+    private AddGoalView addGoalView;
+    private GetInsightView getInsightView;
     private ExpenseHistoryView expenseHistoryView;
     private GoalListView goalListView;
 
@@ -100,23 +97,26 @@ public class AppBuilder {
     }
 
     public AppBuilder addAddExpenseView() {
-        final AddExpenseOutputBoundary addExpenseOutputBoundary = new AddExpensePresenter(viewSwitcher);
-        var addExpenseController = new AddExpenseController(viewSwitcher, userData, addExpenseOutputBoundary);
-
-        var expenseView = new AddExpenseView();
-        expenseView.setAddExpenseController(addExpenseController);
-        expenseView.setViewSwitcher(viewSwitcher);
-        expenseView.setUserData(userData);
-        viewSwitcher.add(ViewNames.addExpense, expenseView);
+        addExpenseView = new AddExpenseView(viewSwitcher);
+        viewSwitcher.add(ViewNames.addExpense, addExpenseView);
         return this;
     }
 
     public AppBuilder addExpenseHistoryView() {
-        var expenseController = new ExpenseHistoryController(userData);
-        var budgetController = new BudgetHistoryController(userData);
-        expenseHistoryView = new ExpenseHistoryView(bottomButtons, expenseController, budgetController);
+        ExpenseHistoryController controller = new ExpenseHistoryController(userData);
+        BudgetHistoryController controller1 = new BudgetHistoryController(userData);
+        expenseHistoryView = new ExpenseHistoryView(bottomButtons, controller, controller1);
         expenseHistoryView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.expenseHistory, expenseHistoryView);
+        return this;
+    }
+
+    public AppBuilder addAddExpenseUseCase() {
+        final AddExpensePresenter presenter = new AddExpensePresenter();
+        final AddExpenseInteractor interactor = new AddExpenseInteractor(userData, presenter, expenseFactory);
+        final AddExpenseController controller = new AddExpenseController(interactor);
+        addExpenseView.setAddExpenseController(controller);
+//      viewSwitcher.add(ViewNames.addIncome, addIncomeView);
         return this;
     }
 
@@ -137,22 +137,25 @@ public class AppBuilder {
     }
 
     public AppBuilder addAddGoalView() {
-        var controller = new AddGoalController(viewSwitcher, userData);
-        var goalsView = new AddGoalView(controller, viewSwitcher);
-        goalsView.setViewSwitcher(viewSwitcher);
-        goalsView.setUserData(userData);
-        viewSwitcher.add(ViewNames.addGoal, goalsView);
+        addGoalView = new AddGoalView(viewSwitcher);
+        viewSwitcher.add(ViewNames.addGoal, addGoalView);
         return this;
     }
 
-    public AppBuilder addGoalsView() {
-        var interactor = new GoalListController(userData);
-        goalListView = new GoalListView(bottomButtons, interactor);
+    public AppBuilder addGoalListView() {
+        GoalListController controller = new GoalListController(userData);
+        goalListView = new GoalListView(controller);
         goalListView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.goalList, goalListView);
         return this;
     }
 
+    public AppBuilder addAddGoalUseCase() {
+        final AddGoalInteractor interactor = new AddGoalInteractor(userData, goalFactory);
+        final AddGoalController controller = new AddGoalController(interactor);
+        addGoalView.setAddGoalController(controller);
+        return this;
+    }
 
     // TODO need to fix
     public AppBuilder addGetInsightView() {

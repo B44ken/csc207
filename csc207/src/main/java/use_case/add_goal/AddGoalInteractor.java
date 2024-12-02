@@ -1,22 +1,20 @@
 package use_case.add_goal;
 
+import data_access.UserData;
 import entity.Goal;
+import entity.GoalFactory;
 import entity.GoalList;
 
 /**
  * The Add Goal Interactor.
  */
-public class AddGoalInteractor implements AddGoalInputBoundary {
-    private final AddGoalUserDataAccessInterface userDataAccessObject;
-    private final AddGoalOutputBoundary userPresenter;
-    private final GoalList goals;
+public class AddGoalInteractor {
+    private final UserData userData;
+    private final GoalFactory goalFactory;
 
-    public AddGoalInteractor(AddGoalUserDataAccessInterface userDataAccessObject,
-                               AddGoalOutputBoundary userPresenter,
-                               GoalList goals) {
-        this.userDataAccessObject = userDataAccessObject;
-        this.userPresenter = userPresenter;
-        this.goals = goals;
+    public AddGoalInteractor(UserData userData, GoalFactory goalFactory) {
+        this.userData = userData;
+        this.goalFactory = goalFactory;
     }
 
     /**
@@ -24,20 +22,10 @@ public class AddGoalInteractor implements AddGoalInputBoundary {
      *
      * @param addGoalInputData the input data for this use case
      */
-    @Override
     public void execute(AddGoalInputData addGoalInputData) {
-        final Goal goal = new Goal(null, null, null);
-        goal.setTarget(addGoalInputData.getTarget());
-        goal.setAmount(addGoalInputData.getAmount());
-        goal.setTargetDate(addGoalInputData.getTargetDate());
-        goals.add(goal);
-        userDataAccessObject.addGoal(goal);
-        final AddGoalOutputData addGoalOutputData = new AddGoalOutputData(goal.getTarget(), false);
-        userPresenter.prepareSuccessView(addGoalOutputData);
-    }
-
-    @Override
-    public void switchToHomeView() {
-
+        final Goal goal = goalFactory.create(addGoalInputData.getTarget(), addGoalInputData.getAmount(),
+                addGoalInputData.getTargetDate());
+        userData.getGoals().add(goal);
+        userData.save();
     }
 }

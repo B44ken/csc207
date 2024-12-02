@@ -15,7 +15,7 @@ public class AddGoalInteractorTest {
                 "car", 2000, LocalDate.of(2024, 12,12));
         GoalList goalList =  new GoalList();
 
-        AddGoalOutputBoundary successPresenter = new AddGoalOutputBoundary() {
+        AddGoalOutputBoundary successPresenter = new  {
             @Override
             public void prepareSuccessView(AddGoalOutputData goals) {
                 assertEquals("goal", goals.getTarget());

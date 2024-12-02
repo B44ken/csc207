@@ -1,8 +1,7 @@
 package view;
 
 import com.labrats.app.ViewNames;
-import data_access.UserData;
-import use_case.goals.GoalListController;
+import interface_adapter.GoalListController;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -11,27 +10,22 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GoalListView extends JPanel {
+public class GoalListView extends JPanel implements ActionListener {
     private final String viewName = "Goals";
 
     private DefaultTableModel goalsTableModel;
-    private JTable goalsTable;
-    private JPanel goalsTablePanel;
+    private JTable goalListTable;
     private JPanel panel;
 
     private final JButton homeButton;
     private final JButton incomeButton;
     private final JButton expenseButton;
     private final JButton goalsButton;
-    private final JButton addGoalButton;
     private ViewSwitcher viewSwitcher;
+    private GoalListController controller;
 
-    private GoalListController goalsInteractor;
-
-    private UserData userData;
-
-    public GoalListView(BottomButtons bottomButtons, GoalListController goalsInteractor) {
-        this.goalsInteractor = goalsInteractor;
+    public GoalListView(GoalListController controller) {
+        this.controller = controller;
 
         final JLabel titleLabel = new JLabel("Goals");
 
@@ -42,10 +36,13 @@ public class GoalListView extends JPanel {
         add(titleLabel, BorderLayout.NORTH);
 
         this.panel = new JPanel();
+        var addGoalButton = new JButton(ViewNames.addGoal);
 
-        final JPanel addGoal = new JPanel();
-        addGoalButton = new JButton("Add New Goal");
-        addGoal.add(addGoalButton);
+        addGoalButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                viewSwitcher.switchTo(ViewNames.addGoal);
+            }
+        });
 
         final JPanel buttons = new JPanel();
         homeButton = new JButton("Home");
@@ -57,13 +54,6 @@ public class GoalListView extends JPanel {
         goalsButton = new JButton("Goal");
         buttons.add(goalsButton);
 
-        addGoalButton.addActionListener(
-                new ActionListener() {
-                    public void actionPerformed(ActionEvent evt) {
-                        viewSwitcher.switchTo(ViewNames.addGoal);
-                    }
-                }
-        );
         homeButton.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
@@ -87,90 +77,45 @@ public class GoalListView extends JPanel {
                     }
                 }
         );
+
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setupGoalsTable();
 
         this.add(titleLabel);
         this.add(panel);
-
-        setupGoalsTable();
-
-        this.add(goalsTablePanel);
-
         this.add(addGoalButton);
         this.add(buttons, BorderLayout.AFTER_LAST_LINE);
 
         repaint();
     }
 
+    @Override
+    public void repaint() {
+        if (controller != null) {
+            controller.execute(goalsTableModel);
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent evt) {System.out.println("Click " + evt.getActionCommand());}
+
     public void setViewSwitcher(ViewSwitcher viewSwitcher) {
         this.viewSwitcher = viewSwitcher;
-    }
-
-    public void repaint() {
-        if (goalsInteractor != null)
-            goalsInteractor.execute(goalsTableModel);
-    }
-
-    public void attachSwitchToOnButton(JButton button, String viewName) {
-        button.addActionListener(
-                new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        viewSwitcher.switchTo(viewName);
-                    }
-                }
-        );
     }
 
     public void setupGoalsTable() {
         String[] columnNames = {"Target", "Amount", "TargetDate"};
         goalsTableModel = new DefaultTableModel(columnNames, 0);
 
-        goalsTable = new JTable(goalsTableModel);
-        JScrollPane tableScrollPane = new JScrollPane(goalsTable);
+        goalListTable = new JTable(goalsTableModel);
+        JScrollPane tableScrollPane = new JScrollPane(goalListTable);
         TitledBorder tableTitle = BorderFactory.createTitledBorder("Goals");
         tableScrollPane.setBorder(tableTitle);
-        goalsTable.setFillsViewportHeight(true);
-        goalsTable.setVisible(true);
-        goalsTablePanel = new JPanel();
-        goalsTablePanel.add(tableScrollPane);
-        goalsTablePanel.setSize(300, 400);
-        goalsTablePanel.setVisible(true);
-    }
-
-    public void setUserData(UserData userData) {
-        this.userData = userData;
-        populateGoalsTable();
-    }
-
-    private void populateGoalsTable() {
-        if(goalsTable == null || userData == null)
-            return;
-        DefaultTableModel model = (DefaultTableModel) goalsTable.getModel();
-        model.setRowCount(0);
-        for(var g : userData.getGoals().getList())
-            model.addRow(new Object[]{g.getTarget(), g.getAmount(), g.getTargetDate()});
-//        GoalList goalsData = userData.getGoals();
-       JPanel goalsPane = new JPanel();
-//
-//        String[] goalsColumnNames = {"Target", "Amount", "Target Date"};
-//        goalsTableModel = new DefaultTableModel(goalsColumnNames, 0);
-//
-//        for (Goal goals : goalsData.getHistory()) {
-//            goalsTableModel.addRow(new String[]{goals.getTarget(), String.valueOf(goals.getAmount()),
-//                    goals.getTargetDate().toString()});
-//        }
-
-        goalsTable = new JTable(goalsTableModel);
-        JScrollPane tableScrollPane = new JScrollPane(goalsTable);
-        goalsTable.setFillsViewportHeight(true);
-        goalsTable.setVisible(true);
-        JPanel tablePanel = new JPanel();
-        tablePanel.add(tableScrollPane);
-        tablePanel.setSize(300, 400);
-        tablePanel.setVisible(true);
-        goalsPane.add(tablePanel);
-
-        this.panel.setComponentZOrder(goalsPane, 0);
-
+        goalListTable.setFillsViewportHeight(true);
+        goalListTable.setVisible(true);
+        panel = new JPanel();
+        panel.add(tableScrollPane);
+        panel.setSize(300, 400);
+        panel.setVisible(true);
     }
 }

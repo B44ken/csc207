@@ -6,9 +6,8 @@ package use_case.add_goal;
 public interface AddGoalOutputBoundary {
     /**
      * Prepares the success view for the Add Goal Use Case.
-     * @param outputData the output data
      */
-    void prepareSuccessView(AddGoalOutputData outputData);
+    void prepareSuccessView();
 
     /**
      * Prepares the failure view for the Add Goal Use Case.
@@ -16,8 +15,4 @@ public interface AddGoalOutputBoundary {
      */
     void prepareFailView(String errorMessage);
 
-    /**
-     * Switches to the Home View.
-     */
-    void switchToHomeVIew();
 }
