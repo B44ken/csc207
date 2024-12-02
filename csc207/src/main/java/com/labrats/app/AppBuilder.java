@@ -1,9 +1,7 @@
 package com.labrats.app;
 
 
-import entity.GoalFactory;
 import entity.IncomeFactory;
-import interface_adapter.add_goal.AddGoalPresenter;
 import interface_adapter.home.HomeChartController;
 import interface_adapter.home.HomeValuesController;
 import interface_adapter.add_budget.AddBudgetController;
@@ -12,9 +10,8 @@ import interface_adapter.add_income.AddIncomeController;
 import interface_adapter.add_income.AddIncomePresenter;
 import interface_adapter.income_history.IncomeHistoryController;
 import interface_adapter.ExpenseHistoryController;
-import use_case.add_goal.AddGoalInteractor;
 import use_case.add_income.AddIncomeInteractor;
-import interface_adapter.GoalListController;
+import use_case.goals.GoalListController;
 import use_case.history.BudgetHistoryController;
 
 import interface_adapter.get_insight.GetInsightViewModel;
@@ -37,13 +34,11 @@ public class AppBuilder {
     private ViewSwitcher viewSwitcher;
     private BottomButtons bottomButtons;
     private final IncomeFactory incomeFactory = new IncomeFactory();
-    private final GoalFactory goalFactory = new GoalFactory();
 
     private HomeView homeView;
     private IncomeHistoryView incomeHistoryView;
     private AddIncomeView addIncomeView;
     private AddExpenseView addExpenseView;
-    private AddGoalView addGoalView;
     private GetInsightView getInsightView;
     private ExpenseHistoryView expenseHistoryView;
     private GoalListView goalListView;
@@ -117,26 +112,22 @@ public class AppBuilder {
     }
 
     public AppBuilder addAddGoalView() {
-        addGoalView = new AddGoalView(viewSwitcher);
-        viewSwitcher.add(ViewNames.addGoal, addGoalView);
+        var controller = new AddGoalController(viewSwitcher, userData);
+        var goalsView = new AddGoalView(controller, viewSwitcher);
+        goalsView.setViewSwitcher(viewSwitcher);
+        goalsView.setUserData(userData);
+        viewSwitcher.add(ViewNames.addGoal, goalsView);
         return this;
     }
 
-    public AppBuilder addGoalListView() {
-        GoalListController controller = new GoalListController(userData);
-        goalListView = new GoalListView(controller);
+    public AppBuilder addGoalsView() {
+        var interactor = new GoalListController(userData);
+        goalListView = new GoalListView(bottomButtons, interactor);
         goalListView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.goalList, goalListView);
         return this;
     }
 
-    public AppBuilder addAddGoalUseCase() {
-        final AddGoalPresenter presenter = new AddGoalPresenter();
-        final AddGoalInteractor interactor = new AddGoalInteractor(userData, presenter, goalFactory);
-        final AddGoalController controller = new AddGoalController(interactor);
-        addGoalView.setAddGoalController(controller);
-        return this;
-    }
 
     // TODO need to fix
     public AppBuilder addGetInsightView() {

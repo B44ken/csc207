@@ -33,8 +33,7 @@ public class AddExpenseInteractor implements AddExpenseInputBoundary {
 
             addExpenseDataAccessObject.save(transaction);
 
-            final AddExpenseOutputData addExpenseOutputData = new AddExpenseOutputData(transaction.getName(),
-                    false);
+            final AddExpenseOutputData addExpenseOutputData = new AddExpenseOutputData(transaction.getName());
         }
     }
 
