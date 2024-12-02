@@ -103,7 +103,7 @@ public class AppBuilder {
     public AppBuilder addExpenseHistoryView() {
         var expenseController = new ExpenseHistoryController(userData);
         var budgetController = new BudgetHistoryController(userData);
-        var expenseHistoryView = new ExpenseHistoryView(bottomButtons, expenseController, budgetController);
+        expenseHistoryView = new ExpenseHistoryView(bottomButtons, expenseController, budgetController);
         expenseHistoryView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.expenseHistory, expenseHistoryView);
         return this;
