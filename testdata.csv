@@ -1,4 +1,12 @@
 amount,name,category,date,type
+1000.0,pet snake,,2024-12-31,goal
+600.0,another pet snake,,2024-12-31,goal
+2000.0,car,,2024-12-12,goal
+2000.0,bag,,2024-12-20,goal
+500.0,scooter,,2024-12-31,goal
+2000.0,demoGoal,,2024-11-12,goal
+11.99,,fortnite battle pass,,budget
+2000.0,,demoBudget,,budget
 100.0,wingstop,food,2024-12-03,expense
 100.0,mcdonalds,food,2024-12-04,expense
 100.0,mcdonalds,food,2024-12-05,expense
@@ -7,12 +15,6 @@ amount,name,category,date,type
 300.0,job,income,2024-12-03,income
 300.0,job,income,2024-12-05,income
 300.0,side hustle,income,2024-12-07,income
-1000.0,pet snake,,2024-12-31,goal
-600.0,another pet snake,,2024-12-31,goal
-2000.0,car,,2024-12-12,goal
-2000.0,bag,,2024-12-20,goal
-500.0,scooter,,2024-12-31,goal
-11.99,,fortnite battle pass,,budget
 2300.0,luxury beachfront cottage,rent,2024-10-01,expense
 100.0,wingstop,food,2024-10-03,expense
 100.0,mcdonalds,food,2024-10-04,expense
@@ -33,3 +35,5 @@ amount,name,category,date,type
 100.0,orphaned babies,charity,2024-01-01,expense
 20.0,KFC,28,2024-12-02,expense
 200.0,car,transport,2024-12-12,expense
+1000.0,demoIncome,demo,2024-12-12,income
+1000.0,demoExpense,food,0012-12-15,expense

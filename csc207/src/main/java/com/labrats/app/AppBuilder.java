@@ -6,6 +6,8 @@ import interface_adapter.GoalListController;
 import interface_adapter.add_budget.AddBudgetPresenter;
 import interface_adapter.add_expense.AddExpenseController;
 import interface_adapter.add_expense.AddExpensePresenter;
+import interface_adapter.get_insight.GetInsightController;
+import interface_adapter.get_insight.GetInsightPresenter;
 import interface_adapter.home.HomeChartController;
 import interface_adapter.home.HomeValuesController;
 import interface_adapter.add_budget.AddBudgetController;
@@ -17,7 +19,9 @@ import interface_adapter.ExpenseHistoryController;
 import use_case.add_budget.AddBudgetInteractor;
 import use_case.add_expense.AddExpenseInteractor;
 import use_case.add_goal.AddGoalInteractor;
+import interface_adapter.income_history.IncomeHistoryRepainter;
 import use_case.add_income.AddIncomeInteractor;
+import use_case.get_insight.GetInsightInteractor;
 import use_case.budget_report.BudgetReportInteractor;
 import use_case.history.BudgetHistoryController;
 
@@ -81,7 +85,8 @@ public class AppBuilder {
 
     public AppBuilder addIncomeHistoryView() {
         IncomeHistoryController controller = new IncomeHistoryController(userData);
-        incomeHistoryView = new IncomeHistoryView(controller);
+        IncomeHistoryRepainter repainter = new IncomeHistoryRepainter(userData);
+        incomeHistoryView = new IncomeHistoryView(controller, repainter);
         incomeHistoryView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.incomeHistory, incomeHistoryView);
         return this;
@@ -96,6 +101,23 @@ public class AppBuilder {
 //      viewSwitcher.add(ViewNames.addIncome, addIncomeView);
         return this;
     }
+
+    public AppBuilder addGetInsightView() {
+        getInsightView = new GetInsightView(bottomButtons, userData);
+        // getInsightView.setUserData(userData);
+        getInsightView.setViewSwitcher(viewSwitcher);
+        viewSwitcher.add(ViewNames.getInsight, getInsightView);
+        return this;
+    }
+
+    public AppBuilder addGetInsightUseCase() {
+        final GetInsightInteractor interactor = new GetInsightInteractor(userData);
+        final GetInsightController controller = new GetInsightController(interactor);
+        getInsightView.setGetInsightController(controller);
+        return this;
+    }
+
+
 
     public AppBuilder addAddExpenseView() {
         addExpenseView = new AddExpenseView(viewSwitcher);
@@ -158,19 +180,10 @@ public class AppBuilder {
         return this;
     }
 
-    // TODO need to fix
-    public AppBuilder addGetInsightView() {
-        // GetInsightInteractor interactor = new GetInsightInteractor();
-        GetInsightView getInsightView = new GetInsightView(bottomButtons, new GetInsightViewModel());
-        getInsightView.setViewSwitcher(viewSwitcher);
-        viewSwitcher.add(ViewNames.getInsight, getInsightView);
-        return this;
-    }
-
     private BudgetReportView budgetReportView;
 
     public AppBuilder addReportView() {
-       budgetReportView = new BudgetReportView(bottomButtons);
+       budgetReportView = new BudgetReportView(bottomButtons, viewSwitcher);
        viewSwitcher.add(ViewNames.budgetReport, budgetReportView);
        return this;
     }
