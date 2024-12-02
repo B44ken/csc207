@@ -31,8 +31,6 @@ public class BudgetHistory {
         return result;
     }
 
-    // public ArrayList<Budget> getHistory() {}
-
     public ArrayList<Budget> getList() {
         return history;
     }
