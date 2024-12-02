@@ -6,6 +6,7 @@ package interface_adapter.add_income;
 // call method to start a use case, pass the input data into the use case
 
 import data_access.UserData;
+import entity.Income;
 import use_case.add_income.AddIncomeInputBoundary;
 import use_case.add_income.AddIncomeInputData;
 import use_case.add_income.AddIncomeInteractor;
@@ -17,21 +18,26 @@ import java.time.LocalDate;
  * Controller for Add Income use case.
  */
 public class AddIncomeController {
-    private final AddIncomeInteractor addIncomeUseCaseInteractor;
-    private final UserData userData ;
+    private final AddIncomeInteractor addIncomeInteractor;
 
-    public AddIncomeController(AddIncomeInteractor addIncomeUseCaseInteractor, UserData userData) {
-        this.addIncomeUseCaseInteractor = addIncomeUseCaseInteractor;
-        this.userData = userData;
+    public AddIncomeController(AddIncomeInteractor addIncomeInteractor) {
+        this.addIncomeInteractor = addIncomeInteractor;
     }
-
     /**
      * Executes the Add Income use case by passing UserData into Interactor
-     * @param userData
+     * @param name
+     * @param amount
+     * @param category
+     * @param year
+     * @param month
+     * @param date
      *
      */
-    public void execute(UserData userData) {
-        addIncomeUseCaseInteractor.execute(userData);
+    public void execute(String name, String amount, String category, String year, String month, String date) {
+        Double doubleAmount = Double.valueOf(amount);
+        LocalDate localDate = LocalDate.of(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(date));
+        final AddIncomeInputData addIncomeInputData = new AddIncomeInputData(name, doubleAmount, category, localDate);
+        addIncomeInteractor.execute(addIncomeInputData);
     }
 
 }

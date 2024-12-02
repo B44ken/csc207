@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import data_access.UserData;
 import entity.Income;
+import entity.IncomeFactory;
 
 
 // this class no longer implements AddIncomeInputBoundary
@@ -12,30 +13,26 @@ import entity.Income;
  */
 public class AddIncomeInteractor{
     private final UserData userData;
-    // private final AddIncomeOutputBoundary userPresenter;
+    private final IncomeFactory incomeFactory;
+    private final AddIncomeOutputBoundary userPresenter;
 
-    public AddIncomeInteractor(UserData userData) {
+    public AddIncomeInteractor(UserData userData, AddIncomeOutputBoundary userPresenter, IncomeFactory incomeFactory) {
         this.userData = userData;
-        // this.userPresenter = userPresenter;
+        this.incomeFactory = incomeFactory;
+        this.userPresenter = userPresenter;
     }
 
     /**
      * Execute the Change Password Use Case.
      *
-     * @param userData the input data for this use case
+     * @param addIncomeInputData the input data for add income use case
      */
     // @Override
-    public void execute(UserData userData) {
-        userData.getHistory().add(new Income("food", 10.0, "income", LocalDate.of(2024, 12, 12)));
-        // is the above code how we add new Transaction object into txt file?
-
+    public void execute(AddIncomeInputData addIncomeInputData) {
+        final Income income = incomeFactory.create(addIncomeInputData.getName(), addIncomeInputData.getAmount(),
+                addIncomeInputData.getCategory(), addIncomeInputData.getDate());
+        userData.getHistory().add(income);
+        userData.save();
     }
 
-//    /**
-//     *
-//     */
-//    @Override
-//    public void switchToHomeView() {
-//        userPresenter.switchToHomeVIew();
-//    }
 }

@@ -1,8 +1,5 @@
 package view;
 
-import java.io.*;
-import java.util.Date;
-
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,17 +7,10 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.text.View;
 
 import com.labrats.app.ViewNames;
 import data_access.UserData;
-import entity.Budget;
 import interface_adapter.add_budget.AddBudgetController;
-import interface_adapter.add_budget.AddBudgetState;
-import interface_adapter.add_budget.AddBudgetViewModel;
-import use_case.AddExpenseController;
 
 
 public class AddBudgetView extends JPanel implements ActionListener, PropertyChangeListener {
