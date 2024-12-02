@@ -49,7 +49,6 @@ public class UserDataFileAccess extends UserData {
 
     private void parseData() {
         for (var row : csv) {
-            System.out.println("new row");
             var type = row.get(4);
             if (type.equals("income")) {
                 var amount = Double.parseDouble(row.get(0));
