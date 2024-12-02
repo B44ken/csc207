@@ -37,6 +37,7 @@ public class App {
                 .addAddBudgetUseCase()
                 .addAddExpenseUseCase()
                 .addReportUseCase()
+                .addAddGoalUseCase()
                 //.addAddExpenseUseCase()
                 .build();
         application.pack();
