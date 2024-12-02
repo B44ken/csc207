@@ -43,7 +43,7 @@ public class UserDataFileAccess extends UserData {
                 row.add(part);
             csv.add(row);
         }
-        //csv.remove(0);
+        csv.remove(0);
         return csv;
     }
 
@@ -77,11 +77,11 @@ public class UserDataFileAccess extends UserData {
                 var entry = new Budget(category, amount);
                 budgets.add(entry);
             } else if (type.equals("goal")) {
-                var target = row.get(0);
-                var amount = Double.parseDouble(row.get(1));
+                var amount = Double.parseDouble(row.get(0));
+                var target = row.get(1);
                 var targetDate = LocalDate.parse(row.get(3));
                 var entry = new Goal(target, amount, targetDate);
-                goals.add(entry );
+                goals.add(entry);
             } else {
                 throw new RuntimeException("Invalid type: " + type);
             }
@@ -91,53 +91,50 @@ public class UserDataFileAccess extends UserData {
     public String serializeBudget(Budget budget) {
         // amount,name,category,date,type
         return String.format(
-            "%s,,%s,,budget\n",
-            budget.getAmount(),
-            budget.getCategoryName()
-        );
+                "%s,,%s,,budget\n",
+                budget.getAmount(),
+                budget.getCategoryName());
     }
 
     public String serializeGoal(Goal goal) {
         return String.format(
-            "%s,%s,,%s,goal\n",
-            goal.getTarget(),
-            goal.getAmount(),  
-            goal.getTargetDate()
-        );
+                "%s,%s,,%s,goal\n",
+                goal.getAmount(), goal.getTarget(), goal.getTargetDate());
     }
 
     public String serializeTransaction(Transaction txn) {
         return String.format(
-            "%s,%s,%s,%s,%s\n",
-            txn.getAmount(),
-            txn.getName(),
-            txn.getCategory(),
-            txn.getDate(),
-            txn.getClass().getSimpleName().toLowerCase()
-        );
+                "%s,%s,%s,%s,%s\n",
+                txn.getAmount(),
+                txn.getName(),
+                txn.getCategory(),
+                txn.getDate(),
+                txn.getClass().getSimpleName().toLowerCase());
     }
 
     public String serializeSomething(Object s) {
-        if(s instanceof Transaction)
+        if (s instanceof Transaction)
             return serializeTransaction((Transaction) s);
-        else if(s instanceof Goal)
+        else if (s instanceof Goal)
             return serializeGoal((Goal) s);
-        else if(s instanceof Budget)
+        else if (s instanceof Budget)
             return serializeBudget((Budget) s);
         return "uh oh";
     }
 
     public void save() {
+        System.err.println("saving...");
         try {
             var file = new PrintWriter(filePath);
-            for(var g : getGoals().getList())
+            file.write("amount,name,category,date,type\n");
+            for (var g : getGoals().getList()) {
                 file.write(serializeGoal(g));
-            for(var b : getBudgets().getList())
+            }
+            for (var b : getBudgets().getList())
                 file.write(serializeBudget(b));
-            for(var t : getHistory().getHistory()) {
-                //file.write(String.format("amount,name,category,date,type\n"));
+            for (var t : getHistory().getHistory()) {
+                // file.write(String.format("amount,name,category,date,type\n"));
                 String s = serializeTransaction(t);
-                System.err.println(s);
                 file.write(s);
             }
             file.flush();
