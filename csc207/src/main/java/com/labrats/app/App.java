@@ -36,7 +36,6 @@ public class App {
                 .addAddBudgetUseCase()
                 .addAddExpenseUseCase()
                 .addAddGoalUseCase()
-                //.addAddExpenseUseCase()
                 .build();
         application.pack();
         application.setVisible(true);
