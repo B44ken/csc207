@@ -183,7 +183,7 @@ public class AppBuilder {
     private BudgetReportView budgetReportView;
 
     public AppBuilder addReportView() {
-       budgetReportView = new BudgetReportView(bottomButtons);
+       budgetReportView = new BudgetReportView(bottomButtons, viewSwitcher);
        viewSwitcher.add(ViewNames.budgetReport, budgetReportView);
        return this;
     }

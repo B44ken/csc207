@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import com.labrats.app.ViewNames;
+
 // import interface_adapter.BudgetReportInteractor;
 
 public class BudgetReportView extends JPanel {
@@ -17,7 +19,7 @@ public class BudgetReportView extends JPanel {
 
     private JTextArea report;
 
-    public BudgetReportView(BottomButtons bottom) {
+    public BudgetReportView(BottomButtons bottom, ViewSwitcher vs) {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         var titleContainer = new JPanel();
@@ -26,7 +28,7 @@ public class BudgetReportView extends JPanel {
         title.setFont(title.getFont().deriveFont(24.0f));
         titleContainer.add(title);
 
-        var reportContainer = new JPanel();
+        var reportContainer = new JPanel(); 
         report = new JTextArea();
         report.setEditable(false);
         reportContainer.setSize(400, 400);
@@ -35,7 +37,22 @@ public class BudgetReportView extends JPanel {
         this.add(titleContainer);
         this.add(reportContainer);
         this.add(reportButtons());
-        this.add(bottom);
+
+        var home = new JButton("Home");
+        home.addActionListener(e -> vs.switchTo(ViewNames.home));
+        this.add(home);
+
+        var incomeHistory = new JButton("Income History");
+        incomeHistory.addActionListener(e -> vs.switchTo(ViewNames.incomeHistory));
+        this.add(incomeHistory);
+
+        var expenseHistory = new JButton("Expense History");
+        expenseHistory.addActionListener(e -> vs.switchTo(ViewNames.expenseHistory));
+        this.add(expenseHistory);
+
+        var goalList = new JButton("Goal List");
+        goalList.addActionListener(e -> vs.switchTo(ViewNames.goalList));
+        this.add(goalList);
     }
 
     public JPanel reportButtons() {
@@ -53,9 +70,13 @@ public class BudgetReportView extends JPanel {
         return buttons;
     }
 
-    public void onCategoricalReport() { }
+    public void onCategoricalReport() {
+        report.setText(interactor.createCategoryReport(LocalDate.now()));
+    }
 
-    public void onBalanceReport() { }
+    public void onBalanceReport() {
+        report.setText(interactor.createBalanceReport(LocalDate.now()));6
+    }
 
     public void setInteractor(BudgetReportInteractor interactor) {
         this.interactor = interactor;
@@ -64,6 +85,6 @@ public class BudgetReportView extends JPanel {
 
     public void repaint() {
         if (interactor != null)
-            report.setText(interactor.createBudgetReport(LocalDate.now()));
+            report.setText(interactor.createCategoryReport(LocalDate.now()));
     }
 }

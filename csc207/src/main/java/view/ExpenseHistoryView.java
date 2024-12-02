@@ -81,7 +81,7 @@ public class ExpenseHistoryView extends JPanel {
 
         this.add(addExpenseButton);
         this.add(addBudgetButton);
-        this.add(bottomButtons, BorderLayout.AFTER_LAST_LINE);
+        this.add(bottomButtons);
         repaint();
     }
 
