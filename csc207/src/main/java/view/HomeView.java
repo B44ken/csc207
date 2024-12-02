@@ -140,6 +140,8 @@ public class HomeView extends JPanel {
         this.add(chart);
         this.add(buttons1);
         this.add(buttons2);
+
+        repaint();
     }
 
     public String getName() {
@@ -148,11 +150,6 @@ public class HomeView extends JPanel {
 
     public void setViewSwitcher(ViewSwitcher vs) {
         viewSwitcher = vs;
-    }
-
-    public void setUserData(UserData ud) {
-        userData = ud;
-        this.repaint();
     }
 
     public void attachSwitchToOnButton(JButton button, String viewName) {
@@ -164,12 +161,14 @@ public class HomeView extends JPanel {
                 });
     }
 
+    @Override
     public void repaint() {
         if (chart != null) {
             this.remove(chart);
             this.add(chartController.execute(chart));
         }
         // TODO WHY THE FUCK IS THIS NULL WHEN APP RUNS IM GONNA KMS
-        valuesController.execute(incomeValue, expensesValue, netBalanceValue);
+        if (this.valuesController != null)
+            valuesController.execute(incomeValue, expensesValue, netBalanceValue);
     }
 }
