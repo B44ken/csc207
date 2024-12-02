@@ -6,22 +6,16 @@ import use_case.add_goal.AddGoalOutputData;
 
 public class AddGoalPresenter implements AddGoalOutputBoundary {
 
-    private final AddGoalViewModel addGoalViewModel;
-    private final ViewManagerModel viewManagerModel;
-
-    public AddGoalPresenter(AddGoalViewModel addGoalViewModel, ViewManagerModel viewManagerModel) {
-        this.addGoalViewModel = addGoalViewModel;
-        this.viewManagerModel = viewManagerModel;
+    public AddGoalPresenter() {
     }
 
     /**
      * Prepares the success view for the Add Goal Use Case.
      *
-     * @param outputData the output data
      */
     @Override
-    public void prepareSuccessView(AddGoalOutputData outputData) {
-        addGoalViewModel.firePropertyChanged("goal");
+    public void prepareSuccessView() {
+
     }
 
     /**
@@ -31,10 +25,5 @@ public class AddGoalPresenter implements AddGoalOutputBoundary {
     @Override
     public void prepareFailView(String errorMessage) {
         // this use case currently cannot fail.
-    }
-
-    @Override
-    public void switchToHomeVIew() {
-        // remove in future
     }
 }

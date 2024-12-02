@@ -19,7 +19,7 @@ public class GoalListController {
             model.addRow(new String[] {
                     g.getTarget(),
                     String.valueOf(g.getAmount()),
-                    String.valueOf(g.getTargetDate()),
+                    g.getTargetDate().toString(),
             });
     }
 }
