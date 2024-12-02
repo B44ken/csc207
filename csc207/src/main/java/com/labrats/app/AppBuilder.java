@@ -38,6 +38,7 @@ public class AppBuilder {
     private HomeView homeView;
     private IncomeHistoryView incomeHistoryView;
     private AddIncomeView addIncomeView;
+    private AddExpenseView addExpenseView;
     private GetInsightView getInsightView;
     private ExpenseHistoryView expenseHistoryView;
     private GoalListView goalListView;
@@ -85,18 +86,18 @@ public class AppBuilder {
     }
 
     public AppBuilder addAddExpenseView() {
-        var expenseView = new AddExpenseView();
-        expenseView.setViewSwitcher(viewSwitcher);
+        addExpenseView = new AddExpenseView(expenseHistoryView);
+        addExpenseView.setViewSwitcher(viewSwitcher);
         // expenseView.setAddExpenseController();
-        expenseView.setUserData(userData);
-        viewSwitcher.add(ViewNames.addExpense, expenseView);
+        addExpenseView.setUserData(userData);
+        viewSwitcher.add(ViewNames.addExpense, addExpenseView);
         return this;
     }
 
     public AppBuilder addExpenseHistoryView() {
         var expenseController = new ExpenseHistoryController(userData);
         var budgetController = new BudgetHistoryController(userData);
-        var expenseHistoryView = new ExpenseHistoryView(bottomButtons, expenseController, budgetController);
+        expenseHistoryView = new ExpenseHistoryView(bottomButtons, expenseController, budgetController);
         expenseHistoryView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.expenseHistory, expenseHistoryView);
         return this;

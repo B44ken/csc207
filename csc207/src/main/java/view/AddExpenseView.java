@@ -28,6 +28,9 @@ import interface_adapter.add_expense.AddExpenseViewModel;
 public class AddExpenseView extends JPanel implements ActionListener {
     private final String viewName = "add expense";
 
+    private ViewSwitcher viewSwitcher;
+    private ExpenseHistoryView expenseHistoryView;
+
     private final JButton confirmButton;
     private final JButton cancelButton;
 
@@ -36,11 +39,11 @@ public class AddExpenseView extends JPanel implements ActionListener {
     private final JButton expenseButton;
     private final JButton goalsButton;
 
-    private ViewSwitcher viewSwitcher;
     private final LocalDate date = LocalDate.now();
     private UserData userData;
 
-    public AddExpenseView() {
+    public AddExpenseView(ExpenseHistoryView expenseHistoryView) {
+        this.expenseHistoryView = expenseHistoryView;
         final JLabel title = new JLabel(AddExpenseViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -80,6 +83,9 @@ public class AddExpenseView extends JPanel implements ActionListener {
 
                     userData.getHistory().add(new Expense(name, amount, category, date));
                     userData.save();
+
+                    expenseHistoryView.setupExpenseTable();
+
                     viewSwitcher.switchTo(ViewNames.home);
                 }
             }
