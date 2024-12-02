@@ -100,9 +100,7 @@ public class UserDataFileAccess extends UserData {
     public String serializeGoal(Goal goal) {
         return String.format(
             "%s,%s,,%s,goal\n",
-            goal.getTarget(),
-            goal.getAmount(),  
-            goal.getTargetDate()
+            goal.getAmount(), goal.getTarget(), goal.getTargetDate()
         );
     }
 

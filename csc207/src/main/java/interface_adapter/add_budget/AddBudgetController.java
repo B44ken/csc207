@@ -6,6 +6,7 @@ import entity.Budget;
 import entity.Expense;
 import use_case.add_budget.AddBudgetInputBoundary;
 import use_case.add_budget.AddBudgetInputData;
+import use_case.add_budget.AddBudgetInteractor;
 import view.ViewSwitcher;
 
 import java.time.LocalDate;
@@ -19,15 +20,19 @@ public class AddBudgetController {
 
     // private final AddBudgetInputBoundary addBudgetInteractor;
     // do we need inputboundary instead of AddBudgetInteractor
-    // private final AddBudgetInteractor addBudgetInteractor;
-    private UserData userData;
-    private ViewSwitcher viewSwitcher;
+    private final AddBudgetInteractor addBudgetInteractor;
+    private final ViewSwitcher viewSwitcher;
 
-    public AddBudgetController(ViewSwitcher vs, UserData ud) {
+    //private UserData userData;
+    //private ViewSwitcher viewSwitcher;
+
+    public AddBudgetController(AddBudgetInteractor addBudgetInteractor, ViewSwitcher viewSwitcher) {
         // this.addBudgetInputBoundary = addBudgetInputBoundary;
-        // this.addBudgetInteractor = addBudgetInteractor;
-        userData = ud;
-        viewSwitcher = vs;
+        this.addBudgetInteractor = addBudgetInteractor;
+        this.viewSwitcher = viewSwitcher;
+
+        // userData = ud;
+        // viewSwitcher = vs;
 
     }
 
@@ -39,9 +44,11 @@ public class AddBudgetController {
         }
         try {
             var amount = Double.parseDouble(amountStr);
-            var t = new Budget(categoryName, amount);
-            userData.getBudgets().add(t);
-            userData.save();
+            // var t = new Budget(categoryName, amount);
+            final AddBudgetInputData addBudgetInputData = new AddBudgetInputData(categoryName, amount);
+            addBudgetInteractor.execute(addBudgetInputData);
+            // userData.getBudgets().add(t);
+            // userData.save();
         } catch (NumberFormatException ex) {
             System.out.println("failed to parse amount");
         }
