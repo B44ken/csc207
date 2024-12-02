@@ -3,24 +3,13 @@ package view;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
-import java.io.FileWriter;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import javax.swing.*;
 
 import com.labrats.app.ViewNames;
-
 import data_access.UserData;
-import entity.Expense;
-// import interface_adapter.add_expense.AddExpenseController;
-import interface_adapter.add_expense.AddExpenseState;
+import interface_adapter.add_expense.AddExpenseController;
 import interface_adapter.add_expense.AddExpenseViewModel;
-
-//change above to what its actually called if its different
 
 /**
  * The View for the Add Expense Use Case
@@ -29,7 +18,6 @@ public class AddExpenseView extends JPanel implements ActionListener {
     private final String viewName = "add expense";
 
     private ViewSwitcher viewSwitcher;
-    private ExpenseHistoryView expenseHistoryView;
 
     private final JButton confirmButton;
     private final JButton cancelButton;
@@ -41,9 +29,9 @@ public class AddExpenseView extends JPanel implements ActionListener {
 
     private final LocalDate date = LocalDate.now();
     private UserData userData;
+    private AddExpenseController controller;
 
-    public AddExpenseView(ExpenseHistoryView expenseHistoryView) {
-        this.expenseHistoryView = expenseHistoryView;
+    public AddExpenseView() {
         final JLabel title = new JLabel(AddExpenseViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -81,12 +69,17 @@ public class AddExpenseView extends JPanel implements ActionListener {
                     var category = categoryTextField.getText();
                     var date = LocalDate.now();
 
+                    controller.addExpense(nameTextField.getText(), amountTextField.getText(),
+                            categoryTextField.getText());
+                    /*
                     userData.getHistory().add(new Expense(name, amount, category, date));
                     userData.save();
 
                     expenseHistoryView.setupExpenseTable();
 
                     viewSwitcher.switchTo(ViewNames.home);
+
+                     */
                 }
             }
         });
@@ -164,4 +157,8 @@ public class AddExpenseView extends JPanel implements ActionListener {
         this.viewSwitcher = viewSwitcher;
     }
 
+    public void setAddExpenseController(AddExpenseController addExpenseController) {
+        this.controller = addExpenseController;
+    }
 }
+

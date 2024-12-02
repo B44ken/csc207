@@ -1,39 +1,38 @@
 package interface_adapter.add_expense;
 
-import interface_adapter.ViewManagerModel;
+import javax.swing.*;
+
+import com.labrats.app.ViewNames;
 import use_case.add_expense.AddExpenseOutputBoundary;
 import use_case.add_expense.AddExpenseOutputData;
+import view.ViewSwitcher;
+
 
 /**
- * The Presenter for teh Add Expense Use Case.
+ * The Presenter for the Add Expense Use Case.
  */
 public class AddExpensePresenter implements AddExpenseOutputBoundary {
 
-    private final AddExpenseViewModel addExpenseViewModel;
-    private final ViewManagerModel viewManagerModel;
+    private final ViewSwitcher viewSwitcher;
 
-    public AddExpensePresenter (ViewManagerModel viewManagerModel,
-                                AddExpenseViewModel addExpenseViewModel) {
-        this.viewManagerModel = viewManagerModel;
-        this.addExpenseViewModel = addExpenseViewModel;
+    public AddExpensePresenter(ViewSwitcher vs) {
+        this.viewSwitcher = vs;
     }
 
     @Override
     public void prepareSuccessView(AddExpenseOutputData outputData) {
-//        viewManagerModel.setState(homeViewModel.getViewName());
-//        viewManagerModel.firePropertyChanged();
+        JOptionPane.showMessageDialog(null, "Expense " + outputData.getName()
+                + " successfully added!");
+        viewSwitcher.switchTo(ViewNames.home);
     }
 
     @Override
     public void prepareFailView(String error) {
-//        final AddExpenseState addExpenseState = addExpenseViewModel.getState();
-//        addExpenseState.setNameError(error);
-//        addExpenseViewModel.firePropertyChanged();
+        JOptionPane.showMessageDialog(null, error);
     }
 
     @Override
     public void switchToHomeView() {
-//        viewManagerModel.setState(homeViewModel.getViewName());
-//        viewManagerModel.firePropertyChanged();
+        viewSwitcher.switchTo(ViewNames.home);
     }
 }
