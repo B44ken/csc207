@@ -1,13 +1,29 @@
 package com.labrats.app;
 
-import interface_adapter.add_income.AddIncomeViewModel;
+
+import entity.Expense;
+import entity.GoalList;
+import interface_adapter.add_budget.AddBudgetController;
+import interface_adapter.add_goal.AddGoalController;
 import use_case.ExpenseHistoryController;
+import use_case.AddExpenseController;
+import use_case.add_budget.AddBudgetInteractor;
+import use_case.goals.GoalListController;
+import use_case.history.BudgetHistoryController;
+
+import interface_adapter.add_income.AddIncomeViewModel;
+import interface_adapter.get_insight.GetInsightController;
+import interface_adapter.get_insight.GetInsightViewModel;
+import use_case.get_insight.GetInsightInteractor;
+import use_case.ExpenseHistoryController;
+
 import view.*;
 
 import data_access.UserData;
 import data_access.UserDataFileAccess;
 
 import java.awt.CardLayout;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -26,6 +42,7 @@ public class AppBuilder {
     private AddExpenseView addExpenseView;
     private GetInsightView getInsightView;
     private ExpenseHistoryView expenseHistoryView;
+    private GoalListView goalListView;
 
     public AppBuilder() {
         cards = new JPanel(new CardLayout());
@@ -37,7 +54,7 @@ public class AppBuilder {
     public AppBuilder addUserData() {
         homeView.setUserData(userData);
         incomeHistoryView.setUserData(this.userData);
-        expenseHistoryView.setUserData(this.userData);
+        // expenseHistoryView.setUserData(this.userData);
         // getInsightView.setUserData(this.userData);
         // TODO
         // do user data stuff for other views
@@ -60,7 +77,7 @@ public class AppBuilder {
 
     public AppBuilder addIncomeHistoryView() {
         incomeHistoryView = new IncomeHistoryView(viewSwitcher);
-        incomeHistoryView.setViewSwitcher(viewSwitcher);
+        // incomeHistoryView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.incomeHistory, incomeHistoryView);
         return this;
     }
@@ -84,38 +101,44 @@ public class AppBuilder {
     }
 
     public AppBuilder addExpenseHistoryView() {
-        var interactor = new ExpenseHistoryController(userData);
-        expenseHistoryView = new ExpenseHistoryView(interactor);
+        var expenseController = new ExpenseHistoryController(userData);
+        var budgetController = new BudgetHistoryController(userData);
+        var expenseHistoryView = new ExpenseHistoryView(bottomButtons, expenseController, budgetController);
         expenseHistoryView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.expenseHistory, expenseHistoryView);
         return this;
     }
 
     public AppBuilder addAddBudgetView() {
-        //var controller = new ExpenseHistoryController(userData);
-        //var expenseView = new ExpenseHistoryView(bottomButtons, controller);
-        //viewSwitcher.add(ViewNames.expenseHistory, expenseView);
-
+        var addBudgetController = new AddBudgetController(viewSwitcher, userData);
+        var addBudgetView = new AddBudgetView(addBudgetController, viewSwitcher);
+        addBudgetView.setViewSwitcher(viewSwitcher);
+        viewSwitcher.add(ViewNames.addBudget, addBudgetView);
         return this;
     }
 
     public AppBuilder addAddGoalView() {
-        var addGoalView = new AddGoalView();
-        addGoalView.setViewSwitcher(viewSwitcher);
-        viewSwitcher.add(ViewNames.addGoal, addGoalView);
+        var controller = new AddGoalController(viewSwitcher, userData);
+        var goalsView = new AddGoalView(controller, viewSwitcher);
+        goalsView.setViewSwitcher(viewSwitcher);
+        goalsView.setUserData(userData);
+        viewSwitcher.add(ViewNames.addGoal, goalsView);
         return this;
     }
 
     public AppBuilder addGoalsView() {
-        var goalsView = new GoalsView();
-        goalsView.setUserData(userData);
-        goalsView.setViewSwitcher(viewSwitcher);
-        viewSwitcher.add(ViewNames.goalList, goalsView);
+        var interactor = new GoalListController(userData);
+        goalListView = new GoalListView(bottomButtons, interactor);
+        goalListView.setViewSwitcher(viewSwitcher);
+        viewSwitcher.add(ViewNames.goalList, goalListView);
         return this;
     }
 
+
+    // TODO need to fix
     public AppBuilder addGetInsightView() {
-        getInsightView = new GetInsightView();
+        // GetInsightInteractor interactor = new GetInsightInteractor();
+        GetInsightView getInsightView = new GetInsightView(bottomButtons, new GetInsightViewModel());
         getInsightView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.getInsight, getInsightView);
         return this;
