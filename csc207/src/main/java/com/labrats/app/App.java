@@ -31,9 +31,10 @@ public class App {
                 .addAddIncomeView()
                 .addGoalListView()
                 .addAddGoalView()
-                .addAddGoalUseCase()
                 .addAddBudgetView()
                 .addAddIncomeUseCase()
+                .addAddBudgetUseCase()
+                .addAddExpenseUseCase()
                 //.addAddExpenseUseCase()
                 .build();
         application.pack();

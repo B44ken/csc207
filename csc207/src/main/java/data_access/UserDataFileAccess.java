@@ -81,7 +81,7 @@ public class UserDataFileAccess extends UserData {
                 var amount = Double.parseDouble(row.get(1));
                 var targetDate = LocalDate.parse(row.get(3));
                 var entry = new Goal(target, amount, targetDate);
-                goals.add(entry);
+                goals.add(entry );
             } else {
                 throw new RuntimeException("Invalid type: " + type);
             }
@@ -100,9 +100,7 @@ public class UserDataFileAccess extends UserData {
     public String serializeGoal(Goal goal) {
         return String.format(
             "%s,%s,,%s,goal\n",
-            goal.getTarget(),
-            goal.getAmount(),  
-            goal.getTargetDate()
+            goal.getAmount(), goal.getTarget(), goal.getTargetDate()
         );
     }
 

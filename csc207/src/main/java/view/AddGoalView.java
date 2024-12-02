@@ -67,7 +67,7 @@ public class AddGoalView extends JPanel implements ActionListener, PropertyChang
         confirmButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 addGoalController.execute(targetTextField.getText(), amountTextField.getText(),
-                        dayTextField.getText(), monthTextField.getText(), yearTextField.getText());
+                        yearTextField.getText(), monthTextField.getText(), dayTextField.getText());
                 viewSwitcher.switchTo(ViewNames.goalList);
             }
         });
