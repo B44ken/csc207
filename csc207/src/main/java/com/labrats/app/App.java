@@ -35,6 +35,7 @@ public class App {
                 .addAddBudgetView()
                 .addAddIncomeUseCase()
                 .addAddBudgetUseCase()
+                .addAddExpenseUseCase()
                 //.addAddExpenseUseCase()
                 .build();
         application.pack();
