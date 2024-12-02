@@ -75,6 +75,12 @@ public class HomeView extends JPanel {
         getInsight = new JButton("Get Insight");
         buttons1.add(getInsight, 0);
 
+        var budgetReport = new JButton("Budget Report");
+        buttons1.add(budgetReport, 0);
+        budgetReport.addActionListener(
+            x -> viewSwitcher.switchTo(ViewNames.budgetReport)
+        );
+
         getInsight.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
@@ -163,7 +169,8 @@ public class HomeView extends JPanel {
     public void repaint() {
         if (chart != null) {
             this.remove(chart);
-            this.add(chartController.execute(chart));
+            chart = chartController.execute();
+            this.add(chart);
         }
 
         if (this.valuesController != null)
