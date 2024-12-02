@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import entity.Expense;
 
 /**
- * The Add Expense Interactor
+ * The Add Expense Interactor.
  */
 public class AddExpenseInteractor implements AddExpenseInputBoundary {
     private final AddExpenseOutputBoundary addExpensePresenter;
