@@ -66,8 +66,6 @@ public class HomeView extends JPanel {
         expensesValue.setAlignmentX(Component.CENTER_ALIGNMENT);
         final JLabel netValue = new JLabel("Goal");
 
-        // add chart API here
-
         final JPanel buttons1 = new JPanel();
         addIncome = new JButton("Add Income");
         buttons1.add(addIncome);
@@ -174,6 +172,7 @@ public class HomeView extends JPanel {
             chart = chartController.execute();
             this.add(chart);
         }
+
         if (this.valuesController != null)
             valuesController.execute(incomeValue, expensesValue, netBalanceValue);
     }
