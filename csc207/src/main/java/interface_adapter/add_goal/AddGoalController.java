@@ -11,8 +11,6 @@ import entity.Budget;
 import entity.Goal;
 import use_case.add_goal.AddGoalInputData;
 import use_case.add_goal.AddGoalInputBoundary;
-import use_case.add_goal.AddGoalInteractor;
-import use_case.add_income.AddIncomeInputData;
 import view.ViewSwitcher;
 
 import javax.swing.text.View;
@@ -20,29 +18,36 @@ import java.time.LocalDate;
 import java.util.Date;
 
 /**
- * Controller for Add Goal use case.
+ * Controller for Add Income use case.
  */
 public class AddGoalController {
-    private final AddGoalInteractor addGoalInteractor;
+    private UserData userData;
+    private ViewSwitcher viewSwitcher;
 
-    public AddGoalController(AddGoalInteractor addGoalInteractor) {
-        this.addGoalInteractor = addGoalInteractor;
+    public AddGoalController(ViewSwitcher vs, UserData ud) {
+        userData = ud;
+        viewSwitcher = vs;
     }
 
-    /**
-     * Executes the Add Goal use case by passing UserData into Interactor
-     * @param target
-     * @param amount
-     * @param targetDay
-     * @param targetMonth
-     * @param targetYear
-     *
-     */
-    public void execute(String target, String amount, String targetDay, String targetMonth, String targetYear) {
-        Double doubleAmount = Double.valueOf(amount);
-        LocalDate localDate = LocalDate.of(Integer.parseInt(targetYear), Integer.parseInt(targetMonth),
-                Integer.parseInt(targetDay));
-        final AddGoalInputData addGoalInputData = new AddGoalInputData(target, doubleAmount, localDate);
-        addGoalInteractor.execute(addGoalInputData);
+    public void addGoal(String target, String amountstr, LocalDate targetDate) {
+
+        if (target == null || amountstr == null || targetDate == null) {
+            System.out.println("invalid input");
+            return;
+        }
+        try {
+            var amount = Double.parseDouble(amountstr);
+            var g = new Goal(target, amount, targetDate);
+            userData.getGoals().add(g);
+            userData.save();
+        } catch (NumberFormatException ex) {
+            System.out.println("failed to parse amount");
+        }
+
+
+    }
+
+    public void switchToHomeView() {
+        viewSwitcher.switchTo(ViewNames.home);
     }
 }
