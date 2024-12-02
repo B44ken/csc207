@@ -29,7 +29,7 @@ public class App {
                 .addAddExpenseView()
                 .addIncomeHistoryView()
                 .addAddIncomeView()
-                .addGoalListView()
+                .addGoalsView()
                 .addAddGoalView()
                 .addAddBudgetView()
                 .addAddIncomeUseCase()

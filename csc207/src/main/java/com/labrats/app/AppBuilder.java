@@ -2,6 +2,7 @@ package com.labrats.app;
 
 
 import entity.*;
+import interface_adapter.GoalListController;
 import interface_adapter.add_budget.AddBudgetPresenter;
 import interface_adapter.add_expense.AddExpenseController;
 import interface_adapter.add_expense.AddExpensePresenter;
@@ -14,11 +15,11 @@ import interface_adapter.add_income.AddIncomeController;
 import interface_adapter.add_income.AddIncomePresenter;
 import interface_adapter.income_history.IncomeHistoryController;
 import interface_adapter.ExpenseHistoryController;
+import interface_adapter.GoalListController;
 import use_case.add_budget.AddBudgetInteractor;
 import use_case.add_expense.AddExpenseInteractor;
 import use_case.add_goal.AddGoalInteractor;
 import use_case.add_income.AddIncomeInteractor;
-import interface_adapter.GoalListController;
 import use_case.history.BudgetHistoryController;
 
 import interface_adapter.get_insight.GetInsightViewModel;
