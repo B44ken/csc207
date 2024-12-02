@@ -10,10 +10,17 @@ public class AddExpenseInputData {
     private final String amount;
     private final String category;
 
-    public AddExpenseInputData(String name, String amount, String category) {
+    private final String day;
+    private final String month;
+    private final String year;
+
+    public AddExpenseInputData(String name, String amount, String category, String day, String month, String year) {
         this.name = name;
         this.amount = amount;
         this.category = category;
+        this.day = day;
+        this.month = month;
+        this.year = year;
     }
 
     String getAmountString(){
@@ -28,4 +35,15 @@ public class AddExpenseInputData {
         return category;
     }
 
+    String getDay(){
+        return day;
+    }
+
+    String getMonth(){
+        return month;
+    }
+
+    String getYear(){
+        return year;
+    }
 }
