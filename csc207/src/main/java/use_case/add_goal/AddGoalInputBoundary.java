@@ -1,5 +1,7 @@
 package use_case.add_goal;
 
+import data_access.UserData;
+
 /**
  * Add Goal Use Case.
  */
@@ -7,9 +9,9 @@ package use_case.add_goal;
 public interface AddGoalInputBoundary {
     /**
      * Execute the Goal Use Case.
-     * @param addGoalInputData the input data for this use case
+     * @param userData the input data for this use case
      */
-    void execute(AddGoalInputData addGoalInputData);
+    void execute(UserData userData);
 
     void switchToHomeView();
 

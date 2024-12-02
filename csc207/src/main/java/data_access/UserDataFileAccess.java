@@ -43,7 +43,7 @@ public class UserDataFileAccess extends UserData {
                 row.add(part);
             csv.add(row);
         }
-        //csv.remove(0);
+        csv.remove(0);
         return csv;
     }
 
@@ -81,7 +81,7 @@ public class UserDataFileAccess extends UserData {
                 var amount = Double.parseDouble(row.get(1));
                 var targetDate = LocalDate.parse(row.get(3));
                 var entry = new Goal(target, amount, targetDate);
-                goals.add(entry );
+                goals.add(entry);
             } else {
                 throw new RuntimeException("Invalid type: " + type);
             }
