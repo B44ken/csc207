@@ -39,7 +39,7 @@ public class AddBudgetView extends JPanel implements ActionListener, PropertyCha
 
     private AddBudgetController controller;
 
-    public AddBudgetView(AddBudgetController controller, ViewSwitcher viewSwitcher) {
+    public AddBudgetView(AddBudgetController controller) {
 
         // this.addBudgetController = controller;
         // this.addBudgetViewModel = budgetViewModel;
