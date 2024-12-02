@@ -23,7 +23,7 @@ public class AddIncomeInteractor{
     }
 
     /**
-     * Execute the Add Inco Use Case.
+     * Execute the Add Income Use Case.
      *
      * @param addIncomeInputData the input data for add income use case
      */
