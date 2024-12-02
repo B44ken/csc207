@@ -6,7 +6,6 @@ import interface_adapter.GoalListController;
 import interface_adapter.add_budget.AddBudgetPresenter;
 import interface_adapter.add_expense.AddExpenseController;
 import interface_adapter.add_expense.AddExpensePresenter;
-import interface_adapter.add_goal.AddGoalPresenter;
 import interface_adapter.home.HomeChartController;
 import interface_adapter.home.HomeValuesController;
 import interface_adapter.add_budget.AddBudgetController;
@@ -15,7 +14,6 @@ import interface_adapter.add_income.AddIncomeController;
 import interface_adapter.add_income.AddIncomePresenter;
 import interface_adapter.income_history.IncomeHistoryController;
 import interface_adapter.ExpenseHistoryController;
-import interface_adapter.GoalListController;
 import use_case.add_budget.AddBudgetInteractor;
 import use_case.add_expense.AddExpenseInteractor;
 import use_case.add_goal.AddGoalInteractor;
@@ -153,8 +151,7 @@ public class AppBuilder {
     }
 
     public AppBuilder addAddGoalUseCase() {
-        final AddGoalPresenter presenter = new AddGoalPresenter();
-        final AddGoalInteractor interactor = new AddGoalInteractor(userData, presenter, goalFactory);
+        final AddGoalInteractor interactor = new AddGoalInteractor(userData, goalFactory);
         final AddGoalController controller = new AddGoalController(interactor);
         addGoalView.setAddGoalController(controller);
         return this;

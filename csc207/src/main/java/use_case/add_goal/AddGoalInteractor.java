@@ -11,12 +11,10 @@ import entity.GoalList;
 public class AddGoalInteractor {
     private final UserData userData;
     private final GoalFactory goalFactory;
-    private final AddGoalOutputBoundary userPresenter;
 
-    public AddGoalInteractor(UserData userData, AddGoalOutputBoundary userPresenter, GoalFactory goalFactory) {
+    public AddGoalInteractor(UserData userData, GoalFactory goalFactory) {
         this.userData = userData;
         this.goalFactory = goalFactory;
-        this.userPresenter = userPresenter;
     }
 
     /**
