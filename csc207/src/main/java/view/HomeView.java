@@ -11,6 +11,8 @@ import com.labrats.app.ViewNames;
 
 import data_access.ChartImageFactory;
 import data_access.UserData;
+import interface_adapter.home.HomeChartController;
+import interface_adapter.home.HomeValuesController;
 
 /**
  * The view for the home view case.
@@ -34,7 +36,16 @@ public class HomeView extends JPanel {
     private final JButton expenseButton;
     private final JButton goalButton;
 
-    public HomeView() {
+    private final HomeChartController chartController;
+    private final HomeValuesController valuesController;
+
+    public JLabel chart;
+
+    public HomeView(HomeValuesController controller, HomeChartController chartController) {
+        this.valuesController = controller;
+        this.chartController = chartController;
+        this.chart = new JLabel();
+
         final JLabel title = new JLabel("My Cool Finance App");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -126,6 +137,7 @@ public class HomeView extends JPanel {
         this.add(incomeValue);
         this.add(expenseText);
         this.add(expensesValue);
+        this.add(chart);
         this.add(buttons1);
         this.add(buttons2);
     }
@@ -152,27 +164,12 @@ public class HomeView extends JPanel {
                 });
     }
 
-    public JLabel chart;
-
     public void repaint() {
-        if (userData != null) {
-            var api = new ChartImageFactory(userData.getHistory());
-            if (chart != null)
-                this.remove(chart);
-            chart = api.createImage(
-                    LocalDate.of(2024, 10, 1), LocalDate.of(2024, 10, 7));
-            chart.setSize(400, 300);
-            this.add(chart);
+        if (chart != null) {
+            this.remove(chart);
+            this.add(chartController.execute(chart));
         }
-
-        if (userData != null && incomeValue != null) {
-            incomeValue.setText(Double.toString(userData.getHistory().getIncomeTotal()));
-        }
-        if (userData != null && expensesValue != null) {
-            expensesValue.setText(Double.toString(userData.getHistory().getExpensesTotal()));
-        }
-        if (userData != null && netBalanceValue != null) {
-            netBalanceValue.setText(Double.toString(userData.getHistory().getNetBalance()));
-        }
+        // TODO WHY THE FUCK IS THIS NULL WHEN APP RUNS IM GONNA KMS
+        valuesController.execute(incomeValue, expensesValue, netBalanceValue);
     }
 }

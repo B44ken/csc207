@@ -2,6 +2,8 @@ package com.labrats.app;
 
 
 import entity.IncomeFactory;
+import interface_adapter.home.HomeChartController;
+import interface_adapter.home.HomeValuesController;
 import interface_adapter.add_budget.AddBudgetController;
 import interface_adapter.add_goal.AddGoalController;
 import interface_adapter.add_income.AddIncomeController;
@@ -49,8 +51,9 @@ public class AppBuilder {
     }
 
     public AppBuilder addHomeView() {
-        HomeController controller = new HomeController(userData);
-        homeView = new HomeView();
+        HomeValuesController valuesController = new HomeValuesController(userData);
+        HomeChartController chartController = new HomeChartController(userData);
+        homeView = new HomeView(valuesController, chartController);
         homeView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.home, homeView);
         return this;
