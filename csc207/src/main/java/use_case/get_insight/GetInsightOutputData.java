@@ -1,21 +1,18 @@
 package use_case.get_insight;
 
+import entity.Deductible;
+
+import java.util.ArrayList;
+
 public class GetInsightOutputData {
-    private String expensesLevel;
-    private boolean useCaseFailed;
+    private ArrayList<Deductible> deductableArrayList;
 
-    public GetInsightOutputData(String expensesLevel, boolean useCaseFailed) {
+    public GetInsightOutputData() {
         // save the parameters in the instance variables.
-        this.expensesLevel = expensesLevel;
-        this.useCaseFailed = useCaseFailed;
+        this.deductableArrayList = new ArrayList<>();
     }
 
-    public String getExpensesLevel() {
-        return expensesLevel;
+    public ArrayList<Deductible> getDeductibleList() {
+        return this.deductableArrayList;
     }
-
-    public boolean isUseCaseFailed() {
-        return useCaseFailed;
-    }
-
 }

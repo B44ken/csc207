@@ -1,11 +1,8 @@
 package view;
 
 import com.labrats.app.ViewNames;
-import data_access.ChartImageFactory;
-import data_access.UserData;
-import entity.Transaction;
-import entity.TransactionHistory;
 import interface_adapter.income_history.IncomeHistoryController;
+import interface_adapter.income_history.IncomeHistoryRepainter;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -13,7 +10,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
 
 
 /**
@@ -33,10 +29,11 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
     private final JButton goalsButton;
     private ViewSwitcher viewSwitcher;
     private IncomeHistoryController controller;
+    private IncomeHistoryRepainter incomeHistoryRepainter;
 
-    public IncomeHistoryView(IncomeHistoryController controller) {
+    public IncomeHistoryView(IncomeHistoryController controller, IncomeHistoryRepainter incomeHistoryRepainter) {
         this.controller = controller;
-        // this.viewSwitcher = viewSwitcher;
+        this.incomeHistoryRepainter = incomeHistoryRepainter;
         final JLabel title = new JLabel("Income History");
 
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -95,7 +92,6 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setUpTable();
 
-
         this.add(title);
         this.add(panel);
         this.add(panelChart);
@@ -110,10 +106,14 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
         if (controller!= null) {
             controller.execute(tableModel);
         }
-        // this.repaintChart();
+        if (incomeHistoryRepainter != null) {
+            this.panelChart.removeAll();
+            JPanel result = incomeHistoryRepainter.execute();
+            this.panelChart.add(result);
+        }
     }
 
-//    public void repaintChart() {
+//    public void repaintChart(JPanel panelChart) {
 //        var api = new ChartImageFactory(new TransactionHistory());
 //        JLabel incomeChart = api.createIncomeImage(LocalDate.of(2024, 1, 1), LocalDate.now());
 //        this.panelChart.setComponentZOrder(incomeChart, 0);
@@ -140,7 +140,7 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
 
         incomeHistoryTable = new JTable(tableModel);
         JScrollPane tableScrollPane = new JScrollPane(incomeHistoryTable);
-        TitledBorder tableTitle = BorderFactory.createTitledBorder("Expense History");
+        TitledBorder tableTitle = BorderFactory.createTitledBorder("Income History");
         tableScrollPane.setBorder(tableTitle);
         incomeHistoryTable.setFillsViewportHeight(true);
         incomeHistoryTable.setVisible(true);

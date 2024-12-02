@@ -9,10 +9,7 @@ import data_access.UserData;
 public interface AddIncomeInputBoundary {
     /**
      * Execute the Change Password Use Case.
-     * @param userData the input data for this use case
+     * @param addIncomeInputData the input data for this use case
      */
-    void execute(UserData userData);
-
-    void switchToHomeView();
-
+    void execute(AddIncomeInputData addIncomeInputData);
 }

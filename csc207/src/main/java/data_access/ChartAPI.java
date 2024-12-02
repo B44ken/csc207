@@ -38,7 +38,7 @@ public class ChartAPI {
         }
     }
 
-    private String qrEndpoint = "https://quickchart.io/qr?text=https://clnx.utoronto.ca/home.htm";
+    private String qrEndpoint = "https://quickchart.io/qr?text=https://www.canada.ca/en/revenue-agency/services/forms-publications/tax-packages-years/general-income-tax-benefit-package/ontario/5006-pc.html";
 
     private String endpoint = "https://quickchart.io/chart/render/zm-203d31f0-9c91-4750-917b-1e888d1bea24";
     private String failImage = "https://steemitimages.com/640x0/http://backofthebook.ca/wp-content/uploads/2013/03/sad-puppy.jpg";

@@ -11,7 +11,7 @@ import entity.IncomeFactory;
 /**
  * The Add Income Interactor.
  */
-public class AddIncomeInteractor{
+public class AddIncomeInteractor implements AddIncomeInputBoundary{
     private final UserData userData;
     private final IncomeFactory incomeFactory;
     private final AddIncomeOutputBoundary userPresenter;
