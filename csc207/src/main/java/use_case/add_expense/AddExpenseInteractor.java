@@ -1,39 +1,61 @@
 package use_case.add_expense;
 
+import data_access.UserData;
+import entity.Expense;
 import entity.TransactionFactory;
 import entity.Transaction;
 
 import java.time.LocalDate;
 
+import entity.Expense;
+
 /**
  * The Add Expense Interactor
  */
 public class AddExpenseInteractor implements AddExpenseInputBoundary {
-    private final AddExpenseDataAccessInterface addExpenseDataAccessObject;
     private final AddExpenseOutputBoundary addExpensePresenter;
-    private final TransactionFactory transactionFactory;
+    private final UserData userData;
 
-    public AddExpenseInteractor(AddExpenseDataAccessInterface addExpenseDataAccessInterface,
-                                AddExpenseOutputBoundary addExpenseOutputBoundary,
-                                TransactionFactory transactionFactory) {
-        this.addExpenseDataAccessObject = addExpenseDataAccessInterface;
+    public AddExpenseInteractor(AddExpenseOutputBoundary addExpenseOutputBoundary, UserData ud) {
         this.addExpensePresenter = addExpenseOutputBoundary;
-        this.transactionFactory = transactionFactory;
+        this.userData = ud;
     }
 
     @Override
-    public void execute(AddExpenseInputData addExpenseInputData) {
+    public void addExpense(AddExpenseInputData addExpenseInputData) {
+        var date = LocalDate.now();
+        var name = addExpenseInputData.getName();
+        var amountStr = addExpenseInputData.getAmountString();
+        var category = addExpenseInputData.getCategory();
 
-        if (addExpenseDataAccessObject.existsByName(addExpenseInputData.getName())) {
-            addExpensePresenter.prepareFailView("Transaction already exists");
+
+        if (name.equals("")) {
+            addExpensePresenter.prepareFailView("Name field cannot be blank");
+            return;
+        } else if (amountStr.equals("")) {
+            addExpensePresenter.prepareFailView("Amount field cannot be blank");
+            return;
+        } else if (category.equals("")) {
+            addExpensePresenter.prepareFailView("Category field cannot be blank");
+            return;
+        } else {
+            try {Double.valueOf(amountStr); }
+            catch (NumberFormatException e) {
+                addExpensePresenter.prepareFailView("Invalid amount for parsing.");
+                return;
+            }
         }
-        else {
-            final Transaction transaction = transactionFactory.create(addExpenseInputData.getName(),
-                    addExpenseInputData.getAmount(), addExpenseInputData.getCategory(), addExpenseInputData.getDate());
+        try {
+            var amount = Double.parseDouble(amountStr);
+            var t = new Expense(name, amount, category, date);
+            userData.getHistory().add(t);
+            userData.save();
 
-            addExpenseDataAccessObject.save(transaction);
-
-            final AddExpenseOutputData addExpenseOutputData = new AddExpenseOutputData(transaction.getName());
+            final AddExpenseOutputData addExpenseOutputData = new AddExpenseOutputData(name);
+            addExpensePresenter.prepareSuccessView(addExpenseOutputData);
+        } catch (NumberFormatException ex) {
+            System.out.println("failed to parse amount");
+            addExpensePresenter.prepareFailView("failed to parse amount");
         }
     }
 

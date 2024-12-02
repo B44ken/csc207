@@ -9,10 +9,10 @@ public interface AddExpenseInputBoundary {
      * Executes the add expense use case.
      * @param addExpenseInputData the input data
      */
-    void execute(AddExpenseInputData addExpenseInputData);
+    void addExpense(AddExpenseInputData addExpenseInputData);
 
     /**
-     * Execytes the switch to home view use case/
+     * Executes the switch to home view use case/
      */
     void switchToHomeView();
 }

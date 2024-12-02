@@ -7,18 +7,16 @@ import java.time.LocalDate;
  */
 public class AddExpenseInputData {
     private final String name;
-    private final double amount;
+    private final String amount;
     private final String category;
-    private final LocalDate date;
 
-    public AddExpenseInputData(String name, double amount, String category, LocalDate date) {
+    public AddExpenseInputData(String name, String amount, String category) {
         this.name = name;
         this.amount = amount;
         this.category = category;
-        this.date = date;
     }
 
-    double getAmount(){
+    String getAmountString(){
         return amount;
     }
 
@@ -30,7 +28,4 @@ public class AddExpenseInputData {
         return category;
     }
 
-    LocalDate getDate(){
-        return date;
-    }
 }

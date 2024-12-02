@@ -20,6 +20,8 @@ import interface_adapter.ExpenseHistoryController;
 
 import use_case.add_budget.AddBudgetInteractor;
 
+import use_case.add_expense.AddExpenseInputBoundary;
+import use_case.add_expense.AddExpenseInteractor;
 import use_case.add_expense.AddExpenseOutputBoundary;
 
 import use_case.add_income.AddIncomeInteractor;
@@ -101,7 +103,9 @@ public class AppBuilder {
 
     public AppBuilder addAddExpenseView() {
         final AddExpenseOutputBoundary addExpenseOutputBoundary = new AddExpensePresenter(viewSwitcher);
-        var addExpenseController = new AddExpenseController(viewSwitcher, userData, addExpenseOutputBoundary);
+        final AddExpenseInputBoundary addExpenseInputBoundary = new AddExpenseInteractor(
+                addExpenseOutputBoundary, userData);
+        var addExpenseController = new AddExpenseController(viewSwitcher, userData, addExpenseInputBoundary);
 
         var expenseView = new AddExpenseView();
         expenseView.setAddExpenseController(addExpenseController);

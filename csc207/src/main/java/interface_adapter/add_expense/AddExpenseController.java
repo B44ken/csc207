@@ -6,7 +6,8 @@ import com.labrats.app.ViewNames;
 
 import data_access.UserData;
 import entity.Expense;
-import use_case.add_expense.AddExpenseOutputBoundary;
+import use_case.add_expense.AddExpenseInputData;
+import use_case.add_expense.AddExpenseInputBoundary;
 import use_case.add_expense.AddExpenseOutputData;
 import view.ViewSwitcher;
 
@@ -14,15 +15,19 @@ public class AddExpenseController {
     private UserData userData;
     private ViewSwitcher viewSwitcher;
 
-    private AddExpenseOutputBoundary presenter;
+    private AddExpenseInputBoundary userAddExpenseInteractor;
 
-    public AddExpenseController(ViewSwitcher vs, UserData ud, AddExpenseOutputBoundary addExpenseOutputBoundary) {
+    public AddExpenseController(ViewSwitcher vs, UserData ud, AddExpenseInputBoundary addExpenseInputBoundary) {
         this.userData = ud;
         this.viewSwitcher = vs;
-        this.presenter = addExpenseOutputBoundary;
+        this.userAddExpenseInteractor = addExpenseInputBoundary;
     }
 
+
     public void addExpense(String name, String amountStr, String category) {
+        final AddExpenseInputData addExpenseInputData = new AddExpenseInputData(name, amountStr, category);
+        userAddExpenseInteractor.addExpense(addExpenseInputData);
+        /*
         var date = LocalDate.now();
 
 
@@ -53,9 +58,11 @@ public class AddExpenseController {
             System.out.println("failed to parse amount");
             presenter.prepareFailView("failed to parse amount");
         }
+
+         */
     }
 
-    public void switchToHome() {
+    public void switchToHome () {
         viewSwitcher.switchTo(ViewNames.home);
+        }
     }
-}
