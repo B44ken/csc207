@@ -15,12 +15,13 @@ public class AddBudgetInteractor implements AddBudgetInputBoundary {
     // private final AddBudgetOutputBoundary addBudgetOutputBoundary;
 
     // private final AddBudgetUserDataAccessInterface userDataAccessObject;
-    // private final AddBudgetOutputBoundary userPresenter;
+    private final AddBudgetOutputBoundary userPresenter;
     // private final BudgetHistory budgetHistory;
 
-    public AddBudgetInteractor(UserData userData, BudgetFactory budgetFactory) {
+    public AddBudgetInteractor(UserData userData, AddBudgetOutputBoundary userPresenter, BudgetFactory budgetFactory) {
         this.userData = userData;
         this.budgetFactory = budgetFactory;
+        this.userPresenter = userPresenter;
 
         // this.userDataAccessObject = userDataAccessObject;
         // this.userPresenter = userPresenter;

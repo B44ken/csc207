@@ -6,9 +6,8 @@ package use_case.add_budget;
 public interface AddBudgetOutputBoundary {
     /**
      * Prepares the success view for the Add Budget Use Case.
-     * @param outputData the output data
      */
-    void prepareSuccessView(AddBudgetOutputData outputData);
+    void prepareSuccessView();
 
     /**
      * Prepares the failure view for the Add Budget Use Case.
@@ -16,8 +15,4 @@ public interface AddBudgetOutputBoundary {
      */
     void prepareFailView(String errorMessage);
 
-    /**
-     * Switches to the Budget View.
-     */
-    void switchToHomeView();
 }

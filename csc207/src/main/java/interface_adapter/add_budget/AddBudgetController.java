@@ -21,15 +21,13 @@ public class AddBudgetController {
     // private final AddBudgetInputBoundary addBudgetInteractor;
     // do we need inputboundary instead of AddBudgetInteractor
     private final AddBudgetInteractor addBudgetInteractor;
-    private final ViewSwitcher viewSwitcher;
 
     //private UserData userData;
     //private ViewSwitcher viewSwitcher;
 
-    public AddBudgetController(AddBudgetInteractor addBudgetInteractor, ViewSwitcher viewSwitcher) {
+    public AddBudgetController(AddBudgetInteractor addBudgetInteractor) {
         // this.addBudgetInputBoundary = addBudgetInputBoundary;
         this.addBudgetInteractor = addBudgetInteractor;
-        this.viewSwitcher = viewSwitcher;
 
         // userData = ud;
         // viewSwitcher = vs;
@@ -69,11 +67,5 @@ public class AddBudgetController {
         // addBudgetInteractor.execute(addBudgetInputData);
     // }
 
-    /**
-     * Executes the "switch to BudgetView" Use Case.
-     */
-    public void switchToHomeView() {
-        viewSwitcher.switchTo(ViewNames.home);
-        // addBudgetInteractor.switchToHomeView();
-    }
+
 }
