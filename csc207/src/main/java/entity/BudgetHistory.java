@@ -8,6 +8,9 @@ import java.util.ArrayList;
 public class BudgetHistory {
     private ArrayList<Budget> history;
 
+    /**
+     * Initializes a BudgetHistory object.
+     */
     public BudgetHistory() {
         history = new ArrayList<>();
     }
@@ -20,9 +23,12 @@ public class BudgetHistory {
         history.add(budget);
     }
 
-
+    /**
+     * Returns a BudgetHistory object containing all added Budgets.
+     * @return the BudgetHistory object.
+     */
     public BudgetHistory getAllBudgets() {
-        BudgetHistory result = new BudgetHistory();
+        final BudgetHistory result = new BudgetHistory();
         for (var t : history) {
             if (t instanceof Budget) {
                 result.add(t);
@@ -31,6 +37,10 @@ public class BudgetHistory {
         return result;
     }
 
+    /**
+     * Returns an ArrayList containing Budget objects that are contained in BudgetHistory.
+     * @return an ArrayList of Budgets.
+     */
     public ArrayList<Budget> getList() {
         return history;
     }

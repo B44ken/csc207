@@ -8,11 +8,6 @@ import entity.Budget;
  * The interface for DAO for Add Budget use case.
  */
 public interface AddBudgetUserDataAccessInterface {
-    /**
-     * Checks if a Budget with the given categoryName exists.
-     * @param categoryName the categoryName to look for
-     * @return true if a budget with the given categoryName exists; false otherwise
-     */
 
     /**
      * Adds Budget into Budget History.

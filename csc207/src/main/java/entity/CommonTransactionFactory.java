@@ -2,7 +2,6 @@ package entity;
 
 import java.time.LocalDate;
 
-
 /**
  * Factory for creating common transaction objects.
  */
