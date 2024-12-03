@@ -4,7 +4,11 @@ amount,name,category,date,type
 2000.0,car,,2024-12-12,goal
 2000.0,bag,,2024-12-20,goal
 500.0,scooter,,2024-12-31,goal
+2000.0,demoGoal,,2024-11-12,goal
+100.0,bike,,2025-12-10,goal
 11.99,,fortnite battle pass,,budget
+2000.0,,demoBudget,,budget
+2000.0,,demo,,budget
 100.0,wingstop,food,2024-12-03,expense
 100.0,mcdonalds,food,2024-12-04,expense
 100.0,mcdonalds,food,2024-12-05,expense
@@ -33,4 +37,8 @@ amount,name,category,date,type
 100.0,orphaned babies,charity,2024-01-01,expense
 20.0,KFC,28,2024-12-02,expense
 200.0,car,transport,2024-12-12,expense
-1000.0,wingstop,income,2024-01-01,income
+1000.0,demoIncome,demo,2024-12-12,income
+1000.0,demoExpense,food,0012-12-15,expense
+200.0,demo,demo,2024-11-12,income
+2000.0,demo,demo,2024-12-12,expense
+75.0,Orphan babies fund Tax Deductable,Charity,2024-12-02,income

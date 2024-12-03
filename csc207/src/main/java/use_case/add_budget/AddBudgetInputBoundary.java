@@ -1,6 +1,8 @@
 package use_case.add_budget;
 
-
+/**
+ * The AddBudgetInputBoundary interface.
+ */
 public interface AddBudgetInputBoundary {
     /**
      * Execute the Add Budget Use Case.

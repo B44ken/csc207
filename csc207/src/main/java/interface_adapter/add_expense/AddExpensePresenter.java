@@ -20,7 +20,8 @@ public class AddExpensePresenter implements AddExpenseOutputBoundary {
     }
     @Override
     public void prepareSuccessView(AddExpenseOutputData outputData) {
-        JOptionPane.showMessageDialog(null, "Expense " + outputData.getName() + " successfully added!");
+        JOptionPane.showMessageDialog(null, "Expense "
+                + outputData.getName() + " successfully added!");
         viewSwitcher.switchTo(ViewNames.home);
     }
 

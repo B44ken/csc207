@@ -1,15 +1,16 @@
 package use_case.add_budget;
 
-import data_access.UserData;
-import entity.Budget;
-import entity.BudgetFactory;
-import entity.BudgetHistory;
-import interface_adapter.add_budget.AddBudgetPresenter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import data_access.UserData;
+import entity.Budget;
+import entity.BudgetFactory;
+import interface_adapter.add_budget.AddBudgetPresenter;
 
+/**
+ * Test class for AddBudgetInteractor.
+ */
 public class AddBudgetInteractorTest {
 
     private UserData testUserData;
@@ -19,6 +20,9 @@ public class AddBudgetInteractorTest {
 
     private AddBudgetInputData testAddBudgetInputData;
 
+    /**
+     * Before each test, required parameters for AddBudgetInteractor construction.
+     */
     @BeforeEach
     void setUpForTests() {
         testUserData = new UserData();
@@ -28,23 +32,22 @@ public class AddBudgetInteractorTest {
         // testAddBudgetInputData = new AddBudgetInputData("food", 50.0);
     }
 
+    /**
+     * Test for execute() method of AddBudgetInteractor.
+     */
     @Test
     void addToUserDataTest() {
         testAddBudgetInteractor = new AddBudgetInteractor(testUserData, testUserPresenter, testBudgetFactory);
         testAddBudgetInputData = new AddBudgetInputData("food", 50.0);
-        try {
-            testAddBudgetInteractor.execute(testAddBudgetInputData);
-            if (!testUserData.getBudgets().getList().isEmpty()) {
-                Budget thisBudget = testUserData.getBudgets().getList().get(0);
-                if (thisBudget.getCategoryName().equals("food") && thisBudget.getAmount() == 50.0) {
-                    System.out.println("Success: Adding to User Data");
-                } else {
-                    System.err.println("Fail: Adding to User Data");
-                }
+        testAddBudgetInteractor.execute(testAddBudgetInputData);
+        if (!testUserData.getBudgets().getList().isEmpty()) {
+            final Budget thisBudget = testUserData.getBudgets().getList().get(0);
+            if (thisBudget.getCategoryName().equals("food") && thisBudget.getAmount() == 50.0) {
+                System.out.println("Success: Adding to User Data");
             }
-        } catch (Exception e) {
-            System.err.println("Fail: Adding to User Data");
+            else {
+                System.err.println("Fail: Adding to User Data");
+            }
         }
     }
-
 }

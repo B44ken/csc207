@@ -5,19 +5,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.time.LocalDate;
 
 import javax.swing.*;
 
-
-import data_access.UserData;
-
 import com.labrats.app.ViewNames;
-
 import interface_adapter.add_income.AddIncomeController;
-import interface_adapter.add_income.AddIncomeViewModel;
-//change above to what its actually called if its different
 
+/**
+ * The AddIncomeView for adding an Income.
+ */
 public class AddIncomeView extends JPanel implements ActionListener, PropertyChangeListener {
     private String viewName = "Add Income";
 
@@ -25,67 +21,71 @@ public class AddIncomeView extends JPanel implements ActionListener, PropertyCha
 
     private ViewSwitcher viewSwitcher;
 
-    public AddIncomeView(ViewSwitcher vs) {
-        super();
-        this.viewSwitcher = vs;
+    /**
+     * The AddIncomeView constructor.
+     * @param viewSwitcher a ViewSwitcher object to display views.
+     */
+    public AddIncomeView(ViewSwitcher viewSwitcher) {
+        this.viewSwitcher = viewSwitcher;
         final JLabel title = new JLabel("Add Income");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JPanel namePanel = new JPanel();
-        JTextField nameTextField = new JTextField(15);
+        final JPanel namePanel = new JPanel();
+        final JTextField nameTextField = new JTextField(15);
         namePanel.add(new JLabel("Name:"));
         namePanel.add(nameTextField);
 
-        JPanel amountPanel = new JPanel();
-        JTextField amountTextField = new JTextField(15);
+        final JPanel amountPanel = new JPanel();
+        final JTextField amountTextField = new JTextField(15);
         amountPanel.add(new JLabel("Amount:"));
         amountPanel.add(amountTextField);
 
-        JPanel categoryPanel = new JPanel();
-        JTextField categoryTextField = new JTextField(15);
+        final JPanel categoryPanel = new JPanel();
+        final JTextField categoryTextField = new JTextField(15);
         categoryPanel.add(new JLabel("Category:"));
         categoryPanel.add(categoryTextField);
 
-        JPanel dayPanel = new JPanel();
-        JTextField dayTextField = new JTextField(15);
+        final JPanel dayPanel = new JPanel();
+        final JTextField dayTextField = new JTextField(15);
         dayPanel.add(new JLabel("Day:"));
         dayPanel.add(dayTextField);
 
-        JPanel monthPanel = new JPanel();
-        JTextField monthTextField = new JTextField(15);
+        final JPanel monthPanel = new JPanel();
+        final JTextField monthTextField = new JTextField(15);
         monthPanel.add(new JLabel("Month:"));
         monthPanel.add(monthTextField);
 
-        JPanel yearPanel = new JPanel();
-        JTextField yearTextField = new JTextField(15);
+        final JPanel yearPanel = new JPanel();
+        final JTextField yearTextField = new JTextField(15);
         yearPanel.add(new JLabel("Year:"));
         yearPanel.add(yearTextField);
 
-        JPanel confirmPanel = new JPanel();
-        JButton confirmButton = new JButton("Confirm");
+        final JPanel confirmPanel = new JPanel();
+        final JButton confirmButton = new JButton("Confirm");
         confirmPanel.add(confirmButton);
 
-        JPanel cancelPanel = new JPanel();
-        JButton cancelButton = new JButton("Cancel");
+        final JPanel cancelPanel = new JPanel();
+        final JButton cancelButton = new JButton("Cancel");
         cancelPanel.add(cancelButton);
 
         confirmButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent evt) {
                 // input into text file here using controller (--> interactor --> presenter)
                 // after everything funnelled into txt file go back to home
-                addIncomeController.execute(nameTextField.getText(), amountTextField.getText()
-                        ,categoryTextField.getText(), yearTextField.getText(), monthTextField.getText(), dayTextField.getText());
+                addIncomeController.execute(nameTextField.getText(), amountTextField.getText(),
+                        categoryTextField.getText(), yearTextField.getText(), monthTextField.getText(),
+                        dayTextField.getText());
                 viewSwitcher.switchTo(ViewNames.incomeHistory);
             }
         });
 
         cancelButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent evt) {
                 viewSwitcher.switchTo(ViewNames.home);
             }
         });
 
-        JPanel mainPanel = new JPanel();
+        final JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
         mainPanel.add(title);
         mainPanel.add(namePanel);
@@ -110,7 +110,6 @@ public class AddIncomeView extends JPanel implements ActionListener, PropertyCha
     public void propertyChange(PropertyChangeEvent evt) {
         // JOptionPane.showMessageDialog(this, "Property Change not implemented yet.");
     }
-
 
     public String getViewName() {
         return viewName;
