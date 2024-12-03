@@ -3,12 +3,12 @@ package entity;
 import java.time.LocalDate;
 
 /**
- * Transaction parent class.
+ * Goal class.
  */
 
 public class Goal {
     private String target;
-    private double amount;
+    private Double amount;
     private LocalDate targetDate;
 
     public Goal(String target, Double amount, LocalDate targetDate) {

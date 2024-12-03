@@ -30,12 +30,12 @@ public class AddGoalController {
     }
 
     /**
-     * Executes the Add Goal use case by passing UserData into Interactor
-     * @param target
-     * @param amount
-     * @param targetDay
-     * @param targetMonth
-     * @param targetYear
+     * Executes the Add Goal use case by passing UserData into Interactor.
+     * @param target Name of target.
+     * @param amount Amount of target.
+     * @param targetDay Day of target.
+     * @param targetMonth Month of target.
+     * @param targetYear Year of target
      *
      */
     public void execute(String target, String amount, String targetDay, String targetMonth, String targetYear) {

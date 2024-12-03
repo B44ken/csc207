@@ -3,7 +3,7 @@ package entity;
 import java.util.ArrayList;
 
 /**
- * Stores the Transaction history for app.
+ * Stores the list of Goals for app.
  */
 public class GoalList {
     private static ArrayList<Goal> history;

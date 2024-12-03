@@ -6,6 +6,7 @@ import interface_adapter.GoalListController;
 import interface_adapter.add_budget.AddBudgetPresenter;
 import interface_adapter.add_expense.AddExpenseController;
 import interface_adapter.add_expense.AddExpensePresenter;
+import interface_adapter.add_goal.AddGoalPresenter;
 import interface_adapter.get_insight.GetInsightController;
 import interface_adapter.get_insight.GetInsightPresenter;
 import interface_adapter.home.HomeChartController;
@@ -174,7 +175,8 @@ public class AppBuilder {
     }
 
     public AppBuilder addAddGoalUseCase() {
-        final AddGoalInteractor interactor = new AddGoalInteractor(userData, goalFactory);
+        final AddGoalPresenter presenter = new AddGoalPresenter();
+        final AddGoalInteractor interactor = new AddGoalInteractor(userData, presenter, goalFactory);
         final AddGoalController controller = new AddGoalController(interactor);
         addGoalView.setAddGoalController(controller);
         return this;

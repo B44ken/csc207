@@ -4,6 +4,10 @@ import javax.swing.table.DefaultTableModel;
 import data_access.UserData;
 import entity.Goal;
 
+/**
+ * Controller for GoalList.
+ */
+
 public class GoalListController {
     private UserData userData;
 
