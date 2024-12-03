@@ -3,6 +3,7 @@ package com.labrats.app;
 import java.time.LocalDate;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import data_access.ChartImageFactory;
 import data_access.UserDataFileAccess;
@@ -13,14 +14,15 @@ import data_access.UserDataFileAccess;
 public class App {
     /**
      * Main method for this project.
-     * 
      * @param args argument.
      */
     public static void main(String[] args) {
         runWholeApp();
-        // runChartDemo();
     }
 
+    /**
+     * Main method for running the whole app.
+     */
     public static void runWholeApp() {
         final AppBuilder appBuilder = new AppBuilder();
         final JFrame application = appBuilder
@@ -40,21 +42,23 @@ public class App {
                 .addAddGoalUseCase()
                 .addGetInsightView()
                 .addGetInsightUseCase()
-                //.addAddExpenseUseCase()
                 .build();
         application.pack();
         application.setVisible(true);
     }
 
+    /**
+     * Demo for running chart.
+     */
     public static void runChartDemo() {
         // var test = FileAccess.importData("testdata.csv");
-        var test = new UserDataFileAccess("testdata.csv");
+        final UserDataFileAccess test = new UserDataFileAccess("testdata.csv");
 
-        var cif = new ChartImageFactory(test.getHistory());
-        var chart = cif.createImage(LocalDate.of(2024, 10, 1), LocalDate.of(2024, 10, 7));
+        final ChartImageFactory cif = new ChartImageFactory(test.getHistory());
+        final JLabel chart = cif.createImage(LocalDate.of(2024, 10, 1), LocalDate.of(2024, 10, 7));
         chart.setVisible(true);
 
-        var frame = new JFrame();
+        final JFrame frame = new JFrame();
         frame.getContentPane().add(chart);
         frame.pack();
         frame.setVisible(true);

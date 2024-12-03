@@ -8,9 +8,7 @@ import entity.*;
 
 public class GetInsightInteractor implements GetInsightInputBoundary {
     private final double percentage = 0.75;
-
     private UserData userData;
-    // constant: average spending of UOFT student
 
     public GetInsightInteractor(UserData userData) {
         this.userData = userData;
@@ -41,6 +39,7 @@ public class GetInsightInteractor implements GetInsightInputBoundary {
                 final Deductible deductible = factory.createDeductible((Expense) t, income);
                 result.add(deductible);
             }
+            System.out.println("deductible added");
         }
         return result;
     }
