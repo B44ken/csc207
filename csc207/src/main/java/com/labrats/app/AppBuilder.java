@@ -60,7 +60,6 @@ public class AppBuilder {
     private ExpenseHistoryView expenseHistoryView;
     private GoalListView goalListView;
 
-
     public AppBuilder() {
         cards = new JPanel(new CardLayout());
         userData = new UserDataFileAccess("testdata.csv");
@@ -77,7 +76,6 @@ public class AppBuilder {
         return this;
     }
 
-
     public AppBuilder addAddIncomeView() {
         addIncomeView = new AddIncomeView(viewSwitcher);
         // addIncomeView.setViewSwitcher(viewSwitcher);
@@ -85,28 +83,37 @@ public class AppBuilder {
         return this;
     }
 
+    /**
+     * Income history view.
+     * @return AppBuilder.
+     */
     public AppBuilder addIncomeHistoryView() {
-        IncomeHistoryController controller = new IncomeHistoryController(userData);
-        IncomeHistoryRepainter repainter = new IncomeHistoryRepainter(userData);
+        final IncomeHistoryController controller = new IncomeHistoryController(userData);
+        final IncomeHistoryRepainter repainter = new IncomeHistoryRepainter(userData);
         incomeHistoryView = new IncomeHistoryView(controller, repainter);
         incomeHistoryView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.incomeHistory, incomeHistoryView);
         return this;
     }
 
-
+    /**
+     * Use case for Add Income.
+     * @return AppBuilder.
+     */
     public AppBuilder addAddIncomeUseCase() {
         final AddIncomePresenter presenter = new AddIncomePresenter();
         final AddIncomeInteractor interactor = new AddIncomeInteractor(userData, presenter, incomeFactory);
         final AddIncomeController controller = new AddIncomeController(interactor);
         addIncomeView.setAddIncomeController(controller);
-//      viewSwitcher.add(ViewNames.addIncome, addIncomeView);
         return this;
     }
 
+    /**
+     * GETingisht view.
+     * @return AppBuilder.
+     */
     public AppBuilder addGetInsightView() {
         getInsightView = new GetInsightView(bottomButtons, userData);
-        // getInsightView.setUserData(userData);
         getInsightView.setViewSwitcher(viewSwitcher);
         viewSwitcher.add(ViewNames.getInsight, getInsightView);
         return this;
@@ -118,8 +125,6 @@ public class AppBuilder {
         getInsightView.setGetInsightController(controller);
         return this;
     }
-
-
 
     public AppBuilder addAddExpenseView() {
         addExpenseView = new AddExpenseView(viewSwitcher);

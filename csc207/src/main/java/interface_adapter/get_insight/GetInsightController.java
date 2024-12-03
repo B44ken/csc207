@@ -1,12 +1,11 @@
 package interface_adapter.get_insight;
 
+import java.util.List;
+
 import data_access.UserData;
-import entity.Deductible;
 import entity.Deductible;
 import use_case.get_insight.GetInsightInputData;
 import use_case.get_insight.GetInsightInteractor;
-
-import java.util.ArrayList;
 
 public class GetInsightController {
     private final GetInsightInteractor interactor;
@@ -16,13 +15,14 @@ public class GetInsightController {
         this.interactor = interactor;
     }
 
-    public void execute(UserData userData) {
-        GetInsightInputData inputData = new GetInsightInputData(userData.getHistory());
-        this.interactor.execute(inputData);
-    }
-    public ArrayList<Deductible> getDeductibles(UserData userData){
-        GetInsightInputData inputData = new GetInsightInputData(userData.getHistory());
+    /**
+     * Execute method of controller to pass inputData into interactor.
+     * @param userData the input UserData.
+     * @return ArrayList<> as return type.
+     */
+    public List<Deductible> execute(UserData userData) {
+        final GetInsightInputData inputData = new GetInsightInputData(userData.getHistory());
+        System.out.println("controller executed");
         return this.interactor.execute(inputData);
     }
-
 }

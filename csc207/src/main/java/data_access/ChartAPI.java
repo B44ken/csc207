@@ -106,7 +106,8 @@ public class ChartAPI {
             BufferedImage image = ImageIO.read(inputStream);
 
             return new ImageIcon(image);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             System.out.println("Error");
             return new ImageIcon(failImage);
         }

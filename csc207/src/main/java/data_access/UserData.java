@@ -4,24 +4,15 @@ import entity.BudgetHistory;
 import entity.GoalList;
 import entity.TransactionHistory;
 
-// public interface UserData {
-//     TransactionHistory getHistory();
-//     GoalHistory getGoals();
-//     void save(String filename);
-// }
-
-// public class UserDataFile implements UserData {
 public class UserData {
-    TransactionHistory history;
+    final TransactionHistory history;
     GoalList goals;
     BudgetHistory budgets;
 
     public UserData() {
         history = new TransactionHistory();
-
         goals = new GoalList();
         budgets = new BudgetHistory();
-
     }
 
     public TransactionHistory getHistory() {
@@ -32,7 +23,10 @@ public class UserData {
         return goals;
     }
 
-    public BudgetHistory getBudgets() { return budgets; }
+    public BudgetHistory getBudgets() {
+        return budgets;
+    }
 
-    public void save() { }
+    public void save() {
+    }
 }

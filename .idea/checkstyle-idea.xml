@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CheckStyle-IDEA" serialisationVersion="2">
-    <checkstyleVersion>10.18.1</checkstyleVersion>
+    <checkstyleVersion>10.20.2</checkstyleVersion>
     <scanScope>JavaOnly</scanScope>
     <option name="thirdPartyClasspath" />
     <option name="activeLocationIds">
-      <option value="06eb7a3f-311e-4d6f-8987-33c5c297915e" />
+      <option value="d8e6bb3e-fa2c-4dee-be13-48057e4034b8" />
     </option>
     <option name="locations">
       <list>
         <ConfigurationLocation id="bundled-sun-checks" type="BUNDLED" scope="All" description="Sun Checks">(bundled)</ConfigurationLocation>
         <ConfigurationLocation id="bundled-google-checks" type="BUNDLED" scope="All" description="Google Checks">(bundled)</ConfigurationLocation>
-        <ConfigurationLocation id="06eb7a3f-311e-4d6f-8987-33c5c297915e" type="LOCAL_FILE" scope="All" description="csc207">$PROJECT_DIR$/../hoserena/hoserena/week3git/mystyle.xml</ConfigurationLocation>
+        <ConfigurationLocation id="d8e6bb3e-fa2c-4dee-be13-48057e4034b8" type="LOCAL_FILE" scope="All" description="checkstule">$PROJECT_DIR$/../lab-5/mystyle.xml</ConfigurationLocation>
       </list>
     </option>
   </component>
