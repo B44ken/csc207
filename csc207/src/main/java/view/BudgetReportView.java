@@ -75,7 +75,7 @@ public class BudgetReportView extends JPanel {
     }
 
     public void onBalanceReport() {
-        report.setText(interactor.createBalanceReport(LocalDate.now()));6
+        report.setText(interactor.createBalanceReport(LocalDate.now()));
     }
 
     public void setInteractor(BudgetReportInteractor interactor) {

@@ -18,6 +18,9 @@ import view.BottomButtons;
 import interface_adapter.add_goal.AddGoalController;
 import interface_adapter.add_goal.AddGoalViewModel;
 
+/**
+ * The view for adding a new goal.
+ */
 public class AddGoalView extends JPanel implements ActionListener, PropertyChangeListener {
     private String viewName = "Add Goal View";
 

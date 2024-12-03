@@ -10,6 +10,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The view for GoalList.
+ */
 public class GoalListView extends JPanel implements ActionListener {
     private final String viewName = "Goals";
 
