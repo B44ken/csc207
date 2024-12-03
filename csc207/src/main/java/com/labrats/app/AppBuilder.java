@@ -77,6 +77,7 @@ public class AppBuilder {
         return this;
     }
 
+
     public AppBuilder addAddIncomeView() {
         addIncomeView = new AddIncomeView(viewSwitcher);
         // addIncomeView.setViewSwitcher(viewSwitcher);
@@ -144,6 +145,10 @@ public class AppBuilder {
         return this;
     }
 
+    /**
+     * Adds the AddBudgetView to app.
+     * @return AppBuilder object.
+     */
     public AppBuilder addAddBudgetView() {
         addBudgetView = new AddBudgetView(viewSwitcher);
         // addIncomeView.setViewSwitcher(viewSwitcher);
@@ -151,12 +156,15 @@ public class AppBuilder {
         return this;
     }
 
+    /**
+     *  Adds the AddBudget Use Case to app.
+     * @return AppBuilder object.
+     */
     public AppBuilder addAddBudgetUseCase() {
         final AddBudgetPresenter presenter = new AddBudgetPresenter();
         final AddBudgetInteractor interactor = new AddBudgetInteractor(userData, presenter, budgetFactory);
         final AddBudgetController controller = new AddBudgetController(interactor);
         addBudgetView.setAddBudgetController(controller);
-//      viewSwitcher.add(ViewNames.addIncome, addIncomeView);
         return this;
     }
 
