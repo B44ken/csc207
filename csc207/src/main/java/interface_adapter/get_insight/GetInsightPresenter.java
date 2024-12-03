@@ -1,12 +1,15 @@
 package interface_adapter.get_insight;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 import com.labrats.app.ViewNames;
+import entity.Deductible;
 import interface_adapter.ViewManagerModel;
 import use_case.get_insight.GetInsightInputData;
 import use_case.get_insight.GetInsightOutputData;
 import view.ViewSwitcher;
+
+import java.util.ArrayList;
 
 public class GetInsightPresenter {
 
@@ -19,16 +22,7 @@ public class GetInsightPresenter {
         this.viewModel = viewModel;
     }
 
-    public void prepareSuccessView(GetInsightOutputData outputData) {
-        // On success, pass output data of which
-
-        // TODO need to fix below
-        //this.viewModel.setState(Success);
-        //this.viewModel.firePropertyChanged();
-
-        this.viewSwitcher.switchTo(ViewNames.home);
-
-        JOptionPane.showMessageDialog(null, "Login successful! Welcome, ", "Success", JOptionPane.INFORMATION_MESSAGE);
+    public void createAllButtons(ArrayList<Deductible> deductables) {
 
     }
 

@@ -81,7 +81,7 @@ public class ExpenseHistoryView extends JPanel {
 
         this.add(addExpenseButton);
         this.add(addBudgetButton);
-        this.add(bottomButtons, BorderLayout.AFTER_LAST_LINE);
+        this.add(bottomButtons);
         repaint();
     }
 
@@ -121,7 +121,7 @@ public class ExpenseHistoryView extends JPanel {
     }
 
     /**
-     * Populates table when.addUserData() is run in App.
+     * Sets up table when.addUserData() is run in App.
      */
     public void setupExpenseTable() {
         final String[] columnNames = {"Name", "Amount", "Date", "Category"};

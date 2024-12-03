@@ -39,12 +39,6 @@ public class BudgetReportInteractor {
         userData = ud;
     }
 
-    private TransactionHistory getMonthsTransactions(TransactionHistory history) {
-        var monthStart = LocalDate.now().withDayOfMonth(1);
-        var monthEnd = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
-        return history.getBetween(monthStart, monthEnd);
-    }
-
     private ArrayList<KeyValue> categorizeExpenses(TransactionHistory history) {
         var cats = new ArrayList<KeyValue>();
         for (var t : history.getAllExpenses().getHistory()) {
@@ -64,7 +58,7 @@ public class BudgetReportInteractor {
         return cats;
     }
 
-    public String createBudgetReport(LocalDate stamp) {
+    public String createCategoryReport(LocalDate stamp) {
         var monthStart = stamp.withDayOfMonth(1);
         var monthEnd = stamp.withDayOfMonth(stamp.lengthOfMonth());
         var transactions = userData.getHistory().getBetween(monthStart, monthEnd);
@@ -81,5 +75,25 @@ public class BudgetReportInteractor {
         }
 
         return report.toString();
+    }
+
+    public String createBalanceReport(LocalDate stamp) {
+        var monthStart = stamp.withDayOfMonth(1);
+        var monthEnd = stamp.withDayOfMonth(stamp.lengthOfMonth());
+        var transactions = userData.getHistory().getBetween(monthStart, monthEnd);
+
+        var expenses = transactions.getAllExpenses().getAmountTotal();
+        var income = transactions.getAllIncomes().getAmountTotal();
+        var balance = income - expenses;
+
+        StringBuilder report = new StringBuilder();
+
+        report.append("Budget Report for " + stamp.getMonth() + " " + stamp.getYear() + "\n");
+        report.append("Expenses: $" + expenses + "\n");
+        report.append("Income: $" + income + "\n");
+        report.append("Remaining Balance: $" + balance + "\n");
+
+        return report.toString();
+
     }
 }

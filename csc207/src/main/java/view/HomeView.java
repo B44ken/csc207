@@ -72,7 +72,7 @@ public class HomeView extends JPanel {
         addExpense = new JButton("Add Expense");
         buttons1.add(addExpense);
 
-        getInsight = new JButton("Get Insight");
+        getInsight = new JButton("Financial Insights");
         buttons1.add(getInsight, 0);
 
         var budgetReport = new JButton("Budget Report");
