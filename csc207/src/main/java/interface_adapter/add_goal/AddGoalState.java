@@ -14,16 +14,29 @@ public class AddGoalState {
     }
 
     public AddGoalState() {
+
     }
 
+    /**
+     * Getter for name of AddGoalState.
+     * @return name of AddGoalState.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Setter for name of AddGoalState to name.
+     * @param name the new name to set AddGoalState's name to.
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Setter for name of AddGoalstate to name.
+     * @param addFail new addFail to set AddGoalState's addFail to.
+     */
     public void setAddFail(String addFail) {
         this.addFail = addFail;
     }

@@ -1,22 +1,14 @@
 package view;
 
-import com.labrats.app.ViewNames;
-import data_access.UserData;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.time.LocalDate;
 
 import javax.swing.*;
-import javax.swing.text.View;
 
-import entity.Expense;
-import entity.Goal;
-import view.BottomButtons;
+import com.labrats.app.ViewNames;
 import interface_adapter.add_goal.AddGoalController;
-import interface_adapter.add_goal.AddGoalViewModel;
 
 /**
  * The view for adding a new goal.
@@ -28,11 +20,15 @@ public class AddGoalView extends JPanel implements ActionListener, PropertyChang
 
     private ViewSwitcher viewSwitcher;
 
-    public AddGoalView(ViewSwitcher vs) {
+    /**
+     * Creates AddGoalView with viewSwitcher.
+     * @param viewSwitcher the class responsible for switching between views.
+     */
+    public AddGoalView(ViewSwitcher viewSwitcher) {
         super();
-        this.viewSwitcher = vs;
+        this.viewSwitcher = viewSwitcher;
         final JLabel title = new JLabel("Add Goal");
-        title.setAlignmentX((JComponent.CENTER_ALIGNMENT));
+        title.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 
         JPanel targetPanel = new JPanel();
         JTextField targetTextField = new JTextField(15);
@@ -68,15 +64,15 @@ public class AddGoalView extends JPanel implements ActionListener, PropertyChang
         cancelPanel.add(cancelButton);
 
         confirmButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent evt) {
                 addGoalController.execute(targetTextField.getText(), amountTextField.getText(),
                         dayTextField.getText(), monthTextField.getText(), yearTextField.getText());
                 viewSwitcher.switchTo(ViewNames.goalList);
             }
         });
 
-        cancelButton.addActionListener( new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        cancelButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 viewSwitcher.switchTo(ViewNames.home);
             }
         });
@@ -104,14 +100,26 @@ public class AddGoalView extends JPanel implements ActionListener, PropertyChang
     public void propertyChange(PropertyChangeEvent evt) {
     }
 
+    /**
+     * Getter for AddGoalView's viewname.
+     * @return the viewName of AddGoalView.
+     */
     public String getViewName() {
         return viewName;
     }
 
+    /**
+     * Sets AddGoalView's viewSwticher.
+     * @param viewSwitcher the ViewSwitcher object to be set as AddGoalView's ViewSwitcher.
+     */
     public void setViewSwitcher(ViewSwitcher viewSwitcher) {
         this.viewSwitcher = viewSwitcher;
     }
 
+    /**
+     * Setter for AddGoalView's controller as the controller parameter.
+     * @param controller the controller for AddGoalView's controller to be set to.
+     */
     public void setAddGoalController(AddGoalController controller) {
         this.addGoalController = controller;
     }
