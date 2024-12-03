@@ -88,7 +88,6 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
                 }
         );
 
-
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setUpTable();
 
@@ -134,12 +133,12 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
      * Populates table when view is switched....
      */
     public void setUpTable() {
-        String[] columnNames = {"Name", "Amount", "Date", "Category"};
+        final String[] columnNames = {"Name", "Amount", "Date", "Category"};
         tableModel = new DefaultTableModel(columnNames, 0);
 
         incomeHistoryTable = new JTable(tableModel);
-        JScrollPane tableScrollPane = new JScrollPane(incomeHistoryTable);
-        TitledBorder tableTitle = BorderFactory.createTitledBorder("Income History");
+        final JScrollPane tableScrollPane = new JScrollPane(incomeHistoryTable);
+        final TitledBorder tableTitle = BorderFactory.createTitledBorder("Income History");
         tableScrollPane.setBorder(tableTitle);
         incomeHistoryTable.setFillsViewportHeight(true);
         incomeHistoryTable.setVisible(true);
