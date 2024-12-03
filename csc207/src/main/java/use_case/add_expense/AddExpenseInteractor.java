@@ -8,7 +8,8 @@ import java.time.LocalDate;
 import java.time.DateTimeException;
 
 /**
- * The Add Expense Interactor.
+ * The Add Expense Interactor, gets input data, turns amount into a double
+ * Prepares success/fail views depending on input.
  */
 public class AddExpenseInteractor implements AddExpenseInputBoundary {
     private final AddExpenseOutputBoundary addExpensePresenter;

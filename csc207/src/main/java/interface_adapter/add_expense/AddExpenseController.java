@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import use_case.add_expense.AddExpenseInputData;
 import use_case.add_expense.AddExpenseInteractor;
 
+/**
+ * The Controller for Add Expense Use Case.
+ */
 public class AddExpenseController {
    private final AddExpenseInteractor addExpenseInteractor;
 
@@ -22,7 +25,8 @@ public class AddExpenseController {
      */
     public void execute(String name, String amount, String category, String year, String month, String date) {
         //Double doubleAmount = Double.valueOf(amount);
-        final AddExpenseInputData addExpenseInputData = new AddExpenseInputData(name, amount, category, date, month, year);
+        final AddExpenseInputData addExpenseInputData = new AddExpenseInputData(name,
+                amount, category, date, month, year);
         addExpenseInteractor.execute(addExpenseInputData);
     }
 }
