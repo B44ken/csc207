@@ -1,7 +1,5 @@
 package entity;
 
-
-
 /**
  * Factory for creating budgets.
  */
