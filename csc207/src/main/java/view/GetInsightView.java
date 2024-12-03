@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class GetInsightView extends JPanel {
     private final JLabel title = new JLabel("Financial Insights");
@@ -29,36 +30,28 @@ public class GetInsightView extends JPanel {
 
     private GetInsightViewModel viewModel;
     private GetInsightController getInsightController;
+    private JPanel panelTax;
 
     private JLabel expensesContainer;
 
     private UserData userData;
-
-    private ArrayList<Deductible> deductables;
+    private List<Deductible> newInsights;
 
     public GetInsightView(BottomButtons bottomButtons, UserData userData) {
         this.userData = userData;
-        deductables = new ArrayList<>();
-        deductables.add(
-                new Deductible(
-                        new Expense("orphan babies fund",100.0, "charity", LocalDate.now()),
-                        new Income("Orphan babies fund Tax Deductable", 75.0, "Charity", LocalDate.now())
-                )
-        );
 
         JButton taxCredits = new JButton("Tax Credits");
         taxCredits.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                getInsightController.execute(userData);
+                newInsights = getInsightController.execute(userData);
             }
         });
 
         JPanel resourceButtons = new JPanel();
         resourceButtons.setLayout(new BoxLayout(resourceButtons, BoxLayout.Y_AXIS));
 
-        JButton scholarships = new JButton("Explore Scholarships!");
+        JButton scholarships = new JButton("Explore UofT Scholarships!");
         resourceButtons.add(scholarships);
-
 
         var api = new ChartImageFactory(userData.getHistory());
         JPanel qrPanel = new JPanel();
@@ -90,10 +83,12 @@ public class GetInsightView extends JPanel {
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         this.add(title);
         // this.add(expensesContainer);
-        this.add(createDeductibleEntry(deductables.get(0)));
+        this.add(taxCredits);
+        this.add(panelTax);
         this.add(resourceButtons);
         this.add(finalQR);
         this.add(bottomButtons, BorderLayout.AFTER_LAST_LINE);
+        repaint();
     }
 
     /**
@@ -104,29 +99,18 @@ public class GetInsightView extends JPanel {
         this.viewSwitcher = viewSwitcher;
     }
 
-//    /**
-//     * Sets userdata for Get Insight View
-//     * @param userData
-//     */
-//    public void setUserData(UserData userData) {
-//        this.userData = userData;
-//    }
-
-    public ArrayList<Deductible> createDeductibles() {
-        return getInsightController.getDeductibles(userData);
-    }
-
     public void setGetInsightController(GetInsightController getInsightController) {
         this.getInsightController = getInsightController;
     }
 
-//    public void repaint() {
-//        if(getInsightController != null) {
-//            renderExpensesContainer();
-//        }
-//    }
+    public void repaint() {
+        if (getInsightController != null) {
+            this.panelTax.removeAll();
+            this.panelTax.add(newInsights);
+        };
+    }
 
-    public JPanel createDeductibleEntry(Deductible deductible) {
+    public JPanel populateTable(Deductible deductible) {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
@@ -143,7 +127,7 @@ public class GetInsightView extends JPanel {
         return panel;
     }
 
-    public void renderExpensesContainer() {
+//    public void renderExpensesContainer() {
 //        JTextPane textPane = new JTextPane();
 //        textPane.add("We found" + t.getName() +", " + t.getCategory() + ", you are eligible for tax credit!");
 //
