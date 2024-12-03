@@ -1,9 +1,8 @@
 package entity;
 
-
 public class Deductible {
-    Expense expense;
-    Income credit;
+    private final Expense expense;
+    private final Income credit;
 
     public Deductible(Expense expense, Income income) {
         this.expense = expense;
@@ -20,9 +19,5 @@ public class Deductible {
 
     public String getExpenseName() {
         return expense.getName();
-    }
-
-    public double getIncomeCredit() {
-        return credit.getAmount();
     }
 }
