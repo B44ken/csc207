@@ -9,12 +9,16 @@ public class GoalFactoryTest {
     @Test
     void goalCreateTest() throws  Exception {
         GoalFactory goalFactory = new GoalFactory();
-        Goal testGoal = new Goal("oven", 200.0, LocalDate.of(2025, 2, 2));
-        boolean b = !testGoal.equals(goalFactory.create("oven", 200.0,
-                LocalDate.parse("02-02-2025")));
-
-        if (b) {
-            throw new Exception("create() method error.");
+        Goal createdGoal = goalFactory.create("car", 2000.0,
+                LocalDate.of(2024,12,12));
+        Goal compareToGoal = new Goal(null, null, null);
+        compareToGoal.setTarget("car");
+        compareToGoal.setAmount(2000.0);
+        compareToGoal.setTargetDate(LocalDate.of(2024,12,12));
+        if (!createdGoal.getTarget().equals(compareToGoal.getTarget()) &&
+                createdGoal.getAmount() != compareToGoal.getAmount() &&
+                createdGoal.getTargetDate() != compareToGoal.getTargetDate()) {
+            throw new Exception("Fail; Creating Goal");
         }
     }
 }
