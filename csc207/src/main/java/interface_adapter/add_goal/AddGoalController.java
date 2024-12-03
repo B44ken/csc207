@@ -1,23 +1,9 @@
 package interface_adapter.add_goal;
 
-// listens for any changes in view
-// convert raw user input data into something useful
-// create input data object containing that info
-// call method to start a use case, pass the input data into the use case
-
-import com.labrats.app.ViewNames;
-import data_access.UserData;
-import entity.Budget;
-import entity.Goal;
-import use_case.add_goal.AddGoalInputData;
-import use_case.add_goal.AddGoalInputBoundary;
-import use_case.add_goal.AddGoalInteractor;
-import use_case.add_income.AddIncomeInputData;
-import view.ViewSwitcher;
-
-import javax.swing.text.View;
 import java.time.LocalDate;
-import java.util.Date;
+
+import use_case.add_goal.AddGoalInputData;
+import use_case.add_goal.AddGoalInteractor;
 
 /**
  * Controller for Add Goal use case.

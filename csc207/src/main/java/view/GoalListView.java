@@ -1,17 +1,18 @@
 package view;
 
-import com.labrats.app.ViewNames;
-import interface_adapter.GoalListController;
-
-import javax.swing.*;
-import javax.swing.border.TitledBorder;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.*;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
+
+import com.labrats.app.ViewNames;
+import interface_adapter.GoalListController;
+
 /**
- * The view for GoalList.
+ * Class for GoalListView.
  */
 public class GoalListView extends JPanel implements ActionListener {
     private final String viewName = "Goals";
@@ -42,7 +43,7 @@ public class GoalListView extends JPanel implements ActionListener {
         var addGoalButton = new JButton(ViewNames.addGoal);
 
         addGoalButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent evt) {
                 viewSwitcher.switchTo(ViewNames.addGoal);
             }
         });
@@ -100,12 +101,21 @@ public class GoalListView extends JPanel implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent evt) {System.out.println("Click " + evt.getActionCommand());}
+    public void actionPerformed(ActionEvent evt) {
+        System.out.println("Click " + evt.getActionCommand());
+    }
 
+    /**
+     * The setter for ViewSwitcher of GoalList object.
+     * @param viewSwitcher the ViewSwitcher.
+     */
     public void setViewSwitcher(ViewSwitcher viewSwitcher) {
         this.viewSwitcher = viewSwitcher;
     }
 
+    /**
+     * Sets up table when .addUserData() is run in App.
+     */
     public void setupGoalsTable() {
         String[] columnNames = {"Target", "Amount", "TargetDate"};
         goalsTableModel = new DefaultTableModel(columnNames, 0);

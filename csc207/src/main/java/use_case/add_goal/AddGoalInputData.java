@@ -18,16 +18,27 @@ public class AddGoalInputData {
         this.targetDate = targetDate;
     }
 
+    /**
+     * Getter for AddGoalInputData's target.
+     * @return AddGoalInputData's target.
+     */
     String getTarget() {
         return target;
     }
 
+    /**
+     * Getter for AddGoalInputData's amount.
+     * @return AddGoalInputData's amount.
+     */
     double getAmount() {
         return amount;
     }
 
+    /**
+     * Getter for AddGoalInputData's date.
+     * @return AddGoalInputData's date.
+     */
     LocalDate getTargetDate() {
         return targetDate;
     }
-
 }

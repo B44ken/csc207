@@ -14,10 +14,18 @@ public class AddGoalOutputData {
         this.useCaseFailed = useCaseFailed;
     }
 
+    /**
+     * Getter for AddGoalOutputData's target.
+     * @return AddGoalOutputData's target.
+     */
     public String getTarget() {
         return target;
     }
 
+    /**
+     * Returns useCaseFailed for AddGoalOutputData.
+     * @return boolean if use case passed or failed.
+     */
     public boolean isUseCaseFailed() {
         return useCaseFailed;
     }

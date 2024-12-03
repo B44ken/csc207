@@ -13,6 +13,9 @@ public interface AddGoalInputBoundary {
      */
     void execute(UserData userData);
 
+    /**
+     * Switches from addGoal view to Home View.
+     */
     void switchToHomeView();
 
 }
