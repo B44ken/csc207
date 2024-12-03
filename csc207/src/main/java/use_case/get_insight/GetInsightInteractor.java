@@ -5,13 +5,11 @@ import java.util.Objects;
 
 import data_access.UserData;
 import entity.*;
-import interface_adapter.get_insight.GetInsightPresenter;
 
 public class GetInsightInteractor implements GetInsightInputBoundary {
     private final double percentage = 0.75;
 
     private UserData userData;
-    private GetInsightPresenter presenter;
     // constant: average spending of UOFT student
 
     public GetInsightInteractor(UserData userData) {
