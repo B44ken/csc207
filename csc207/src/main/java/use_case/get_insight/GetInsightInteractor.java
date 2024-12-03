@@ -33,11 +33,14 @@ public class GetInsightInteractor implements GetInsightInputBoundary {
      */
     public ArrayList<Deductible> execute(GetInsightInputData inputData) {
         final ArrayList<Deductible> result = new ArrayList<>();
+        final DeductibleFactory factory = new DeductibleFactory();
+        final IncomeFactory incomeFactory = new IncomeFactory();
         // for every charity category transaction,
         for (Transaction t : inputData.getInputData()) {
             if (Objects.equals(t.getCategory(), "charity") && t instanceof Expense) {
-                final Deductible deductible = new Deductible((Expense) t, new Income(t.getName(),
-                        t.getAmount() * percentage, t.getCategory(), t.getDate()));
+                final Income income = incomeFactory.create(t.getName(),
+                        t.getAmount() * percentage, t.getCategory(), t.getDate());
+                final Deductible deductible = factory.createDeductible((Expense) t, income);
                 result.add(deductible);
             }
         }
