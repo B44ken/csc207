@@ -3,9 +3,9 @@ package entity;
 import java.time.LocalDate;
 
 /**
- *
+ * Income Factory class that only creates Incomes (Single responsibility).
  */
-public class IncomeFactory implements TransactionFactory{
+public class IncomeFactory implements TransactionFactory {
 
     /**
      * Creates a new transaction.

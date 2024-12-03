@@ -14,8 +14,8 @@ public class Deductible {
         return credit;
     }
 
-    public Expense getExpense() {
-        return expense;
+    public double getExpense() {
+        return expense.getAmount();
     }
 
     public String getExpenseName() {
