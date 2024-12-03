@@ -17,10 +17,10 @@ public class AddExpenseController {
 
     /**
      * Executes the Add Income use case by passing UserData into Interactor
-     * @param name
-     * @param amount
-     * @param category
-     * @param date
+     * @param name, name of expense
+     * @param amount of money
+     * @param category of expenditure
+     * @param date of expenditure
      *
      */
     public void execute(String name, String amount, String category, String year, String month, String date) {

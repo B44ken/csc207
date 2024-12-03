@@ -17,7 +17,7 @@ public interface AddExpenseOutputBoundary {
     void prepareFailView(String errorMessage);
 
     /**
-     * Execytes the switch to home view use case/
+     * Executes the switch to home view use case/
      */
     void switchToHomeView();
 }
