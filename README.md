@@ -1,6 +1,6 @@
 # csc207
 
-Add an Expense Use Case br /
+Add an Expense Use Case <br />
 Provides a View through an AddExpenseView class wherein the user can input information about the information of an expense including:
 Name
 Amount
