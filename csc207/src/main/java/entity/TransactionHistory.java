@@ -2,7 +2,6 @@ package entity;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Stores the Transaction history for app.

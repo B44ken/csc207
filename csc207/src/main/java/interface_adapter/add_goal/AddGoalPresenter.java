@@ -1,13 +1,10 @@
 package interface_adapter.add_goal;
 
-// takes output data and turns it into raw strings
-// this tells UI what to do when the use case finishes running
-
-import com.labrats.app.ViewNames;
 import use_case.add_goal.AddGoalOutputBoundary;
-import view.AddGoalView;
-import view.ViewSwitcher;
 
+/**
+ * Presenter for Add Goal Use Case.
+ */
 public class AddGoalPresenter implements AddGoalOutputBoundary {
 
     public AddGoalPresenter() {

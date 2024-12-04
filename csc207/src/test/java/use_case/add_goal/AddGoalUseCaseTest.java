@@ -93,13 +93,13 @@ public class AddGoalUseCaseTest {
             Goal secondGoal = testUserData.getGoals().getList().get(1);
 
             if (!firstGoal.getTarget().equals("car") && firstGoal.getAmount() != 2000.0 &&
-                    !firstGoal.getTargetDate().equals(LocalDate.of(2024, 12, 12))) {
-                throw new Exception("Fail: First goal details do not match expected values.");
+                        !firstGoal.getTargetDate().equals(LocalDate.of(2024, 12, 12))) {
+                throw new Exception("Fail: First goal do not match expected values.");
             }
 
             if (!secondGoal.getTarget().equals("house") && secondGoal.getAmount() != 100000.0 &&
-                    !secondGoal.getTargetDate().equals(LocalDate.of(2030, 6, 15))) {
-                throw new Exception("Fail: Second goal details do not match expected values.");
+                        !secondGoal.getTargetDate().equals(LocalDate.of(2030, 6, 15))) {
+                throw new Exception("Fail: Second goal do not match expected values.");
             }
 
             System.out.println("Success: Adding multiple goals to User Data");
