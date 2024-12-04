@@ -31,6 +31,8 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
     private IncomeHistoryController controller;
     private IncomeHistoryRepainter incomeHistoryRepainter;
 
+    private final int twenty = 20;
+
     public IncomeHistoryView(IncomeHistoryController controller, IncomeHistoryRepainter incomeHistoryRepainter) {
         this.controller = controller;
         this.incomeHistoryRepainter = incomeHistoryRepainter;
@@ -39,14 +41,12 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         title.setHorizontalAlignment(SwingConstants.CENTER);
-        title.setFont(new Font("Arial", Font.BOLD, 20));
+        title.setFont(new Font("Arial", Font.BOLD, twenty));
         add(title, BorderLayout.NORTH);
-
-        //Add chart API here!
 
         this.panel = new JPanel();
         this.panelChart = new JPanel();
-        var addIncomeButton = new JButton(ViewNames.addIncome);
+        final JButton addIncomeButton = new JButton(ViewNames.addIncome);
 
         addIncomeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -76,7 +76,7 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         viewSwitcher.switchTo(ViewNames.expenseHistory);
-                        }
+                    }
                 }
         );
 
@@ -87,7 +87,6 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
                     }
                 }
         );
-
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setUpTable();
@@ -103,44 +102,43 @@ public class IncomeHistoryView extends JPanel implements ActionListener {
 
     @Override
     public void repaint() {
-        if (controller!= null) {
+        if (controller != null) {
             controller.execute(tableModel);
         }
         if (incomeHistoryRepainter != null) {
             this.panelChart.removeAll();
-            JPanel result = incomeHistoryRepainter.execute();
+            final JPanel result = incomeHistoryRepainter.execute();
             this.panelChart.add(result);
         }
     }
-
-//    public void repaintChart(JPanel panelChart) {
-//        var api = new ChartImageFactory(new TransactionHistory());
-//        JLabel incomeChart = api.createIncomeImage(LocalDate.of(2024, 1, 1), LocalDate.now());
-//        this.panelChart.setComponentZOrder(incomeChart, 0);
-//    }
 
     /**
      * React to a button click that results in evt.
      * @param evt the ActionEvent to react to
      */
     @Override
-    public void actionPerformed(ActionEvent evt) {System.out.println("Click " + evt.getActionCommand());}
+    public void actionPerformed(ActionEvent evt) {
+        System.out.println("Click " + evt.getActionCommand());
+    }
 
+    /**
+     * Sets viewSwitcher for this view.
+     * @param viewSwitcher the vs.
+     */
     public void setViewSwitcher(ViewSwitcher viewSwitcher) {
         this.viewSwitcher = viewSwitcher;
     }
-
 
     /**
      * Populates table when view is switched....
      */
     public void setUpTable() {
-        String[] columnNames = {"Name", "Amount", "Date", "Category"};
+        final String[] columnNames = {"Name", "Amount", "Date", "Category"};
         tableModel = new DefaultTableModel(columnNames, 0);
 
         incomeHistoryTable = new JTable(tableModel);
-        JScrollPane tableScrollPane = new JScrollPane(incomeHistoryTable);
-        TitledBorder tableTitle = BorderFactory.createTitledBorder("Income History");
+        final JScrollPane tableScrollPane = new JScrollPane(incomeHistoryTable);
+        final TitledBorder tableTitle = BorderFactory.createTitledBorder("Income History");
         tableScrollPane.setBorder(tableTitle);
         incomeHistoryTable.setFillsViewportHeight(true);
         incomeHistoryTable.setVisible(true);

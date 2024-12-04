@@ -1,9 +1,10 @@
 package entity;
 
+import java.time.LocalDate;
 
 public class Deductible {
-    Expense expense;
-    Income credit;
+    private final Expense expense;
+    private final Income credit;
 
     public Deductible(Expense expense, Income income) {
         this.expense = expense;
@@ -14,15 +15,23 @@ public class Deductible {
         return credit;
     }
 
-    public Expense getExpense() {
-        return expense;
+    public double getIncomeAmount() {
+        return credit.getAmount();
+    }
+
+    public double getExpenseAmount() {
+        return expense.getAmount();
     }
 
     public String getExpenseName() {
         return expense.getName();
     }
 
-    public double getIncomeCredit() {
-        return credit.getAmount();
+    public LocalDate getCreditDate() {
+        return credit.getDate();
+    }
+
+    public LocalDate getExpenseDate() {
+        return expense.getDate();
     }
 }
