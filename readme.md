@@ -8,7 +8,7 @@
 [Authors](#authors)
 
 ## Features
-- Track and save goals, budgets, expenses,, and transactions
+- Track and save goals, budgets, expenses, and transactions
 - Visualize spending via chart
 - See breakdowns of spending
 - See tips on optimizing income (e.x. suggesting unrealized tax credits)
