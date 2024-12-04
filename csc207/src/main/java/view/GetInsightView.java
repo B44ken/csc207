@@ -115,7 +115,7 @@ public class GetInsightView extends JPanel {
             panelTax.setLayout(new BoxLayout(panelTax, BoxLayout.Y_AXIS));
             for (Deductible t : newInsights) {
                 final JLabel words =
-                        new JLabel("We found " + t.getExpenseName() + " donation for " + t.getExpense()
+                        new JLabel("We found " + t.getExpenseName() + " donation for " + t.getExpenseAmount()
                                 + ", you are eligible for tax credit!");
                 this.panelTax.add(words);
                 final JButton button = new JButton("Click here to add" + t.getExpenseName() + " income credit!");

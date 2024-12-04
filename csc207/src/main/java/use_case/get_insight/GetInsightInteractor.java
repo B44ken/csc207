@@ -21,9 +21,10 @@ public class GetInsightInteractor implements GetInsightInputBoundary {
     /**
      * Executes get insight use case
      * Implements the logic of execution:
-     *         get the expense out of the input data.
-     *         instantiate the `LogoutOutputData`, which needs to contain the correct insight.
-     *         tell the presenter to prepare a success view.
+     * get the expense out of the input data.
+     * instantiate the `LogoutOutputData`, which needs to contain the correct insight.
+     * tell the presenter to prepare a success view.
+     *
      * @param inputData the inputData created by Controller.
      * @return ArrayList output Data object to be returned.
      */
