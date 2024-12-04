@@ -1,8 +1,6 @@
 package use_case.add_expense;
 
 import entity.Expense;
-import entity.Goal;
-import entity.Transaction;
 
 /**
  * DAO for the Add Expense Use Case.

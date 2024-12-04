@@ -1,7 +1,5 @@
 package use_case.add_expense;
 
-import data_access.UserData;
-
 /**
  * Input Boundary for actions which are related to adding an expense.
  */

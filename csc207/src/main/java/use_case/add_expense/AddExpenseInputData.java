@@ -1,6 +1,5 @@
-package use_case.add_expense;
 
-import java.time.LocalDate;
+package use_case.add_expense;
 
 /**
  * The input data for the Add Expense Use Case.
@@ -27,23 +26,23 @@ public class AddExpenseInputData {
         return amount;
     }
 
-    String getName(){
+    String getName() {
         return name;
     }
 
-    String getCategory(){
+    String getCategory() {
         return category;
     }
 
-    String getDay(){
+    String getDay() {
         return day;
     }
 
-    String getMonth(){
+    String getMonth() {
         return month;
     }
 
-    String getYear(){
+    String getYear() {
         return year;
     }
 }
