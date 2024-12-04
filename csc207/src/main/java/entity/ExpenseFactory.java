@@ -13,7 +13,7 @@ public class ExpenseFactory implements TransactionFactory {
      * @param name   of transaction.
      * @param amount of transaction.
      * @param category   of transaction.
-     * @param date of trasnaction
+     * @param date of transaction
      * @return the transaction.
      */
     @Override

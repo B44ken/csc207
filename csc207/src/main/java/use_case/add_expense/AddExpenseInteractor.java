@@ -1,11 +1,11 @@
 package use_case.add_expense;
 
-import data_access.UserData;
-import entity.*;
-import entity.Expense;
-
-import java.time.LocalDate;
 import java.time.DateTimeException;
+import java.time.LocalDate;
+
+import data_access.UserData;
+import entity.Expense;
+import entity.ExpenseFactory;
 
 /**
  * The Add Expense Interactor, gets input data, turns amount into a double
@@ -16,10 +16,10 @@ public class AddExpenseInteractor implements AddExpenseInputBoundary {
     private final UserData userData;
     private final ExpenseFactory expenseFactory;
 
-    public AddExpenseInteractor(UserData ud, AddExpenseOutputBoundary addExpenseOutputBoundary,
+    public AddExpenseInteractor(UserData user, AddExpenseOutputBoundary addExpenseOutputBoundary,
                                 ExpenseFactory expenseFactory) {
         this.addExpensePresenter = addExpenseOutputBoundary;
-        this.userData = ud;
+        this.userData = user;
         this.expenseFactory = expenseFactory;
     }
 
@@ -29,56 +29,68 @@ public class AddExpenseInteractor implements AddExpenseInputBoundary {
         var amountStr = addExpenseInputData.getAmountString();
         var category = addExpenseInputData.getCategory();
 
-
         if (name.equals("")) {
             addExpensePresenter.prepareFailView("Name field cannot be blank");
             return;
-        } else if (amountStr.equals("")) {
+        }
+        else if (amountStr.equals("")) {
             addExpensePresenter.prepareFailView("Amount field cannot be blank");
             return;
-        } else if (category.equals("")) {
+        }
+        else if (category.equals("")) {
             addExpensePresenter.prepareFailView("Category field cannot be blank");
             return;
-        } else {
-            try {Double.valueOf(amountStr); }
-            catch (NumberFormatException e) {
+        }
+        else {
+            try {
+                Double.valueOf(amountStr);
+            }
+            catch (NumberFormatException ex) {
                 addExpensePresenter.prepareFailView("Invalid amount for parsing.");
                 return;
             }
 
-            try {Integer.parseInt(addExpenseInputData.getDay()); }
-            catch (NumberFormatException e) {
+            try {
+                Integer.parseInt(addExpenseInputData.getDay());
+            }
+            catch (NumberFormatException ex) {
                 addExpensePresenter.prepareFailView("Invalid day for parsing.");
             }
 
-            try {Integer.parseInt(addExpenseInputData.getMonth()); }
-            catch (NumberFormatException e) {
+            try {
+                Integer.parseInt(addExpenseInputData.getMonth());
+            }
+            catch (NumberFormatException ex) {
                 addExpensePresenter.prepareFailView("Invalid month for parsing.");
             }
 
-            try {Integer.parseInt(addExpenseInputData.getYear()); }
-            catch (NumberFormatException e) {
+            try {
+                Integer.parseInt(addExpenseInputData.getYear());
+            }
+            catch (NumberFormatException ex) {
                 addExpensePresenter.prepareFailView("Invalid year for parsing.");
             }
         }
         try {
             LocalDate date = LocalDate.of(Integer.parseInt(addExpenseInputData.getYear()),
                     Integer.parseInt(addExpenseInputData.getMonth()), Integer.parseInt(addExpenseInputData.getDay()));
-        } catch (DateTimeException ex) {
+        }
+        catch (DateTimeException ex) {
             addExpensePresenter.prepareFailView("Invalid date for parsing.");
             return;
         }
         try {
-            LocalDate date = LocalDate.of(Integer.parseInt(addExpenseInputData.getYear()),
+            final LocalDate date = LocalDate.of(Integer.parseInt(addExpenseInputData.getYear()),
                     Integer.parseInt(addExpenseInputData.getMonth()), Integer.parseInt(addExpenseInputData.getDay()));
-            var amount = Double.parseDouble(amountStr);
-            var t = new Expense(name, amount, category, date);
+            final var amount = Double.parseDouble(amountStr);
+            final var t = new Expense(name, amount, category, date);
             userData.getHistory().add(t);
             userData.save();
 
             final AddExpenseOutputData addExpenseOutputData = new AddExpenseOutputData(name);
             addExpensePresenter.prepareSuccessView(addExpenseOutputData);
-        } catch (NumberFormatException ex) {
+        }
+        catch (NumberFormatException ex) {
             System.out.println("failed to parse amount");
             addExpensePresenter.prepareFailView("failed to parse amount");
         }

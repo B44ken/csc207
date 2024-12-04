@@ -24,11 +24,6 @@ public class AddExpenseView extends JPanel implements ActionListener {
     private final JButton confirmButton;
     private final JButton cancelButton;
 
-//    private final JButton homeButton;
-//    private final JButton incomeButton;
-//    private final JButton expenseButton;
-//    private final JButton goalsButton;
-
     private final LocalDate date = LocalDate.now();
     private UserData userData;
     private AddExpenseController addExpenseController;
@@ -89,48 +84,6 @@ public class AddExpenseView extends JPanel implements ActionListener {
                     }
         });
 
-//        final JPanel buttons2 = new JPanel();
-//        homeButton = new JButton("Home");
-//        buttons2.add(homeButton);
-//        incomeButton = new JButton("Income");
-//        buttons2.add(incomeButton);
-//        expenseButton = new JButton("Expense");
-//        buttons2.add(expenseButton);
-//        goalsButton = new JButton("Goals");
-//        buttons2.add(goalsButton);
-//
-//        homeButton.addActionListener(
-//                new ActionListener() {
-//                    public void actionPerformed(ActionEvent evt) {
-//                        viewSwitcher.switchTo(ViewNames.home);
-//                    }
-//                }
-//        );
-//
-//        expenseButton.addActionListener(
-//                new ActionListener() {
-//                    public void actionPerformed(ActionEvent evt) {
-//                        viewSwitcher.switchTo(ViewNames.expenseHistory);
-//                    }
-//                }
-//        );
-//
-//        incomeButton.addActionListener(
-//                new ActionListener() {
-//                    public void actionPerformed(ActionEvent evt) {
-//                        viewSwitcher.switchTo(ViewNames.incomeHistory);
-//                    }
-//                }
-//        );
-//
-//        goalsButton.addActionListener(
-//                new ActionListener() {
-//                    public void actionPerformed(ActionEvent evt) {
-//                        viewSwitcher.switchTo(ViewNames.goalList);
-//                    }
-//                }
-//        );
-
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
@@ -147,7 +100,8 @@ public class AddExpenseView extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent evt) {
-        JOptionPane.showMessageDialog(this, "Button not implemented yet");
+        JOptionPane.showMessageDialog(this,
+                "Button not implemented yet");
     }
 
     public void propertyChange(PropertyChangeEvent evt) {

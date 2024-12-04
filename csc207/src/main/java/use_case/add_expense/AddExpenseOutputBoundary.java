@@ -7,6 +7,7 @@ public interface AddExpenseOutputBoundary {
 
     /**
      * Prepares the success view for the Add Expense Use Case.
+     * @param outputData - expense data clustered together.
      */
     void prepareSuccessView(AddExpenseOutputData outputData);
 
@@ -17,7 +18,7 @@ public interface AddExpenseOutputBoundary {
     void prepareFailView(String errorMessage);
 
     /**
-     * Execytes the switch to home view use case/
+     * Executes the switch to home view use case.
      */
     void switchToHomeView();
 }
